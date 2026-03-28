@@ -48,6 +48,7 @@ export function AttachmentCodeExperience() {
   const [state, setState] = useState<AttachmentRuntimeState>(
     getInitialAttachmentRuntimeState,
   );
+  const [hasEnteredExperience, setHasEnteredExperience] = useState(false);
   const totalQuestions = attachmentQuestions.length;
   const currentQuestion = attachmentQuestions[Math.min(state.currentIndex, totalQuestions - 1)];
   const progress = Math.min(((state.currentIndex + 1) / totalQuestions) * 100, 100);
@@ -95,8 +96,61 @@ export function AttachmentCodeExperience() {
     setState(initialState);
   }
 
+  const hasProgress = Object.keys(state.answers).length > 0;
+
   if (!currentQuestion) {
     return null;
+  }
+
+  if (!hasEnteredExperience) {
+    return (
+      <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden rounded-[40px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(106,90,205,0.22),transparent_28%),linear-gradient(135deg,rgba(48,20,78,0.9),rgba(10,14,34,0.92)_58%,rgba(35,38,56,0.88))] px-6 py-16 text-center shadow-[0_30px_120px_rgba(6,8,22,0.45)]">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(214,194,138,0.12),transparent_62%)] blur-3xl" />
+          <div className="absolute right-[12%] top-[18%] h-32 w-32 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.08),transparent_70%)] blur-2xl" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-3xl">
+          <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-full border border-white/12 bg-white/8 text-[var(--color-secondary)] shadow-[0_14px_40px_rgba(214,194,138,0.12)] backdrop-blur-xl">
+            <span className="font-display text-6xl leading-none">✦</span>
+          </div>
+
+          <h2 className="font-display text-6xl text-white sm:text-7xl">
+            Luna Attachment
+          </h2>
+          <p className="mt-5 text-2xl font-medium text-[var(--color-secondary)] sm:text-3xl">
+            당신의 애착유형을 알아보세요
+          </p>
+          <p className="mx-auto mt-8 max-w-xl text-lg leading-9 text-white/62">
+            은하수 너머 마음이 그리는 관계의 지도를 따라가며, 사랑 앞에서
+            반복되는 감정의 패턴을 조용하고 섬세하게 읽어보세요.
+          </p>
+
+          <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => setHasEnteredExperience(true)}
+              className="inline-flex min-h-14 items-center justify-center rounded-full bg-[linear-gradient(90deg,rgba(244,229,239,0.92),rgba(236,171,185,0.95))] px-8 py-4 text-base font-semibold text-[#24182e] shadow-[0_24px_60px_rgba(230,180,194,0.24)] transition hover:-translate-y-0.5"
+            >
+              {hasProgress ? "이어서 시작하기" : "탐험 시작하기"}
+              <span className="ml-3 text-xl" aria-hidden="true">
+                →
+              </span>
+            </button>
+
+            {hasProgress ? (
+              <button
+                type="button"
+                onClick={resetRuntimeState}
+                className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/15 bg-white/6 px-8 py-4 text-sm font-semibold text-white/78 transition hover:bg-white/10"
+              >
+                처음부터 다시 시작
+              </button>
+            ) : null}
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (

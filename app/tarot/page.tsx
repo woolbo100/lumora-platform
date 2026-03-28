@@ -1,109 +1,53 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { GlassPanel } from "@/components/shared/GlassPanel";
-import { tarotCategories } from "@/data/tarotCards";
-
 export default function TarotPage() {
   return (
-    <main className="flex flex-1 flex-col gap-10 pb-8">
-      <section className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-        <GlassPanel className="relative overflow-hidden p-8 sm:p-10 lg:p-12">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/tarot/tarotmain.png"
-              alt="타로 메인 비주얼"
-              fill
-              priority
-              className="object-cover opacity-20"
-              sizes="(max-width: 1024px) 100vw, 60vw"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(23,20,51,0.82),rgba(36,29,73,0.9),rgba(18,15,44,0.95))]" />
-          </div>
+    <main className="relative flex flex-1 items-center justify-center overflow-hidden px-6 py-12 sm:px-8">
+      <div className="absolute inset-0">
+        <Image
+          src="/images/tarot/tarotmain.png"
+          alt="타로 허브 배경"
+          fill
+          priority
+          className="object-cover opacity-34 scale-[1.02]"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(205,154,188,0.08),transparent_24%),linear-gradient(180deg,rgba(36,24,64,0.74)_0%,rgba(24,18,48,0.7)_48%,rgba(16,13,34,0.8)_100%)]" />
+      </div>
 
-          <div className="relative max-w-2xl">
-            <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-secondary)]">
-              Mystic Insight
-            </p>
-            <h2 className="mt-4 font-display text-5xl leading-tight text-white sm:text-6xl">
-              지금의 흐름을
-              <br />
-              타로로 읽어보세요
-            </h2>
-            <p className="mt-6 max-w-xl text-base leading-8 text-white/74 sm:text-lg">
-              상징과 직감을 통해 감정, 관계, 선택의 결을 살펴보는 LUMORA의 서브
-              서비스입니다. 카테고리를 고르고 카드 세 장을 선택하면 현재 흐름과
-              다음 메시지를 정리해 드립니다.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/tarot/select?category=love"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold tracking-[0.18em] uppercase text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#7f71dc]"
-              >
-                타로 시작하기
-              </Link>
-              <Link
-                href="/blog"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/15 bg-white/6 px-6 py-3 text-sm font-semibold tracking-[0.18em] uppercase text-white/82 transition duration-300 hover:-translate-y-0.5 hover:border-[var(--color-secondary)]/40 hover:text-[var(--color-secondary)]"
-              >
-                블로그 보기
-              </Link>
-            </div>
-          </div>
-        </GlassPanel>
-
-        <GlassPanel className="flex flex-col justify-between p-8 sm:p-10">
-          <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]/75">
-              Service Flow
-            </p>
-            <h3 className="mt-4 font-display text-3xl text-white sm:text-4xl">
-              LUMORA 안에서 이어지는 타로 경험
-            </h3>
-          </div>
-          <div className="mt-8 space-y-5 text-sm leading-7 text-white/72">
-            <p>1. 질문에 가장 가까운 카테고리를 선택합니다.</p>
-            <p>2. 카드 세 장을 골라 지금의 흐름을 정리합니다.</p>
-            <p>3. 결과 페이지에서 카드 조합이 전하는 메시지를 확인합니다.</p>
-          </div>
-        </GlassPanel>
-      </section>
-
-      <section className="pb-4">
-        <div className="mb-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-white/50">
-            Reading Categories
-          </p>
-          <h3 className="mt-3 font-display text-4xl text-white">
-            지금 보고 싶은 주제를 골라 주세요
-          </h3>
+      <section className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center">
+        <div className="mb-8 flex h-22 w-22 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 bg-[radial-gradient(circle,rgba(245,186,211,0.16),rgba(255,255,255,0.02))] text-5xl text-[#e7adc8] shadow-[0_0_60px_rgba(231,173,200,0.14)]">
+          ✦
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {tarotCategories.map((category) => (
-            <Link
-              key={category.key}
-              href={`/tarot/select?category=${category.key}`}
-              className="group"
-            >
-              <GlassPanel className="flex h-full flex-col p-6 transition duration-300 hover:-translate-y-1 hover:border-[var(--color-primary)]/35 hover:bg-white/10">
-                <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-secondary)]/75">
-                  {category.eyebrow}
-                </p>
-                <h4 className="mt-4 font-display text-3xl text-white">
-                  {category.label}
-                </h4>
-                <p className="mt-4 text-sm leading-7 text-white/72">
-                  {category.description}
-                </p>
-                <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-secondary)] transition group-hover:translate-x-1">
-                  리딩 시작하기
-                  <span aria-hidden="true">→</span>
-                </span>
-              </GlassPanel>
-            </Link>
-          ))}
+        <h1 className="font-display text-6xl leading-none text-white sm:text-7xl md:text-8xl">
+          Luna Tarot
+        </h1>
+        <p className="mt-5 font-myeongjo text-2xl text-[#d7a2bd] sm:text-3xl">
+          당신의 감정과 흐름을 읽어보세요
+        </p>
+        <p className="mt-8 max-w-2xl text-lg leading-9 text-white/62 sm:text-xl">
+          은은하게 흐르는 감정의 결, 관계의 신호, 지금 필요한 메시지를 세 장의
+          카드로 조용히 해석합니다. 먼저 리딩 공간에 들어가 카드를 뽑아보세요.
+        </p>
+
+        <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row">
+          <Link
+            href="/tarot/select"
+            className="inline-flex min-h-14 items-center justify-center rounded-full bg-[linear-gradient(90deg,#dbc3d3_0%,#f5aebc_100%)] px-10 py-4 text-lg font-semibold text-[#24183c] shadow-[0_18px_60px_rgba(245,174,188,0.28)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(245,174,188,0.34)]"
+          >
+            탐험 시작하기
+            <span className="ml-3 text-xl" aria-hidden="true">
+              →
+            </span>
+          </Link>
+          <Link
+            href="/"
+            className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-white/5 px-8 py-4 text-sm font-semibold tracking-[0.18em] text-white/76 transition duration-300 hover:-translate-y-1 hover:border-[var(--color-secondary)]/28 hover:text-[var(--color-secondary)]"
+          >
+            LUMORA 홈으로
+          </Link>
         </div>
       </section>
     </main>

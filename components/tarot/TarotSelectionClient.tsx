@@ -1,17 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import TarotCardItem from "@/components/tarot/TarotCard";
 import {
+  tarotCategories,
   tarotCategoryMap,
   tarotCards,
   type TarotCategoryKey,
 } from "@/data/tarotCards";
 
 type TarotSelectionClientProps = {
-  categoryKey: TarotCategoryKey;
+  initialCategoryKey?: TarotCategoryKey;
 };
 
 function shuffleCards<T>(items: T[]) {
@@ -26,14 +27,29 @@ function shuffleCards<T>(items: T[]) {
 }
 
 export function TarotSelectionClient({
-  categoryKey,
+  initialCategoryKey,
 }: TarotSelectionClientProps) {
   const router = useRouter();
+  const [selectedCategoryKey, setSelectedCategoryKey] = useState<
+    TarotCategoryKey | undefined
+  >(initialCategoryKey);
   const [selectedCardIds, setSelectedCardIds] = useState<number[]>([]);
-  const [shuffledCards] = useState(() => shuffleCards(tarotCards));
-  const category = tarotCategoryMap[categoryKey];
+  const shuffledCards = useMemo(() => shuffleCards(tarotCards), []);
+  const selectedCategory = selectedCategoryKey
+    ? tarotCategoryMap[selectedCategoryKey]
+    : undefined;
+
+  const handleCategorySelect = (categoryKey: TarotCategoryKey) => {
+    setSelectedCategoryKey(categoryKey);
+    setSelectedCardIds([]);
+    router.replace(`/tarot/select?category=${categoryKey}`);
+  };
 
   const handleToggle = (cardId: number) => {
+    if (!selectedCategoryKey) {
+      return;
+    }
+
     setSelectedCardIds((current) => {
       if (current.includes(cardId)) {
         return current.filter((id) => id !== cardId);
@@ -48,12 +64,12 @@ export function TarotSelectionClient({
   };
 
   const handleNext = () => {
-    if (selectedCardIds.length !== 3) {
+    if (!selectedCategoryKey || selectedCardIds.length !== 3) {
       return;
     }
 
     router.push(
-      `/tarot/result?category=${categoryKey}&cards=${selectedCardIds.join(",")}`,
+      `/tarot/result?category=${selectedCategoryKey}&cards=${selectedCardIds.join(",")}`,
     );
   };
 
@@ -61,32 +77,68 @@ export function TarotSelectionClient({
     <section className="flex flex-1 flex-col">
       <div className="mx-auto w-full max-w-4xl text-center">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]/72">
-          {category.eyebrow}
+          {selectedCategory?.eyebrow ?? "Mystic Spread"}
         </p>
         <h2 className="mt-4 font-display text-4xl text-white sm:text-5xl">
-          {category.label} 리딩을 위한 카드 선택
+          {selectedCategory
+            ? `${selectedCategory.label} 리딩을 위한 카드 선택`
+            : "어떤 흐름을 읽고 싶은지 먼저 골라 주세요"}
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
-          마음이 머무는 카드 세 장을 골라 주세요. 78장 전체 덱에서 선택한 카드
-          조합으로 현재 흐름과 다음 메시지를 읽어드립니다.
+          {selectedCategory
+            ? "이제 카드 세 장을 뽑아 주세요. 선택 화면에서는 카드의 뒷면만 보이고, 결과 페이지에서만 실제 카드가 드러납니다."
+            : "주제를 먼저 정하면 그 감정선에 맞는 리딩 흐름으로 카드 뽑기를 시작할 수 있습니다."}
         </p>
         <p className="mt-6 text-sm uppercase tracking-[0.24em] text-[var(--color-secondary)]">
-          {selectedCardIds.length} / 3 selected
+          {selectedCategory
+            ? `${selectedCardIds.length} / 3 selected`
+            : "Choose a reading topic"}
         </p>
       </div>
 
-      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-        {shuffledCards.map((card, index) => (
-          <TarotCardItem
-            key={card.id}
-            card={card}
-            isSelected={selectedCardIds.includes(card.id)}
-            isRevealed
-            onSelect={() => handleToggle(card.id)}
-            priority={index < 5}
-          />
-        ))}
+      <div className="mx-auto mt-10 grid w-full max-w-5xl gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {tarotCategories.map((category) => {
+          const active = category.key === selectedCategoryKey;
+
+          return (
+            <button
+              key={category.key}
+              type="button"
+              onClick={() => handleCategorySelect(category.key)}
+              className={`rounded-[26px] border px-6 py-6 text-left transition duration-300 ${
+                active
+                  ? "border-[var(--color-secondary)]/36 bg-[var(--color-secondary)]/10 shadow-[0_0_24px_rgba(219,195,142,0.12)]"
+                  : "border-white/10 bg-white/5 hover:-translate-y-1 hover:border-white/20 hover:bg-white/8"
+              }`}
+            >
+              <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-secondary)]/72">
+                {category.eyebrow}
+              </p>
+              <h3 className="mt-3 font-display text-3xl text-white">
+                {category.label}
+              </h3>
+              <p className="mt-4 text-sm leading-7 text-white/68">
+                {category.description}
+              </p>
+            </button>
+          );
+        })}
       </div>
+
+      {selectedCategory ? (
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+          {shuffledCards.map((card, index) => (
+            <TarotCardItem
+              key={card.id}
+              card={card}
+              isSelected={selectedCardIds.includes(card.id)}
+              isRevealed={false}
+              onSelect={() => handleToggle(card.id)}
+              priority={index < 5}
+            />
+          ))}
+        </div>
+      ) : null}
 
       <div className="sticky bottom-6 mt-10 flex flex-col items-center justify-center gap-4 rounded-[28px] border border-white/10 bg-[#120f2ccc] px-5 py-5 backdrop-blur-xl sm:flex-row">
         <button
@@ -94,12 +146,12 @@ export function TarotSelectionClient({
           onClick={() => router.push("/tarot")}
           className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 px-6 py-3 text-sm font-semibold tracking-[0.18em] text-white/82 transition duration-300 hover:border-white/24 hover:bg-white/6"
         >
-          카테고리 다시 선택
+          허브로 돌아가기
         </button>
         <button
           type="button"
           onClick={handleNext}
-          disabled={selectedCardIds.length !== 3}
+          disabled={!selectedCategoryKey || selectedCardIds.length !== 3}
           className="inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold tracking-[0.18em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#7f71dc] disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/40"
         >
           결과 보기

@@ -43,6 +43,10 @@ export function isTarotCategoryKey(value?: string): value is TarotCategoryKey {
   return Boolean(value && value in tarotCategoryMap);
 }
 
+export function parseTarotCategoryKey(value: string): TarotCategoryKey {
+  return value as TarotCategoryKey;
+}
+
 export function findTarotCardsByIds(ids: number[]) {
   return ids
     .map((id) => tarotCards.find((card) => card.id === id))

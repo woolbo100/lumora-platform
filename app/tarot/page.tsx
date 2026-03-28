@@ -3,20 +3,20 @@ import Link from "next/link";
 
 export default function TarotPage() {
   return (
-    <main className="relative flex flex-1 items-center justify-center overflow-hidden px-6 py-12 sm:px-8">
+    <main className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2 overflow-hidden">
       <div className="absolute inset-0">
         <Image
           src="/images/tarot/tarotmain.png"
           alt="타로 허브 배경"
           fill
           priority
-          className="object-cover opacity-34 scale-[1.02]"
+          className="object-cover opacity-38 scale-[1.03]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(205,154,188,0.08),transparent_24%),linear-gradient(180deg,rgba(36,24,64,0.74)_0%,rgba(24,18,48,0.7)_48%,rgba(16,13,34,0.8)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(205,154,188,0.08),transparent_24%),linear-gradient(180deg,rgba(36,24,64,0.68)_0%,rgba(24,18,48,0.62)_48%,rgba(16,13,34,0.76)_100%)]" />
       </div>
 
-      <section className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center">
+      <section className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-3xl flex-col items-center justify-center px-6 py-12 text-center sm:px-8">
         <div className="mb-8 flex h-22 w-22 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 bg-[radial-gradient(circle,rgba(245,186,211,0.16),rgba(255,255,255,0.02))] text-5xl text-[#e7adc8] shadow-[0_0_60px_rgba(231,173,200,0.14)]">
           ✦
         </div>

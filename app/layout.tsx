@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "LUMORA | 마음코드 해석 플랫폼",
-  description: "타로, 애착코드, 블로그를 통해 내면의 신호를 해석하는 플랫폼",
+  title: "LUMORA | 마음 코드 해석 플랫폼",
+  description:
+    "타로 리딩, 애착유형 코드, 블로그 콘텐츠를 통해 내면의 신호를 해석하는 LUMORA 플랫폼입니다.",
 };
 
 export default function RootLayout({

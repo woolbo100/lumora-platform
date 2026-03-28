@@ -12,8 +12,9 @@ export default function BlogPage() {
           블로그
         </h1>
         <p className="mt-6 max-w-2xl text-base leading-8 text-white/72">
-          인사이트 콘텐츠와 해석 아카이브를 위한 공간입니다. 이후 카테고리,
-          목록, 상세 페이지를 이 경로에서 자연스럽게 확장하면 됩니다.
+          LUMORA의 인사이트 콘텐츠와 해석 아카이브를 위한 공간입니다. 이후
+          카테고리, 목록, 상세 페이지를 같은 톤 안에서 자연스럽게 확장할 수
+          있도록 구조를 열어두었습니다.
         </p>
         <div className="mt-10 flex flex-wrap gap-4">
           <CTAButton href="/">홈으로 돌아가기</CTAButton>

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { GlassPanel } from "@/components/shared/GlassPanel";
 
 type ServiceCardProps = {
@@ -16,13 +18,13 @@ export function ServiceCard({
   badge,
 }: ServiceCardProps) {
   return (
-    <a
+    <Link
       href={href}
-      className="group block h-full w-full cursor-pointer"
+      className="group block h-full w-full"
       aria-label={`${title} 서비스로 이동`}
     >
-      <GlassPanel className="flex h-full flex-col p-6 transition duration-300 hover:-translate-y-1 hover:border-[var(--color-primary)]/35 hover:bg-white/10">
-        <div className="mb-6 flex items-center justify-between gap-4">
+      <GlassPanel className="flex h-full min-h-[250px] flex-col p-6 transition duration-300 hover:-translate-y-1 hover:border-[var(--color-primary)]/35 hover:bg-white/10 sm:p-7">
+        <div className="mb-7 flex items-center justify-between gap-4">
           <span className="text-xs font-semibold uppercase tracking-[0.28em] text-white/55">
             {eyebrow}
           </span>
@@ -43,6 +45,6 @@ export function ServiceCard({
           </span>
         </div>
       </GlassPanel>
-    </a>
+    </Link>
   );
 }

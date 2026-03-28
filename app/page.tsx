@@ -1,5 +1,4 @@
 import { CTAButton } from "@/components/shared/CTAButton";
-import { GlassPanel } from "@/components/shared/GlassPanel";
 import { ServiceCard } from "@/components/shared/ServiceCard";
 import { services } from "@/data/services";
 
@@ -18,9 +17,9 @@ export default function Home() {
         </CTAButton>
       </header>
 
-      <section className="grid flex-1 items-center gap-10 py-12 lg:grid-cols-[1.2fr_0.8fr] lg:py-20">
-        <div className="space-y-8">
-          <div className="space-y-5">
+      <section className="flex flex-1 items-center justify-center py-20 lg:py-32">
+        <div className="mx-auto flex max-w-4xl flex-col items-center justify-center text-center">
+          <div className="space-y-6">
             <p className="text-sm uppercase tracking-[0.3em] text-white/60">
               마음의 패턴과 상징을 읽는 공간
             </p>
@@ -32,7 +31,7 @@ export default function Home() {
                 마음코드 해석 플랫폼
               </p>
             </div>
-            <p className="max-w-2xl text-base leading-8 text-white/74 sm:text-lg">
+            <p className="mx-auto max-w-3xl text-base leading-8 text-white/74 sm:text-lg">
               타로, 애착코드, 감정 아카이브를 하나의 감각적인 경험으로 연결해
               내면의 신호를 읽고 해석하는 플랫폼입니다. 앞으로 새로운 마음코드
               서비스가 추가되어도 같은 구조 안에서 자연스럽게 확장할 수 있도록
@@ -40,57 +39,16 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <CTAButton href="/tarot">타로 시작하기</CTAButton>
             <CTAButton href="/blog" variant="secondary">
               인사이트 둘러보기
             </CTAButton>
           </div>
         </div>
-
-        <GlassPanel className="relative overflow-hidden p-8">
-          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent" />
-          <div className="space-y-6">
-            <p className="text-xs uppercase tracking-[0.3em] text-white/50">
-              Featured Flow
-            </p>
-            <div className="space-y-3">
-              <h3 className="font-display text-4xl text-white">
-                직관과 해석이 만나는
-                <br />
-                프리미엄 리추얼
-              </h3>
-              <p className="leading-7 text-white/70">
-                각 서비스는 독립적인 페이지로 운영되며, 공통 컴포넌트와 디자인
-                토큰을 공유해 새로운 서비스가 추가되어도 일관된 브랜드 경험을
-                유지합니다.
-              </p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-2xl border border-white/10 bg-black/10 p-4">
-                <p className="text-xs uppercase tracking-[0.25em] text-white/45">
-                  Primary
-                </p>
-                <p className="mt-2 font-medium text-white">#6A5ACD</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-black/10 p-4">
-                <p className="text-xs uppercase tracking-[0.25em] text-white/45">
-                  Secondary
-                </p>
-                <p className="mt-2 font-medium text-white">#FFD700</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-black/10 p-4">
-                <p className="text-xs uppercase tracking-[0.25em] text-white/45">
-                  Mood
-                </p>
-                <p className="mt-2 font-medium text-white">Mystic Glass</p>
-              </div>
-            </div>
-          </div>
-        </GlassPanel>
       </section>
 
-      <section className="pb-16">
+      <section className="pt-8 pb-16 lg:pt-14">
         <div className="mb-6 flex items-end justify-between gap-4">
           <div className="space-y-2">
             <p className="text-xs uppercase tracking-[0.3em] text-white/50">

@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { ServiceHubContent } from "@/components/shared/ServiceHubContent";
+import { serviceHubContent } from "@/lib/service-hub-content";
 
 export default function EmotionPage() {
   return (
@@ -73,6 +75,8 @@ export default function EmotionPage() {
           </div>
         </GlassPanel>
       </div>
+
+      <ServiceHubContent {...serviceHubContent.emotion} />
     </main>
   );
 }

@@ -1,13 +1,18 @@
+import { ServiceHubContent } from "@/components/shared/ServiceHubContent";
 import { ServiceHubHero } from "@/components/shared/ServiceHubHero";
+import { serviceHubContent } from "@/lib/service-hub-content";
 
 export default function AttachmentCodePage() {
   return (
-    <ServiceHubHero
-      title="Luna Attachment"
-      subtitle="당신의 애착유형을 알아보세요"
-      description="관계 안에서 반복되는 감정의 흐름, 거리 두기, 불안과 회피의 패턴을 차분하게 읽어봅니다. 사랑 앞에서 내가 어떤 방식으로 가까워지고 멀어지는지, LUMORA의 감성으로 섬세하게 비춰보세요."
-      primaryHref="/attachment-code/test"
-      primaryLabel="탐험 시작하기"
-    />
+    <>
+      <ServiceHubHero
+        title="Luna Attachment"
+        subtitle="관계 안에서 반복되는 애착의 흐름을 확인해보세요"
+        description="애착유형 코드는 가까워질수록 반복되는 감정 반응과 거리감, 불안과 회피의 패턴을 읽어내는 서비스입니다. 나의 관계 방식이 어떻게 형성되는지 루모라의 톤으로 차분하게 분석해드립니다."
+        primaryHref="/attachment-code/test"
+        primaryLabel="애착유형 확인하기"
+      />
+      <ServiceHubContent {...serviceHubContent.attachment} />
+    </>
   );
 }

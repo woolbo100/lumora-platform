@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { NamingHero } from "@/components/naming/NamingHero";
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { ServiceHubContent } from "@/components/shared/ServiceHubContent";
+import { serviceHubContent } from "@/lib/service-hub-content";
 
 export default function NamingPage() {
   return (
@@ -132,6 +134,8 @@ export default function NamingPage() {
             </div>
           </div>
         </GlassPanel>
+
+        <ServiceHubContent {...serviceHubContent.naming} />
       </main>
     </>
   );

@@ -1,0 +1,145 @@
+import type { ComponentProps } from "react";
+
+import { ServiceHubContent } from "@/components/shared/ServiceHubContent";
+
+type ServiceHubContentConfig = Omit<ComponentProps<typeof ServiceHubContent>, "introTitle"> & {
+  introTitle?: string;
+};
+
+export const serviceHubContent: Record<string, ServiceHubContentConfig> = {
+  saju: {
+    introText: [
+      "선천코드 사주는 단순 운세가 아니라 타고난 에너지 구조와 흐름을 분석하는 서비스입니다.",
+      "성향, 관계, 재물, 인생 방향까지 전체적인 흐름을 입체적으로 이해할 수 있습니다.",
+    ],
+    steps: ["생년월일 입력", "오행 및 구조 분석", "흐름 해석", "방향 제시"],
+    example: ["현재는 변화와 정리의 흐름이 강한 시기이며 새로운 방향으로 전환되는 에너지가 작용하고 있습니다."],
+    faqs: [
+      { question: "사주는 미래를 맞추는 건가요?", answer: "구조와 흐름을 해석하는 도구입니다." },
+      { question: "무료인가요?", answer: "기본 분석은 무료입니다." },
+      { question: "어떤 내용을 볼 수 있나요?", answer: "성향, 관계, 재물 흐름을 확인할 수 있습니다." },
+    ],
+    ctaLabel: "선천코드 사주 시작하기",
+    ctaHref: "/saju/reading",
+  },
+  naming: {
+    introText: [
+      "이름은 단순한 호칭이 아니라 에너지 흐름을 보완하고 강화하는 요소입니다.",
+      "사주 구조를 기반으로 가장 잘 맞는 이름을 제안합니다.",
+    ],
+    steps: ["사주 분석", "부족한 기운 파악", "방향 설정", "이름 생성"],
+    example: ["서하린 — 안정과 흐름을 보완하며 부드러운 에너지를 강화하는 이름입니다."],
+    faqs: [
+      { question: "이름이 영향을 주나요?", answer: "이미지와 인식에 영향을 줄 수 있습니다." },
+      { question: "기준은 무엇인가요?", answer: "오행과 방향 기반입니다." },
+      { question: "브랜드명도 가능한가요?", answer: "가능합니다." },
+    ],
+    ctaLabel: "무료 이름 추천 받기",
+    ctaHref: "/naming/start",
+  },
+  tarot: {
+    introText: [
+      "타로는 현재 상황과 감정 흐름을 반영하여 지금 필요한 방향과 메시지를 제공합니다.",
+      "연애, 관계, 선택의 순간에서 도움을 받을 수 있습니다.",
+    ],
+    steps: ["질문 선택", "카드 선택", "해석 제공", "방향 제시"],
+    example: ["지금은 감정 정리가 필요한 시기이며 성급한 선택은 피하는 것이 좋습니다."],
+    faqs: [
+      { question: "정확한가요?", answer: "흐름 기반 해석입니다." },
+      { question: "어떤 질문이 가능한가요?", answer: "연애, 관계, 선택 모두 가능합니다." },
+      { question: "무료인가요?", answer: "기본 리딩은 무료입니다." },
+    ],
+    ctaLabel: "무료 타로 시작하기",
+    ctaHref: "/tarot/select",
+  },
+  attachment: {
+    introText: [
+      "애착유형은 관계에서 나타나는 감정 반응과 행동 패턴을 설명합니다.",
+      "자신의 패턴을 이해하면 관계의 흐름이 달라집니다.",
+    ],
+    steps: ["질문 응답", "패턴 분석", "유형 도출", "관계 해석"],
+    example: ["가까워질수록 불안을 느끼며 확인을 반복하는 경향이 있습니다."],
+    faqs: [
+      { question: "몇 가지 유형이 있나요?", answer: "대표적으로 4가지 유형입니다." },
+      { question: "연애에도 적용되나요?", answer: "매우 밀접하게 연결됩니다." },
+      { question: "바뀔 수 있나요?", answer: "경험에 따라 변화합니다." },
+    ],
+    ctaLabel: "애착유형 분석 시작",
+    ctaHref: "/attachment-code/test",
+  },
+  lovePattern: {
+    introText: [
+      "연애는 감정이 아니라 패턴과 선택의 반복입니다.",
+      "당신의 연애 흐름을 분석하여 문제의 원인을 파악합니다.",
+    ],
+    steps: ["관계 질문 입력", "패턴 분석", "흐름 해석", "개선 방향 제시"],
+    example: ["비슷한 유형의 상대를 반복 선택하는 패턴이 나타나고 있습니다."],
+    faqs: [
+      { question: "왜 같은 문제가 반복되나요?", answer: "패턴이 고정되어 있기 때문입니다." },
+      { question: "해결 방법도 나오나요?", answer: "방향을 함께 제시합니다." },
+      { question: "연애 경험이 없어도 되나요?", answer: "가능합니다." },
+    ],
+    ctaLabel: "연애패턴 분석 시작",
+    ctaHref: "/relationship-pattern/test",
+  },
+  reunion: {
+    introText: [
+      "관계는 감정뿐 아니라 흐름과 타이밍이 중요합니다.",
+      "현재 상태를 분석하여 재회의 가능성과 방향을 제시합니다.",
+    ],
+    steps: ["관계 상태 입력", "감정 분석", "흐름 분석", "가능성 해석"],
+    example: ["감정은 남아 있지만 지금은 시간이 필요한 흐름입니다."],
+    faqs: [
+      { question: "재회 확률이 정확한가요?", answer: "흐름 기반 분석입니다." },
+      { question: "연락해야 하나요?", answer: "상황에 따라 다릅니다." },
+      { question: "언제 가능할까요?", answer: "타이밍에 따라 달라집니다." },
+    ],
+    ctaLabel: "재회 가능성 확인하기",
+    ctaHref: "/reunion-test/test",
+  },
+  charm: {
+    introText: [
+      "매력은 외모가 아니라 분위기와 에너지의 조합입니다.",
+      "자신의 매력을 이해하면 관계가 달라집니다.",
+    ],
+    steps: ["질문 응답", "패턴 분석", "매력 유형 도출", "관계 해석"],
+    example: ["부드러움과 중심이 함께 있는 타입으로 시간이 지날수록 더 강한 매력을 보입니다."],
+    faqs: [
+      { question: "매력은 바뀌나요?", answer: "표현 방식에 따라 달라집니다." },
+      { question: "연애에도 영향 있나요?", answer: "매우 중요합니다." },
+      { question: "첫인상도 알 수 있나요?", answer: "가능합니다." },
+    ],
+    ctaLabel: "나의 매력코드 보기",
+    ctaHref: "/attraction-code/test",
+  },
+  dream: {
+    introText: [
+      "꿈은 현재 감정과 상황을 반영한 상징입니다. 같은 꿈이라도 해석은 달라질 수 있습니다.",
+      "이 서비스는 상징과 흐름을 함께 분석합니다.",
+    ],
+    steps: ["꿈 입력", "키워드 분석", "상징 해석", "흐름 분석"],
+    example: ["물이 넘치는 꿈은 감정의 변화와 흐름을 의미할 수 있습니다."],
+    faqs: [
+      { question: "꿈은 왜 꾸나요?", answer: "무의식의 반영입니다." },
+      { question: "의미가 항상 있나요?", answer: "대부분 감정과 연결됩니다." },
+      { question: "반복되는 꿈은요?", answer: "해결되지 않은 신호일 수 있습니다." },
+    ],
+    ctaLabel: "무료 꿈해몽 시작",
+    ctaHref: "/dream/start",
+  },
+  emotion: {
+    introText: [
+      "감정은 현재 상태를 알려주는 중요한 신호입니다.",
+      "지금의 감정을 이해하면 방향을 찾을 수 있습니다.",
+    ],
+    steps: ["감정 입력", "상태 분석", "흐름 해석", "확언 제안"],
+    example: ["지금은 에너지가 분산된 상태이며 정리와 안정이 필요한 시기입니다."],
+    faqs: [
+      { question: "감정은 왜 중요한가요?", answer: "상태를 알려주는 신호입니다." },
+      { question: "확언은 무엇인가요?", answer: "방향을 강화하는 문장입니다." },
+      { question: "매일 사용해도 되나요?", answer: "가능합니다." },
+    ],
+    ctaLabel: "감정 리딩 시작하기",
+    ctaHref: "/emotion/start",
+  },
+};

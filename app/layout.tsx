@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 
+import { SiteFooter } from "@/components/shared/SiteFooter";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -45,7 +47,10 @@ export default function RootLayout({
           <div className="absolute bottom-[-12rem] left-[-5rem] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,_rgba(213,195,165,0.12),_transparent_72%)] blur-3xl" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,18,0.1),rgba(5,7,18,0.22)_42%,rgba(5,7,18,0.44))]" />
         </div>
-        {children}
+        <div className="flex min-h-screen flex-col">
+          <div className="flex-1">{children}</div>
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );

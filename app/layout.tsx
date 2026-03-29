@@ -8,7 +8,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "LUMORA | 마음 코드 해석 플랫폼",
   description:
-    "타로 리딩, 애착유형 코드, 블로그 콘텐츠를 통해 내면의 신호를 해석하는 LUMORA 플랫폼입니다.",
+    "타로 리딩, 애착유형 분석, 연애패턴 코드, 재회 가능성 테스트를 통해 감정과 관계의 흐름을 해석하는 LUMORA 플랫폼입니다.",
 };
 
 export default function RootLayout({

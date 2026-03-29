@@ -1,11 +1,22 @@
 import { HeroSplineScene } from "@/components/home/HeroSplineScene";
 import { CTAButton } from "@/components/shared/CTAButton";
+import { GlassPanel } from "@/components/shared/GlassPanel";
 import { ServiceCard } from "@/components/shared/ServiceCard";
 import { services } from "@/data/services";
 
 export default function Home() {
   const serviceItems = services.filter((service) => service.type === "service");
   const blogItem = services.find((service) => service.type === "blog");
+  const introductionParagraphs = [
+    "LUMORA는 감정과 관계, 그리고 내면의 흐름을 이해하기 위한 심리 기반 해석 플랫폼입니다.",
+    "타로 리딩, 애착유형 분석, 연애패턴 코드, 재회 가능성 테스트 등 다양한 도구를 통해 자신의 감정과 관계를 더 깊이 바라볼 수 있도록 돕고 있습니다.",
+    "LUMORA의 콘텐츠는 심리적 통찰과 감성적 해석을 바탕으로 구성되며, 단순한 결과 제공이 아닌 자기 이해를 돕는 것을 목표로 합니다.",
+  ];
+  const introductionPoints = [
+    "반복되는 감정의 흐름과 선택의 패턴을 읽습니다.",
+    "관계 안에서 나를 더 분명하게 이해할 수 있도록 돕습니다.",
+    "개인이 직접 기획하고 운영하며, 콘텐츠와 경험을 계속 개선합니다.",
+  ];
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
@@ -60,9 +71,9 @@ export default function Home() {
               </p>
             </div>
             <p className="mx-auto max-w-3xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-              타로 리딩, 감정코드, 꿈해몽, 관계 분석까지 내면의 신호를 읽어내는 감각적인
-              플랫폼입니다. 각 서비스는 하나의 흐름 안에서 자연스럽게 이어지고 LUMORA의 공통 결
-              안에서 확장될 수 있도록 구성했습니다.
+              타로 리딩, 애착유형 분석, 연애패턴 코드, 재회 가능성 테스트 등 다양한
+              심리 기반 도구를 통해 감정과 관계의 흐름을 더 깊이 바라보도록 돕는
+              해석 플랫폼입니다.
             </p>
           </div>
 
@@ -75,6 +86,44 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="pb-8">
+        <GlassPanel className="overflow-hidden p-8 sm:p-10 lg:p-12">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.9fr)] lg:items-start">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-secondary)]">
+                About LUMORA
+              </p>
+              <h2 className="mt-4 max-w-3xl font-display text-3xl leading-tight text-[var(--foreground)] sm:text-4xl">
+                단순한 결과가 아니라, 나를 더 깊이 이해하도록 돕는 해석의 공간
+              </h2>
+              <div className="mt-6 space-y-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+                {introductionParagraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+                <p>
+                  우리는 누구나 반복되는 감정의 흐름과 선택의 패턴을 가지고 있으며,
+                  이를 이해하는 과정이 더 나은 관계와 삶으로 이어진다고 믿습니다.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid gap-4">
+              {introductionPoints.map((point, index) => (
+                <div
+                  key={point}
+                  className="rounded-[24px] border border-white/10 bg-white/6 p-5 shadow-[0_18px_50px_rgba(7,10,28,0.2)]"
+                >
+                  <p className="text-xs uppercase tracking-[0.26em] text-[var(--color-secondary)]">
+                    0{index + 1}
+                  </p>
+                  <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{point}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </GlassPanel>
+      </section>
+
       <section className="pb-20 pt-8 lg:pt-14">
         <div className="mb-8 flex items-end justify-between gap-4">
           <div className="space-y-2">
@@ -82,7 +131,7 @@ export default function Home() {
               SIGNATURE SERVICES
             </p>
             <h2 className="font-display text-4xl text-[var(--foreground)]">
-              운의 흐름을 읽고 설계하는 서비스
+              감정과 관계의 흐름을 해석하는 시그니처 도구
             </h2>
           </div>
         </div>

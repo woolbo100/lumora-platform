@@ -3,6 +3,9 @@ import { ServiceCard } from "@/components/shared/ServiceCard";
 import { services } from "@/data/services";
 
 export default function Home() {
+  const serviceItems = services.filter((service) => service.type === "service");
+  const blogItem = services.find((service) => service.type === "blog");
+
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
       <header className="flex items-center justify-between border-b border-white/8 pb-6">
@@ -10,9 +13,7 @@ export default function Home() {
           <p className="text-xs uppercase tracking-[0.35em] text-[var(--color-secondary)]">
             Inner Symbolism Platform
           </p>
-          <h1 className="mt-2 font-display text-2xl text-[var(--foreground)]">
-            LUMORA
-          </h1>
+          <h1 className="mt-2 font-display text-2xl text-[var(--foreground)]">LUMORA</h1>
         </div>
         <CTAButton href="/tarot" className="hidden sm:inline-flex">
           타로 시작하기
@@ -37,39 +38,44 @@ export default function Home() {
               </p>
             </div>
             <p className="mx-auto max-w-3xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-              타로 리딩, 애착유형 코드, 블로그 콘텐츠를 통해 내면의 신호를
-              읽어내는 감각적인 플랫폼입니다. 각 서비스는 하나의 흐름 안에서
-              자연스럽게 이어지고, LUMORA의 공통 톤 안에서 확장될 수 있도록
-              구성했습니다.
+              타로 리딩, 감정코드, 꿈해몽, 관계 분석까지 내면의 신호를 읽어내는 감각적인
+              플랫폼입니다. 각 서비스는 하나의 흐름 안에서 자연스럽게 이어지고 LUMORA의 공통 결
+              안에서 확장될 수 있도록 구성했습니다.
             </p>
           </div>
 
           <div className="relative mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <CTAButton href="/tarot">타로 리딩 시작</CTAButton>
-            <CTAButton href="/attraction-code" variant="secondary">
-              매력코드 보기
+            <CTAButton href="/emotion" variant="secondary">
+              감정코드 보기
             </CTAButton>
           </div>
         </div>
       </section>
 
-      <section className="pb-16 pt-8 lg:pt-14">
-        <div className="mb-6 flex items-end justify-between gap-4">
+      <section className="pb-20 pt-8 lg:pt-14">
+        <div className="mb-8 flex items-end justify-between gap-4">
           <div className="space-y-2">
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--foreground-muted)]">
-              Core Services
+              SIGNATURE SERVICES
             </p>
             <h2 className="font-display text-4xl text-[var(--foreground)]">
-              지금 바로 시작할 수 있는 서비스
+              운의 흐름을 읽고 설계하는 서비스
             </h2>
           </div>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-          {services.map((service) => (
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {serviceItems.map((service) => (
             <ServiceCard key={service.href} {...service} />
           ))}
         </div>
+
+        {blogItem ? (
+          <div className="mt-8">
+            <ServiceCard {...blogItem} />
+          </div>
+        ) : null}
       </section>
     </main>
   );

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 
 import "./globals.css";
 
@@ -15,6 +16,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="h-full scroll-smooth" suppressHydrationWarning>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-H86NT2M7KT"
+          strategy="afterInteractive"
+        />
+        <Script id="ga-script" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-H86NT2M7KT');
+          `}
+        </Script>
+      </head>
       <body
         className="min-h-full bg-[var(--background)] text-[var(--foreground)] antialiased"
         suppressHydrationWarning

@@ -16,6 +16,14 @@ export const services: ServiceItem[] = [
     badge: "인기 서비스",
   },
   {
+    href: "/attachment-code",
+    title: "애착유형 코드",
+    eyebrow: "INNER ATTACHMENT",
+    description:
+      "관계 안에서 반복되는 감정 반응과 애착의 습관을 살펴보며, 당신이 사랑을 받아들이는 방식과 불안의 결을 섬세하게 읽어드립니다.",
+    badge: "기본 분석",
+  },
+  {
     href: "/relationship-pattern",
     title: "연애패턴 코드",
     eyebrow: "INNER PATTERN",

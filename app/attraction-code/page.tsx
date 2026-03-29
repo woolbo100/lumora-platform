@@ -8,14 +8,7 @@ export default function AttractionCodePage() {
 
   return (
     <>
-      <main className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,201,221,0.11),transparent_18%),radial-gradient(circle_at_20%_22%,rgba(122,104,217,0.24),transparent_30%),radial-gradient(circle_at_78%_24%,rgba(255,182,212,0.14),transparent_25%),radial-gradient(circle_at_52%_62%,rgba(213,195,165,0.1),transparent_32%),linear-gradient(180deg,rgba(17,11,31,0.82)_0%,rgba(15,12,30,0.9)_48%,rgba(10,10,24,0.96)_100%)]" />
-          <div className="absolute left-[12%] top-[16%] h-[19rem] w-[19rem] rounded-full bg-[radial-gradient(circle,rgba(122,104,217,0.24),transparent_68%)] blur-3xl" />
-          <div className="absolute right-[12%] top-[18%] h-[16rem] w-[16rem] rounded-full bg-[radial-gradient(circle,rgba(255,182,212,0.18),transparent_72%)] blur-3xl" />
-          <div className="absolute left-1/2 top-[58%] h-[24rem] w-[24rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(213,195,165,0.09),transparent_70%)] blur-3xl" />
-        </div>
-
+      <main className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2">
         <section className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-4xl flex-col items-center justify-center px-6 py-12 text-center sm:px-8">
           <div className="mb-8 flex h-22 w-22 items-center justify-center rounded-full border border-[#f4c9dd]/18 bg-[radial-gradient(circle,rgba(244,201,221,0.22),rgba(255,255,255,0.03))] text-5xl text-[#f4c9dd] shadow-[0_0_60px_rgba(197,132,174,0.18)]">
             ✦

@@ -14,7 +14,11 @@ export default function AttractionCodeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ServiceHubLayout eyebrow="Attraction Code" title="Attraction Code">
+    <ServiceHubLayout
+      eyebrow="Attraction Code"
+      title="Attraction Code"
+      backgroundVariant="rose"
+    >
       {children}
     </ServiceHubLayout>
   );

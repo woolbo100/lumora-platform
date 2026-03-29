@@ -7,7 +7,7 @@ import { serviceHubContent } from "@/lib/service-hub-content";
 export default function TarotPage() {
   return (
     <>
-      <main className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2 overflow-hidden">
+      <main className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2">
         <div className="absolute inset-0">
           <Image
             src="/images/tarot/tarotmain.png"
@@ -17,7 +17,7 @@ export default function TarotPage() {
             className="scale-[1.03] object-cover opacity-38"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(213,195,165,0.08),transparent_22%),radial-gradient(circle_at_50%_35%,rgba(122,104,217,0.16),transparent_34%),linear-gradient(180deg,rgba(13,11,28,0.5)_0%,rgba(10,11,23,0.68)_52%,rgba(7,8,18,0.86)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,11,28,0.32)_0%,rgba(10,11,23,0.48)_52%,rgba(7,8,18,0.58)_100%)]" />
         </div>
 
         <section className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-3xl flex-col items-center justify-center px-6 py-12 text-center sm:px-8">

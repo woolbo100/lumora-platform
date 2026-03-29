@@ -17,6 +17,10 @@ export default function RootLayout({
   return (
     <html lang="ko" className="h-full scroll-smooth" suppressHydrationWarning>
       <head>
+        <meta
+          name="google-site-verification"
+          content="Cyw4aUDav7WKHtcNDrnjhHmuRF_v2HKk0pi0p81SRh4"
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-H86NT2M7KT"
           strategy="afterInteractive"

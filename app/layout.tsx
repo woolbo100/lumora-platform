@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 
 import { SiteFooter } from "@/components/shared/SiteFooter";
+import { SiteHeader } from "@/components/shared/SiteHeader";
 
 import "./globals.css";
 
@@ -48,6 +49,7 @@ export default function RootLayout({
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,18,0.1),rgba(5,7,18,0.22)_42%,rgba(5,7,18,0.44))]" />
         </div>
         <div className="flex min-h-screen flex-col">
+          <SiteHeader />
           <div className="flex-1">{children}</div>
           <SiteFooter />
         </div>

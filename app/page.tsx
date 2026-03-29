@@ -46,8 +46,8 @@ export default function Home() {
 
           <div className="relative mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <CTAButton href="/tarot">타로 리딩 시작</CTAButton>
-            <CTAButton href="/relationship-pattern" variant="secondary">
-              애착유형 코드 보기
+            <CTAButton href="/attraction-code" variant="secondary">
+              매력코드 보기
             </CTAButton>
           </div>
         </div>

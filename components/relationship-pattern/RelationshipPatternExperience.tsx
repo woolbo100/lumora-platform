@@ -2,29 +2,37 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
-import { attachmentQuestions } from "@/data/attachmentQuestions";
-import { calculateAttachmentResult, getSelectedAttachmentOption } from "@/lib/attachmentCalculator";
-import { type AttachmentAnswerMap, type AttachmentOption, type AttachmentType } from "@/types/attachment";
+import { relationshipPatternQuestions } from "@/data/relationshipPatternQuestions";
+import {
+  calculateRelationshipPatternResult,
+  getSelectedRelationshipPatternOption,
+} from "@/lib/relationshipPatternCalculator";
+import {
+  type RelationshipPatternAnswerMap,
+  type RelationshipPatternOption,
+  type RelationshipPatternType,
+} from "@/types/relationshipPattern";
 
-const STORAGE_KEY = "lumora-attachment-code-store";
+const STORAGE_KEY = "lumora-relationship-pattern-store";
 
-type AttachmentRuntimeState = {
+type RelationshipPatternRuntimeState = {
   currentIndex: number;
-  answers: AttachmentAnswerMap;
-  resultType: AttachmentType | null;
+  answers: RelationshipPatternAnswerMap;
+  resultType: RelationshipPatternType | null;
   completed: boolean;
 };
 
-const initialState: AttachmentRuntimeState = {
+const initialState: RelationshipPatternRuntimeState = {
   currentIndex: 0,
   answers: {},
   resultType: null,
   completed: false,
 };
 
-function getInitialAttachmentRuntimeState(): AttachmentRuntimeState {
+function getInitialRelationshipPatternState(): RelationshipPatternRuntimeState {
   if (typeof window === "undefined") {
     return initialState;
   }
@@ -36,45 +44,49 @@ function getInitialAttachmentRuntimeState(): AttachmentRuntimeState {
   }
 
   try {
-    return JSON.parse(savedState) as AttachmentRuntimeState;
+    return JSON.parse(savedState) as RelationshipPatternRuntimeState;
   } catch {
     window.localStorage.removeItem(STORAGE_KEY);
     return initialState;
   }
 }
 
-export function AttachmentCodeExperience() {
+export function RelationshipPatternExperience() {
   const router = useRouter();
-  const [state, setState] = useState<AttachmentRuntimeState>(
-    getInitialAttachmentRuntimeState,
+  const [state, setState] = useState<RelationshipPatternRuntimeState>(
+    getInitialRelationshipPatternState,
   );
   const [hasEnteredExperience, setHasEnteredExperience] = useState(false);
-  const totalQuestions = attachmentQuestions.length;
-  const currentQuestion = attachmentQuestions[Math.min(state.currentIndex, totalQuestions - 1)];
+  const totalQuestions = relationshipPatternQuestions.length;
+  const currentQuestion =
+    relationshipPatternQuestions[Math.min(state.currentIndex, totalQuestions - 1)];
   const progress = Math.min(((state.currentIndex + 1) / totalQuestions) * 100, 100);
   const selectedOption = currentQuestion
-    ? getSelectedAttachmentOption(state.answers, currentQuestion.id)
+    ? getSelectedRelationshipPatternOption(state.answers, currentQuestion.id)
     : undefined;
 
   useEffect(() => {
     if (state.completed && state.resultType) {
-      router.push(`/attachment-code/result?type=${state.resultType}`);
+      router.push(`/relationship-pattern/result?type=${state.resultType}`);
     }
   }, [router, state.completed, state.resultType]);
 
-  function persist(nextState: AttachmentRuntimeState) {
+  function persist(nextState: RelationshipPatternRuntimeState) {
     setState(nextState);
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(nextState));
   }
 
-  function handleSelectOption(questionId: number, option: AttachmentOption) {
+  function handleSelectOption(
+    questionId: number,
+    option: RelationshipPatternOption,
+  ) {
     const nextAnswers = {
       ...state.answers,
       [questionId]: option,
     };
-    const nextResult = calculateAttachmentResult(nextAnswers);
+    const nextResult = calculateRelationshipPatternResult(nextAnswers);
     const completed = Object.keys(nextAnswers).length >= totalQuestions;
-    const nextState: AttachmentRuntimeState = {
+    const nextState: RelationshipPatternRuntimeState = {
       currentIndex: Math.min(state.currentIndex + 1, totalQuestions),
       answers: nextAnswers,
       resultType: completed ? nextResult.topType : null,
@@ -116,14 +128,15 @@ export function AttachmentCodeExperience() {
           </div>
 
           <h2 className="font-display text-6xl text-[var(--foreground)] sm:text-7xl">
-            Luna Attachment
+            Luna Pattern
           </h2>
           <p className="mt-5 text-2xl font-medium text-[var(--color-secondary)] sm:text-3xl">
-            당신의 애착유형을 알아보세요
+            연애패턴 코드를 읽어보세요
           </p>
           <p className="mx-auto mt-8 max-w-xl text-lg leading-9 text-[var(--foreground-soft)]">
-            은하수 너머 마음이 그리는 관계의 지도를 따라가며, 사랑 앞에서
-            반복되는 감정의 패턴을 조용하고 섬세하게 읽어보세요.
+            관계 안에서 반복되는 감정선과 반응의 결을 20개의 질문으로 천천히
+            살펴봅니다. 사랑이 깊어질수록 나는 어디로 흐르는지, LUMORA의 감성
+            리딩으로 부드럽게 비춰보세요.
           </p>
 
           <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -132,7 +145,7 @@ export function AttachmentCodeExperience() {
               onClick={() => setHasEnteredExperience(true)}
               className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(157,139,227,0.94)_55%,rgba(108,92,198,0.92))] px-8 py-4 text-base font-semibold text-[#1c1830] shadow-[0_24px_70px_rgba(89,72,173,0.28)] transition hover:-translate-y-0.5"
             >
-              {hasProgress ? "이어서 시작하기" : "탐험 시작하기"}
+              {hasProgress ? "이어서 분석하기" : "지금 시작하기"}
               <span className="ml-3 text-xl" aria-hidden="true">
                 →
               </span>
@@ -144,7 +157,7 @@ export function AttachmentCodeExperience() {
                 onClick={resetRuntimeState}
                 className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/15 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] px-8 py-4 text-sm font-semibold text-[var(--foreground-soft)] transition hover:bg-white/10"
               >
-                처음부터 다시 시작
+                처음부터 다시 보기
               </button>
             ) : null}
           </div>
@@ -157,22 +170,21 @@ export function AttachmentCodeExperience() {
     <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
       <GlassPanel className="border-[var(--color-secondary)]/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.1),rgba(10,13,28,0.35))] p-8">
         <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-secondary)]">
-          Attachment Code
+          Relationship Pattern Code
         </p>
         <h2 className="mt-4 font-display text-4xl text-[var(--foreground)]">
-          관계 속 감정 패턴을
+          사랑 안에서 드러나는
           <br />
-          정제된 흐름으로 읽어보세요
+          당신의 흐름을 읽어보세요
         </h2>
         <p className="mt-5 text-sm leading-7 text-[var(--foreground-soft)]">
-          20개의 질문을 통해 사랑 앞에서 내가 어떻게 반응하는지 차분하게
-          확인합니다. 각 답변은 안정형, 불안형, 회피형, 혼합형 코드로 연결되어
-          결과 리포트를 완성합니다.
+          연애 안에서 반복되는 몰입, 희생, 거리감, 감정의 파도, 안정 지향성을
+          차분하게 살펴보고 현재의 관계 패턴을 가장 닮은 코드로 정리해드립니다.
         </p>
 
         <div className="mt-10 space-y-4">
           <div className="flex items-center justify-between text-sm text-white/65">
-            <span>진행도</span>
+            <span>진행률</span>
             <span>
               {Math.min(state.currentIndex + 1, totalQuestions)} / {totalQuestions}
             </span>
@@ -187,10 +199,12 @@ export function AttachmentCodeExperience() {
 
         <div className="mt-10 grid gap-3 text-sm text-[var(--foreground-soft)]">
           <div className="rounded-2xl border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-4">
-            안정형, 불안형, 회피형, 혼합형의 반응 흐름을 균형 있게 비교합니다.
+            질문은 실제 연애 장면에서 자주 반복되는 반응을 기준으로 설계되어
+            있습니다.
           </div>
           <div className="rounded-2xl border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-4">
-            감정 과잉 해석보다 현재 관계에서 반복되는 패턴을 읽는 데 초점을 둡니다.
+            지금의 당신을 가장 닮은 감정선이 어느 방향으로 흐르는지 중심 패턴을
+            부드럽게 읽어드립니다.
           </div>
         </div>
       </GlassPanel>
@@ -218,9 +232,8 @@ export function AttachmentCodeExperience() {
                     : "border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] hover:border-[var(--color-primary)]/45 hover:bg-white/10"
                 }`}
               >
-                <span className="block text-base leading-7 text-[var(--foreground)]">{option.text}</span>
-                <span className="mt-2 block text-xs uppercase tracking-[0.25em] text-white/40">
-                  {option.type}
+                <span className="block text-base leading-7 text-[var(--foreground)]">
+                  {option.text}
                 </span>
               </button>
             );
@@ -244,7 +257,7 @@ export function AttachmentCodeExperience() {
             onClick={resetRuntimeState}
             className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 px-5 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
           >
-            처음부터 다시
+            다시 시작
           </button>
         </div>
       </GlassPanel>

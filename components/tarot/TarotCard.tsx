@@ -29,12 +29,12 @@ export default function TarotCardItem({
       disabled={!clickable}
       className={`group relative overflow-hidden rounded-[24px] border text-left transition duration-300 ${
         clickable
-          ? "cursor-pointer hover:-translate-y-1 hover:border-[var(--color-secondary)]/45"
+          ? "cursor-pointer hover:-translate-y-1 hover:border-[var(--color-secondary)]/45 hover:shadow-[0_24px_70px_rgba(18,16,42,0.38)]"
           : "cursor-default"
       } ${
         isSelected
-          ? "border-[var(--color-secondary)] bg-white/12 shadow-[0_20px_60px_rgba(214,194,138,0.16)]"
-          : "border-white/10 bg-white/6"
+          ? "border-[var(--color-secondary)]/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.13),rgba(255,255,255,0.06)_48%,rgba(10,12,24,0.28))] shadow-[0_24px_70px_rgba(76,60,144,0.28)]"
+          : "border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.04)_52%,rgba(10,12,24,0.22))]"
       }`}
     >
       <div className="relative aspect-[3/5] w-full overflow-hidden bg-[#130f2b]">
@@ -74,9 +74,9 @@ export default function TarotCardItem({
           <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--color-secondary)]/72">
             {suitLabel}
           </p>
-          <p className="font-display text-xl text-white">{card.nameKr}</p>
-          <p className="text-sm text-white/60">{card.name}</p>
-          <p className="text-sm leading-6 text-white/66">{card.meaningUpright}</p>
+          <p className="font-display text-xl text-[var(--foreground)]">{card.nameKr}</p>
+          <p className="text-sm text-[var(--foreground-muted)]">{card.name}</p>
+          <p className="text-sm leading-6 text-[var(--foreground-soft)]">{card.meaningUpright}</p>
         </div>
       ) : (
         <div className="border-t border-white/6 px-4 py-4">

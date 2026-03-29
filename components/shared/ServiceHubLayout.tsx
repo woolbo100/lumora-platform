@@ -1,29 +1,27 @@
-import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 
-import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "LUMORA | 타로 리딩",
-  description:
-    "LUMORA 안에서 현재의 감정, 관계, 선택의 흐름을 읽어보는 타로 리딩 서비스입니다.",
+type ServiceHubLayoutProps = {
+  eyebrow: string;
+  title: string;
+  children: ReactNode;
 };
 
-export default function TarotLayout({
+export function ServiceHubLayout({
+  eyebrow,
+  title,
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: ServiceHubLayoutProps) {
   return (
     <div className="relative">
       <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
         <header className="mb-8 flex items-center justify-between gap-4 border-b border-white/8 pb-6">
           <div>
             <p className="text-xs uppercase tracking-[0.35em] text-[var(--color-secondary)]">
-              Mystic Insight
+              {eyebrow}
             </p>
             <h1 className="mt-2 font-display text-2xl text-[var(--foreground)] sm:text-3xl">
-              Tarot Reading
+              {title}
             </h1>
           </div>
           <Link

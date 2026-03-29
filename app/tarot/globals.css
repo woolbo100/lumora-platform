@@ -52,19 +52,24 @@
 }
 
 body {
-  @apply bg-mystic-dark text-white min-h-screen font-serif overflow-x-hidden;
-  background: linear-gradient(to bottom, #0F0C29, #302B63, #24243E);
+  @apply min-h-screen overflow-x-hidden font-serif text-[var(--foreground)];
+  background:
+    radial-gradient(circle at top, rgba(122, 104, 217, 0.16), transparent 28%),
+    radial-gradient(circle at 82% 22%, rgba(120, 162, 255, 0.1), transparent 24%),
+    linear-gradient(to bottom, #0b0a18, #120f28 42%, #0d1020 100%);
   background-attachment: fixed;
 }
 
 .glass-panel {
-  @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  @apply rounded-2xl border border-white/12 backdrop-blur-xl;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04) 55%, rgba(10, 12, 24, 0.28));
+  box-shadow: 0 24px 80px rgba(8, 10, 30, 0.38);
 }
 
 .glass-panel-gold {
-  @apply bg-mystic-dark/40 backdrop-blur-lg border border-mystic-gold/20 rounded-2xl shadow-gold-glow;
-  background: linear-gradient(135deg, rgba(219, 195, 142, 0.05), rgba(15, 12, 41, 0.6));
+  @apply rounded-2xl border border-mystic-gold/20 backdrop-blur-lg;
+  background: linear-gradient(135deg, rgba(219, 195, 142, 0.08), rgba(15, 12, 41, 0.68));
+  box-shadow: 0 22px 70px rgba(219, 195, 142, 0.12);
 }
 
 .animate-fade-in-up {
@@ -76,13 +81,13 @@ body {
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 20px rgba(219, 195, 142, 0.4);
+  box-shadow: 0 18px 48px rgba(219, 195, 142, 0.18);
   transform: translateY(-2px);
   transition: all 0.3s ease;
 }
 
 .gold-text-shadow {
-  text-shadow: 0 0 10px rgba(219, 195, 142, 0.5);
+  text-shadow: 0 0 18px rgba(219, 195, 142, 0.24);
 }
 
 .perspective-1000 {

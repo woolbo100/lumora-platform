@@ -7,10 +7,10 @@ export default function AttachmentCodePage() {
         <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-secondary)]">
           Premium Attachment Analysis
         </p>
-        <h1 className="mt-4 font-display text-5xl text-white sm:text-6xl">
+        <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
           애착유형 코드
         </h1>
-        <p className="mt-5 text-base leading-8 text-white/72 sm:text-lg">
+        <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
           관계 안에서 반복되는 감정의 흐름, 거리 두기, 불안과 회피의 패턴을
           질문 기반으로 살펴보는 프리미엄 분석 경험입니다. 타로와는 다른
           방식으로 마음의 구조를 읽어내지만, 같은 LUMORA 톤 안에서 이어지도록

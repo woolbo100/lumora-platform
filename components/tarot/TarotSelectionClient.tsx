@@ -79,12 +79,12 @@ export function TarotSelectionClient({
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]/72">
           {selectedCategory?.eyebrow ?? "Mystic Spread"}
         </p>
-        <h2 className="mt-4 font-display text-4xl text-white sm:text-5xl">
+        <h2 className="mt-4 font-display text-4xl text-[var(--foreground)] sm:text-5xl">
           {selectedCategory
             ? `${selectedCategory.label} 리딩을 위한 카드 선택`
             : "어떤 흐름을 읽고 싶은지 먼저 골라 주세요"}
         </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
+        <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
           {selectedCategory
             ? "이제 카드 세 장을 뽑아 주세요. 선택 화면에서는 카드의 뒷면만 보이고, 결과 페이지에서만 실제 카드가 드러납니다."
             : "주제를 먼저 정하면 그 감정선에 맞는 리딩 흐름으로 카드 뽑기를 시작할 수 있습니다."}
@@ -107,17 +107,17 @@ export function TarotSelectionClient({
               onClick={() => handleCategorySelect(category.key)}
               className={`rounded-[26px] border px-6 py-6 text-left transition duration-300 ${
                 active
-                  ? "border-[var(--color-secondary)]/36 bg-[var(--color-secondary)]/10 shadow-[0_0_24px_rgba(219,195,142,0.12)]"
-                  : "border-white/10 bg-white/5 hover:-translate-y-1 hover:border-white/20 hover:bg-white/8"
+                  ? "border-[var(--color-secondary)]/36 bg-[linear-gradient(135deg,rgba(213,195,165,0.12),rgba(122,104,217,0.08)_65%,rgba(255,255,255,0.05))] shadow-[0_18px_50px_rgba(60,50,124,0.2)]"
+                  : "border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_18px_48px_rgba(9,11,24,0.28)]"
               }`}
             >
               <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-secondary)]/72">
                 {category.eyebrow}
               </p>
-              <h3 className="mt-3 font-display text-3xl text-white">
+              <h3 className="mt-3 font-display text-3xl text-[var(--foreground)]">
                 {category.label}
               </h3>
-              <p className="mt-4 text-sm leading-7 text-white/68">
+              <p className="mt-4 text-sm leading-7 text-[var(--foreground-soft)]">
                 {category.description}
               </p>
             </button>
@@ -140,11 +140,11 @@ export function TarotSelectionClient({
         </div>
       ) : null}
 
-      <div className="sticky bottom-6 mt-10 flex flex-col items-center justify-center gap-4 rounded-[28px] border border-white/10 bg-[#120f2ccc] px-5 py-5 backdrop-blur-xl sm:flex-row">
+      <div className="sticky bottom-6 mt-10 flex flex-col items-center justify-center gap-4 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(15,16,34,0.88),rgba(10,12,24,0.78)_58%,rgba(28,21,55,0.82))] px-5 py-5 shadow-[0_24px_70px_rgba(8,10,25,0.38)] backdrop-blur-2xl sm:flex-row">
         <button
           type="button"
           onClick={() => router.push("/tarot")}
-          className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 px-6 py-3 text-sm font-semibold tracking-[0.18em] text-white/82 transition duration-300 hover:border-white/24 hover:bg-white/6"
+          className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 px-6 py-3 text-sm font-semibold tracking-[0.18em] text-[var(--foreground-soft)] transition duration-300 hover:border-white/24 hover:bg-white/6"
         >
           허브로 돌아가기
         </button>
@@ -152,7 +152,7 @@ export function TarotSelectionClient({
           type="button"
           onClick={handleNext}
           disabled={!selectedCategoryKey || selectedCardIds.length !== 3}
-          className="inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold tracking-[0.18em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#7f71dc] disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/40"
+          className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(147,131,235,0.92),rgba(112,96,204,0.9)_52%,rgba(77,62,152,0.92))] px-6 py-3 text-sm font-semibold tracking-[0.18em] text-[#fbf6f0] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(88,69,173,0.32)] disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/40"
         >
           결과 보기
         </button>

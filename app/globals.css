@@ -1,13 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #171433;
-  --foreground: #f8f5ff;
-  --color-primary: #6a5acd;
-  --color-secondary: #d6c28a;
-  --color-surface: rgba(255, 255, 255, 0.08);
-  --color-surface-strong: rgba(255, 255, 255, 0.14);
-  --color-border: rgba(255, 255, 255, 0.14);
+  --background: #090814;
+  --foreground: #f6efe7;
+  --foreground-soft: rgba(246, 239, 231, 0.84);
+  --foreground-muted: rgba(246, 239, 231, 0.66);
+  --color-primary: #7a68d9;
+  --color-primary-strong: #9383eb;
+  --color-secondary: #d5c3a5;
+  --color-accent: #78a2ff;
+  --color-surface: rgba(255, 255, 255, 0.06);
+  --color-surface-strong: rgba(255, 255, 255, 0.11);
+  --color-border: rgba(255, 255, 255, 0.12);
+  --shadow-glow-primary: 0 24px 80px rgba(70, 53, 138, 0.34);
+  --shadow-glow-soft: 0 28px 90px rgba(7, 10, 28, 0.55);
   --font-sans-stack:
     "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
   --font-display-stack:
@@ -26,18 +32,38 @@
 }
 
 html {
+  color-scheme: dark;
   background:
-    radial-gradient(circle at 18% 12%, rgba(114, 91, 188, 0.26), transparent 28%),
-    radial-gradient(circle at 82% 18%, rgba(214, 194, 138, 0.08), transparent 18%),
-    radial-gradient(circle at 50% 0%, rgba(92, 74, 165, 0.22), transparent 32%),
-    linear-gradient(180deg, #211b46 0%, #1b173d 42%, #14112f 100%);
+    radial-gradient(circle at 18% 12%, rgba(130, 104, 220, 0.2), transparent 28%),
+    radial-gradient(circle at 78% 16%, rgba(120, 162, 255, 0.1), transparent 20%),
+    radial-gradient(circle at 50% -4%, rgba(213, 195, 165, 0.08), transparent 24%),
+    linear-gradient(180deg, #0f1021 0%, #0b1120 38%, #080913 100%);
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   color: var(--foreground);
   font-family: var(--font-sans-stack);
-  background: transparent;
+  background:
+    radial-gradient(circle at top, rgba(124, 99, 218, 0.12), transparent 26%),
+    radial-gradient(circle at 20% 18%, rgba(58, 92, 182, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(10, 12, 24, 0.14), rgba(10, 12, 24, 0.3));
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08) 0, transparent 1.5px),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.05) 0, transparent 1px),
+    radial-gradient(circle at 35% 72%, rgba(213, 195, 165, 0.06) 0, transparent 1px);
+  background-size: 240px 240px, 320px 320px, 280px 280px;
+  opacity: 0.28;
+  mix-blend-mode: screen;
+  z-index: -2;
 }
 
 a {

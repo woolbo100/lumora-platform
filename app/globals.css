@@ -74,3 +74,27 @@ a {
   background: rgba(214, 194, 138, 0.3);
   color: white;
 }
+
+@keyframes lumoraFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(0, -18px, 0) scale(1.04);
+  }
+}
+
+@keyframes lumoraPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 0.95;
+    transform: scale(1.08);
+  }
+}

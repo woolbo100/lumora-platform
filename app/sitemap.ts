@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
 
+import { listBlogPosts } from "@/lib/blog-posts";
+import { hasSupabaseConfig } from "@/lib/supabase";
+
 const BASE_URL = "https://lumoracode.kr";
 
 const routes: ReadonlyArray<{
@@ -35,13 +38,24 @@ const routes: ReadonlyArray<{
   { path: "/name-design", changeFrequency: "monthly", priority: 0.8 },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
 
-  return routes.map(({ path, changeFrequency, priority }) => ({
+  const staticRoutes = routes.map(({ path, changeFrequency, priority }) => ({
     url: new URL(path, BASE_URL).toString(),
     lastModified,
     changeFrequency,
     priority,
   }));
+
+  const blogRoutes = hasSupabaseConfig()
+    ? (await listBlogPosts()).map((post) => ({
+        url: new URL(`/blog/${post.slug}`, BASE_URL).toString(),
+        lastModified: new Date(post.publishedAt),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      }))
+    : [];
+
+  return [...staticRoutes, ...blogRoutes];
 }

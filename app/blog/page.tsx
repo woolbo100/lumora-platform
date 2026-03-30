@@ -1,28 +1,130 @@
+import type { Metadata } from "next";
+
+import { blogCategories, isBlogCategory } from "@/data/blogCategories";
+import { BlogCategoryFilter } from "@/components/blog/BlogCategoryFilter";
+import { BlogPostGrid } from "@/components/blog/BlogPostGrid";
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { getAdminSession } from "@/lib/admin-auth";
+import { listBlogPosts } from "@/lib/blog-posts";
+import { hasSupabaseConfig } from "@/lib/supabase";
+import type { BlogCategory } from "@/types/blog";
 
-export default function BlogPage() {
+export const metadata: Metadata = {
+  title: "Blog | LUMORA",
+  description:
+    "Browse blog posts from Supabase with category filters and slug-based detail pages.",
+  openGraph: {
+    title: "Blog | LUMORA",
+    description:
+      "Browse blog posts from Supabase with category filters and slug-based detail pages.",
+    type: "website",
+    url: "https://lumoracode.kr/blog",
+  },
+};
+
+export const dynamic = "force-dynamic";
+
+type BlogPageProps = {
+  searchParams: Promise<{ category?: string | string[] }>;
+};
+
+function getSelectedCategory(
+  categoryParam: string | string[] | undefined,
+): BlogCategory | undefined {
+  const category = Array.isArray(categoryParam)
+    ? categoryParam[0]
+    : categoryParam;
+
+  if (category && isBlogCategory(category)) {
+    return category;
+  }
+
+  return undefined;
+}
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const { category } = await searchParams;
+  const selectedCategory = getSelectedCategory(category);
+  const isConfigured = hasSupabaseConfig();
+  const adminSession = await getAdminSession();
+  const posts = isConfigured ? await listBlogPosts(selectedCategory) : [];
+  const selectedCategoryMeta = selectedCategory
+    ? blogCategories.find((item) => item.slug === selectedCategory)
+    : undefined;
+
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-5xl items-center px-6 py-16 sm:px-8">
-      <GlassPanel className="w-full p-8 sm:p-10">
-        <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
-          Editorial Archive
-        </p>
-        <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
-          블로그
-        </h1>
-        <p className="mt-6 max-w-2xl text-base leading-8 text-[var(--foreground-soft)]">
-          LUMORA의 인사이트 콘텐츠와 해석 아카이브를 위한 공간입니다. 이후
-          카테고리, 목록, 상세 페이지를 같은 톤 안에서 자연스럽게 확장할 수
-          있도록 구조를 열어두었습니다.
-        </p>
-        <div className="mt-10 flex flex-wrap gap-4">
-          <CTAButton href="/">홈으로 돌아가기</CTAButton>
-          <CTAButton href="/tarot" variant="secondary">
-            타로 페이지 보기
-          </CTAButton>
-        </div>
+    <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-12 sm:px-8 lg:px-12">
+      <GlassPanel className="overflow-hidden">
+        <section className="relative px-8 py-10 sm:px-10 sm:py-12">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(147,131,235,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(120,162,255,0.14),transparent_28%)]" />
+
+          <div className="relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl space-y-4">
+              <p className="text-xs uppercase tracking-[0.32em] text-[var(--color-secondary)]">
+                EDITORIAL ARCHIVE
+              </p>
+              <h1 className="font-display text-4xl text-[var(--foreground)] sm:text-5xl">
+                Blog backed by Supabase
+              </h1>
+              <p className="text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+                Posts are loaded from the `posts` table, filtered by category,
+                and linked to slug-based detail pages in the App Router.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-black/10 px-5 py-4 text-sm text-[var(--foreground-soft)] backdrop-blur">
+              <p className="text-xs uppercase tracking-[0.24em] text-[var(--foreground-muted)]">
+                POSTS
+              </p>
+              <p className="mt-2 text-3xl font-semibold text-[var(--foreground)]">
+                {posts.length}
+              </p>
+              <p className="mt-1">
+                {selectedCategoryMeta
+                  ? `${selectedCategoryMeta.label} selected`
+                  : "All categories"}
+              </p>
+            </div>
+          </div>
+        </section>
       </GlassPanel>
+
+      <section className="space-y-5">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-3">
+            <h2 className="font-display text-2xl text-[var(--foreground)]">
+              Filter by category
+            </h2>
+            <p className="text-sm leading-7 text-[var(--foreground-soft)]">
+              Choose a category to narrow the list to matching posts only.
+            </p>
+            {adminSession ? (
+              <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+                Admin mode active
+              </p>
+            ) : null}
+          </div>
+          {adminSession ? (
+            <CTAButton href="/blog/write" variant="secondary">
+              Write a post
+            </CTAButton>
+          ) : null}
+        </div>
+        <BlogCategoryFilter activeCategory={selectedCategory} />
+      </section>
+
+      {!isConfigured ? (
+        <GlassPanel className="p-6">
+          <p className="text-sm leading-7 text-[var(--foreground-soft)]">
+            Supabase is not configured yet. Add `SUPABASE_URL` and
+            `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_PUBLISHABLE_KEY` to
+            `.env.local` to load posts from the database.
+          </p>
+        </GlassPanel>
+      ) : null}
+
+      <BlogPostGrid posts={posts} />
     </main>
   );
 }

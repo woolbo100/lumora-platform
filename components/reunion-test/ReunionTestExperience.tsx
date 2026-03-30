@@ -190,7 +190,7 @@ export function ReunionTestExperience() {
           >
             이전 질문
           </button>
-          <CTAButton href="/reunion-test" variant="secondary">
+          <CTAButton href="/" variant="secondary">
             허브로 이동
           </CTAButton>
           <button

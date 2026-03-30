@@ -192,7 +192,7 @@ export function AttractionCodeExperience() {
           >
             이전 질문
           </button>
-          <CTAButton href="/attraction-code" variant="secondary">
+          <CTAButton href="/" variant="secondary">
             허브로 이동
           </CTAButton>
           <button

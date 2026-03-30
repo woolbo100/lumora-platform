@@ -21,7 +21,7 @@ export function CTAButton({
   return (
     <Link
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold tracking-[0.18em] uppercase transition duration-300 hover:-translate-y-0.5 ${styles} ${className}`}
+      className={`relative z-20 inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold tracking-[0.18em] uppercase transition duration-300 hover:-translate-y-0.5 ${styles} ${className}`}
     >
       {children}
     </Link>

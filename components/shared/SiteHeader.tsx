@@ -8,15 +8,15 @@ const navigationLinks = [
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/8 bg-[rgba(9,8,20,0.72)] backdrop-blur-xl">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-8 lg:px-12">
-        <Link href="/" className="min-w-0">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-8 lg:px-12">
+        <Link href="/" className="relative z-20 min-w-0 pointer-events-auto">
           <p className="text-[10px] uppercase tracking-[0.35em] text-[var(--color-secondary)] sm:text-xs">
             Inner Symbolism Platform
           </p>
           <p className="mt-1 font-display text-xl text-[var(--foreground)] sm:text-2xl">LUMORA</p>
         </Link>
 
-        <nav className="flex items-center gap-2 sm:gap-3">
+        <nav className="relative z-20 flex items-center gap-2 sm:gap-3">
           {navigationLinks.map((link) => (
             <Link
               key={link.href}

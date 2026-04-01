@@ -22,6 +22,16 @@ type SupabasePostRow = {
   image_url?: string | null;
 };
 
+function isMissingColumnError(error: unknown) {
+  const message = error instanceof Error ? error.message : "";
+  return (
+    message.includes("column posts.status does not exist") ||
+    message.includes("column posts.image_alt_text does not exist") ||
+    message.includes("column posts.ai_generated does not exist") ||
+    message.includes("column posts.updated_at does not exist")
+  );
+}
+
 function resolvePostStatus(value: string | undefined): BlogPostStatus {
   return value === "published" ? "published" : "draft";
 }
@@ -68,35 +78,76 @@ function buildPostsQuery(
   return `posts?${query.toString()}`;
 }
 
+function buildLegacyPostsQuery(category?: BlogCategory) {
+  const query = new URLSearchParams({
+    select: "title,slug,category,summary,meta_description,content,created_at,image_url",
+    order: "created_at.desc",
+  });
+
+  if (category) {
+    query.set("category", `eq.${category}`);
+  }
+
+  return `posts?${query.toString()}`;
+}
+
 export async function listBlogPosts(
   category?: BlogCategory,
   options?: { includeDrafts?: boolean },
 ) {
-  const response = await supabaseRestRequest(buildPostsQuery(category, options));
-  const rows = (await response.json()) as SupabasePostRow[];
+  try {
+    const response = await supabaseRestRequest(buildPostsQuery(category, options));
+    const rows = (await response.json()) as SupabasePostRow[];
 
-  return rows.map(mapPost);
+    return rows.map(mapPost);
+  } catch (error) {
+    if (!isMissingColumnError(error)) {
+      throw error;
+    }
+
+    const fallbackResponse = await supabaseRestRequest(buildLegacyPostsQuery(category));
+    const fallbackRows = (await fallbackResponse.json()) as SupabasePostRow[];
+
+    return fallbackRows.map(mapPost);
+  }
 }
 
 export async function getBlogPostBySlug(
   slug: string,
   options?: { includeDrafts?: boolean },
 ) {
-  const query = new URLSearchParams({
-    select:
-      "title,slug,category,status,summary,meta_description,image_alt_text,ai_generated,content,created_at,updated_at,image_url",
-    slug: `eq.${slug}`,
-    limit: "1",
-  });
+  try {
+    const query = new URLSearchParams({
+      select:
+        "title,slug,category,status,summary,meta_description,image_alt_text,ai_generated,content,created_at,updated_at,image_url",
+      slug: `eq.${slug}`,
+      limit: "1",
+    });
 
-  if (!options?.includeDrafts) {
-    query.set("status", "eq.published");
+    if (!options?.includeDrafts) {
+      query.set("status", "eq.published");
+    }
+
+    const response = await supabaseRestRequest(`posts?${query.toString()}`);
+    const rows = (await response.json()) as SupabasePostRow[];
+
+    return rows[0] ? mapPost(rows[0]) : undefined;
+  } catch (error) {
+    if (!isMissingColumnError(error)) {
+      throw error;
+    }
+
+    const fallbackQuery = new URLSearchParams({
+      select: "title,slug,category,summary,meta_description,content,created_at,image_url",
+      slug: `eq.${slug}`,
+      limit: "1",
+    });
+
+    const fallbackResponse = await supabaseRestRequest(`posts?${fallbackQuery.toString()}`);
+    const fallbackRows = (await fallbackResponse.json()) as SupabasePostRow[];
+
+    return fallbackRows[0] ? mapPost(fallbackRows[0]) : undefined;
   }
-
-  const response = await supabaseRestRequest(`posts?${query.toString()}`);
-  const rows = (await response.json()) as SupabasePostRow[];
-
-  return rows[0] ? mapPost(rows[0]) : undefined;
 }
 
 export async function listRelatedBlogPosts(

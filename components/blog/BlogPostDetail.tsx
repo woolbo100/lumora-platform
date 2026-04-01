@@ -60,7 +60,7 @@ export function BlogPostDetail({
                 {post.title}
               </h1>
               <p className="max-w-3xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-                {paragraphs[0] ?? "No content available."}
+                {post.summary?.trim() || paragraphs[0] || "No content available."}
               </p>
             </div>
 
@@ -139,6 +139,7 @@ export function BlogPostDetail({
                 <p>Category: {category.label}</p>
                 <p>Published: {publishedDate}</p>
                 <p>Reading time: {getBlogReadTime(post.content)}</p>
+                {post.metaDescription ? <p>Meta: {post.metaDescription}</p> : null}
               </div>
               <CTAButton href="/blog" variant="secondary" className="w-full">
                 Browse more posts

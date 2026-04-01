@@ -1,15 +1,30 @@
 import { getCategoryMeta, isBlogCategory } from "@/data/blogCategories";
 import { supabaseRestRequest } from "@/lib/supabase";
-import type { BlogCategory, BlogPost, CreateBlogPostInput } from "@/types/blog";
+import type {
+  BlogCategory,
+  BlogPost,
+  BlogPostStatus,
+  CreateBlogPostInput,
+} from "@/types/blog";
 
 type SupabasePostRow = {
   title: string;
   slug: string;
   category: string;
+  status?: string;
+  summary?: string | null;
+  meta_description?: string | null;
+  image_alt_text?: string | null;
+  ai_generated?: boolean | null;
   content: string;
   created_at: string;
+  updated_at?: string | null;
   image_url?: string | null;
 };
+
+function resolvePostStatus(value: string | undefined): BlogPostStatus {
+  return value === "published" ? "published" : "draft";
+}
 
 function mapPost(row: SupabasePostRow): BlogPost {
   if (!isBlogCategory(row.category)) {
@@ -20,15 +35,25 @@ function mapPost(row: SupabasePostRow): BlogPost {
     title: row.title,
     slug: row.slug,
     category: row.category,
+    status: resolvePostStatus(row.status),
+    summary: row.summary ?? null,
+    metaDescription: row.meta_description ?? null,
+    imageAltText: row.image_alt_text ?? null,
+    aiGenerated: Boolean(row.ai_generated),
     content: row.content,
     publishedAt: row.created_at,
+    updatedAt: row.updated_at ?? null,
     imageUrl: row.image_url ?? null,
   };
 }
 
-function buildPostsQuery(category?: BlogCategory) {
+function buildPostsQuery(
+  category?: BlogCategory,
+  options?: { includeDrafts?: boolean },
+) {
   const query = new URLSearchParams({
-    select: "title,slug,category,content,created_at,image_url",
+    select:
+      "title,slug,category,status,summary,meta_description,image_alt_text,ai_generated,content,created_at,updated_at,image_url",
     order: "created_at.desc",
   });
 
@@ -36,22 +61,37 @@ function buildPostsQuery(category?: BlogCategory) {
     query.set("category", `eq.${category}`);
   }
 
+  if (!options?.includeDrafts) {
+    query.set("status", "eq.published");
+  }
+
   return `posts?${query.toString()}`;
 }
 
-export async function listBlogPosts(category?: BlogCategory) {
-  const response = await supabaseRestRequest(buildPostsQuery(category));
+export async function listBlogPosts(
+  category?: BlogCategory,
+  options?: { includeDrafts?: boolean },
+) {
+  const response = await supabaseRestRequest(buildPostsQuery(category, options));
   const rows = (await response.json()) as SupabasePostRow[];
 
   return rows.map(mapPost);
 }
 
-export async function getBlogPostBySlug(slug: string) {
+export async function getBlogPostBySlug(
+  slug: string,
+  options?: { includeDrafts?: boolean },
+) {
   const query = new URLSearchParams({
-    select: "title,slug,category,content,created_at,image_url",
+    select:
+      "title,slug,category,status,summary,meta_description,image_alt_text,ai_generated,content,created_at,updated_at,image_url",
     slug: `eq.${slug}`,
     limit: "1",
   });
+
+  if (!options?.includeDrafts) {
+    query.set("status", "eq.published");
+  }
 
   const response = await supabaseRestRequest(`posts?${query.toString()}`);
   const rows = (await response.json()) as SupabasePostRow[];
@@ -73,6 +113,8 @@ export async function createBlogPost(
   input: CreateBlogPostInput,
   authToken: string,
 ) {
+  const now = new Date().toISOString();
+
   const response = await supabaseRestRequest(
     "posts",
     {
@@ -84,7 +126,13 @@ export async function createBlogPost(
         title: input.title,
         slug: input.slug,
         category: input.category,
+        status: input.status ?? "draft",
+        summary: input.summary?.trim() || null,
+        meta_description: input.metaDescription?.trim() || null,
+        image_alt_text: input.imageAltText?.trim() || null,
+        ai_generated: Boolean(input.aiGenerated),
         content: input.content,
+        updated_at: now,
         image_url: input.imageUrl?.trim() || null,
       }),
     },
@@ -105,9 +153,11 @@ export async function updateBlogPost(
   input: CreateBlogPostInput,
   authToken: string,
 ) {
+  const now = new Date().toISOString();
   const query = new URLSearchParams({
     slug: `eq.${originalSlug}`,
-    select: "title,slug,category,content,created_at,image_url",
+    select:
+      "title,slug,category,status,summary,meta_description,image_alt_text,ai_generated,content,created_at,updated_at,image_url",
   });
 
   const response = await supabaseRestRequest(
@@ -121,7 +171,13 @@ export async function updateBlogPost(
         title: input.title,
         slug: input.slug,
         category: input.category,
+        status: input.status ?? "draft",
+        summary: input.summary?.trim() || null,
+        meta_description: input.metaDescription?.trim() || null,
+        image_alt_text: input.imageAltText?.trim() || null,
+        ai_generated: Boolean(input.aiGenerated),
         content: input.content,
+        updated_at: now,
         image_url: input.imageUrl?.trim() || null,
       }),
     },

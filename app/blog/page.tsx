@@ -48,7 +48,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const selectedCategory = getSelectedCategory(category);
   const isConfigured = hasSupabaseConfig();
   const adminSession = await getAdminSession();
-  const posts = isConfigured ? await listBlogPosts(selectedCategory) : [];
+  const posts = isConfigured
+    ? await listBlogPosts(selectedCategory, {
+        includeDrafts: Boolean(adminSession),
+      })
+    : [];
   const selectedCategoryMeta = selectedCategory
     ? blogCategories.find((item) => item.slug === selectedCategory)
     : undefined;

@@ -15,7 +15,7 @@ type BlogPostCardProps = {
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
   const category = getCategoryMeta(post.category);
-  const excerpt = getBlogExcerpt(post.content);
+  const excerpt = post.summary?.trim() || getBlogExcerpt(post.content);
   const readTime = getBlogReadTime(post.content);
 
   return (

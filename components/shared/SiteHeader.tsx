@@ -9,7 +9,11 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/8 bg-[rgba(9,8,20,0.72)] backdrop-blur-xl">
       <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-8 lg:px-12">
-        <Link href="/" className="relative z-20 min-w-0 pointer-events-auto">
+        <Link
+          href="/"
+          aria-label="홈으로 이동"
+          className="relative z-20 inline-flex min-w-0 cursor-pointer flex-col rounded-xl px-1 py-1 pointer-events-auto transition hover:opacity-90"
+        >
           <p className="text-[10px] uppercase tracking-[0.35em] text-[var(--color-secondary)] sm:text-xs">
             Inner Symbolism Platform
           </p>

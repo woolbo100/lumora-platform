@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import { isBlogCategory } from "@/data/blogCategories";
 import { getAdminSession } from "@/lib/admin-auth";
+import { slugifyBlogValue } from "@/lib/blog-slug";
 import {
   createBlogPost,
   deleteBlogPost,
@@ -12,15 +13,7 @@ import {
   updateBlogPost,
 } from "@/lib/blog-posts";
 import { deleteBlogImageByUrl, uploadBlogImage } from "@/lib/blog-storage";
-
-function slugify(value: string) {
-  return value
-    .trim()
-    .toLowerCase()
-    .replace(/[^\p{Letter}\p{Number}\s-]/gu, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-}
+import type { BlogPostStatus } from "@/types/blog";
 
 function readImageFile(formData: FormData) {
   const value = formData.get("imageFile");
@@ -30,6 +23,11 @@ function readImageFile(formData: FormData) {
   }
 
   return value;
+}
+
+function readPostStatus(formData: FormData): BlogPostStatus {
+  const value = String(formData.get("status") ?? "").trim();
+  return value === "published" ? "published" : "draft";
 }
 
 export async function createBlogPostAction(formData: FormData) {
@@ -42,6 +40,11 @@ export async function createBlogPostAction(formData: FormData) {
   const title = String(formData.get("title") ?? "").trim();
   const rawSlug = String(formData.get("slug") ?? "").trim();
   const category = String(formData.get("category") ?? "").trim();
+  const summary = String(formData.get("summary") ?? "").trim();
+  const metaDescription = String(formData.get("metaDescription") ?? "").trim();
+  const imageAltText = String(formData.get("imageAltText") ?? "").trim();
+  const aiGenerated = String(formData.get("aiGenerated") ?? "").trim() === "true";
+  const status = readPostStatus(formData);
   const content = String(formData.get("content") ?? "").trim();
   const imageFile = readImageFile(formData);
 
@@ -53,7 +56,7 @@ export async function createBlogPostAction(formData: FormData) {
     redirect("/blog/write?error=invalid-category");
   }
 
-  const slug = slugify(rawSlug || title);
+  const slug = slugifyBlogValue(rawSlug || title);
 
   if (!slug) {
     redirect("/blog/write?error=invalid-slug");
@@ -71,6 +74,11 @@ export async function createBlogPostAction(formData: FormData) {
         title,
         slug,
         category,
+        status,
+        summary,
+        metaDescription,
+        imageAltText,
+        aiGenerated,
         content,
         imageUrl: uploadedImageUrl ?? undefined,
       },
@@ -88,7 +96,12 @@ export async function createBlogPostAction(formData: FormData) {
 
   revalidatePath("/blog");
   revalidatePath(`/blog/${postSlug}`);
-  redirect(`/blog/${postSlug}?created=1`);
+
+  if (status === "published") {
+    redirect(`/blog/${postSlug}?created=1`);
+  }
+
+  redirect(`/blog/${postSlug}/edit?saved=draft`);
 }
 
 export async function updateBlogPostAction(formData: FormData) {
@@ -103,6 +116,11 @@ export async function updateBlogPostAction(formData: FormData) {
   const title = String(formData.get("title") ?? "").trim();
   const rawSlug = String(formData.get("slug") ?? "").trim();
   const category = String(formData.get("category") ?? "").trim();
+  const summary = String(formData.get("summary") ?? "").trim();
+  const metaDescription = String(formData.get("metaDescription") ?? "").trim();
+  const imageAltText = String(formData.get("imageAltText") ?? "").trim();
+  const aiGenerated = String(formData.get("aiGenerated") ?? "").trim() === "true";
+  const status = readPostStatus(formData);
   const content = String(formData.get("content") ?? "").trim();
   const imageFile = readImageFile(formData);
 
@@ -118,7 +136,7 @@ export async function updateBlogPostAction(formData: FormData) {
     redirect(`/blog/${originalSlug}/edit?error=invalid-category`);
   }
 
-  const slug = slugify(rawSlug || title);
+  const slug = slugifyBlogValue(rawSlug || title);
 
   if (!slug) {
     redirect(`/blog/${originalSlug}/edit?error=invalid-slug`);
@@ -137,6 +155,11 @@ export async function updateBlogPostAction(formData: FormData) {
         title,
         slug,
         category,
+        status,
+        summary,
+        metaDescription,
+        imageAltText,
+        aiGenerated,
         content,
         imageUrl: uploadedImageUrl ?? undefined,
       },
@@ -159,7 +182,12 @@ export async function updateBlogPostAction(formData: FormData) {
   revalidatePath("/blog");
   revalidatePath(`/blog/${originalSlug}`);
   revalidatePath(`/blog/${updatedSlug}`);
-  redirect(`/blog/${updatedSlug}?updated=1`);
+
+  if (status === "published") {
+    redirect(`/blog/${updatedSlug}?updated=1`);
+  }
+
+  redirect(`/blog/${updatedSlug}/edit?saved=draft`);
 }
 
 export async function deleteBlogPostAction(formData: FormData) {
@@ -176,7 +204,7 @@ export async function deleteBlogPostAction(formData: FormData) {
   }
 
   try {
-    const post = await getBlogPostBySlug(slug);
+    const post = await getBlogPostBySlug(slug, { includeDrafts: true });
 
     await deleteBlogPost(slug, session.accessToken);
 

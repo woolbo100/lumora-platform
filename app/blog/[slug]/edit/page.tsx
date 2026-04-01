@@ -12,12 +12,16 @@ import { hasSupabaseConfig } from "@/lib/supabase";
 
 export const metadata: Metadata = {
   title: "Edit Blog Post | LUMORA",
-  description: "Update an existing blog post as an administrator.",
+  description: "Review and update an existing blog post with optional AI-assisted drafting support.",
 };
 
 type BlogEditPageProps = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ error?: string | string[]; message?: string | string[] }>;
+  searchParams: Promise<{
+    error?: string | string[];
+    message?: string | string[];
+    saved?: string | string[];
+  }>;
 };
 
 export default async function BlogEditPage({
@@ -36,7 +40,7 @@ export default async function BlogEditPage({
 
   const { slug } = await params;
   const query = await searchParams;
-  const post = await getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug, { includeDrafts: true });
 
   if (!post) {
     notFound();
@@ -46,6 +50,11 @@ export default async function BlogEditPage({
   const message = Array.isArray(query.message)
     ? query.message[0]
     : query.message;
+  const saved = Array.isArray(query.saved) ? query.saved[0] : query.saved;
+  const successMessage =
+    saved === "draft"
+      ? "초안이 저장되었습니다. 이 페이지에서 바로 계속 수정할 수 있습니다."
+      : undefined;
 
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-12 sm:px-8">
@@ -58,8 +67,8 @@ export default async function BlogEditPage({
             Edit blog post
           </h1>
           <p className="text-base leading-8 text-[var(--foreground-soft)]">
-            Update the post and save changes back to the Supabase `posts`
-            table.
+            기존 글을 직접 수정하거나 AI 초안을 다시 생성해 에디터에 채운 뒤, 검토 후
+            저장할 수 있습니다.
           </p>
           <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--foreground-muted)]">
             <span>Signed in as {session.email}</span>
@@ -87,12 +96,15 @@ export default async function BlogEditPage({
           action={updateBlogPostAction}
           error={error}
           message={message}
+          successMessage={successMessage}
           submitLabel="Update Post"
           initialValues={{
             originalSlug: post.slug,
             title: post.title,
             slug: post.slug,
             category: post.category,
+            summary: post.summary ?? "",
+            metaDescription: post.metaDescription ?? "",
             imageUrl: post.imageUrl ?? "",
             content: post.content,
           }}

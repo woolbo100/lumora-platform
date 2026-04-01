@@ -10,11 +10,15 @@ import { hasSupabaseConfig } from "@/lib/supabase";
 
 export const metadata: Metadata = {
   title: "Write Blog Post | LUMORA",
-  description: "Create and save a blog post into the Supabase posts table.",
+  description: "Create, review, and save AI-assisted blog drafts in the Supabase posts table.",
 };
 
 type BlogWritePageProps = {
-  searchParams: Promise<{ error?: string | string[]; message?: string | string[] }>;
+  searchParams: Promise<{
+    error?: string | string[];
+    message?: string | string[];
+    saved?: string | string[];
+  }>;
 };
 
 export default async function BlogWritePage({
@@ -31,6 +35,11 @@ export default async function BlogWritePage({
   const message = Array.isArray(query.message)
     ? query.message[0]
     : query.message;
+  const saved = Array.isArray(query.saved) ? query.saved[0] : query.saved;
+  const successMessage =
+    saved === "draft"
+      ? "초안이 저장되었습니다. 계속 수정할 수 있습니다."
+      : undefined;
   const isConfigured = hasSupabaseConfig();
 
   return (
@@ -44,8 +53,8 @@ export default async function BlogWritePage({
             Write a blog post
           </h1>
           <p className="text-base leading-8 text-[var(--foreground-soft)]">
-            Fill in the title, slug, category, and content to save a post to the
-            Supabase `posts` table.
+            키워드로 AI 초안을 먼저 생성해 에디터에 채우거나, 직접 제목과 본문을 작성해
+            저장할 수 있습니다. 자동 발행은 하지 않으며 검토 후 직접 저장하는 흐름입니다.
           </p>
           <p className="text-sm text-[var(--foreground-muted)]">
             Signed in as {session.email}
@@ -75,6 +84,7 @@ export default async function BlogWritePage({
           action={createBlogPostAction}
           error={error}
           message={message}
+          successMessage={successMessage}
         />
       </GlassPanel>
     </main>

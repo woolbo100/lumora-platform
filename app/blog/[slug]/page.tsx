@@ -37,7 +37,8 @@ export async function generateMetadata(
     };
   }
 
-  const description = getBlogExcerpt(post.content);
+  const description =
+    post.metaDescription?.trim() || post.summary?.trim() || getBlogExcerpt(post.content);
 
   return {
     title: `${post.title} | LUMORA`,
@@ -67,7 +68,9 @@ export default async function BlogPostPage({
   const adminSession = await getAdminSession();
   const { slug } = await params;
   const query = await searchParams;
-  const post = await getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug, {
+    includeDrafts: Boolean(adminSession),
+  });
 
   if (!post) {
     notFound();

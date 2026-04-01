@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { ServiceHubLayout } from "@/components/shared/ServiceHubLayout";
 
 export const metadata: Metadata = {
-  title: "LUMORA | Aura Code",
+  title: "LUMORA | 오라코드",
   description:
-    "LUMORA 안에서 감정 흐름, 주요 차크라, 오라의 분위기를 함께 읽어보는 aura code 허브 페이지입니다.",
+    "LUMORA 안에서 감정 흐름, 주요 차크라, 오라의 분위기를 함께 읽어보는 오라코드 허브 페이지입니다.",
 };
 
 export default function AuraCodeLayout({
@@ -14,7 +14,7 @@ export default function AuraCodeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ServiceHubLayout eyebrow="Aura Reading" title="Aura Code">
+    <ServiceHubLayout eyebrow="Aura Reading" title="오라코드">
       {children}
     </ServiceHubLayout>
   );

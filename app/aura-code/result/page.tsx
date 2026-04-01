@@ -2,9 +2,9 @@ import { AuraResult } from "@/components/aura-code/AuraResult";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "오라코드 테스트 | 감정과 차크라 흐름으로 보는 나의 오라",
+  title: "오라코드 | 감정과 차크라 흐름으로 보는 나의 오라",
   description:
-    "감정 상태와 7개 차크라 흐름을 바탕으로 현재의 오라 색과 에너지 결을 해석해보세요. 무료 오라코드 테스트.",
+    "감정 상태와 7개 차크라 흐름을 바탕으로 현재의 오라 색과 에너지 결을 해석해보세요. 무료 오라코드 리딩.",
 };
 
 export default function AuraCodeResultPage() {
@@ -12,7 +12,7 @@ export default function AuraCodeResultPage() {
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-12 sm:px-8 lg:px-12">
       <section className="mb-10 max-w-3xl">
         <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-secondary)]">
-          Aura Code Result
+          Aura Reading Result
         </p>
         <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
           오라코드 리포트

@@ -141,7 +141,7 @@ export const serviceHubContent: Record<string, ServiceHubContentConfig> = {
   },
   aura: {
     introText: [
-      "오라코드 테스트는 감정과 차크라를 따로 떼어 보지 않고, 지금의 분위기와 존재감이 어떤 결로 흐르는지 함께 읽어보는 서비스입니다.",
+      "오라코드는 감정과 차크라를 따로 떼어 보지 않고, 지금의 분위기와 존재감이 어떤 결로 흐르는지 함께 읽어보는 서비스입니다.",
       "21개의 질문을 통해 주요 차크라 상태, 감정 흐름, 오라 색상을 상징적인 언어로 해석하며 자기이해에 가까운 리포트를 제공합니다.",
     ],
     steps: ["21문항 응답", "감정 흐름 분석", "차크라 중심 해석", "오라 색상 리포트 확인"],
@@ -162,7 +162,7 @@ export const serviceHubContent: Record<string, ServiceHubContentConfig> = {
         answer: "네, 무료 체험형 서비스로 바로 확인하실 수 있습니다.",
       },
     ],
-    ctaLabel: "오라코드 테스트 시작",
+    ctaLabel: "오라코드 시작",
     ctaHref: "/aura-code/test",
   },
   dream: {

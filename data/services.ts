@@ -39,7 +39,7 @@ export const services: ServiceItem[] = [
   },
   {
     href: "/aura-code",
-    title: "오라코드 테스트",
+    title: "오라코드",
     eyebrow: "AURA READING",
     description:
       "감정 상태와 에너지 흐름을 바탕으로\n현재의 차크라 균형과 오라 색을 해석해드립니다.\n지금의 분위기, 내면 상태, 그리고 드러나는 에너지의 결을 읽어보세요.",

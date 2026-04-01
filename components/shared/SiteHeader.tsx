@@ -12,12 +12,14 @@ export function SiteHeader() {
         <Link
           href="/"
           aria-label="홈으로 이동"
-          className="relative z-20 inline-flex min-w-0 cursor-pointer flex-col rounded-xl px-1 py-1 pointer-events-auto transition hover:opacity-90"
+          className="relative z-30 flex min-h-[56px] min-w-[220px] cursor-pointer flex-col justify-center rounded-xl px-2 py-1 pointer-events-auto transition duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary)]/60"
         >
-          <p className="text-[10px] uppercase tracking-[0.35em] text-[var(--color-secondary)] sm:text-xs">
+          <span className="text-[10px] uppercase tracking-[0.35em] text-[var(--color-secondary)] sm:text-xs">
             Inner Symbolism Platform
-          </p>
-          <p className="mt-1 font-display text-xl text-[var(--foreground)] sm:text-2xl">LUMORA</p>
+          </span>
+          <span className="mt-1 font-display text-xl text-[var(--foreground)] sm:text-2xl">
+            LUMORA
+          </span>
         </Link>
 
         <nav className="relative z-20 flex items-center gap-2 sm:gap-3">

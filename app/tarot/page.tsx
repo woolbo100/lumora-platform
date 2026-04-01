@@ -7,17 +7,26 @@ import { serviceHubContent } from "@/lib/service-hub-content";
 export default function TarotPage() {
   return (
     <>
-      <main className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2">
+      <main className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/tarot/tarotmain.png"
             alt="타로 허브 배경"
             fill
             priority
-            className="scale-[1.03] object-cover opacity-38"
+            className="scale-[1.04] object-cover object-center opacity-58"
             sizes="100vw"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to bottom, rgba(0,0,0,0.84) 0%, rgba(0,0,0,0.92) 58%, rgba(0,0,0,0.38) 84%, transparent 100%)",
+              maskImage:
+                "linear-gradient(to bottom, rgba(0,0,0,0.84) 0%, rgba(0,0,0,0.92) 58%, rgba(0,0,0,0.38) 84%, transparent 100%)",
+            }}
           />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,11,28,0.32)_0%,rgba(10,11,23,0.48)_52%,rgba(7,8,18,0.58)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(255,227,166,0.08),transparent_18%),radial-gradient(circle_at_24%_22%,rgba(120,98,210,0.16),transparent_24%),radial-gradient(circle_at_82%_24%,rgba(185,151,255,0.1),transparent_18%),linear-gradient(180deg,rgba(8,7,20,0.22)_0%,rgba(10,9,24,0.42)_40%,rgba(7,8,18,0.72)_76%,rgba(7,8,18,0.96)_100%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,rgba(7,8,18,0)_0%,rgba(7,8,18,0.82)_55%,rgba(7,8,18,1)_100%)]" />
+          <div className="absolute left-[14%] top-[16%] h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(255,221,158,0.12),transparent_70%)] blur-3xl" />
+          <div className="absolute right-[10%] top-[22%] h-52 w-52 rounded-full bg-[radial-gradient(circle,rgba(120,98,210,0.14),transparent_70%)] blur-3xl" />
         </div>
 
         <section className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-3xl flex-col items-center justify-center px-6 py-12 text-center sm:px-8">

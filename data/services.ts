@@ -38,6 +38,15 @@ export const services: ServiceItem[] = [
     type: "service",
   },
   {
+    href: "/egen-vs-teto",
+    title: "에겐 vs 테토녀 테스트",
+    eyebrow: "RELATION TYPE TEST",
+    description:
+      "20문항으로 나의 연애 본능을 가볍게 점검하고\n에겐형, 테토녀형, 혼합형 중\n어느 결에 가까운지 직관적으로 확인해보세요.",
+    badge: "공유형 테스트",
+    type: "service",
+  },
+  {
     href: "/aura-code",
     title: "오라코드",
     eyebrow: "AURA READING",

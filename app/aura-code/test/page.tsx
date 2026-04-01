@@ -36,7 +36,7 @@ export default function AuraCodeTestPage() {
         </p>
       </section>
 
-      <AuraTestClient />
+      <AuraTestClient embedded />
     </main>
   );
 }

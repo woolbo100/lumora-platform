@@ -8,7 +8,6 @@ import { ServiceCard } from "@/components/shared/ServiceCard";
 import { services } from "@/data/services";
 import { auraQuestions } from "@/data/auraQuestions";
 import { auraToneLabels, chakraFocus, chakraLabels } from "@/lib/auraMapping";
-import { createAuraFallbackResult } from "@/lib/auraScoring";
 import { type AuraComputedResult } from "@/types/auraCode";
 
 const STORAGE_KEY = "lumora-aura-code-v2";
@@ -44,10 +43,34 @@ function readStoredResult(): {
 
 export function AuraResult() {
   const [stored, setStored] = useState(readStoredResult);
-  const result = stored.result ?? createAuraFallbackResult();
   const recommended = services.filter((service) =>
     ["/emotion", "/attachment-code", "/relationship-pattern", "/tarot"].includes(service.href),
   );
+
+  if (!stored.result) {
+    return (
+      <GlassPanel className="p-8 text-center sm:p-10">
+        <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
+          Aura Result
+        </p>
+        <h2 className="mt-4 font-display text-4xl text-[var(--foreground)] sm:text-5xl">
+          테스트를 마친 뒤
+          <br />
+          결과 페이지가 열립니다
+        </h2>
+        <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+          지금은 저장된 테스트 결과가 없어 리포트를 보여드릴 수 없습니다.
+          21문항 테스트를 완료하면 주요 차크라 상태, 전체 에너지 흐름, 메인 오라와
+          서브 오라가 이 페이지에 정리됩니다.
+        </p>
+        <div className="mt-8 flex justify-center">
+          <CTAButton href="/aura-code/test">테스트 시작하기</CTAButton>
+        </div>
+      </GlassPanel>
+    );
+  }
+
+  const result = stored.result;
 
   function reset() {
     window.localStorage.removeItem(STORAGE_KEY);

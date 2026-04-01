@@ -1,5 +1,3 @@
-import { AuraResult } from "@/components/aura-code/AuraResult";
-import { AuraTestClient } from "@/components/aura-code/AuraTestClient";
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { ServiceCard } from "@/components/shared/ServiceCard";
@@ -32,7 +30,7 @@ export function AuraCodeDetailPage() {
 
   return (
     <div className="space-y-16 pb-20 lg:space-y-24">
-      <section className="relative overflow-hidden rounded-[40px] border border-white/10 bg-[radial-gradient(circle_at_20%_22%,rgba(155,128,255,0.18),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(255,188,138,0.12),transparent_24%),radial-gradient(circle_at_72%_72%,rgba(98,196,214,0.12),transparent_24%),linear-gradient(135deg,rgba(16,14,32,0.97),rgba(7,12,28,0.96)_52%,rgba(11,12,24,0.98))] px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <section className="relative overflow-hidden rounded-[40px] border border-white/10 bg-[radial-gradient(circle_at_18%_18%,rgba(155,128,255,0.2),transparent_28%),radial-gradient(circle_at_82%_20%,rgba(255,188,138,0.12),transparent_22%),radial-gradient(circle_at_76%_76%,rgba(98,196,214,0.12),transparent_22%),linear-gradient(135deg,rgba(16,14,32,0.98),rgba(8,11,28,0.97)_54%,rgba(11,12,24,0.99))] px-6 py-14 sm:px-8 lg:px-12 lg:py-18">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-[12%] top-[14%] h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(194,168,255,0.18),transparent_68%)] blur-3xl" />
           <div className="absolute right-[10%] top-[18%] h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(255,206,153,0.12),transparent_70%)] blur-3xl" />
@@ -62,63 +60,47 @@ export function AuraCodeDetailPage() {
           </div>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <CTAButton href="#aura-test" className="min-w-[14rem]">
+            <CTAButton href="/aura-code/test" className="min-w-[14rem]">
               테스트 시작하기
             </CTAButton>
-            <CTAButton
-              href="#aura-result"
-              variant="secondary"
-              className="min-w-[14rem]"
-            >
-              결과 미리보기
-            </CTAButton>
           </div>
-        </div>
-      </section>
+          <div className="mt-16 grid gap-5 text-left lg:grid-cols-[1.2fr_0.8fr]">
+            <GlassPanel className="border-white/12 bg-[linear-gradient(135deg,rgba(124,110,194,0.16),rgba(255,255,255,0.04)_52%,rgba(13,15,31,0.24))] p-8 sm:p-10">
+              <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">
+                Overview
+              </p>
+              <h2 className="mt-4 max-w-3xl font-display text-4xl text-[var(--foreground)] sm:text-5xl">
+                오라는 보이지 않는 인상보다
+                <br />
+                더 섬세한 현재의 리듬입니다
+              </h2>
+              <p className="mt-6 max-w-3xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+                이 페이지는 감정 상태와 차크라 흐름을 함께 바라보며, 지금의
+                당신이 어떤 분위기와 존재감으로 드러나는지 읽기 위해 설계되었습니다.
+                결과는 진단보다 자기이해에 가까운 감성 해석으로 제공됩니다.
+              </p>
 
-      <section className="space-y-6" id="aura-intro">
-        <div className="max-w-3xl space-y-3">
-          <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">
-            Overview
-          </p>
-          <h2 className="font-display text-4xl text-[var(--foreground)] sm:text-5xl">
-            오라는 보이지 않는 인상보다
-            <br />
-            더 섬세한 현재의 리듬입니다
-          </h2>
-          <p className="text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-            이 페이지는 감정 상태와 차크라 흐름을 함께 바라보며, 지금의 당신이
-            어떤 분위기와 존재감으로 드러나는지 읽기 위해 설계되었습니다. 결과는
-            진단보다 자기이해에 가까운 감성 해석으로 제공됩니다.
-          </p>
-        </div>
+              <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                {chakraHighlights.map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_56%,rgba(10,12,24,0.22))] p-5"
+                  >
+                    <p className="text-xs uppercase tracking-[0.24em] text-white/42">
+                      {item.label}
+                    </p>
+                    <h3 className="mt-3 text-xl font-semibold text-[var(--foreground)]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
+                      {item.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </GlassPanel>
 
-        <div className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-          <GlassPanel className="p-8 sm:p-10">
-            <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
-              Test Focus
-            </p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-3">
-              {chakraHighlights.map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_56%,rgba(10,12,24,0.22))] p-5"
-                >
-                  <p className="text-xs uppercase tracking-[0.24em] text-white/42">
-                    {item.label}
-                  </p>
-                  <h3 className="mt-3 text-xl font-semibold text-[var(--foreground)]">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </GlassPanel>
-
-          <GlassPanel className="p-8">
+            <GlassPanel className="border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.04)_56%,rgba(14,16,34,0.26))] p-8">
             <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
               What You Get
             </p>
@@ -136,46 +118,23 @@ export function AuraCodeDetailPage() {
                 감성적 해석문과 차크라 리딩
               </div>
             </div>
-          </GlassPanel>
+              <div className="mt-8 rounded-[22px] border border-[var(--color-secondary)]/16 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(119,105,190,0.1)_52%,rgba(12,14,28,0.2))] p-5">
+                <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+                  Start Now
+                </p>
+                <p className="mt-3 text-sm leading-7 text-[var(--foreground-soft)]">
+                  허브페이지에서 전체 흐름을 먼저 읽고, 실제 21문항은 별도의
+                  테스트 페이지에서 차분하게 진행할 수 있도록 분리되어 있습니다.
+                </p>
+                <div className="mt-5">
+                  <CTAButton href="/aura-code/test" className="w-full justify-center">
+                    테스트 시작하기
+                  </CTAButton>
+                </div>
+              </div>
+            </GlassPanel>
+          </div>
         </div>
-      </section>
-
-      <section className="space-y-6" id="aura-test">
-        <div className="max-w-3xl space-y-3">
-          <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">
-            21 Questions
-          </p>
-          <h2 className="font-display text-4xl text-[var(--foreground)] sm:text-5xl">
-            21문항으로 지금의 에너지 결을 읽어보세요
-          </h2>
-          <p className="text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-            각 문항은 루트부터 크라운까지 7개 차크라의 흐름을 따라가며,
-            막힘·과활성·균형의 결을 함께 읽습니다. 모바일에서도 부담 없이 한
-            문항씩 응답할 수 있도록 차분하게 구성했습니다.
-          </p>
-        </div>
-
-        <AuraTestClient embedded />
-      </section>
-
-      <section className="space-y-6" id="aura-result">
-        <div className="max-w-3xl space-y-3">
-          <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">
-            Result Reading
-          </p>
-          <h2 className="font-display text-4xl text-[var(--foreground)] sm:text-5xl">
-            결과는 차갑게 분류하지 않고
-            <br />
-            한 편의 리딩처럼 정리됩니다
-          </h2>
-          <p className="text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-            테스트를 마치면 주요 차크라 상태, 전체 에너지 흐름, 메인 오라와
-            서브 오라를 함께 묶어 읽어드립니다. 아직 테스트 전이라면 아래
-            섹션은 결과 화면의 톤을 미리 보여주는 프리뷰처럼 작동합니다.
-          </p>
-        </div>
-
-        <AuraResult />
       </section>
 
       <section className="space-y-6">
@@ -187,7 +146,7 @@ export function AuraCodeDetailPage() {
             함께 보면 더 선명해지는 리딩
           </h2>
           <p className="text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-            오라코드 테스트가 현재의 분위기와 존재감을 읽어줬다면, 아래 서비스로
+            오라코드 허브에서 현재의 분위기와 존재감을 읽었다면, 아래 서비스로
             감정과 관계의 흐름을 더 입체적으로 이어서 살펴볼 수 있습니다.
           </p>
         </div>

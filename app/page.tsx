@@ -48,9 +48,10 @@ export default function Home() {
               </p>
             </div>
             <p className="mx-auto max-w-3xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-              타로 리딩, 애착유형 분석, 연애패턴 코드, 재회 가능성 테스트 등 다양한
-              심리 기반 도구를 통해 감정과 관계의 흐름을 더 깊이 바라보도록 돕는
-              해석 플랫폼입니다.
+              타로 리딩, 애착유형 분석, 연애패턴 코드, 재회 가능성 테스트,
+              오라코드 테스트 등 다양한 자기이해 도구를 통해 감정과 관계의
+              흐름, 그리고 지금의 분위기를 더 깊이 바라보도록 돕는 해석
+              플랫폼입니다.
             </p>
           </div>
 

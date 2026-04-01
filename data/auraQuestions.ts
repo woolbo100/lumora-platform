@@ -1,0 +1,25 @@
+import { type AuraQuestion } from "@/types/auraCode";
+
+export const auraQuestions: AuraQuestion[] = [
+  { id: 1, text: "이유 없이 미래나 생존에 대한 불안이 오래 남아 있을 때가 많다.", chakra: "root", state: "blocked" },
+  { id: 2, text: "안정감을 잃지 않으려는 마음 때문에 돈, 일, 생활 통제를 지나치게 붙잡을 때가 있다.", chakra: "root", state: "overactive" },
+  { id: 3, text: "나는 대체로 현실 감각이 있고, 삶의 기반을 차분하게 지켜가는 편이다.", chakra: "root", state: "balanced" },
+  { id: 4, text: "즐거움을 느껴야 할 순간에도 감정이나 욕구를 쉽게 억누르는 편이다.", chakra: "sacral", state: "blocked" },
+  { id: 5, text: "감정이 올라오면 기분, 관계, 소비, 즐거움에 쉽게 휩쓸릴 때가 있다.", chakra: "sacral", state: "overactive" },
+  { id: 6, text: "나는 감정과 즐거움을 자연스럽게 느끼고 표현하는 편이다.", chakra: "sacral", state: "balanced" },
+  { id: 7, text: "내가 원하는 것을 분명하게 말하기 전에 자주 망설이게 된다.", chakra: "solar", state: "blocked" },
+  { id: 8, text: "내 뜻을 관철시키기 위해 강하게 밀어붙이거나 예민해질 때가 있다.", chakra: "solar", state: "overactive" },
+  { id: 9, text: "나는 스스로의 선택과 결정을 비교적 신뢰하는 편이다.", chakra: "solar", state: "balanced" },
+  { id: 10, text: "상처받을까 봐 마음을 쉽게 열지 못하는 편이다.", chakra: "heart", state: "blocked" },
+  { id: 11, text: "누군가를 좋아하거나 돌볼 때 내 경계를 넘어서서 과하게 몰입할 때가 있다.", chakra: "heart", state: "overactive" },
+  { id: 12, text: "나는 사랑과 친절을 주고받는 관계를 비교적 편안하게 느낀다.", chakra: "heart", state: "balanced" },
+  { id: 13, text: "하고 싶은 말이 있어도 꾹 참거나 삼키는 경우가 많다.", chakra: "throat", state: "blocked" },
+  { id: 14, text: "내 생각이나 감정을 바로 말하지 않으면 답답해서 강하게 표현할 때가 있다.", chakra: "throat", state: "overactive" },
+  { id: 15, text: "나는 내 진심을 비교적 분명하고 차분하게 전하는 편이다.", chakra: "throat", state: "balanced" },
+  { id: 16, text: "내 직감이 와도 쉽게 믿지 못하고 자꾸 의심하는 편이다.", chakra: "thirdEye", state: "blocked" },
+  { id: 17, text: "생각이 너무 많아져서 의미를 과하게 해석하거나 예민하게 반응할 때가 있다.", chakra: "thirdEye", state: "overactive" },
+  { id: 18, text: "나는 상황을 볼 때 직감과 이성을 함께 활용하는 편이다.", chakra: "thirdEye", state: "balanced" },
+  { id: 19, text: "삶의 방향이나 의미가 희미하게 느껴져 공허함이 오래 머물 때가 있다.", chakra: "crown", state: "blocked" },
+  { id: 20, text: "이상적이거나 영적인 생각에 몰입해 현실과 거리가 생길 때가 있다.", chakra: "crown", state: "overactive" },
+  { id: 21, text: "나는 내 삶이 어떤 방향으로 흐르는지 어느 정도 신뢰하는 편이다.", chakra: "crown", state: "balanced" },
+];

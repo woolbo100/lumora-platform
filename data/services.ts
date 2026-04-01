@@ -29,6 +29,15 @@ export const services: ServiceItem[] = [
     type: "service",
   },
   {
+    href: "/love-code",
+    title: "러브코드",
+    eyebrow: "LOVE CODE",
+    description:
+      "생년월일 기반 별자리 흐름을 바탕으로\n현재 관계에서 필요한 행동 힌트와\n오늘의 연애 움직임을 제안합니다.",
+    badge: "행동 추천",
+    type: "service",
+  },
+  {
     href: "/aura-code",
     title: "오라코드 테스트",
     eyebrow: "AURA READING",

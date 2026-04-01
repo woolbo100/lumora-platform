@@ -7,7 +7,7 @@ import { serviceHubContent } from "@/lib/service-hub-content";
 export default function TarotPage() {
   return (
     <div className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[52rem] sm:h-[58rem]">
+      <div className="pointer-events-none absolute inset-x-0 top-[-9rem] h-[61rem] sm:top-[-10rem] sm:h-[68rem]">
         <Image
           src="/images/tarot/tarotmain.png"
           alt="타로 허브 배경"

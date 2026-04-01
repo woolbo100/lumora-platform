@@ -39,10 +39,10 @@ type BlogComposerFormProps = {
 };
 
 const errorMessageMap: Record<string, string> = {
-  "missing-fields": "Title and content are required.",
-  "invalid-category": "Please choose a valid category.",
-  "invalid-slug": "Please review the slug value.",
-  "save-failed": "Saving failed. Check your permissions or duplicate slug.",
+  "missing-fields": "제목과 본문은 필수입니다.",
+  "invalid-category": "유효한 카테고리를 선택해주세요.",
+  "invalid-slug": "슬러그 값을 확인해주세요.",
+  "save-failed": "저장에 실패했습니다. 권한 또는 중복 슬러그를 확인해주세요.",
 };
 
 type ManualChecklistState = {
@@ -111,7 +111,7 @@ export function BlogComposerForm({
   error,
   message,
   successMessage,
-  submitLabel = "Publish",
+  submitLabel = "발행",
   initialValues,
 }: BlogComposerFormProps) {
   const [title, setTitle] = useState(initialValues?.title ?? "");
@@ -163,53 +163,53 @@ export function BlogComposerForm({
   const autoChecklist = useMemo(
     () => [
       {
-        label: "Main keyword in title",
+        label: "제목에 메인 키워드 포함",
         passed:
           !keyword.trim() ||
           title.toLowerCase().includes(keyword.trim().toLowerCase()),
-        detail: "Title should include the main keyword naturally.",
+        detail: "제목에 메인 키워드가 자연스럽게 들어가야 합니다.",
       },
       {
-        label: "Meta description exists",
+        label: "메타 설명 작성 여부",
         passed: Boolean(metaDescription.trim()),
-        detail: "Fill meta description for search snippets.",
+        detail: "검색 스니펫용 메타 설명을 작성하세요.",
       },
       {
-        label: "At least 3 H2 headings",
+        label: "H2 소제목 3개 이상",
         passed: h2Count >= 3,
-        detail: `Detected H2: ${h2Count}`,
+        detail: `현재 H2 개수: ${h2Count}`,
       },
       {
-        label: "Minimum content length",
+        label: "최소 본문 길이",
         passed: contentLength >= targetMinLength,
-        detail: `Current ${contentLength} / target ${targetMinLength}+`,
+        detail: `현재 ${contentLength}자 / 목표 ${targetMinLength}자 이상`,
       },
       {
-        label: "Slug exists",
+        label: "슬러그 작성 여부",
         passed: Boolean(slug.trim()),
-        detail: "Slug should be lowercase and hyphen-based.",
+        detail: "슬러그는 영문 소문자와 하이픈 형식을 권장합니다.",
       },
       {
-        label: "Excerpt exists",
+        label: "요약문 작성 여부",
         passed: Boolean(summary.trim()),
-        detail: "Excerpt helps feed cards and SEO snippets.",
+        detail: "요약문은 카드 노출과 SEO 스니펫에 도움이 됩니다.",
       },
       {
-        label: "FAQ section availability",
+        label: "FAQ 섹션 포함 여부",
         passed: !includeFaq || faqCount > 0,
-        detail: includeFaq ? `FAQ count ${faqCount}` : "FAQ option disabled",
+        detail: includeFaq ? `FAQ 개수: ${faqCount}` : "FAQ 옵션 비활성화",
       },
       {
-        label: "Internal links availability",
+        label: "내부링크 추천 포함 여부",
         passed: !includeInternalLinks || internalLinkCount > 0,
         detail: includeInternalLinks
-          ? `Suggested links ${internalLinkCount}`
-          : "Internal link option disabled",
+          ? `추천 링크 수: ${internalLinkCount}`
+          : "내부링크 옵션 비활성화",
       },
       {
-        label: "Image alt suggestion",
+        label: "이미지 ALT 추천 문구",
         passed: Boolean(aiImageAltText.trim()),
-        detail: "Add image alt text before publishing.",
+        detail: "발행 전에 이미지 ALT 텍스트를 채워주세요.",
       },
     ],
     [
@@ -232,12 +232,12 @@ export function BlogComposerForm({
   const publishWarnings = useMemo(() => {
     const warnings: string[] = [];
 
-    if (!title.trim()) warnings.push("Title is required.");
-    if (!metaDescription.trim()) warnings.push("Meta description is recommended.");
-    if (!content.trim()) warnings.push("Content is required.");
-    if (h2Count < 3) warnings.push("Add at least 3 H2 headings for structure.");
+    if (!title.trim()) warnings.push("제목은 필수입니다.");
+    if (!metaDescription.trim()) warnings.push("메타 설명 작성을 권장합니다.");
+    if (!content.trim()) warnings.push("본문은 필수입니다.");
+    if (h2Count < 3) warnings.push("구조를 위해 H2 소제목을 3개 이상 추가하세요.");
     if (contentLength < targetMinLength) {
-      warnings.push(`Increase content length to around ${targetMinLength}+ characters.`);
+      warnings.push(`본문 분량을 ${targetMinLength}자 이상으로 보완해주세요.`);
     }
 
     return warnings;
@@ -284,7 +284,7 @@ export function BlogComposerForm({
     const currentKeyword = forcedKeyword?.trim() || keyword.trim();
 
     if (!currentKeyword) {
-      setGenerationError("Please enter the main keyword.");
+      setGenerationError("메인 키워드를 입력해주세요.");
       return;
     }
 
@@ -298,7 +298,7 @@ export function BlogComposerForm({
 
     if (shouldConfirmOverwrite) {
       const confirmed = window.confirm(
-        "Current title/excerpt/meta/content may be overwritten by the AI draft. Continue?",
+        "현재 입력된 제목/요약/메타설명/본문이 AI 초안으로 덮어쓰기 될 수 있습니다. 계속할까요?",
       );
 
       if (!confirmed) {
@@ -334,13 +334,13 @@ export function BlogComposerForm({
       } & Partial<BlogAiDraftResult> & { draft?: BlogAiDraftResult };
 
       if (!response.ok) {
-        throw new Error(payload.error ?? "AI draft generation failed.");
+        throw new Error(payload.error ?? "AI 초안 생성에 실패했습니다.");
       }
 
       const draft = normalizeDraftResponse(payload);
 
       if (!draft) {
-        throw new Error("AI draft response format is invalid.");
+        throw new Error("AI 응답 형식이 올바르지 않습니다.");
       }
 
       setKeyword(currentKeyword);
@@ -354,14 +354,14 @@ export function BlogComposerForm({
       setAiImageAltText(draft.imageAltText ?? "");
       setAiChecklist(draft.checklist ?? []);
       setGenerationSuccess(
-        "AI draft applied. Review checklist/SEO panel, then save draft or publish.",
+        "AI 초안을 에디터에 반영했습니다. 체크리스트를 확인한 뒤 임시저장 또는 발행하세요.",
       );
       setAiGenerated(true);
     } catch (generationFailure) {
       setGenerationError(
         generationFailure instanceof Error
           ? generationFailure.message
-          : "Error while generating AI draft.",
+          : "AI 초안 생성 중 오류가 발생했습니다.",
       );
     } finally {
       setIsGenerating(false);
@@ -370,7 +370,7 @@ export function BlogComposerForm({
 
   async function handleGenerateTopics() {
     if (!topicKeyword.trim()) {
-      setTopicError("Enter a keyword first.");
+      setTopicError("먼저 키워드를 입력해주세요.");
       return;
     }
 
@@ -391,7 +391,7 @@ export function BlogComposerForm({
       const payload = (await response.json()) as { error?: string; topics?: string[] };
 
       if (!response.ok || !Array.isArray(payload.topics)) {
-        throw new Error(payload.error ?? "Failed to generate topic suggestions.");
+        throw new Error(payload.error ?? "주제 추천 생성에 실패했습니다.");
       }
 
       setTopicSuggestions(payload.topics);
@@ -399,7 +399,7 @@ export function BlogComposerForm({
       setTopicError(
         topicFailure instanceof Error
           ? topicFailure.message
-          : "Failed to generate topic suggestions.",
+          : "주제 추천 생성 중 오류가 발생했습니다.",
       );
     } finally {
       setIsGeneratingTopics(false);
@@ -483,7 +483,7 @@ export function BlogComposerForm({
 
       <div className="grid gap-6 md:grid-cols-2">
         <label className="space-y-2">
-          <span className="text-sm text-[var(--foreground-soft)]">Title</span>
+          <span className="text-sm text-[var(--foreground-soft)]">제목</span>
           <input
             name="title"
             type="text"
@@ -491,25 +491,25 @@ export function BlogComposerForm({
             value={title}
             onChange={(event) => handleTitleChange(event.target.value)}
             className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-[var(--color-primary-strong)]"
-            placeholder="Enter the post title"
+            placeholder="게시글 제목을 입력하세요"
           />
         </label>
 
         <label className="space-y-2">
-          <span className="text-sm text-[var(--foreground-soft)]">Slug</span>
+          <span className="text-sm text-[var(--foreground-soft)]">슬러그</span>
           <input
             name="slug"
             type="text"
             value={slug}
             onChange={(event) => setSlug(event.target.value)}
             className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-[var(--color-primary-strong)]"
-            placeholder="e.g. healing-routine"
+            placeholder="예: healing-routine"
           />
         </label>
       </div>
 
       <label className="space-y-2">
-        <span className="text-sm text-[var(--foreground-soft)]">Category</span>
+        <span className="text-sm text-[var(--foreground-soft)]">카테고리</span>
         <select
           name="category"
           required
@@ -526,36 +526,36 @@ export function BlogComposerForm({
       </label>
 
       <label className="space-y-2">
-        <span className="text-sm text-[var(--foreground-soft)]">Excerpt</span>
+        <span className="text-sm text-[var(--foreground-soft)]">요약문</span>
         <textarea
           name="summary"
           rows={3}
           value={summary}
           onChange={(event) => setSummary(event.target.value)}
           className="w-full rounded-[24px] border border-white/12 bg-white/6 px-4 py-4 text-sm leading-7 text-white outline-none transition placeholder:text-white/35 focus:border-[var(--color-primary-strong)]"
-          placeholder="Short summary for cards and previews."
+          placeholder="카드와 미리보기에 들어갈 짧은 요약을 작성하세요."
         />
       </label>
 
       <label className="space-y-2">
-        <span className="text-sm text-[var(--foreground-soft)]">Meta Description</span>
+        <span className="text-sm text-[var(--foreground-soft)]">메타 설명</span>
         <textarea
           name="metaDescription"
           rows={3}
           value={metaDescription}
           onChange={(event) => setMetaDescription(event.target.value)}
           className="w-full rounded-[24px] border border-white/12 bg-white/6 px-4 py-4 text-sm leading-7 text-white outline-none transition placeholder:text-white/35 focus:border-[var(--color-primary-strong)]"
-          placeholder="Meta description for search results."
+          placeholder="검색 결과에 노출될 메타 설명을 작성하세요."
         />
       </label>
 
       {initialValues?.imageUrl ? (
         <div className="space-y-2">
-          <span className="text-sm text-[var(--foreground-soft)]">Current image</span>
+          <span className="text-sm text-[var(--foreground-soft)]">현재 이미지</span>
           <div className="overflow-hidden rounded-[24px] border border-white/10">
             <img
               src={initialValues.imageUrl}
-              alt="Current post image"
+              alt="현재 게시글 이미지"
               className="h-56 w-full object-cover"
             />
           </div>
@@ -563,7 +563,7 @@ export function BlogComposerForm({
       ) : null}
 
       <label className="space-y-2">
-        <span className="text-sm text-[var(--foreground-soft)]">Upload image</span>
+        <span className="text-sm text-[var(--foreground-soft)]">이미지 업로드</span>
         <input
           name="imageFile"
           type="file"
@@ -571,12 +571,12 @@ export function BlogComposerForm({
           className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3 text-sm text-white file:mr-4 file:rounded-full file:border-0 file:bg-white/10 file:px-4 file:py-2 file:text-xs file:font-semibold file:uppercase file:tracking-[0.14em] file:text-[var(--foreground-soft)]"
         />
         <p className="text-xs leading-6 text-[var(--foreground-muted)]">
-          Leave empty to keep the current image.
+          비워두면 기존 이미지를 유지합니다.
         </p>
       </label>
 
       <label className="space-y-2">
-        <span className="text-sm text-[var(--foreground-soft)]">Content</span>
+        <span className="text-sm text-[var(--foreground-soft)]">본문</span>
         <textarea
           name="content"
           required
@@ -584,13 +584,13 @@ export function BlogComposerForm({
           value={content}
           onChange={(event) => setContent(event.target.value)}
           className="w-full rounded-[28px] border border-white/12 bg-white/6 px-4 py-4 text-sm leading-7 text-white outline-none transition placeholder:text-white/35 focus:border-[var(--color-primary-strong)]"
-          placeholder="Use markdown headings (##, ###) and blank lines between paragraphs."
+          placeholder="마크다운 소제목(##, ###)과 문단 간 줄바꿈을 사용해 작성하세요."
         />
       </label>
 
       {error ? (
         <div className="rounded-2xl border border-rose-300/20 bg-rose-400/10 px-4 py-3 text-sm text-rose-100">
-          {errorMessageMap[error] ?? "An unexpected error occurred."}
+          {errorMessageMap[error] ?? "예상치 못한 오류가 발생했습니다."}
           {message ? <p className="mt-2 break-words text-rose-50/90">{message}</p> : null}
         </div>
       ) : null}
@@ -625,7 +625,7 @@ function SaveActionButtons({
     <div className="space-y-3">
       {publishWarnings.length > 0 ? (
         <div className="rounded-2xl border border-amber-300/20 bg-amber-400/10 px-4 py-3 text-sm text-amber-100">
-          <p className="font-medium">Before publishing, check a few more items:</p>
+          <p className="font-medium">발행 전 아래 항목을 한 번 더 확인해보세요:</p>
           <div className="mt-2 space-y-1 text-amber-100/90">
             {publishWarnings.map((warning) => (
               <p key={warning}>- {warning}</p>
@@ -642,7 +642,7 @@ function SaveActionButtons({
           disabled={pending}
           className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(147,131,235,0.92),rgba(112,96,204,0.9)_52%,rgba(77,62,152,0.92))] px-6 py-3 text-sm font-semibold tracking-[0.18em] text-[#fbf6f0] uppercase shadow-[0_20px_60px_rgba(88,69,173,0.36),inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-65"
         >
-          {pending ? "Saving..." : "Save Draft"}
+          {pending ? "저장 중..." : "초안 저장"}
         </button>
         <button
           type="submit"
@@ -651,7 +651,7 @@ function SaveActionButtons({
           disabled={pending || !canPublish}
           className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-white/6 px-6 py-3 text-sm font-semibold tracking-[0.18em] text-[var(--foreground-soft)] uppercase transition duration-300 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-65"
         >
-          {pending ? "Processing..." : submitLabel}
+          {pending ? "처리 중..." : submitLabel}
         </button>
       </div>
     </div>

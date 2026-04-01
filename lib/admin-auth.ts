@@ -22,25 +22,27 @@ async function fetchSupabaseAuthUser(accessToken: string) {
   const config = readSupabasePublicConfig();
 
   if (!config) {
-    throw new Error(
-      "Missing SUPABASE_URL or SUPABASE_PUBLISHABLE_KEY for admin auth.",
-    );
-  }
-
-  const response = await fetch(`${config.url}/auth/v1/user`, {
-    method: "GET",
-    cache: "no-store",
-    headers: {
-      apikey: config.publishableKey,
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (!response.ok) {
     return null;
   }
 
-  return (await response.json()) as { email?: string } | null;
+  try {
+    const response = await fetch(`${config.url}/auth/v1/user`, {
+      method: "GET",
+      cache: "no-store",
+      headers: {
+        apikey: config.publishableKey,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return (await response.json()) as { email?: string } | null;
+  } catch {
+    return null;
+  }
 }
 
 export async function getAdminSession() {

@@ -11,8 +11,9 @@ import { getBlogPostBySlug } from "@/lib/blog-posts";
 import { hasSupabaseConfig } from "@/lib/supabase";
 
 export const metadata: Metadata = {
-  title: "Edit Blog Post | LUMORA",
-  description: "Review and update an existing blog post with optional AI-assisted drafting support.",
+  title: "블로그 글 수정 | LUMORA",
+  description:
+    "기존 블로그 글을 수정하고, 필요하면 AI 보조 초안을 다시 생성해 반영할 수 있습니다.",
 };
 
 type BlogEditPageProps = {
@@ -61,23 +62,20 @@ export default async function BlogEditPage({
       <GlassPanel className="p-8 sm:p-10">
         <div className="space-y-4">
           <p className="text-xs uppercase tracking-[0.32em] text-[var(--color-secondary)]">
-            BLOG EDITOR
+            블로그 수정
           </p>
           <h1 className="font-display text-4xl text-[var(--foreground)] sm:text-5xl">
-            Edit blog post
+            블로그 글 수정
           </h1>
           <p className="text-base leading-8 text-[var(--foreground-soft)]">
-            기존 글을 직접 수정하거나 AI 초안을 다시 생성해 에디터에 채운 뒤, 검토 후
-            저장할 수 있습니다.
+            기존 글을 직접 수정하거나 AI 초안을 다시 생성해 에디터에 반영한 뒤,
+            검토 후 임시저장/발행할 수 있습니다.
           </p>
           <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--foreground-muted)]">
-            <span>Signed in as {session.email}</span>
-            <span className="text-white/20">•</span>
-            <Link
-              href={`/blog/${post.slug}`}
-              className="transition hover:text-white"
-            >
-              View post
+            <span>로그인 계정: {session.email}</span>
+            <span className="text-white/20">·</span>
+            <Link href={`/blog/${post.slug}`} className="transition hover:text-white">
+              글 미리보기
             </Link>
           </div>
           <form action={adminLogoutAction}>
@@ -85,7 +83,7 @@ export default async function BlogEditPage({
               type="submit"
               className="inline-flex min-h-10 items-center justify-center rounded-full border border-white/10 bg-white/6 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-[var(--foreground-soft)] uppercase transition hover:bg-white/10"
             >
-              Sign out
+              로그아웃
             </button>
           </form>
         </div>
@@ -97,7 +95,7 @@ export default async function BlogEditPage({
           error={error}
           message={message}
           successMessage={successMessage}
-          submitLabel="Update Post"
+          submitLabel="수정 발행"
           initialValues={{
             originalSlug: post.slug,
             title: post.title,

@@ -36,15 +36,21 @@ function resolvePostStatus(value: string | undefined): BlogPostStatus {
   return value === "published" ? "published" : "draft";
 }
 
-function mapPost(row: SupabasePostRow): BlogPost {
-  if (!isBlogCategory(row.category)) {
-    throw new Error(`Unsupported category value: ${row.category}`);
+function resolvePostCategory(value: string): BlogCategory {
+  if (isBlogCategory(value)) {
+    return value;
   }
+
+  return "mind-study";
+}
+
+function mapPost(row: SupabasePostRow): BlogPost {
+  const category = resolvePostCategory(row.category);
 
   return {
     title: row.title,
     slug: row.slug,
-    category: row.category,
+    category,
     status: resolvePostStatus(row.status),
     summary: row.summary ?? null,
     metaDescription: row.meta_description ?? null,

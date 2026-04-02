@@ -1,23 +1,26 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;600;700&display=swap");
 
 :root {
-  --background: #090814;
-  --foreground: #f6efe7;
-  --foreground-soft: rgba(246, 239, 231, 0.84);
-  --foreground-muted: rgba(246, 239, 231, 0.66);
-  --color-primary: #7a68d9;
-  --color-primary-strong: #9383eb;
-  --color-secondary: #d5c3a5;
-  --color-accent: #78a2ff;
-  --color-surface: rgba(255, 255, 255, 0.06);
-  --color-surface-strong: rgba(255, 255, 255, 0.11);
-  --color-border: rgba(255, 255, 255, 0.12);
-  --shadow-glow-primary: 0 24px 80px rgba(70, 53, 138, 0.34);
-  --shadow-glow-soft: 0 28px 90px rgba(7, 10, 28, 0.55);
+  --background: #0f0f17;
+  --foreground: #ffffff;
+  --foreground-soft: #cfcfd6;
+  --foreground-muted: rgba(207, 207, 214, 0.72);
+  --color-primary: #2b1f3a;
+  --color-primary-strong: #3a2a55;
+  --color-secondary: #f7e7ce;
+  --color-accent: #d4af37;
+  --color-rose: #e6c7c2;
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --color-surface-strong: rgba(255, 255, 255, 0.1);
+  --color-border: rgba(247, 231, 206, 0.18);
+  --shadow-glow-primary: 0 18px 60px rgba(212, 175, 55, 0.2);
+  --shadow-glow-soft: 0 26px 80px rgba(4, 4, 12, 0.58);
+  --gradient-premium: linear-gradient(135deg, #f7e7ce 0%, #d4af37 100%);
   --font-sans-stack:
-    "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+    "Noto Sans KR", "Segoe UI", "Apple SD Gothic Neo", Arial, sans-serif;
   --font-display-stack:
-    "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;
+    "Cormorant Garamond", "Noto Serif KR", "Times New Roman", serif;
 }
 
 @theme inline {
@@ -34,10 +37,10 @@
 html {
   color-scheme: dark;
   background:
-    radial-gradient(circle at 18% 12%, rgba(130, 104, 220, 0.2), transparent 28%),
-    radial-gradient(circle at 78% 16%, rgba(120, 162, 255, 0.1), transparent 20%),
-    radial-gradient(circle at 50% -4%, rgba(213, 195, 165, 0.08), transparent 24%),
-    linear-gradient(180deg, #0f1021 0%, #0b1120 38%, #080913 100%);
+    radial-gradient(circle at 18% 8%, rgba(230, 199, 194, 0.12), transparent 28%),
+    radial-gradient(circle at 78% 10%, rgba(118, 84, 174, 0.22), transparent 32%),
+    radial-gradient(circle at 52% -12%, rgba(212, 175, 55, 0.08), transparent 26%),
+    linear-gradient(160deg, #0f0f17 0%, #1a1a2e 46%, #2b1f3a 100%);
 }
 
 body {
@@ -45,10 +48,13 @@ body {
   min-height: 100vh;
   color: var(--foreground);
   font-family: var(--font-sans-stack);
+  line-height: 1.72;
+  letter-spacing: 0.01em;
   background:
-    radial-gradient(circle at top, rgba(124, 99, 218, 0.12), transparent 26%),
-    radial-gradient(circle at 20% 18%, rgba(58, 92, 182, 0.08), transparent 28%),
-    linear-gradient(180deg, rgba(10, 12, 24, 0.14), rgba(10, 12, 24, 0.3));
+    radial-gradient(circle at 12% 14%, rgba(230, 199, 194, 0.1), transparent 24%),
+    radial-gradient(circle at 84% 20%, rgba(126, 91, 187, 0.16), transparent 28%),
+    radial-gradient(circle at 45% -8%, rgba(212, 175, 55, 0.06), transparent 24%),
+    linear-gradient(180deg, rgba(7, 7, 15, 0.2), rgba(7, 7, 15, 0.46));
 }
 
 body::before {
@@ -57,12 +63,19 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08) 0, transparent 1.5px),
-    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.05) 0, transparent 1px),
-    radial-gradient(circle at 35% 72%, rgba(213, 195, 165, 0.06) 0, transparent 1px);
-  background-size: 240px 240px, 320px 320px, 280px 280px;
-  opacity: 0.28;
-  mix-blend-mode: screen;
+    radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.07) 0, transparent 1.2px),
+    radial-gradient(circle at 78% 32%, rgba(212, 175, 55, 0.08) 0, transparent 1px),
+    radial-gradient(circle at 34% 72%, rgba(230, 199, 194, 0.07) 0, transparent 1.1px),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.016) 0,
+      rgba(255, 255, 255, 0.016) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  background-size: 220px 220px, 300px 300px, 280px 280px, 100% 100%;
+  opacity: 0.24;
+  mix-blend-mode: soft-light;
   z-index: -2;
 }
 
@@ -71,8 +84,8 @@ a {
 }
 
 ::selection {
-  background: rgba(214, 194, 138, 0.3);
-  color: white;
+  background: rgba(212, 175, 55, 0.35);
+  color: #111;
 }
 
 @keyframes lumoraSparkle {

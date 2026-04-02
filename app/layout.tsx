@@ -17,6 +17,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_ID?.trim() ?? "";
+  const shouldRenderAdsenseScript =
+    adsenseId !== "" && adsenseId !== "나중에_입력";
+
   return (
     <html lang="ko" className="h-full scroll-smooth" suppressHydrationWarning>
       <head>
@@ -36,17 +40,26 @@ export default function RootLayout({
             gtag('config', 'G-H86NT2M7KT');
           `}
         </Script>
+        {shouldRenderAdsenseScript ? (
+          <Script
+            id="adsense-script"
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        ) : null}
       </head>
       <body
         className="min-h-full bg-[var(--background)] text-[var(--foreground)] antialiased"
         suppressHydrationWarning
       >
         <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(147,131,235,0.08),transparent_34%),radial-gradient(circle_at_bottom,rgba(120,162,255,0.06),transparent_32%)]" />
-          <div className="absolute left-1/2 top-0 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(122,104,217,0.3),_transparent_68%)] blur-3xl" />
-          <div className="absolute right-[-10rem] top-1/4 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,_rgba(120,162,255,0.16),_transparent_70%)] blur-3xl" />
-          <div className="absolute bottom-[-12rem] left-[-5rem] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,_rgba(213,195,165,0.12),_transparent_72%)] blur-3xl" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,18,0.1),rgba(5,7,18,0.22)_42%,rgba(5,7,18,0.44))]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(230,199,194,0.12),transparent_30%),radial-gradient(circle_at_82%_12%,rgba(108,79,166,0.24),transparent_34%),linear-gradient(165deg,#0f0f17_0%,#1a1a2e_48%,#2b1f3a_100%)]" />
+          <div className="absolute left-1/2 top-[-5rem] h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(212,175,55,0.14),_rgba(212,175,55,0.04)_34%,_transparent_70%)] blur-3xl" />
+          <div className="absolute right-[-8rem] top-[10%] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,_rgba(122,90,178,0.2),_transparent_72%)] blur-3xl" />
+          <div className="absolute bottom-[-12rem] left-[-6rem] h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,_rgba(230,199,194,0.16),_transparent_72%)] blur-3xl" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,16,0.28),rgba(8,8,16,0.42)_42%,rgba(8,8,16,0.62))]" />
         </div>
         <div className="flex min-h-screen flex-col">
           <SiteHeader />

@@ -4,10 +4,10 @@ on public.posts
 for update
 to authenticated
 using (
-  auth.jwt()->>'email' = 'admin@example.com'
+  auth.jwt()->>'email' = 'woolbo100@gmail.com'
 )
 with check (
-  auth.jwt()->>'email' = 'admin@example.com'
+  auth.jwt()->>'email' = 'woolbo100@gmail.com'
 );
 
 grant update on table public.posts to authenticated;

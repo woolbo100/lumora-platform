@@ -24,7 +24,7 @@ export function ServiceCard({
   return (
     <Link href={href} className="group block h-full w-full" aria-label={`${title} 서비스로 이동`}>
       <GlassPanel
-        className={`flex h-full flex-col transition duration-300 hover:-translate-y-1.5 hover:border-[var(--color-primary)]/35 hover:shadow-[0_30px_90px_rgba(51,40,108,0.42)] ${
+        className={`flex h-full flex-col transition duration-300 hover:-translate-y-1.5 hover:border-[var(--color-accent)]/38 hover:shadow-[0_24px_72px_rgba(212,175,55,0.16)] ${
           isBlog ? "min-h-[124px] p-5 sm:min-h-[132px] sm:p-6" : "min-h-[250px] p-6 sm:p-7"
         }`}
       >
@@ -32,7 +32,7 @@ export function ServiceCard({
           <span className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--foreground-muted)]">
             {eyebrow}
           </span>
-          <span className="rounded-full border border-[var(--color-secondary)]/24 bg-[linear-gradient(135deg,rgba(213,195,165,0.16),rgba(213,195,165,0.05))] px-3 py-1 text-[11px] font-medium text-[var(--color-secondary)] shadow-[0_0_24px_rgba(213,195,165,0.08)]">
+          <span className="rounded-full border border-[var(--color-secondary)]/28 bg-[linear-gradient(135deg,rgba(247,231,206,0.22),rgba(212,175,55,0.06))] px-3 py-1 text-[11px] font-medium text-[var(--color-secondary)] shadow-[0_0_20px_rgba(212,175,55,0.12)]">
             {badge}
           </span>
         </div>
@@ -55,7 +55,7 @@ export function ServiceCard({
         </div>
 
         <div className={`mt-auto ${isBlog ? "pt-5" : "pt-8"}`}>
-          <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-secondary)] transition group-hover:translate-x-1">
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-secondary)] transition duration-300 group-hover:translate-x-1 group-hover:text-[#f7e7ce]">
             서비스 보러가기
             <span aria-hidden="true">→</span>
           </span>

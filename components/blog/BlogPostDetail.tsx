@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { deleteBlogPostAction } from "@/app/blog/actions";
 import { getCategoryMeta } from "@/data/blogCategories";
+import { AdBanner } from "@/components/AdBanner";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
@@ -123,6 +124,8 @@ export function BlogPostDetail({
                 {paragraph}
               </p>
             ))}
+
+            <AdBanner className="pt-6" />
           </article>
         </GlassPanel>
 

@@ -13,14 +13,14 @@ export default function Home() {
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
-      <section className="relative isolate flex flex-1 items-center justify-center overflow-hidden py-24 lg:py-32">
+      <section className="relative left-1/2 right-1/2 isolate flex w-screen flex-1 items-center justify-center overflow-hidden -translate-x-1/2 py-24 lg:py-32">
         <div
           className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat opacity-68 blur-[2px]"
           style={{ backgroundImage: `url("${heroAuroraImage}")` }}
         />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(10,10,20,0.52),rgba(10,10,20,0.74))]" />
 
-        <div className="relative mx-auto flex max-w-4xl flex-col items-center justify-center text-center">
+        <div className="relative mx-auto flex max-w-4xl flex-col items-center justify-center px-6 text-center sm:px-8 lg:px-12">
           <div className="pointer-events-none absolute inset-x-0 top-1/2 -z-0 h-[30rem] -translate-y-1/2 opacity-60">
             <HeroSplineScene scene="https://prod.spline.design/0btuJlO8ODRyNQ1h/scene.splinecode" />
           </div>

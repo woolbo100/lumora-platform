@@ -4,6 +4,9 @@ import { CTAButton } from "@/components/shared/CTAButton";
 import { ServiceCard } from "@/components/shared/ServiceCard";
 import { services } from "@/data/services";
 
+const heroAuroraImage =
+  "/images/main/buzasun_aura_energy_background_glowing_light_waves_purple_pin_32813a50-5dc5-4f7a-ae75-17b23889eccd_3.png";
+
 export default function Home() {
   const serviceItems = services.filter((service) => service.type === "service");
   const blogItem = services.find((service) => service.type === "blog");
@@ -12,10 +15,13 @@ export default function Home() {
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
       <section className="flex flex-1 items-center justify-center py-24 lg:py-32">
         <div className="relative mx-auto flex max-w-4xl flex-col items-center justify-center text-center">
-          <div className="pointer-events-none absolute left-1/2 top-[48%] h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(186,155,255,0.34),rgba(255,210,245,0.18)_34%,rgba(132,196,255,0.16)_58%,transparent_74%)] blur-3xl" />
-          <div className="pointer-events-none absolute left-1/2 top-[46%] h-[18rem] w-[18rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgba(255,255,255,0.16)] bg-[radial-gradient(circle,rgba(255,210,245,0.18),rgba(186,155,255,0.14)_46%,rgba(132,196,255,0.12)_68%,transparent_78%)] blur-xl" />
+          <div
+            className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat opacity-68 blur-[2px]"
+            style={{ backgroundImage: `url("${heroAuroraImage}")` }}
+          />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(10,10,20,0.52),rgba(10,10,20,0.74))]" />
 
-          <div className="pointer-events-none absolute inset-x-0 top-1/2 -z-0 h-[30rem] -translate-y-1/2 opacity-74">
+          <div className="pointer-events-none absolute inset-x-0 top-1/2 -z-0 h-[30rem] -translate-y-1/2 opacity-60">
             <HeroSplineScene scene="https://prod.spline.design/0btuJlO8ODRyNQ1h/scene.splinecode" />
           </div>
 

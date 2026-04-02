@@ -12,16 +12,16 @@ export default function Home() {
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
       <section className="flex flex-1 items-center justify-center py-24 lg:py-32">
         <div className="relative mx-auto flex max-w-4xl flex-col items-center justify-center text-center">
-          <div className="pointer-events-none absolute left-1/2 top-[48%] h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(36,24,45,0.66),rgba(21,19,37,0.44)_38%,rgba(11,11,20,0.12)_66%,transparent_78%)] blur-3xl" />
-          <div className="pointer-events-none absolute left-1/2 top-[46%] h-[18rem] w-[18rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#f7e7ce]/24 bg-[radial-gradient(circle,rgba(230,199,194,0.2),rgba(212,175,55,0.11)_46%,transparent_74%)] blur-xl" />
+          <div className="pointer-events-none absolute left-1/2 top-[48%] h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(186,155,255,0.34),rgba(255,210,245,0.18)_34%,rgba(132,196,255,0.16)_58%,transparent_74%)] blur-3xl" />
+          <div className="pointer-events-none absolute left-1/2 top-[46%] h-[18rem] w-[18rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgba(255,255,255,0.16)] bg-[radial-gradient(circle,rgba(255,210,245,0.18),rgba(186,155,255,0.14)_46%,rgba(132,196,255,0.12)_68%,transparent_78%)] blur-xl" />
 
-          <div className="pointer-events-none absolute inset-x-0 top-1/2 -z-0 h-[30rem] -translate-y-1/2 opacity-68">
+          <div className="pointer-events-none absolute inset-x-0 top-1/2 -z-0 h-[30rem] -translate-y-1/2 opacity-74">
             <HeroSplineScene scene="https://prod.spline.design/0btuJlO8ODRyNQ1h/scene.splinecode" />
           </div>
 
-          <div className="pointer-events-none absolute left-[14%] top-[18%] h-5 w-5 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.95),rgba(255,255,255,0.16)_45%,transparent_72%)] opacity-80 blur-[1px] [animation:lumoraSparkle_4.2s_ease-in-out_infinite]" />
-          <div className="pointer-events-none absolute right-[16%] top-[24%] h-3 w-3 rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.98),rgba(212,175,55,0.12)_52%,transparent_76%)] opacity-70 [animation:lumoraSparkle_3.4s_ease-in-out_infinite_0.8s]" />
-          <div className="pointer-events-none absolute left-[22%] bottom-[24%] h-4 w-4 rounded-full bg-[radial-gradient(circle,rgba(230,199,194,0.86),rgba(230,199,194,0.14)_50%,transparent_74%)] opacity-75 [animation:lumoraSparkle_4.8s_ease-in-out_infinite_1.4s]" />
+          <div className="pointer-events-none absolute left-[14%] top-[18%] h-5 w-5 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.95),rgba(255,255,255,0.14)_45%,transparent_72%)] opacity-78 blur-[1px] [animation:lumoraSparkle_4.2s_ease-in-out_infinite]" />
+          <div className="pointer-events-none absolute right-[16%] top-[24%] h-3 w-3 rounded-full bg-[radial-gradient(circle,rgba(255,210,245,0.95),rgba(255,210,245,0.14)_52%,transparent_76%)] opacity-72 [animation:lumoraSparkle_3.4s_ease-in-out_infinite_0.8s]" />
+          <div className="pointer-events-none absolute left-[22%] bottom-[24%] h-4 w-4 rounded-full bg-[radial-gradient(circle,rgba(132,196,255,0.9),rgba(132,196,255,0.14)_50%,transparent_74%)] opacity-72 [animation:lumoraSparkle_4.8s_ease-in-out_infinite_1.4s]" />
           <div className="pointer-events-none absolute right-[22%] bottom-[18%] h-6 w-6 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.9),rgba(255,255,255,0.12)_42%,transparent_72%)] opacity-75 blur-[1px] [animation:lumoraSparkle_5.2s_ease-in-out_infinite_2.1s]" />
           <div className="pointer-events-none absolute left-[20%] top-[26%] h-6 w-6 [animation:lumoraTwinkle_3.8s_ease-in-out_infinite]">
             <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 rounded-full bg-white/85 shadow-[0_0_12px_rgba(255,255,255,0.55)]" />
@@ -41,7 +41,7 @@ export default function Home() {
               AURA · LIGHT · ENERGY
             </p>
             <div className="space-y-4">
-              <h2 className="font-display text-5xl leading-[1.14] whitespace-pre-line text-[var(--foreground)] [text-shadow:0_0_34px_rgba(247,231,206,0.14)] sm:text-6xl lg:text-7xl">
+              <h2 className="font-display text-5xl leading-[1.14] whitespace-pre-line text-[var(--foreground)] [text-shadow:0_0_30px_rgba(255,210,245,0.2)] sm:text-6xl lg:text-7xl">
                 {"보이지 않던 당신의 빛,\n루모라에서 선명해지다"}
               </h2>
               <p className="text-2xl font-medium whitespace-pre-line text-[var(--color-secondary)] sm:text-3xl">
@@ -57,7 +57,7 @@ export default function Home() {
           <div className="relative z-10 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <CTAButton
               href="/tarot"
-              className="bg-[linear-gradient(135deg,#f7e7ce,#d4af37)] text-[#111] shadow-[0_14px_38px_rgba(212,175,55,0.3),0_0_30px_rgba(212,175,55,0.22)] hover:brightness-105 hover:shadow-[0_18px_46px_rgba(212,175,55,0.38),0_0_38px_rgba(212,175,55,0.3)]"
+              className="bg-[linear-gradient(135deg,#f7e7ce_0%,#f3d9d5_42%,#d8b354_100%)] text-[#15121f] shadow-[0_10px_28px_rgba(212,175,55,0.22),0_0_22px_rgba(255,210,245,0.12)] hover:brightness-103 hover:shadow-[0_14px_36px_rgba(212,175,55,0.28),0_0_30px_rgba(186,155,255,0.18)]"
             >
               나의 코드 열기
             </CTAButton>

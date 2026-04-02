@@ -55,11 +55,11 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(230,199,194,0.12),transparent_30%),radial-gradient(circle_at_82%_12%,rgba(108,79,166,0.24),transparent_34%),linear-gradient(165deg,#0f0f17_0%,#1a1a2e_48%,#2b1f3a_100%)]" />
-          <div className="absolute left-1/2 top-[-5rem] h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(212,175,55,0.14),_rgba(212,175,55,0.04)_34%,_transparent_70%)] blur-3xl" />
-          <div className="absolute right-[-8rem] top-[10%] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,_rgba(122,90,178,0.2),_transparent_72%)] blur-3xl" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_12%,rgba(255,210,245,0.16),transparent_32%),radial-gradient(circle_at_84%_10%,rgba(186,155,255,0.22),transparent_36%),radial-gradient(circle_at_74%_70%,rgba(132,196,255,0.14),transparent_30%),linear-gradient(164deg,#0f0f1a_0%,#17142a_48%,#221a3a_100%)]" />
+          <div className="absolute left-1/2 top-[-5rem] h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(255,210,245,0.14),_rgba(186,155,255,0.1)_34%,_transparent_72%)] blur-3xl" />
+          <div className="absolute right-[-8rem] top-[10%] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,_rgba(132,196,255,0.16),_transparent_72%)] blur-3xl" />
           <div className="absolute bottom-[-12rem] left-[-6rem] h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,_rgba(230,199,194,0.16),_transparent_72%)] blur-3xl" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,16,0.28),rgba(8,8,16,0.42)_42%,rgba(8,8,16,0.62))]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,8,20,0.14),rgba(11,10,24,0.24)_42%,rgba(11,10,24,0.42))]" />
         </div>
         <div className="flex min-h-screen flex-col">
           <SiteHeader />

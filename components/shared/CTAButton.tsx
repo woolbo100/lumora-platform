@@ -15,8 +15,8 @@ export function CTAButton({
 }: CTAButtonProps) {
   const styles =
     variant === "primary"
-      ? "border border-[#f7e7ce]/55 bg-[linear-gradient(135deg,#f7e7ce,#d4af37)] text-[#111] shadow-[0_12px_34px_rgba(212,175,55,0.28),0_0_26px_rgba(212,175,55,0.2)] hover:border-[#f7e7ce]/85 hover:brightness-105 hover:shadow-[0_16px_42px_rgba(212,175,55,0.38),0_0_34px_rgba(212,175,55,0.3)]"
-      : "border border-[var(--color-secondary)]/35 bg-[linear-gradient(135deg,rgba(247,231,206,0.16),rgba(212,175,55,0.1)_55%,rgba(11,10,20,0.42))] text-[var(--color-secondary)] shadow-[0_10px_28px_rgba(4,4,12,0.36)] hover:border-[var(--color-secondary)]/55 hover:brightness-105 hover:shadow-[0_14px_34px_rgba(212,175,55,0.18)]";
+      ? "border border-[#f7e7ce]/50 bg-[linear-gradient(135deg,#f7e7ce_0%,#f3d9d5_42%,#d8b354_100%)] text-[#15121f] shadow-[0_10px_26px_rgba(212,175,55,0.22),0_0_20px_rgba(255,210,245,0.12)] hover:border-[#f7e7ce]/72 hover:brightness-103 hover:shadow-[0_14px_34px_rgba(212,175,55,0.26),0_0_28px_rgba(186,155,255,0.16)]"
+      : "border border-[rgba(255,255,255,0.24)] bg-[linear-gradient(135deg,rgba(255,210,245,0.15),rgba(186,155,255,0.12)_55%,rgba(132,196,255,0.08)_100%)] text-[var(--foreground)] shadow-[0_8px_24px_rgba(18,14,38,0.28)] hover:border-[rgba(255,255,255,0.34)] hover:bg-[linear-gradient(135deg,rgba(255,210,245,0.2),rgba(186,155,255,0.16)_55%,rgba(132,196,255,0.1)_100%)] hover:brightness-103";
 
   return (
     <Link

@@ -28,27 +28,34 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-x-0 top-[-2rem] bottom-[-9rem] bg-[linear-gradient(180deg,rgba(13,11,31,0.82)_0%,rgba(18,15,40,0.56)_22%,rgba(21,17,45,0.42)_48%,rgba(16,14,37,0.26)_68%,rgba(15,13,34,0.12)_82%,rgba(15,13,34,0)_100%)]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-[-10rem] h-[18rem] bg-[linear-gradient(180deg,rgba(13,11,31,0)_0%,rgba(13,11,31,0.18)_28%,rgba(13,11,31,0.42)_64%,rgba(13,11,31,0.78)_100%)]" />
         <div className="pointer-events-none absolute inset-x-[8%] bottom-[-8rem] h-[14rem] rounded-full bg-[radial-gradient(circle,rgba(126,114,214,0.16),rgba(88,130,198,0.1)_34%,rgba(13,11,31,0)_72%)] blur-3xl" />
-
-        <div className="relative mx-auto flex max-w-4xl flex-col items-center justify-center px-6 text-center sm:px-8 lg:px-12">
-          <div className="pointer-events-none absolute inset-x-0 top-1/2 -z-0 h-[30rem] -translate-y-1/2 opacity-60">
-            <HeroSplineScene scene="https://prod.spline.design/0btuJlO8ODRyNQ1h/scene.splinecode" />
-          </div>
-
-          <div className="pointer-events-none absolute left-[14%] top-[18%] h-5 w-5 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.95),rgba(255,255,255,0.14)_45%,transparent_72%)] opacity-78 blur-[1px] [animation:lumoraSparkle_4.2s_ease-in-out_infinite]" />
-          <div className="pointer-events-none absolute right-[16%] top-[24%] h-3 w-3 rounded-full bg-[radial-gradient(circle,rgba(255,210,245,0.95),rgba(255,210,245,0.14)_52%,transparent_76%)] opacity-72 [animation:lumoraSparkle_3.4s_ease-in-out_infinite_0.8s]" />
-          <div className="pointer-events-none absolute left-[22%] bottom-[24%] h-4 w-4 rounded-full bg-[radial-gradient(circle,rgba(132,196,255,0.9),rgba(132,196,255,0.14)_50%,transparent_74%)] opacity-72 [animation:lumoraSparkle_4.8s_ease-in-out_infinite_1.4s]" />
-          <div className="pointer-events-none absolute right-[22%] bottom-[18%] h-6 w-6 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.9),rgba(255,255,255,0.12)_42%,transparent_72%)] opacity-75 blur-[1px] [animation:lumoraSparkle_5.2s_ease-in-out_infinite_2.1s]" />
-          <div className="pointer-events-none absolute left-[20%] top-[26%] h-6 w-6 [animation:lumoraTwinkle_3.8s_ease-in-out_infinite]">
+        <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[-8rem] z-0">
+          <div className="absolute left-[8%] top-[12%] h-5 w-5 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.95),rgba(255,255,255,0.14)_45%,transparent_72%)] opacity-72 blur-[1px] [animation:lumoraSparkle_4.2s_ease-in-out_infinite]" />
+          <div className="absolute left-[18%] top-[34%] h-3 w-3 rounded-full bg-[radial-gradient(circle,rgba(255,210,245,0.92),rgba(255,210,245,0.12)_52%,transparent_76%)] opacity-68 [animation:lumoraSparkle_3.8s_ease-in-out_infinite_0.7s]" />
+          <div className="absolute left-[12%] bottom-[18%] h-4 w-4 rounded-full bg-[radial-gradient(circle,rgba(132,196,255,0.9),rgba(132,196,255,0.14)_50%,transparent_74%)] opacity-64 [animation:lumoraSparkle_4.8s_ease-in-out_infinite_1.4s]" />
+          <div className="absolute right-[10%] top-[16%] h-4 w-4 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.92),rgba(255,255,255,0.12)_45%,transparent_74%)] opacity-70 blur-[1px] [animation:lumoraSparkle_5.1s_ease-in-out_infinite_1.2s]" />
+          <div className="absolute right-[18%] top-[38%] h-3 w-3 rounded-full bg-[radial-gradient(circle,rgba(255,210,245,0.95),rgba(255,210,245,0.12)_52%,transparent_76%)] opacity-62 [animation:lumoraSparkle_3.4s_ease-in-out_infinite_0.8s]" />
+          <div className="absolute right-[14%] bottom-[14%] h-6 w-6 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.9),rgba(255,255,255,0.12)_42%,transparent_72%)] opacity-72 blur-[1px] [animation:lumoraSparkle_5.2s_ease-in-out_infinite_2.1s]" />
+          <div className="absolute left-[16%] top-[22%] h-6 w-6 [animation:lumoraTwinkle_3.8s_ease-in-out_infinite]">
             <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 rounded-full bg-white/85 shadow-[0_0_12px_rgba(255,255,255,0.55)]" />
             <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 rounded-full bg-white/85 shadow-[0_0_12px_rgba(255,255,255,0.55)]" />
           </div>
-          <div className="pointer-events-none absolute right-[20%] top-[38%] h-4 w-4 [animation:lumoraTwinkle_4.5s_ease-in-out_infinite_1s]">
+          <div className="absolute right-[22%] top-[30%] h-4 w-4 [animation:lumoraTwinkle_4.5s_ease-in-out_infinite_1s]">
             <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 rounded-full bg-[var(--color-secondary)]/80 shadow-[0_0_10px_rgba(213,195,165,0.5)]" />
             <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 rounded-full bg-[var(--color-secondary)]/80 shadow-[0_0_10px_rgba(213,195,165,0.5)]" />
           </div>
-          <div className="pointer-events-none absolute left-[26%] bottom-[20%] h-3 w-3 [animation:lumoraTwinkle_4.1s_ease-in-out_infinite_1.6s]">
+          <div className="absolute left-[28%] bottom-[18%] h-3 w-3 [animation:lumoraTwinkle_4.1s_ease-in-out_infinite_1.6s]">
             <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 rounded-full bg-[var(--color-accent)]/75 shadow-[0_0_10px_rgba(212,175,55,0.44)]" />
             <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 rounded-full bg-[var(--color-accent)]/75 shadow-[0_0_10px_rgba(212,175,55,0.44)]" />
+          </div>
+          <div className="absolute right-[30%] bottom-[24%] h-5 w-5 [animation:lumoraTwinkle_4.9s_ease-in-out_infinite_2.2s]">
+            <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 rounded-full bg-[rgba(132,196,255,0.82)] shadow-[0_0_10px_rgba(132,196,255,0.42)]" />
+            <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 rounded-full bg-[rgba(132,196,255,0.82)] shadow-[0_0_10px_rgba(132,196,255,0.42)]" />
+          </div>
+        </div>
+
+        <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center justify-center px-6 text-center sm:px-8 lg:px-12">
+          <div className="pointer-events-none absolute inset-x-0 top-1/2 -z-0 h-[30rem] -translate-y-1/2 opacity-60">
+            <HeroSplineScene scene="https://prod.spline.design/0btuJlO8ODRyNQ1h/scene.splinecode" />
           </div>
 
           <div className="relative z-10 space-y-6">

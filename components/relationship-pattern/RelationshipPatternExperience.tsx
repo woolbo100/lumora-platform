@@ -116,7 +116,7 @@ export function RelationshipPatternExperience() {
 
   if (!hasEnteredExperience) {
     return (
-      <section className="aurora-hover relative flex min-h-[70vh] items-center justify-center overflow-hidden rounded-[40px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(122,104,217,0.24),transparent_28%),radial-gradient(circle_at_75%_25%,rgba(120,162,255,0.12),transparent_22%),linear-gradient(135deg,rgba(29,18,53,0.94),rgba(10,14,34,0.94)_58%,rgba(17,19,33,0.92))] px-6 py-16 text-center shadow-[0_30px_120px_rgba(6,8,22,0.45)]">
+      <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden rounded-[40px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(122,104,217,0.24),transparent_28%),radial-gradient(circle_at_75%_25%,rgba(120,162,255,0.12),transparent_22%),linear-gradient(135deg,rgba(29,18,53,0.94),rgba(10,14,34,0.94)_58%,rgba(17,19,33,0.92))] px-6 py-16 text-center shadow-[0_30px_120px_rgba(6,8,22,0.45)]">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(214,194,138,0.12),transparent_62%)] blur-3xl" />
           <div className="absolute right-[12%] top-[18%] h-32 w-32 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.08),transparent_70%)] blur-2xl" />
@@ -143,7 +143,7 @@ export function RelationshipPatternExperience() {
             <button
               type="button"
               onClick={() => setHasEnteredExperience(true)}
-              className="aurora-hover aurora-hover-strong inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(157,139,227,0.94)_55%,rgba(108,92,198,0.92))] px-8 py-4 text-base font-semibold text-[#1c1830] shadow-[0_24px_70px_rgba(89,72,173,0.28)] transition hover:-translate-y-0.5"
+              className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(157,139,227,0.94)_55%,rgba(108,92,198,0.92))] px-8 py-4 text-base font-semibold text-[#1c1830] shadow-[0_24px_70px_rgba(89,72,173,0.28)] transition hover:-translate-y-0.5"
             >
               {hasProgress ? "이어서 분석하기" : "지금 시작하기"}
               <span className="ml-3 text-xl" aria-hidden="true">
@@ -155,7 +155,7 @@ export function RelationshipPatternExperience() {
               <button
                 type="button"
                 onClick={resetRuntimeState}
-                className="aurora-hover aurora-hover-soft inline-flex min-h-14 items-center justify-center rounded-full border border-white/15 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] px-8 py-4 text-sm font-semibold text-[var(--foreground-soft)] transition hover:bg-white/10"
+                className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/15 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] px-8 py-4 text-sm font-semibold text-[var(--foreground-soft)] transition hover:bg-white/10"
               >
                 처음부터 다시 보기
               </button>

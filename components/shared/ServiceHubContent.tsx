@@ -28,7 +28,7 @@ export function ServiceHubContent({
   return (
     <section className="mx-auto mt-20 w-full max-w-4xl px-6 pb-20 sm:px-8 lg:px-0">
       <div className="space-y-16">
-        <GlassPanel className="p-8 sm:p-10">
+        <GlassPanel className="aurora-hover-surface aurora-hover flex p-8 sm:p-10">
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Overview</p>
           <h2 className="mt-4 font-display text-3xl text-[var(--foreground)] sm:text-4xl">
             {introTitle}
@@ -40,14 +40,14 @@ export function ServiceHubContent({
           </div>
         </GlassPanel>
 
-        <GlassPanel className="p-8 sm:p-10">
+        <GlassPanel className="aurora-hover-surface aurora-hover flex p-8 sm:p-10">
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">How It Works</p>
           <h2 className="mt-4 font-display text-3xl text-[var(--foreground)] sm:text-4xl">이용 방법</h2>
           <ol className="mt-8 grid gap-4 md:grid-cols-2">
             {steps.map((step, index) => (
               <li
                 key={step}
-                className="rounded-[22px] border border-white/10 bg-white/6 p-5 text-base leading-8 text-[var(--foreground-soft)]"
+                className="aurora-hover rounded-[22px] border border-white/10 bg-white/6 p-5 text-base leading-8 text-[var(--foreground-soft)]"
               >
                 <span className="mr-2 font-semibold text-[var(--color-secondary)]">{index + 1}.</span>
                 {step}
@@ -56,10 +56,10 @@ export function ServiceHubContent({
           </ol>
         </GlassPanel>
 
-        <GlassPanel className="p-8 sm:p-10">
+        <GlassPanel className="aurora-hover-surface aurora-hover flex p-8 sm:p-10">
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Sample Result</p>
           <h2 className="mt-4 font-display text-3xl text-[var(--foreground)] sm:text-4xl">예시 결과</h2>
-          <div className="mt-8 rounded-[24px] border border-white/10 bg-white/6 p-6">
+          <div className="aurora-hover mt-8 rounded-[24px] border border-white/10 bg-white/6 p-6">
             <div className="space-y-4 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
               {example.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
@@ -68,7 +68,7 @@ export function ServiceHubContent({
           </div>
         </GlassPanel>
 
-        <GlassPanel className="p-8 sm:p-10">
+        <GlassPanel className="aurora-hover-surface aurora-hover flex p-8 sm:p-10">
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">FAQ</p>
           <h2 className="mt-4 font-display text-3xl text-[var(--foreground)] sm:text-4xl">
             자주 묻는 질문
@@ -77,7 +77,7 @@ export function ServiceHubContent({
             {faqs.map((faq) => (
               <div
                 key={faq.question}
-                className="rounded-[22px] border border-white/10 bg-white/6 p-5 text-base leading-8 text-[var(--foreground-soft)]"
+                className="aurora-hover rounded-[22px] border border-white/10 bg-white/6 p-5 text-base leading-8 text-[var(--foreground-soft)]"
               >
                 <p className="font-semibold text-[var(--foreground)]">Q. {faq.question}</p>
                 <p className="mt-2">A. {faq.answer}</p>
@@ -86,7 +86,7 @@ export function ServiceHubContent({
           </div>
         </GlassPanel>
 
-        <GlassPanel className="p-8 text-center sm:p-10">
+        <GlassPanel className="aurora-hover-surface aurora-hover p-8 text-center sm:p-10">
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Start Now</p>
           <h2 className="mt-4 font-display text-3xl text-[var(--foreground)] sm:text-4xl">
             지금 바로 확인해보세요

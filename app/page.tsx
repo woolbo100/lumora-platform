@@ -22,10 +22,10 @@ export default function Home() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center opacity-14 blur-[2px]"
+            className="object-cover object-center opacity-[0.17] blur-[2px]"
           />
         </div>
-        <div className="pointer-events-none absolute inset-x-0 top-[-2rem] bottom-[-16rem] bg-[linear-gradient(180deg,rgba(13,11,31,0.78)_0%,rgba(18,15,40,0.5)_20%,rgba(21,17,45,0.34)_42%,rgba(17,15,40,0.2)_62%,rgba(15,13,34,0.1)_76%,rgba(15,13,34,0.03)_86%,rgba(15,13,34,0)_100%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-[-2rem] bottom-[-16rem] bg-[linear-gradient(180deg,rgba(13,11,31,0.76)_0%,rgba(18,15,40,0.47)_20%,rgba(21,17,45,0.32)_42%,rgba(17,15,40,0.18)_62%,rgba(15,13,34,0.09)_76%,rgba(15,13,34,0.025)_86%,rgba(15,13,34,0)_100%)]" />
         <div className="pointer-events-none absolute inset-x-[-6%] bottom-[-13rem] h-[22rem] bg-[radial-gradient(ellipse_at_center,rgba(118,106,214,0.16)_0%,rgba(95,122,196,0.12)_24%,rgba(58,66,118,0.08)_44%,rgba(15,13,34,0)_72%)] blur-3xl" />
         <div className="pointer-events-none absolute inset-x-0 bottom-[-18rem] h-[22rem] bg-[linear-gradient(180deg,rgba(15,13,34,0)_0%,rgba(15,13,34,0.08)_18%,rgba(15,13,34,0.2)_40%,rgba(15,13,34,0.42)_68%,rgba(15,13,34,0.72)_100%)]" />
         <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[-12rem] z-0">

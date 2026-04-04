@@ -48,11 +48,21 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const selectedCategory = getSelectedCategory(category);
   const isConfigured = hasSupabaseConfig();
   const adminSession = await getAdminSession();
-  const posts = isConfigured
-    ? await listBlogPosts(selectedCategory, {
+  let posts = [] as Awaited<ReturnType<typeof listBlogPosts>>;
+  let fetchError: string | null = null;
+
+  if (isConfigured) {
+    try {
+      posts = await listBlogPosts(selectedCategory, {
         includeDrafts: Boolean(adminSession),
-      })
-    : [];
+      });
+    } catch (error) {
+      fetchError =
+        error instanceof Error
+          ? error.message
+          : "An unexpected error occurred while loading blog posts.";
+    }
+  }
   const selectedCategoryMeta = selectedCategory
     ? blogCategories.find((item) => item.slug === selectedCategory)
     : undefined;
@@ -125,6 +135,19 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_PUBLISHABLE_KEY` to
             `.env.local` to load posts from the database.
           </p>
+        </GlassPanel>
+      ) : null}
+
+      {fetchError ? (
+        <GlassPanel className="p-6">
+          <p className="text-sm leading-7 text-[var(--foreground-soft)]">
+            Blog posts could not be loaded right now. Please try again shortly.
+          </p>
+          {adminSession ? (
+            <p className="mt-3 text-xs leading-6 text-[var(--foreground-muted)]">
+              Debug: {fetchError}
+            </p>
+          ) : null}
         </GlassPanel>
       ) : null}
 

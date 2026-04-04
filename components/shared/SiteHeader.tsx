@@ -28,19 +28,19 @@ export function SiteHeader() {
     <header
       className={`relative sticky top-0 z-[120] overflow-visible border-b bg-[rgba(19,17,34,0.56)] backdrop-blur-xl transition-[border-color,box-shadow,background-color] duration-500 ${
         isScrolled
-          ? "border-[rgba(255,255,255,0.14)] shadow-[0_10px_30px_rgba(10,11,24,0.22)]"
+          ? "border-[rgba(255,255,255,0.14)] shadow-[0_10px_30px_rgba(10,11,24,0.22),0_12px_36px_rgba(116,94,210,0.16),0_18px_46px_rgba(76,137,214,0.12)]"
           : "border-[rgba(255,255,255,0.12)]"
       }`}
     >
       <div
-        className={`pointer-events-none absolute inset-x-0 bottom-[-2rem] z-[119] h-20 transition duration-500 ${
+        className={`pointer-events-none absolute inset-x-0 bottom-[-2rem] z-[130] h-20 transition duration-500 ${
           isScrolled ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="absolute inset-x-[2%] bottom-[1.65rem] h-px bg-gradient-to-r from-transparent via-[rgba(206,188,255,0.72)] to-transparent shadow-[0_0_12px_rgba(176,151,255,0.3)]" />
-        <div className="absolute inset-x-[8%] bottom-[0.7rem] h-10 bg-[radial-gradient(circle_at_center,rgba(196,176,255,0.34),rgba(122,214,255,0.22)_28%,rgba(255,205,235,0.18)_52%,rgba(19,17,34,0)_74%)] blur-xl" />
-        <div className="absolute inset-x-[14%] bottom-[-0.35rem] h-14 bg-[radial-gradient(circle_at_center,rgba(116,94,210,0.28),rgba(76,137,214,0.18)_38%,rgba(255,205,235,0.08)_58%,rgba(19,17,34,0)_78%)] blur-2xl" />
-        <div className="absolute inset-x-[24%] bottom-[-0.9rem] h-12 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),rgba(19,17,34,0)_78%)] blur-2xl" />
+        <div className="absolute inset-x-0 bottom-[1.7rem] h-px bg-gradient-to-r from-transparent via-[rgba(214,198,255,0.86)] to-transparent shadow-[0_0_18px_rgba(176,151,255,0.42)]" />
+        <div className="absolute inset-x-[6%] bottom-[0.75rem] h-10 bg-[radial-gradient(circle_at_center,rgba(204,186,255,0.42),rgba(122,214,255,0.28)_28%,rgba(255,205,235,0.2)_52%,rgba(19,17,34,0)_74%)] blur-xl" />
+        <div className="absolute inset-x-[12%] bottom-[-0.2rem] h-16 bg-[radial-gradient(circle_at_center,rgba(116,94,210,0.34),rgba(76,137,214,0.24)_38%,rgba(255,205,235,0.12)_58%,rgba(19,17,34,0)_78%)] blur-2xl" />
+        <div className="absolute inset-x-[22%] bottom-[-1.05rem] h-14 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.14),rgba(19,17,34,0)_78%)] blur-2xl" />
       </div>
       <div className="relative z-[121] mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-8 lg:px-12">
         <Link

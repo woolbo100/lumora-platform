@@ -96,6 +96,7 @@ a {
   text-decoration: none;
 }
 
+.aurora-hover,
 .aurora-hover-surface {
   position: relative;
   isolation: isolate;
@@ -109,6 +110,8 @@ a {
     filter 0.42s ease;
 }
 
+.aurora-hover::before,
+.aurora-hover::after,
 .aurora-hover-surface::before,
 .aurora-hover-surface::after {
   content: "";
@@ -122,6 +125,7 @@ a {
     filter 0.42s ease;
 }
 
+.aurora-hover::before,
 .aurora-hover-surface::before {
   z-index: -2;
   background:
@@ -133,6 +137,7 @@ a {
   transform: scale(0.94);
 }
 
+.aurora-hover::after,
 .aurora-hover-surface::after {
   inset: -18%;
   z-index: -3;
@@ -144,16 +149,28 @@ a {
   transform: scale(0.9);
 }
 
+.aurora-hover:hover::before,
+.aurora-hover:focus-visible::before,
 .aurora-hover-surface:hover::before,
 .aurora-hover-surface:focus-visible::before {
   opacity: 1;
   transform: scale(1);
 }
 
+.aurora-hover:hover::after,
+.aurora-hover:focus-visible::after,
 .aurora-hover-surface:hover::after,
 .aurora-hover-surface:focus-visible::after {
   opacity: 0.9;
   transform: scale(1.03);
+}
+
+.aurora-hover:hover,
+.aurora-hover:focus-visible {
+  box-shadow:
+    0 16px 38px rgba(11, 14, 30, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 30px rgba(178, 181, 255, 0.14);
 }
 
 .aurora-hover-strong:hover,

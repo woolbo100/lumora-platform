@@ -125,7 +125,7 @@ export function EgenVsTetoTestClient() {
                 key={option.label}
                 type="button"
                 onClick={() => handleSelect(option.value)}
-                className={`rounded-[24px] border px-5 py-5 text-left transition duration-300 ${
+                className={`aurora-hover rounded-[24px] border px-5 py-5 text-left transition duration-300 ${
                   isSelected
                     ? "border-[var(--color-secondary)]/70 bg-[linear-gradient(135deg,rgba(240,205,161,0.12),rgba(185,144,255,0.08)_65%,rgba(255,255,255,0.05))] shadow-[0_18px_50px_rgba(76,60,144,0.22)]"
                     : "border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] hover:border-[var(--color-primary)]/45 hover:bg-white/10"
@@ -154,7 +154,7 @@ export function EgenVsTetoTestClient() {
           <button
             type="button"
             onClick={handleReset}
-            className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 px-5 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
+            className="aurora-hover aurora-hover-soft inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 px-5 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
           >
             다시 시작
           </button>

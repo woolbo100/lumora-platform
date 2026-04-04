@@ -112,7 +112,7 @@ export function AuraTestClient({ embedded = false }: AuraTestClientProps) {
 
   if (!started) {
     return (
-      <section className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(167,127,255,0.16),transparent_28%),radial-gradient(circle_at_78%_22%,rgba(255,201,153,0.1),transparent_22%),radial-gradient(circle_at_22%_78%,rgba(99,182,219,0.12),transparent_24%),linear-gradient(135deg,rgba(18,16,34,0.96),rgba(8,12,28,0.96)_58%,rgba(10,11,22,0.98))] px-6 py-16 text-center shadow-[0_30px_120px_rgba(6,8,22,0.45)]">
+      <section className="aurora-hover relative overflow-hidden rounded-[36px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(167,127,255,0.16),transparent_28%),radial-gradient(circle_at_78%_22%,rgba(255,201,153,0.1),transparent_22%),radial-gradient(circle_at_22%_78%,rgba(99,182,219,0.12),transparent_24%),linear-gradient(135deg,rgba(18,16,34,0.96),rgba(8,12,28,0.96)_58%,rgba(10,11,22,0.98))] px-6 py-16 text-center shadow-[0_30px_120px_rgba(6,8,22,0.45)]">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-[14%] top-[18%] h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(195,176,255,0.16),transparent_70%)] blur-3xl" />
           <div className="absolute right-[14%] bottom-[16%] h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(84,168,210,0.12),transparent_72%)] blur-3xl" />
@@ -133,7 +133,7 @@ export function AuraTestClient({ embedded = false }: AuraTestClientProps) {
             <button
               type="button"
               onClick={() => setStarted(true)}
-              className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(245,226,191,0.95),rgba(176,151,255,0.92)_46%,rgba(91,174,214,0.88))] px-8 py-4 text-base font-semibold text-[#1c1830] shadow-[0_24px_70px_rgba(84,70,173,0.28)] transition hover:-translate-y-0.5"
+              className="aurora-hover aurora-hover-strong inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(245,226,191,0.95),rgba(176,151,255,0.92)_46%,rgba(91,174,214,0.88))] px-8 py-4 text-base font-semibold text-[#1c1830] shadow-[0_24px_70px_rgba(84,70,173,0.28)] transition hover:-translate-y-0.5"
             >
               {hasProgress ? "이어서 테스트하기" : "테스트 시작하기"}
             </button>
@@ -141,7 +141,7 @@ export function AuraTestClient({ embedded = false }: AuraTestClientProps) {
               <button
                 type="button"
                 onClick={resetAll}
-                className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/15 px-8 py-4 text-sm font-semibold text-[var(--foreground-soft)] transition hover:bg-white/6"
+                className="aurora-hover aurora-hover-soft inline-flex min-h-14 items-center justify-center rounded-full border border-white/15 px-8 py-4 text-sm font-semibold text-[var(--foreground-soft)] transition hover:bg-white/6"
               >
                 처음부터 다시
               </button>
@@ -210,7 +210,7 @@ export function AuraTestClient({ embedded = false }: AuraTestClientProps) {
                 key={option.value}
                 type="button"
                 onClick={() => answerQuestion(option.value)}
-                className={`rounded-[24px] border px-5 py-5 text-left transition ${
+                className={`aurora-hover rounded-[24px] border px-5 py-5 text-left transition ${
                   active
                     ? "border-[var(--color-secondary)]/70 bg-[linear-gradient(135deg,rgba(245,223,193,0.12),rgba(135,117,232,0.08)_52%,rgba(95,191,179,0.08))] shadow-[0_18px_50px_rgba(76,60,144,0.22)]"
                     : "border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] hover:border-[var(--color-primary)]/45 hover:bg-white/10"
@@ -242,7 +242,7 @@ export function AuraTestClient({ embedded = false }: AuraTestClientProps) {
           <button
             type="button"
             onClick={resetAll}
-            className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 px-5 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
+            className="aurora-hover aurora-hover-soft inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 px-5 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
           >
             다시 테스트
           </button>

@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const navigationLinks = [
@@ -6,8 +9,37 @@ const navigationLinks = [
 ];
 
 export function SiteHeader() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 24);
+    }
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="sticky top-0 z-[120] border-b border-[rgba(255,255,255,0.12)] bg-[rgba(19,17,34,0.56)] backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-[120] border-b bg-[rgba(19,17,34,0.56)] backdrop-blur-xl transition-[border-color,box-shadow,background-color] duration-500 ${
+        isScrolled
+          ? "border-[rgba(255,255,255,0.14)] shadow-[0_10px_30px_rgba(10,11,24,0.22)]"
+          : "border-[rgba(255,255,255,0.12)]"
+      }`}
+    >
+      <div
+        className={`pointer-events-none absolute inset-x-0 bottom-[-1px] h-10 transition duration-500 ${
+          isScrolled ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <div className="absolute inset-x-[6%] bottom-0 h-px bg-gradient-to-r from-transparent via-[rgba(196,176,255,0.52)] to-transparent" />
+        <div className="absolute inset-x-[12%] bottom-[-0.65rem] h-8 bg-[radial-gradient(circle_at_center,rgba(176,151,255,0.18),rgba(122,214,255,0.12)_32%,rgba(255,205,235,0.1)_54%,rgba(19,17,34,0)_72%)] blur-xl" />
+      </div>
       <div className="relative z-[121] mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-8 lg:px-12">
         <Link
           href="/"

@@ -106,7 +106,7 @@ export default function Home() {
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--foreground-muted)]">
               SIGNATURE SERVICES
             </p>
-            <h2 className="font-display text-4xl text-[var(--foreground)]">
+            <h2 className="font-display text-4xl text-white [text-shadow:0_0_18px_rgba(255,210,245,0.12)]">
               당신의 에너지와 매력 흐름을 해석하는 시그니처 리추얼
             </h2>
           </div>

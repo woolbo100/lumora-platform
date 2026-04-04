@@ -14,18 +14,20 @@ export default function Home() {
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
-      <section className="relative left-1/2 right-1/2 isolate flex w-screen flex-1 items-center justify-center overflow-hidden -translate-x-1/2 py-24 lg:py-32">
-        <div className="pointer-events-none absolute inset-0">
+      <section className="relative left-1/2 right-1/2 isolate flex w-screen flex-1 items-center justify-center overflow-visible -translate-x-1/2 py-24 lg:py-32">
+        <div className="pointer-events-none absolute inset-x-0 top-[-5rem] bottom-[-11rem]">
           <Image
             src={heroAuroraImage}
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center opacity-75 blur-[2px]"
+            className="object-cover object-center opacity-62 blur-[2px]"
           />
         </div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0d0b1f] via-[#0d0b1f]/70 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-[-2rem] bottom-[-9rem] bg-[linear-gradient(180deg,rgba(13,11,31,0.82)_0%,rgba(18,15,40,0.56)_22%,rgba(21,17,45,0.42)_48%,rgba(16,14,37,0.26)_68%,rgba(15,13,34,0.12)_82%,rgba(15,13,34,0)_100%)]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-[-10rem] h-[18rem] bg-[linear-gradient(180deg,rgba(13,11,31,0)_0%,rgba(13,11,31,0.18)_28%,rgba(13,11,31,0.42)_64%,rgba(13,11,31,0.78)_100%)]" />
+        <div className="pointer-events-none absolute inset-x-[8%] bottom-[-8rem] h-[14rem] rounded-full bg-[radial-gradient(circle,rgba(126,114,214,0.16),rgba(88,130,198,0.1)_34%,rgba(13,11,31,0)_72%)] blur-3xl" />
 
         <div className="relative mx-auto flex max-w-4xl flex-col items-center justify-center px-6 text-center sm:px-8 lg:px-12">
           <div className="pointer-events-none absolute inset-x-0 top-1/2 -z-0 h-[30rem] -translate-y-1/2 opacity-60">

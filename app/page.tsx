@@ -14,27 +14,35 @@ export default function Home() {
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
-      <section className="relative left-1/2 right-1/2 isolate flex w-screen flex-1 items-center justify-center overflow-visible -translate-x-1/2 py-24 lg:py-32">
-        <div className="pointer-events-none absolute inset-x-0 top-[-5rem] bottom-[-11rem]">
+      <section className="relative left-1/2 right-1/2 isolate flex w-screen flex-1 items-center justify-center overflow-visible -translate-x-1/2 pb-36 pt-24 lg:pb-44 lg:pt-32">
+        <div className="pointer-events-none absolute inset-x-0 top-[-5rem] bottom-[-16rem]">
           <Image
             src={heroAuroraImage}
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center opacity-62 blur-[2px]"
+            className="object-cover object-center opacity-6 blur-[2px]"
           />
         </div>
-        <div className="pointer-events-none absolute inset-x-0 top-[-2rem] bottom-[-9rem] bg-[linear-gradient(180deg,rgba(13,11,31,0.82)_0%,rgba(18,15,40,0.56)_22%,rgba(21,17,45,0.42)_48%,rgba(16,14,37,0.26)_68%,rgba(15,13,34,0.12)_82%,rgba(15,13,34,0)_100%)]" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-[-10rem] h-[18rem] bg-[linear-gradient(180deg,rgba(13,11,31,0)_0%,rgba(13,11,31,0.18)_28%,rgba(13,11,31,0.42)_64%,rgba(13,11,31,0.78)_100%)]" />
-        <div className="pointer-events-none absolute inset-x-[8%] bottom-[-8rem] h-[14rem] rounded-full bg-[radial-gradient(circle,rgba(126,114,214,0.16),rgba(88,130,198,0.1)_34%,rgba(13,11,31,0)_72%)] blur-3xl" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[-8rem] z-0">
+        <div className="pointer-events-none absolute inset-x-0 top-[-2rem] bottom-[-16rem] bg-[linear-gradient(180deg,rgba(13,11,31,0.84)_0%,rgba(18,15,40,0.58)_20%,rgba(21,17,45,0.4)_42%,rgba(17,15,40,0.24)_62%,rgba(15,13,34,0.12)_76%,rgba(15,13,34,0.04)_86%,rgba(15,13,34,0)_100%)]" />
+        <div className="pointer-events-none absolute inset-x-[-6%] bottom-[-13rem] h-[22rem] bg-[radial-gradient(ellipse_at_center,rgba(118,106,214,0.16)_0%,rgba(95,122,196,0.12)_24%,rgba(58,66,118,0.08)_44%,rgba(15,13,34,0)_72%)] blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-[-18rem] h-[22rem] bg-[linear-gradient(180deg,rgba(15,13,34,0)_0%,rgba(15,13,34,0.08)_18%,rgba(15,13,34,0.2)_40%,rgba(15,13,34,0.42)_68%,rgba(15,13,34,0.72)_100%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[-12rem] z-0">
           <div className="absolute left-[8%] top-[12%] h-5 w-5 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.95),rgba(255,255,255,0.14)_45%,transparent_72%)] opacity-72 blur-[1px] [animation:lumoraSparkle_4.2s_ease-in-out_infinite]" />
+          <div className="absolute left-[11%] top-[26%] h-2.5 w-2.5 rounded-full bg-[radial-gradient(circle,rgba(214,235,255,0.95),rgba(214,235,255,0.12)_48%,transparent_76%)] opacity-64 [animation:lumoraSparkle_3.6s_ease-in-out_infinite_0.4s]" />
           <div className="absolute left-[18%] top-[34%] h-3 w-3 rounded-full bg-[radial-gradient(circle,rgba(255,210,245,0.92),rgba(255,210,245,0.12)_52%,transparent_76%)] opacity-68 [animation:lumoraSparkle_3.8s_ease-in-out_infinite_0.7s]" />
+          <div className="absolute left-[24%] top-[14%] h-4 w-4 rounded-full bg-[radial-gradient(circle,rgba(255,236,210,0.92),rgba(255,236,210,0.12)_50%,transparent_76%)] opacity-56 blur-[1px] [animation:lumoraSparkle_5.4s_ease-in-out_infinite_1.3s]" />
           <div className="absolute left-[12%] bottom-[18%] h-4 w-4 rounded-full bg-[radial-gradient(circle,rgba(132,196,255,0.9),rgba(132,196,255,0.14)_50%,transparent_74%)] opacity-64 [animation:lumoraSparkle_4.8s_ease-in-out_infinite_1.4s]" />
+          <div className="absolute left-[34%] bottom-[28%] h-2 w-2 rounded-full bg-[radial-gradient(circle,rgba(255,210,245,0.96),rgba(255,210,245,0.14)_52%,transparent_78%)] opacity-62 [animation:lumoraSparkle_3.2s_ease-in-out_infinite_1.8s]" />
           <div className="absolute right-[10%] top-[16%] h-4 w-4 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.92),rgba(255,255,255,0.12)_45%,transparent_74%)] opacity-70 blur-[1px] [animation:lumoraSparkle_5.1s_ease-in-out_infinite_1.2s]" />
+          <div className="absolute right-[8%] top-[30%] h-2.5 w-2.5 rounded-full bg-[radial-gradient(circle,rgba(188,228,255,0.95),rgba(188,228,255,0.12)_50%,transparent_76%)] opacity-62 [animation:lumoraSparkle_4s_ease-in-out_infinite_0.9s]" />
           <div className="absolute right-[18%] top-[38%] h-3 w-3 rounded-full bg-[radial-gradient(circle,rgba(255,210,245,0.95),rgba(255,210,245,0.12)_52%,transparent_76%)] opacity-62 [animation:lumoraSparkle_3.4s_ease-in-out_infinite_0.8s]" />
+          <div className="absolute right-[26%] top-[20%] h-3.5 w-3.5 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.94),rgba(255,255,255,0.12)_48%,transparent_76%)] opacity-58 blur-[1px] [animation:lumoraSparkle_4.9s_ease-in-out_infinite_1.7s]" />
           <div className="absolute right-[14%] bottom-[14%] h-6 w-6 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.9),rgba(255,255,255,0.12)_42%,transparent_72%)] opacity-72 blur-[1px] [animation:lumoraSparkle_5.2s_ease-in-out_infinite_2.1s]" />
+          <div className="absolute right-[20%] bottom-[22%] h-2.5 w-2.5 rounded-full bg-[radial-gradient(circle,rgba(132,196,255,0.94),rgba(132,196,255,0.14)_50%,transparent_76%)] opacity-60 [animation:lumoraSparkle_3.7s_ease-in-out_infinite_1.1s]" />
+          <div className="absolute left-[42%] top-[10%] h-3 w-3 rounded-full bg-[radial-gradient(circle,rgba(255,210,245,0.92),rgba(255,210,245,0.1)_50%,transparent_76%)] opacity-52 [animation:lumoraSparkle_4.4s_ease-in-out_infinite_2.4s]" />
+          <div className="absolute left-[48%] bottom-[16%] h-2 w-2 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.96),rgba(255,255,255,0.14)_48%,transparent_78%)] opacity-56 [animation:lumoraSparkle_3.3s_ease-in-out_infinite_0.6s]" />
           <div className="absolute left-[16%] top-[22%] h-6 w-6 [animation:lumoraTwinkle_3.8s_ease-in-out_infinite]">
             <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 rounded-full bg-white/85 shadow-[0_0_12px_rgba(255,255,255,0.55)]" />
             <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 rounded-full bg-white/85 shadow-[0_0_12px_rgba(255,255,255,0.55)]" />

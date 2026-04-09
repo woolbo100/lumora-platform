@@ -1,6 +1,5 @@
 import Link from "next/link";
-
-const HOME_URL = "https://www.lumoracode.kr";
+import { HOME_HREF } from "@/lib/site";
 
 export function NamingHero() {
   return (
@@ -30,7 +29,7 @@ export function NamingHero() {
             무료 이름 생성 시작하기
           </Link>
           <Link
-            href={HOME_URL}
+            href={HOME_HREF}
             className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] px-8 py-4 text-sm font-semibold tracking-[0.18em] text-[var(--foreground-soft)] transition duration-300 hover:-translate-y-1 hover:border-[var(--color-secondary)]/28 hover:text-[var(--color-secondary)]"
           >
             LUMORA 홈으로 돌아가기

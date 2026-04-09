@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-
-const HOME_URL = "https://www.lumoracode.kr";
+import { HOME_HREF } from "@/lib/site";
 
 const navigationLinks = [
   { href: "/about", label: "소개" },
@@ -28,14 +27,14 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`relative sticky top-0 z-[120] overflow-visible border-b bg-[rgba(19,17,34,0.56)] backdrop-blur-xl transition-[border-color,box-shadow,background-color] duration-500 ${
+      className={`relative sticky top-0 z-[150] isolate overflow-visible border-b transition-[border-color,box-shadow,background-color,backdrop-filter] duration-500 ${
         isScrolled
-          ? "border-[rgba(255,255,255,0.14)] shadow-[0_10px_30px_rgba(10,11,24,0.22),0_12px_36px_rgba(116,94,210,0.16),0_18px_46px_rgba(76,137,214,0.12)]"
-          : "border-[rgba(255,255,255,0.12)]"
+          ? "border-[rgba(255,255,255,0.08)] bg-[rgba(10,12,20,0.72)] backdrop-blur-[14px] shadow-[0_10px_30px_rgba(120,160,255,0.10),0_0_24px_rgba(120,160,255,0.08)]"
+          : "border-[rgba(255,255,255,0.12)] bg-[rgba(19,17,34,0.56)] backdrop-blur-xl"
       }`}
     >
       <div
-        className={`pointer-events-none absolute inset-x-0 bottom-[-2rem] z-[130] h-20 transition duration-500 ${
+        className={`pointer-events-none fixed inset-x-0 top-[4.85rem] z-[149] h-20 transition duration-500 sm:top-[5.15rem] ${
           isScrolled ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -44,9 +43,9 @@ export function SiteHeader() {
         <div className="absolute inset-x-[12%] bottom-[-0.2rem] h-16 bg-[radial-gradient(circle_at_center,rgba(116,94,210,0.34),rgba(76,137,214,0.24)_38%,rgba(255,205,235,0.12)_58%,rgba(19,17,34,0)_78%)] blur-2xl" />
         <div className="absolute inset-x-[22%] bottom-[-1.05rem] h-14 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.14),rgba(19,17,34,0)_78%)] blur-2xl" />
       </div>
-      <div className="relative z-[121] mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-8 lg:px-12">
+      <div className="relative z-[151] mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-8 lg:px-12">
         <Link
-          href={HOME_URL}
+          href={HOME_HREF}
           aria-label="홈으로 이동"
           className="aurora-link relative z-[122] flex min-h-[56px] min-w-[220px] cursor-pointer flex-col justify-center rounded-xl px-2 py-1 pointer-events-auto transition duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary)]/60"
         >
@@ -58,7 +57,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="relative z-20 flex items-center gap-2 sm:gap-3">
+        <nav className="pointer-events-auto relative z-20 flex items-center gap-2 sm:gap-3">
           {navigationLinks.map((link) => (
             <Link
               key={link.href}

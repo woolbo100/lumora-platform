@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HOME_HREF } from "@/lib/site";
 
 type CTAButtonProps = {
   href: string;
@@ -7,15 +8,13 @@ type CTAButtonProps = {
   className?: string;
 };
 
-const HOME_URL = "https://www.lumoracode.kr";
-
 export function CTAButton({
   href,
   children,
   variant = "primary",
   className = "",
 }: CTAButtonProps) {
-  const resolvedHref = href === "/" ? HOME_URL : href;
+  const resolvedHref = href === "/" ? HOME_HREF : href;
   const styles =
     variant === "primary"
       ? "aurora-hover-surface aurora-hover-strong border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] text-[#1c1830] shadow-[0_12px_28px_rgba(115,88,232,0.28),0_0_20px_rgba(214,194,255,0.12)] hover:border-[rgba(236,228,255,0.78)] hover:brightness-102"

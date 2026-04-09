@@ -5,9 +5,8 @@ import Link from "next/link";
 
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { HOME_HREF } from "@/lib/site";
 import { type SajuElement, type SajuResult } from "@/types/saju";
-
-const HOME_URL = "https://www.lumoracode.kr";
 
 const TABS = [
   { key: "basic", label: "기본 해석" },
@@ -360,7 +359,7 @@ export function SajuResultView({ result }: SajuResultViewProps) {
               타로 보기
             </Link>
             <Link
-              href={HOME_URL}
+              href={HOME_HREF}
               className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 px-5 py-3 text-sm font-semibold text-[var(--foreground-soft)] transition hover:border-[var(--color-secondary)]/28 hover:text-[var(--color-secondary)]"
             >
               홈으로

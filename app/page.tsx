@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
-      <section className="relative left-1/2 right-1/2 isolate flex w-screen flex-1 items-center justify-center overflow-visible -translate-x-1/2 pb-36 pt-24 lg:pb-44 lg:pt-32">
+      <section className="relative left-1/2 right-1/2 z-0 isolate flex w-screen flex-1 items-center justify-center overflow-visible -translate-x-1/2 pb-36 pt-24 lg:pb-44 lg:pt-32">
         <div className="pointer-events-none absolute inset-x-0 top-[-5rem] bottom-[-16rem] -z-20">
           <Image
             src={heroAuroraImage}

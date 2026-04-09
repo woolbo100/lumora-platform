@@ -5,15 +5,12 @@ import { useRouter } from "next/navigation";
 
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { validateEmotionInput } from "@/lib/emotion/interpreter";
-import { type EmotionInput, type EmotionTag } from "@/types/emotion";
+import { type EmotionInput } from "@/types/emotion";
 
 const INITIAL_FORM: EmotionInput = {
   emotion_text: "",
-  emotion_tag: "anxiety",
   intensity: 3,
 };
-
-const TAG_OPTIONS: EmotionTag[] = ["anxiety", "sad", "excited", "tired", "empty", "happy"];
 
 export function EmotionStartForm() {
   const router = useRouter();
@@ -40,10 +37,6 @@ export function EmotionStartForm() {
       intensity: String(validated.data.intensity ?? 3),
     });
 
-    if (validated.data.emotion_tag) {
-      params.set("emotion_tag", validated.data.emotion_tag);
-    }
-
     startTransition(() => {
       router.push(`/emotion/result?${params.toString()}`);
     });
@@ -56,14 +49,14 @@ export function EmotionStartForm() {
           Emotion Flow
         </p>
         <h2 className="mt-4 font-display text-4xl text-[var(--foreground)] sm:text-5xl">
-          감정코드 리딩 시스템
+          감정코드 리딩 서비스
         </h2>
         <div className="mt-8 grid gap-4">
           {[
             "1. 감정 입력",
             "2. 감정 상태 분석",
             "3. 에너지 흐름 해석",
-            "4. 방향 제시",
+            "4. 방향 제안",
             "5. 맞춤 확언 생성",
           ].map((item) => (
             <div
@@ -88,7 +81,7 @@ export function EmotionStartForm() {
 
         <form className="mt-10 grid gap-6" onSubmit={handleSubmit}>
           <label className="grid gap-3">
-            <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
+            <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-secondary)]">
               Emotion Text
             </span>
             <textarea
@@ -99,40 +92,21 @@ export function EmotionStartForm() {
             />
           </label>
 
-          <div className="grid gap-6 sm:grid-cols-2">
-            <label className="grid gap-3">
-              <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
-                Emotion Tag
-              </span>
-              <select
-                className="min-h-14 rounded-[22px] border border-white/10 bg-white/8 px-5 text-base text-[var(--foreground)] outline-none"
-                value={form.emotion_tag ?? ""}
-                onChange={(event) => updateField("emotion_tag", event.target.value as EmotionTag)}
-              >
-                {TAG_OPTIONS.map((tag) => (
-                  <option key={tag} value={tag}>
-                    {tag}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label className="grid gap-3">
-              <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
-                Intensity
-              </span>
-              <input
-                className="min-h-14 rounded-[22px] border border-white/10 bg-white/8 px-5 text-base text-[var(--foreground)] outline-none"
-                type="range"
-                min={1}
-                max={5}
-                step={1}
-                value={form.intensity ?? 3}
-                onChange={(event) => updateField("intensity", Number(event.target.value))}
-              />
-              <p className="text-sm text-[var(--foreground-soft)]">현재 강도: {form.intensity ?? 3}</p>
-            </label>
-          </div>
+          <label className="grid gap-3">
+            <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-secondary)]">
+              Intensity
+            </span>
+            <input
+              className="min-h-14 rounded-[22px] border border-white/10 bg-white/8 px-5 text-base text-[var(--foreground)] outline-none"
+              type="range"
+              min={1}
+              max={5}
+              step={1}
+              value={form.intensity ?? 3}
+              onChange={(event) => updateField("intensity", Number(event.target.value))}
+            />
+            <p className="text-sm text-[var(--foreground-soft)]">현재 강도: {form.intensity ?? 3}</p>
+          </label>
 
           {errors.length > 0 ? (
             <div className="rounded-[24px] border border-rose-400/24 bg-rose-300/8 p-5 text-sm leading-7 text-rose-100">

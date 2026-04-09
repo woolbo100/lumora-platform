@@ -98,6 +98,24 @@ a {
   text-decoration: none;
 }
 
+.site-header-shell {
+  pointer-events: auto;
+}
+
+.site-header-glow,
+.site-header-shell::before,
+.site-header-shell::after,
+.site-header-glow::before,
+.site-header-glow::after {
+  pointer-events: none;
+}
+
+.site-header-shell a,
+.site-header-shell button,
+.site-header-shell nav {
+  pointer-events: auto;
+}
+
 .aurora-hover,
 .aurora-hover-surface {
   position: relative;

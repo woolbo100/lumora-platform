@@ -62,7 +62,9 @@ export default function RootLayout({
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,8,20,0.14),rgba(11,10,24,0.24)_42%,rgba(11,10,24,0.42))]" />
         </div>
         <div className="flex min-h-screen flex-col">
-          <SiteHeader />
+          <div className="relative z-[200] pointer-events-auto">
+            <SiteHeader />
+          </div>
           <div className="flex-1">{children}</div>
           <SiteFooter />
         </div>

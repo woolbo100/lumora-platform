@@ -33,7 +33,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`site-header-shell relative sticky top-0 z-[200] isolate overflow-visible border-b transition-[border-color,box-shadow,background-color,backdrop-filter] duration-500 ${
+      className={`site-header-shell relative z-[200] isolate overflow-visible border-b transition-[border-color,box-shadow,background-color,backdrop-filter] duration-500 ${
         isScrolled
           ? "border-[rgba(255,255,255,0.08)] bg-[rgba(10,12,20,0.74)] backdrop-blur-[15px] shadow-[0_10px_34px_rgba(120,160,255,0.12),0_0_26px_rgba(120,160,255,0.09)]"
           : "border-[rgba(255,255,255,0.12)] bg-[rgba(19,17,34,0.56)] backdrop-blur-xl"

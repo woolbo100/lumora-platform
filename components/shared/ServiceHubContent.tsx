@@ -14,6 +14,9 @@ type ServiceHubContentProps = {
   faqs: FAQItem[];
   ctaLabel: string;
   ctaHref: string;
+  ctaClassName?: string;
+  stepsClassName?: string;
+  faqClassName?: string;
 };
 
 export function ServiceHubContent({
@@ -24,6 +27,9 @@ export function ServiceHubContent({
   faqs,
   ctaLabel,
   ctaHref,
+  ctaClassName,
+  stepsClassName,
+  faqClassName,
 }: ServiceHubContentProps) {
   return (
     <section className="mx-auto mt-20 w-full max-w-4xl px-6 pb-20 sm:px-8 lg:px-0">
@@ -43,7 +49,7 @@ export function ServiceHubContent({
         <GlassPanel className="aurora-hover-surface aurora-hover flex p-8 sm:p-10">
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">How It Works</p>
           <h2 className="mt-4 font-display text-3xl text-[var(--foreground)] sm:text-4xl">이용 방법</h2>
-          <ol className="mt-8 grid gap-4 md:grid-cols-2">
+          <ol className={`mt-8 grid gap-4 md:grid-cols-2 ${stepsClassName ?? ""}`}>
             {steps.map((step, index) => (
               <li
                 key={step}
@@ -73,7 +79,7 @@ export function ServiceHubContent({
           <h2 className="mt-4 font-display text-3xl text-[var(--foreground)] sm:text-4xl">
             자주 묻는 질문
           </h2>
-          <div className="mt-8 space-y-6">
+          <div className={`mt-8 space-y-6 ${faqClassName ?? ""}`}>
             {faqs.map((faq) => (
               <div
                 key={faq.question}
@@ -95,7 +101,9 @@ export function ServiceHubContent({
             지금의 흐름을 읽고, 필요한 방향을 차분하게 확인할 수 있도록 준비해 두었습니다.
           </p>
           <div className="mt-8 flex justify-center">
-            <CTAButton href={ctaHref}>{ctaLabel}</CTAButton>
+            <CTAButton href={ctaHref} className={ctaClassName}>
+              {ctaLabel}
+            </CTAButton>
           </div>
         </GlassPanel>
       </div>

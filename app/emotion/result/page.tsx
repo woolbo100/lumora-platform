@@ -7,6 +7,15 @@ type EmotionResultPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
+const EMOTION_TAG_LABELS = {
+  anxiety: "불안",
+  sad: "슬픔",
+  excited: "설렘",
+  tired: "피로",
+  empty: "공허",
+  happy: "행복",
+} as const;
+
 function getSingleValue(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
 }
@@ -123,6 +132,30 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
       <GlassPanel className="p-8">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Premium Preview</p>
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)]">{result.premium_preview}</p>
+        <div className="mt-8 rounded-[24px] border border-[var(--color-secondary)]/18 bg-[linear-gradient(135deg,rgba(255,255,255,0.09),rgba(157,139,227,0.1)_55%,rgba(108,92,198,0.12))] p-6">
+          <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+            Recommended Affirmations
+          </p>
+          <h2 className="mt-3 font-display text-2xl text-[var(--foreground)] sm:text-3xl">
+            {EMOTION_TAG_LABELS[result.detected_tag]} 흐름에 맞는 확언 추천
+          </h2>
+          <p className="mt-3 text-base leading-8 text-[var(--foreground-soft)]">
+            마지막으로 지금 감정의 흐름을 안정적으로 붙잡을 수 있도록 맞춤 확언을 추천해 드립니다.
+          </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            {result.affirmation.map((line, index) => (
+              <div
+                key={line}
+                className="rounded-[20px] border border-white/10 bg-white/8 px-4 py-4 text-base text-[var(--foreground)]"
+              >
+                <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-secondary)]">
+                  Affirmation {index + 1}
+                </p>
+                <p className="mt-3 leading-7">{line}</p>
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href="/emotion/premium"

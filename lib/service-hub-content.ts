@@ -217,9 +217,14 @@ export const serviceHubContent: Record<string, ServiceHubContentConfig> = {
     faqs: [
       { question: "감정은 왜 중요한가요?", answer: "상태를 알려주는 신호입니다." },
       { question: "확언은 무엇인가요?", answer: "방향을 강화하는 문장입니다." },
+      { question: "감정 기록은 어떻게 활용되나요?", answer: "반복되는 흐름을 읽고 나를 이해하는 데 도움이 됩니다." },
       { question: "매일 사용해도 되나요?", answer: "가능합니다." },
     ],
     ctaLabel: "감정 리딩 시작하기",
     ctaHref: "/emotion/start",
+    ctaClassName:
+      "border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(157,139,227,0.94)_55%,rgba(108,92,198,0.92))] text-[#1c1830] shadow-[0_24px_70px_rgba(89,72,173,0.28)] hover:-translate-y-0.5 hover:border-white/12 hover:brightness-100",
+    stepsClassName: "md:grid-cols-4",
+    faqClassName: "space-y-0 grid gap-6 md:grid-cols-2",
   },
 };

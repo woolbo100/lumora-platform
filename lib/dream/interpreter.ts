@@ -151,9 +151,9 @@ export function validateDreamInput(input: Partial<DreamInput>): DreamValidationR
     success: true,
     data: {
       dream_text: dreamText,
-      emotion,
-      situation,
-      ...(companion ? { companion } : {}),
+      emotion: emotion as DreamEmotion,
+      situation: situation as DreamSituation,
+      ...(companion ? { companion: companion as DreamCompanion } : {}),
     },
   };
 }

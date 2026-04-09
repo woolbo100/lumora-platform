@@ -1,7 +1,11 @@
 import { DREAM_SYMBOLS } from "@/lib/dream/symbol-dataset";
 import {
+  type DreamCompanion,
+  type DreamEmotion,
   type DreamInput,
   type DreamResult,
+  type DreamSymbolInsight,
+  type DreamSituation,
   type DreamSymbolMeaning,
   type DreamValidationResult,
 } from "@/types/dream";
@@ -54,16 +58,6 @@ const LABEL_ADVICE: Partial<Record<string, string>> = {
   안정: "생활 패턴을 조금만 정돈해도 불안이 줄고 해석이 훨씬 선명해질 수 있습니다.",
 };
 
-const LABEL_WARNING: Partial<Record<string, string>> = {
-  불안: "불안이 커진 상태에서는 작은 신호도 더 크게 느껴질 수 있으니 해석을 단정적으로 굳히지 않는 것이 좋습니다.",
-  유혹: "좋아 보이는 선택일수록 이유를 차분히 검토해야 후회가 줄어듭니다.",
-  "통제 상실": "모든 변수를 잡으려 할수록 오히려 피로가 커질 수 있으니 우선순위를 줄여 보세요.",
-  경고: "반복되는 장면이 있다면 무시하지 말고 현재 삶의 어떤 상황과 닮아 있는지 연결해서 보세요.",
-  관계: "상대의 의도만 추측하다 보면 내 감정의 핵심을 놓칠 수 있습니다.",
-  재정: "기회처럼 보이는 제안도 타이밍과 조건을 확인하지 않으면 부담으로 바뀔 수 있습니다.",
-  풍요: "풍요의 신호가 보여도 과한 기대로 바로 확신해 버리면 흐름을 놓칠 수 있습니다.",
-};
-
 const LABEL_FLOW: Partial<Record<string, string>> = {
   흐름: "멈춰 있던 일이 다시 움직일 준비를 하면서, 마음과 현실 사이의 리듬이 서서히 맞춰지고 있습니다.",
   변화: "익숙한 방식에서 벗어나 새로운 선택 기준을 세우는 전환 흐름이 시작되고 있습니다.",
@@ -76,12 +70,78 @@ const LABEL_FLOW: Partial<Record<string, string>> = {
   기반: "당장 큰 변화보다 생활의 기반을 다지는 쪽으로 에너지가 모이고 있습니다.",
 };
 
+const EMOTION_READING: Record<DreamEmotion, string> = {
+  fear: "무서움이 동반된 꿈은 무의식이 이미 알고 있는 불안 요소를 더 이상 미루지 말라고 강하게 신호 보내는 경우가 많습니다.",
+  sadness: "슬픔이 남는 꿈은 놓아야 할 감정, 회복이 필요한 관계, 오래 남은 여운을 정리해야 할 시기와 맞닿아 있는 경우가 많습니다.",
+  anger: "분노가 올라오는 꿈은 억눌린 의사 표현이나 경계가 무너진 지점을 무의식이 대신 드러내고 있을 가능성이 큽니다.",
+  calm: "평온한 감정이 남는 꿈은 상황 자체보다 그 안의 메시지를 담담하게 받아들일 준비가 되어 있다는 뜻에 가깝습니다.",
+  surprise: "놀람이 강했던 꿈은 예상 밖의 변화, 갑작스럽게 드러날 진실, 새로운 가능성에 대한 감각이 깨어나고 있다는 신호일 수 있습니다.",
+};
+
+const EMOTION_ADVICE: Record<DreamEmotion, string> = {
+  fear: "무서움이 남았다면 그 감정을 없애려 하기보다, 정확히 무엇이 위협처럼 느껴졌는지를 적어보는 것이 해석에 도움이 됩니다.",
+  sadness: "슬픔이 컸다면 무언가를 되돌리려 하기보다, 무엇을 애도하고 무엇을 놓아줘야 하는지부터 분명히 해보세요.",
+  anger: "분노가 남았다면 참아온 요구나 선을 침범당한 지점을 점검해 보는 것이 좋습니다.",
+  calm: "평온함이 남았다면 꿈의 장면을 조용히 복기하면서 지금 삶에 적용할 수 있는 메시지를 하나만 골라보세요.",
+  surprise: "놀람이 컸다면 당장의 충격보다 어떤 변화 가능성이 모습을 드러냈는지 차분히 정리해 보는 편이 좋습니다.",
+};
+
+const SITUATION_READING: Record<DreamSituation, string> = {
+  chased: "쫓기는 상황은 현실에서 피하고 있는 압박, 마주하기 어려운 감정, 뒤늦게 따라오는 책임감과 연결되기 쉽습니다.",
+  falling: "떨어지는 상황은 통제력을 잃고 싶지 않은 마음, 기반이 흔들릴까 걱정하는 불안과 자주 맞닿아 있습니다.",
+  conflict: "싸우는 상황은 밖으로 드러내지 못한 감정 충돌이나 관계 안에서 쌓인 긴장을 직접적으로 비추는 경우가 많습니다.",
+  discovery: "무언가를 발견하는 상황은 감춰져 있던 가능성, 몰랐던 마음, 현실에서 새롭게 보게 될 기회를 뜻할 수 있습니다.",
+  movement: "이동하는 상황은 인생의 방향 전환, 감정의 이동, 새로운 단계로 넘어가기 전의 준비 과정을 상징하기 쉽습니다.",
+};
+
+const COMPANION_READING: Record<DreamCompanion, string> = {
+  alone: "혼자 등장했다는 점은 지금 문제가 관계보다 내면의 상태와 더 직접적으로 연결되어 있음을 보여줍니다.",
+  known: "아는 사람이 함께 있었다면 현실 관계 속 감정 패턴이나 익숙한 역할이 꿈 해석의 중요한 힌트가 됩니다.",
+  unknown: "모르는 사람이 등장했다면 아직 이름 붙이지 못한 감정이나 낯선 가능성이 꿈 안에서 상징으로 나타난 것일 수 있습니다.",
+  family: "가족이 등장했다면 오래된 정서적 습관, 안정감, 책임감, 보호 본능과 연결해 읽어볼 필요가 있습니다.",
+};
+
+const EMOTION_SUMMARY: Record<DreamEmotion, string> = {
+  fear: "불안을 외면하기보다 정면으로 읽어야 하는 시기입니다.",
+  sadness: "놓아야 할 감정과 회복의 흐름이 함께 움직이고 있습니다.",
+  anger: "억눌린 경계와 표현 욕구가 강하게 올라오는 시기입니다.",
+  calm: "무의식의 메시지를 차분히 받아들일 준비가 되어 있습니다.",
+  surprise: "예상 밖 변화의 문턱에서 감각이 깨어나는 시기입니다.",
+};
+
+const SITUATION_FLOW: Record<DreamSituation, string> = {
+  chased: "도망치던 문제를 마주하는 쪽으로 흐름이 움직이고 있습니다.",
+  falling: "기반을 다시 점검하고 중심을 회복하는 방향으로 에너지가 모입니다.",
+  conflict: "감정 충돌을 숨기기보다 건강하게 표현하는 쪽으로 흐름이 전환됩니다.",
+  discovery: "숨겨진 기회나 진실을 인식하는 순간이 가까워지고 있습니다.",
+  movement: "정체를 벗어나 새로운 단계로 이동하려는 흐름이 시작되고 있습니다.",
+};
+
 export function validateDreamInput(input: Partial<DreamInput>): DreamValidationResult {
   const errors: string[] = [];
   const dreamText = String(input.dream_text ?? "").trim();
+  const emotion = input.emotion;
+  const situation = input.situation;
+  const companion = input.companion;
 
   if (dreamText.length < 8) {
     errors.push("꿈 내용은 조금 더 구체적으로 입력해 주세요.");
+  }
+
+  if (!["fear", "sadness", "anger", "calm", "surprise"].includes(emotion ?? "")) {
+    errors.push("꿈에서 가장 크게 남은 감정을 선택해 주세요.");
+  }
+
+  if (!["chased", "falling", "conflict", "discovery", "movement"].includes(situation ?? "")) {
+    errors.push("꿈의 핵심 상황을 선택해 주세요.");
+  }
+
+  if (
+    companion != null &&
+    companion !== "" &&
+    !["alone", "known", "unknown", "family"].includes(companion)
+  ) {
+    errors.push("등장 인물 선택값을 다시 확인해 주세요.");
   }
 
   if (errors.length > 0) {
@@ -92,6 +152,9 @@ export function validateDreamInput(input: Partial<DreamInput>): DreamValidationR
     success: true,
     data: {
       dream_text: dreamText,
+      emotion,
+      situation,
+      ...(companion ? { companion } : {}),
     },
   };
 }
@@ -136,6 +199,45 @@ function pickFirstMessage(labels: string[], dictionary: Partial<Record<string, s
   return labels.map((label) => dictionary[label]).find(Boolean) ?? fallback;
 }
 
+function buildSymbolInsights(
+  matchedSymbols: DreamSymbolMeaning[],
+  input: DreamInput,
+): DreamSymbolInsight[] {
+  const symbolItems = matchedSymbols.slice(0, 3).map((symbol) => ({
+    title: `${symbol.keyword} 상징`,
+    description: symbol.meaning,
+  }));
+
+  const emotionItem: DreamSymbolInsight = {
+    title: `${input.emotion === "fear" ? "무서움" : input.emotion === "sadness" ? "슬픔" : input.emotion === "anger" ? "분노" : input.emotion === "calm" ? "평온" : "놀람"} 감정`,
+    description: EMOTION_READING[input.emotion],
+  };
+
+  const situationItem: DreamSymbolInsight = {
+    title: `${input.situation === "chased" ? "쫓김" : input.situation === "falling" ? "떨어짐" : input.situation === "conflict" ? "싸움" : input.situation === "discovery" ? "발견" : "이동"} 상황`,
+    description: SITUATION_READING[input.situation],
+  };
+
+  const companionItem =
+    input.companion != null
+      ? [
+          {
+            title:
+              input.companion === "alone"
+                ? "혼자 등장"
+                : input.companion === "known"
+                  ? "아는 사람 등장"
+                  : input.companion === "unknown"
+                    ? "모르는 사람 등장"
+                    : "가족 등장",
+            description: COMPANION_READING[input.companion],
+          },
+        ]
+      : [];
+
+  return [...symbolItems, emotionItem, situationItem, ...companionItem].slice(0, 5);
+}
+
 export function interpretDream(input: DreamInput): DreamResult {
   const matchedSymbols = extractMatchedSymbols(input.dream_text);
   const primarySymbol = matchedSymbols[0];
@@ -144,39 +246,70 @@ export function interpretDream(input: DreamInput): DreamResult {
   const symbols = uniqueLabels(matchedSymbols).slice(0, 6);
   const pairedKeywords = matchedSymbols.map((symbol) => symbol.keyword).join(", ");
   const labelMixText = describeLabelMix(labelFocus);
+  const emotionText = EMOTION_READING[input.emotion];
+  const situationText = SITUATION_READING[input.situation];
+  const companionText = input.companion ? COMPANION_READING[input.companion] : "";
+  const summary = `${EMOTION_SUMMARY[input.emotion]} ${SITUATION_FLOW[input.situation]}`;
 
-  const coreMeaning = secondarySymbol
-    ? `${primarySymbol.keyword}와 ${secondarySymbol.keyword} 상징이 함께 나타난 것은 ${labelMixText}과 맞닿아 있는 변화가 지금 삶 안에서 동시에 움직이고 있음을 보여줍니다.`
-    : `${primarySymbol.keyword} 상징은 ${labelMixText}을 드러내며, 지금 마음속에서 놓치지 말아야 할 흐름이 선명해지고 있음을 보여줍니다.`;
-
-  const lifeInterpretation = `${pairedKeywords} 상징은 현재 삶의 표면적인 사건보다 그 아래에 깔린 패턴을 먼저 보라고 말하고 있습니다. 지금은 단순히 좋은 징조나 나쁜 징조로 나누기보다, 반복되는 상황 속에서 무엇이 바뀌어야 하는지 읽어내는 것이 더 중요합니다.`;
-
-  const emotionalAnalysis = `${primarySymbol.meaning} ${
+  const narrative = `${primarySymbol.meaning} ${
     secondarySymbol
-      ? `여기에 ${secondarySymbol.keyword} 상징이 겹치면서 ${secondarySymbol.meaning.toLowerCase()}`
-      : "이 장면은 지금 무의식이 가장 강하게 주목하고 있는 주제를 직접적으로 비추고 있습니다."
-  } 꿈 전체로 보면 ${labelMixText}이 한 방향으로 연결되며, 형식적인 신호가 아니라 현재 삶의 핵심 주제를 압축해서 보여주는 장면에 가깝습니다.`;
+      ? `여기에 ${secondarySymbol.keyword} 상징까지 겹치면서, 꿈은 단일 장면이 아니라 서로 다른 감정과 사건이 한 흐름으로 이어지고 있음을 보여줍니다.`
+      : `꿈은 한 가지 상징을 또렷하게 밀어 올리며 지금 가장 중요한 주제를 분명하게 가리키고 있습니다.`
+  } ${situationText} ${emotionText} ${
+    companionText
+      ? `${companionText} 그래서 이 꿈은 겉으로 보이는 사건보다, 그 안에서 내가 어떻게 반응하고 무엇을 붙잡고 있는지를 천천히 들여다보라고 말하고 있습니다.`
+      : `그래서 이 꿈은 겉으로 보이는 사건보다, 그 장면이 내 안에서 어떤 패턴을 반복시키고 있는지를 보라고 말하고 있습니다.`
+  }`;
 
-  return {
-    core_meaning: coreMeaning,
-    symbols,
-    emotional_analysis: emotionalAnalysis,
-    life_interpretation: lifeInterpretation,
-    advice: pickFirstMessage(
-      labelFocus,
-      LABEL_ADVICE,
+  const psychology = `${pairedKeywords} 상징은 지금 내면에서 ${labelMixText}이 동시에 움직이고 있음을 보여줍니다. ${emotionText} ${
+    input.companion
+      ? companionText
+      : "현재의 문제는 바깥 사람보다 내 안의 반응, 기대, 두려움과 더 직접적으로 연결되어 있을 가능성이 큽니다."
+  } 지금은 단순히 길몽이나 흉몽으로 나누기보다, 어떤 감정이 반복되고 무엇이 아직 정리되지 않았는지 읽어내는 태도가 더 중요합니다.`;
+
+  const actionGuides = [
+    pickFirstMessage(
+      [input.emotion, ...labelFocus],
+      { ...LABEL_ADVICE, ...EMOTION_ADVICE },
       "지금은 꿈의 인상을 빨리 결론내리기보다, 가장 강하게 남는 장면이 현실의 어떤 문제와 닮아 있는지 연결해서 적어보는 것이 도움이 됩니다.",
     ),
-    warning: pickFirstMessage(
-      labelFocus,
-      LABEL_WARNING,
-      "꿈이 강하게 남을수록 의미를 과장해서 해석하기 쉬우니, 현재 상황과 닮은 부분을 차분히 구분해 보는 태도가 필요합니다.",
-    ),
-    related_flow: pickFirstMessage(
-      labelFocus,
-      LABEL_FLOW,
-      "지금은 외부 사건 하나보다 내면의 반응과 생활 리듬을 함께 읽어야 흐름이 더 선명해지는 시기입니다.",
-    ),
+    `${input.situation === "chased" ? "피하고 있는 일" : input.situation === "falling" ? "기반이 흔들린다고 느끼는 부분" : input.situation === "conflict" ? "마음속 충돌이 있는 관계" : input.situation === "discovery" ? "새롭게 보이기 시작한 가능성" : "움직이고 싶은 방향"}을 하나만 골라 현실에서 구체적인 문장으로 적어보세요.`,
+    `${
+      input.companion === "family"
+        ? "가족과 연결된 오래된 감정 패턴"
+        : input.companion === "known"
+          ? "익숙한 관계 안에서 반복되는 반응"
+          : input.companion === "unknown"
+            ? "아직 이름 붙이지 못한 낯선 감정"
+            : "내 안에서 혼자 키우고 있는 생각"
+    }을 오늘 하루 한 번은 의식적으로 돌아보세요.`,
+  ];
+
+  const energyFlow = `${pickFirstMessage(
+    labelFocus,
+    LABEL_FLOW,
+    "지금은 외부 사건 하나보다 내면의 반응과 생활 리듬을 함께 읽어야 흐름이 더 선명해지는 시기입니다.",
+  )} ${
+    input.emotion === "calm"
+      ? "지금의 에너지는 비교적 잔잔하지만, 그 안에서 중요한 메시지가 또렷하게 떠오르는 쪽으로 흐르고 있습니다."
+      : input.emotion === "surprise"
+        ? "정체돼 있던 감각이 흔들리면서 새로운 방향을 받아들일 준비가 시작되고 있습니다."
+        : "지금의 에너지는 다소 흔들리더라도, 그 흔들림 자체가 변화의 방향을 알려주는 신호가 되고 있습니다."
+  }`;
+
+  const closingMessage = input.companion
+    ? `이 꿈이 보여준 관계와 감정의 장면은, 지금 당신에게 무엇을 더 정직하게 바라보라고 말하고 있을까요?`
+    : `이 꿈이 반복해서 비춘 장면은, 지금 당신 안에서 무엇을 가장 먼저 알아차리라고 말하고 있을까요?`;
+
+  return {
+    summary,
+    narrative,
+    symbol_insights: buildSymbolInsights(matchedSymbols, input),
+    psychology,
+    action_guides: actionGuides,
+    energy_flow: energyFlow,
+    closing_message: closingMessage,
+    symbols,
     premium_preview:
       "꿈은 우리의 무의식을 반영하며, 지금 마음 깊은 곳에서 어떤 메시지가 올라오고 있는지 보여주는 상징의 언어입니다.",
     matchedSymbols,

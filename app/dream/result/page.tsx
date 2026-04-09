@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DreamShareButton } from "@/components/dream/DreamShareButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { interpretDream, validateDreamInput } from "@/lib/dream/interpreter";
+import { type DreamCompanion, type DreamEmotion, type DreamSituation } from "@/types/dream";
 
 type DreamResultPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -32,6 +33,9 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
   const params = await searchParams;
   const validated = validateDreamInput({
     dream_text: getSingleValue(params.dream_text),
+    emotion: getSingleValue(params.emotion) as DreamEmotion | undefined,
+    situation: getSingleValue(params.situation) as DreamSituation | undefined,
+    companion: getSingleValue(params.companion) as DreamCompanion | undefined,
   });
 
   if (!validated.success) {
@@ -50,10 +54,10 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
       <GlassPanel className="result-panel-glow border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">Dream Result</p>
         <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
-          꿈이 전하는 핵심 메시지
+          한 줄 요약
         </h1>
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-          {result.core_meaning}
+          {result.summary}
         </p>
         <div className="result-card-glow mt-6 rounded-[22px] border border-white/10 bg-white/6 p-5">
           <p className="text-xs uppercase tracking-[0.24em] text-white/42">Main Symbol</p>
@@ -80,33 +84,55 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
         <GlassPanel className="result-panel-glow p-8">
           <div className="grid gap-4">
             <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-white/42">Symbol Reading</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-white/42">Dream Narrative</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">
-                {result.emotional_analysis}
+                {result.narrative}
               </p>
             </div>
             <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-white/42">Life Interpretation</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-white/42">Psychology</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">
-                {result.life_interpretation}
+                {result.psychology}
               </p>
             </div>
           </div>
         </GlassPanel>
 
         <GlassPanel className="result-panel-glow p-8">
+          <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">핵심 상징 해석</p>
+          <div className="mt-6 grid gap-4">
+            {result.symbol_insights.map((item) => (
+              <div key={item.title} className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
+                <p className="text-sm font-semibold text-[var(--foreground)]">{item.title}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </GlassPanel>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
+        <GlassPanel className="result-panel-glow p-8">
+          <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">행동 가이드</p>
+          <div className="mt-6 grid gap-4">
+            {result.action_guides.map((guide, index) => (
+              <div key={`${index + 1}-${guide}`} className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
+                <p className="text-xs uppercase tracking-[0.24em] text-white/42">Action {index + 1}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{guide}</p>
+              </div>
+            ))}
+          </div>
+        </GlassPanel>
+
+        <GlassPanel className="result-panel-glow p-8">
           <div className="grid gap-4">
             <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-white/42">Advice</p>
-              <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{result.advice}</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-white/42">Energy Flow</p>
+              <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{result.energy_flow}</p>
             </div>
             <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-white/42">Warning</p>
-              <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{result.warning}</p>
-            </div>
-            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-white/42">Related Flow</p>
-              <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{result.related_flow}</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-white/42">Closing Message</p>
+              <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{result.closing_message}</p>
             </div>
           </div>
         </GlassPanel>

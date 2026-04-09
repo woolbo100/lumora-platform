@@ -11,7 +11,7 @@ export default function DreamStartPage() {
           무료 꿈해몽 시작
         </h1>
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-          꿈 내용, 꿈 뒤에 남은 감정, 그리고 해석 방향을 함께 받아 무의식의 메시지를 읽어냅니다.
+          꿈 내용과 감정, 상황, 등장 인물을 단계별로 선택해 무의식의 메시지를 더 선명하게 읽어냅니다.
         </p>
       </section>
 

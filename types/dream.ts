@@ -1,7 +1,16 @@
 export type DreamPurpose = "wealth" | "love" | "career" | "healing";
 
+export type DreamEmotion = "fear" | "sadness" | "anger" | "calm" | "surprise";
+
+export type DreamSituation = "chased" | "falling" | "conflict" | "discovery" | "movement";
+
+export type DreamCompanion = "alone" | "known" | "unknown" | "family";
+
 export type DreamInput = {
   dream_text: string;
+  emotion: DreamEmotion;
+  situation: DreamSituation;
+  companion?: DreamCompanion;
 };
 
 export type DreamSymbolMeaning = {
@@ -11,14 +20,20 @@ export type DreamSymbolMeaning = {
   relatedPurpose: DreamPurpose[];
 };
 
+export type DreamSymbolInsight = {
+  title: string;
+  description: string;
+};
+
 export type DreamResult = {
-  core_meaning: string;
+  summary: string;
+  narrative: string;
+  symbol_insights: DreamSymbolInsight[];
+  psychology: string;
+  action_guides: string[];
+  energy_flow: string;
+  closing_message: string;
   symbols: string[];
-  emotional_analysis: string;
-  life_interpretation: string;
-  advice: string;
-  warning: string;
-  related_flow: string;
   premium_preview: string;
   matchedSymbols: DreamSymbolMeaning[];
 };

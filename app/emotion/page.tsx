@@ -14,16 +14,11 @@ export default function EmotionPage() {
           <div className="mb-6 flex h-22 w-22 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 bg-[radial-gradient(circle,rgba(255,236,236,0.16),rgba(255,255,255,0.03))] text-5xl text-[var(--color-secondary)] shadow-[0_0_60px_rgba(142,116,255,0.16)]">
             ✦
           </div>
-          <p className="font-display text-5xl text-[var(--foreground)] sm:text-6xl md:text-7xl">
+          <p className="font-display text-6xl text-[var(--foreground)] sm:text-7xl md:text-8xl">
             감정코드리딩
           </p>
-          <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">
-            Emotion Code Reading
-          </p>
-          <h1 className="mt-8 font-display text-5xl leading-tight text-[var(--foreground)] sm:text-6xl md:text-7xl">
-            오늘의 감정,
-            <br />
-            그냥 지나치고 있나요?
+          <h1 className="mt-8 font-display text-3xl leading-tight text-[var(--color-secondary)] sm:text-4xl md:text-5xl">
+            <span className="block sm:whitespace-nowrap">오늘의 감정, 그냥 지나치고 있나요?</span>
           </h1>
           <p className="mt-8 max-w-3xl whitespace-pre-line text-lg leading-9 text-[var(--foreground-soft)] sm:text-xl">
             당신의 감정은

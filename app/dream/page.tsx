@@ -14,13 +14,10 @@ export default function DreamPage() {
           <div className="mb-6 flex h-22 w-22 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 bg-[radial-gradient(circle,rgba(255,236,236,0.16),rgba(255,255,255,0.03))] text-5xl text-[var(--color-secondary)] shadow-[0_0_60px_rgba(142,116,255,0.16)]">
             ✦
           </div>
-          <p className="font-display text-5xl text-[var(--foreground)] sm:text-6xl md:text-7xl">
+          <p className="font-display text-6xl text-[var(--foreground)] sm:text-7xl md:text-8xl">
             꿈해몽
           </p>
-          <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">
-            Dream Interpretation
-          </p>
-          <h1 className="mt-8 font-display text-4xl leading-[1.16] text-[var(--foreground)] sm:text-5xl md:text-6xl">
+          <h1 className="mt-8 font-display text-3xl leading-[1.2] text-[var(--color-secondary)] sm:text-4xl md:text-5xl">
             <span className="block sm:whitespace-nowrap">꿈은 단순한 장면이 아니라</span>
             <span className="block sm:whitespace-nowrap">무의식이 보내는 상징의 언어입니다.</span>
           </h1>

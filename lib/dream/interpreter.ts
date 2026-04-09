@@ -1,75 +1,85 @@
 import { DREAM_SYMBOLS } from "@/lib/dream/symbol-dataset";
 import {
-  type DreamEmotion,
   type DreamInput,
-  type DreamPurpose,
   type DreamResult,
   type DreamSymbolMeaning,
   type DreamValidationResult,
 } from "@/types/dream";
 
-const PURPOSE_LABELS: Record<DreamPurpose, string> = {
-  wealth: "돈과 기회의 흐름",
-  love: "관계와 감정의 흐름",
-  career: "일과 방향성의 흐름",
-  healing: "내면과 회복의 흐름",
+const LABEL_READING: Partial<Record<string, string>> = {
+  감정: "감정의 흐름이 안에서 천천히 움직이고 있다는 신호",
+  흐름: "정체됐던 일이 다시 움직일 준비를 하고 있다는 암시",
+  재물: "현실적 기회나 자원에 대한 감각이 예민해지고 있다는 표시",
+  변화: "기존 패턴을 벗어나는 전환점이 다가오고 있다는 징후",
+  유혹: "겉으로 좋아 보이지만 신중히 봐야 할 선택지가 있다는 경고",
+  기회: "두려움과 함께 열리는 새로운 가능성",
+  불안: "마음속 긴장이나 잃고 싶지 않은 부분이 커지고 있다는 반영",
+  관계: "사람 사이 거리감과 반응이 중요한 주제가 되고 있다는 표시",
+  자신감: "자기표현이나 자존감이 흔들리기 쉬운 시기라는 메시지",
+  정리: "오래된 감정이나 상황을 마무리할 시점이 왔다는 신호",
+  전환: "끝처럼 보여도 다음 단계로 넘어가는 문턱에 있다는 흐름",
+  "새 출발": "새로운 리듬이나 역할로 옮겨갈 준비가 시작됐다는 암시",
+  "통제 상실": "예상하지 못한 변수에 대한 불안이 무의식에 쌓여 있다는 반영",
+  경고: "서두르기보다 상황을 한 번 더 점검하라는 안내",
+  자유: "답답했던 틀에서 벗어나고 싶은 마음이 강해지고 있다는 흐름",
+  확장: "시야와 가능성이 넓어지고 있다는 암시",
+  가능성: "지금 선택이 앞으로의 폭을 넓힐 수 있다는 메시지",
+  시야: "한걸음 물러서서 크게 볼 필요가 있다는 신호",
+  영감: "감정보다 직관이 먼저 움직이고 있다는 흐름",
+  회상: "정리되지 않은 기억이나 감정이 다시 떠오르고 있다는 반응",
+  메시지: "지금 꼭 돌아봐야 할 마음의 주제가 있다는 의미",
+  보호: "불안한 시기일수록 스스로를 지키는 감각이 필요하다는 신호",
+  에너지: "억눌린 힘이나 의지가 다시 올라오고 있다는 흐름",
+  표현: "마음속 것을 밖으로 드러낼 타이밍이 다가오고 있다는 뜻",
+  가치: "내가 무엇을 중요하게 여기는지 다시 점검할 시기라는 의미",
+  재정: "현실적인 기반과 선택 기준을 정리할 필요가 있다는 신호",
+  내면: "바깥 사건보다 마음의 상태를 먼저 살펴야 한다는 흐름",
+  안정: "심리적 기반과 생활 리듬을 지키는 일이 중요하다는 안내",
+  기반: "지금의 선택이 앞으로의 토대를 만들고 있다는 의미",
 };
 
-const EMOTION_TONE: Record<DreamEmotion, { emotional: string; warning: string }> = {
-  good: {
-    emotional: "꿈에서 느낀 감정이 긍정적이었기 때문에, 무의식은 지금 다가오는 변화 자체를 비교적 받아들일 준비가 되어 있음을 보여줍니다.",
-    warning: "좋은 신호라도 너무 낙관적으로만 해석해 현실적인 판단을 놓치지 않는 것이 중요합니다.",
-  },
-  neutral: {
-    emotional: "감정이 중립적이었다는 것은 무의식이 현재 상황을 조용히 관찰하며 의미를 정리하고 있는 상태에 가깝습니다.",
-    warning: "지금은 성급히 결론을 내리기보다, 반복되는 패턴을 한번 더 관찰하는 태도가 도움이 됩니다.",
-  },
-  bad: {
-    emotional: "불편하거나 무거운 감정이 남았다면, 현재 삶에서 억눌린 불안이나 피하고 싶은 문제가 꿈 안에서 먼저 떠오른 것으로 볼 수 있습니다.",
-    warning: "감정이 크게 흔들린 상태에서 충동적으로 결정을 내리면 실제 문제보다 더 크게 느껴질 수 있으니 주의가 필요합니다.",
-  },
+const LABEL_ADVICE: Partial<Record<string, string>> = {
+  감정: "지금은 감정을 빨리 정리하려 하기보다 무엇이 흔들리고 있는지 이름 붙여 보는 것이 먼저입니다.",
+  흐름: "한 번에 답을 내리기보다 반복되는 장면과 감정의 방향을 며칠 더 관찰해 보세요.",
+  재물: "현실적인 기회와 손실을 동시에 따져 보고, 막연한 기대보다 기준을 먼저 세우는 것이 좋습니다.",
+  변화: "변화를 밀어붙이기보다 무엇을 끝내고 무엇을 남길지 구분해 두면 흐름이 훨씬 선명해집니다.",
+  관계: "상대 반응을 해석하기 전에 내 안의 서운함과 기대를 먼저 정리해 두는 것이 도움이 됩니다.",
+  자신감: "말을 줄이기보다 지금 가장 위축되는 지점을 정확히 적어보면 자신감 회복에 도움이 됩니다.",
+  정리: "붙잡고 있는 오래된 감정이나 일 하나를 정리하면 다음 흐름이 더 부드럽게 열릴 수 있습니다.",
+  경고: "지금은 직감만 믿고 움직이기보다 현실 정보와 컨디션을 함께 점검해 보는 편이 좋습니다.",
+  자유: "답답함을 무조건 끊어내기보다 지금 나를 묶는 조건이 무엇인지부터 분명히 해 보세요.",
+  내면: "외부 성과보다 마음의 회복과 생활 리듬을 먼저 안정시키는 것이 지금은 더 중요합니다.",
+  안정: "생활 패턴을 조금만 정돈해도 불안이 줄고 해석이 훨씬 선명해질 수 있습니다.",
 };
 
-const PURPOSE_INTERPRETATION: Record<DreamPurpose, string> = {
-  wealth: "재물과 기회, 흐름의 방향에서 변화를 읽어야 하는 시기일 수 있습니다.",
-  love: "관계 안에서의 감정 이동과 친밀감, 거리 조절이 중요한 시기일 수 있습니다.",
-  career: "일, 진로, 역할, 선택의 방향에서 다시 정렬이 필요한 흐름일 수 있습니다.",
-  healing: "지금은 외부 성취보다 내면 회복과 정서적 균형이 더 중요한 메시지일 수 있습니다.",
+const LABEL_WARNING: Partial<Record<string, string>> = {
+  불안: "불안이 커진 상태에서는 작은 신호도 더 크게 느껴질 수 있으니 해석을 단정적으로 굳히지 않는 것이 좋습니다.",
+  유혹: "좋아 보이는 선택일수록 이유를 차분히 검토해야 후회가 줄어듭니다.",
+  "통제 상실": "모든 변수를 잡으려 할수록 오히려 피로가 커질 수 있으니 우선순위를 줄여 보세요.",
+  경고: "반복되는 장면이 있다면 무시하지 말고 현재 삶의 어떤 상황과 닮아 있는지 연결해서 보세요.",
+  관계: "상대의 의도만 추측하다 보면 내 감정의 핵심을 놓칠 수 있습니다.",
+  재정: "기회처럼 보이는 제안도 타이밍과 조건을 확인하지 않으면 부담으로 바뀔 수 있습니다.",
 };
 
-const PURPOSE_ADVICE: Record<DreamPurpose, string> = {
-  wealth: "돈의 흐름을 억지로 당기기보다, 기회가 들어오는 통로를 정리하고 판단 기준을 선명하게 세워 보세요.",
-  love: "지금 중요한 건 감정을 밀어붙이는 것이 아니라, 내 마음이 무엇을 원하는지부터 정직하게 읽는 일입니다.",
-  career: "일의 속도보다 방향의 정확성이 더 중요합니다. 불필요하게 붙잡고 있는 역할이 있는지 점검해 보세요.",
-  healing: "해결보다 회복이 먼저입니다. 충분한 휴식과 감정 정리가 지금의 흐름을 훨씬 부드럽게 만듭니다.",
-};
-
-const PURPOSE_FLOW: Record<DreamPurpose, string> = {
-  wealth: "재물 또는 기회 흐름에서 변화 가능성이 있습니다.",
-  love: "관계 흐름이나 감정 소통 방식에서 새로운 변화가 열릴 수 있습니다.",
-  career: "일과 방향성, 선택의 기준에서 재정렬이 일어날 수 있습니다.",
-  healing: "내면 회복, 감정 정리, 삶의 리듬 회복과 관련된 흐름이 강화되고 있습니다.",
+const LABEL_FLOW: Partial<Record<string, string>> = {
+  흐름: "멈춰 있던 일이 다시 움직일 준비를 하면서, 마음과 현실 사이의 리듬이 서서히 맞춰지고 있습니다.",
+  변화: "익숙한 방식에서 벗어나 새로운 선택 기준을 세우는 전환 흐름이 시작되고 있습니다.",
+  관계: "감정 표현과 거리 조절 방식이 바뀌면서 관계의 온도도 함께 달라질 수 있습니다.",
+  정리: "정리와 마무리를 거친 뒤에야 다음 단계가 보이는 흐름이 강해지고 있습니다.",
+  자유: "답답했던 구조를 벗어나 시야를 넓히려는 흐름이 점점 선명해지고 있습니다.",
+  내면: "겉으로 보이는 결과보다 마음의 균형과 회복이 더 중요한 흐름이 강화되고 있습니다.",
+  기반: "당장 큰 변화보다 생활의 기반을 다지는 쪽으로 에너지가 모이고 있습니다.",
 };
 
 export function validateDreamInput(input: Partial<DreamInput>): DreamValidationResult {
   const errors: string[] = [];
   const dreamText = String(input.dream_text ?? "").trim();
-  const emotion = input.emotion;
-  const purpose = input.purpose;
 
   if (dreamText.length < 8) {
     errors.push("꿈 내용은 조금 더 구체적으로 입력해 주세요.");
   }
 
-  if (!["good", "neutral", "bad"].includes(emotion ?? "")) {
-    errors.push("꿈을 꾼 뒤의 느낌을 선택해 주세요.");
-  }
-
-  if (!["wealth", "love", "career", "healing"].includes(purpose ?? "")) {
-    errors.push("해석 방향을 선택해 주세요.");
-  }
-
-  if (errors.length > 0 || emotion == null || purpose == null) {
+  if (errors.length > 0) {
     return { success: false, errors };
   }
 
@@ -77,8 +87,6 @@ export function validateDreamInput(input: Partial<DreamInput>): DreamValidationR
     success: true,
     data: {
       dream_text: dreamText,
-      emotion,
-      purpose,
     },
   };
 }
@@ -92,31 +100,75 @@ function uniqueLabels(symbols: DreamSymbolMeaning[]) {
   return [...new Set(symbols.flatMap((symbol) => [symbol.keyword, ...symbol.labels]))];
 }
 
+function countLabels(symbols: DreamSymbolMeaning[]) {
+  return symbols.reduce<Record<string, number>>((acc, symbol) => {
+    for (const label of symbol.labels) {
+      acc[label] = (acc[label] ?? 0) + 1;
+    }
+    return acc;
+  }, {});
+}
+
+function dominantLabels(symbols: DreamSymbolMeaning[]) {
+  return Object.entries(countLabels(symbols))
+    .sort((a, b) => b[1] - a[1])
+    .map(([label]) => label);
+}
+
+function describeLabelMix(labels: string[]) {
+  return labels
+    .slice(0, 3)
+    .map((label) => LABEL_READING[label] ?? `${label}와 관련된 흐름`)
+    .join(", ");
+}
+
+function pickFirstMessage(labels: string[], dictionary: Partial<Record<string, string>>, fallback: string) {
+  return labels.map((label) => dictionary[label]).find(Boolean) ?? fallback;
+}
+
 export function interpretDream(input: DreamInput): DreamResult {
   const matchedSymbols = extractMatchedSymbols(input.dream_text);
-  const symbolText = matchedSymbols.map((symbol) => symbol.meaning).join(" ");
+  const primarySymbol = matchedSymbols[0];
+  const secondarySymbol = matchedSymbols[1];
+  const labelFocus = dominantLabels(matchedSymbols);
   const symbols = uniqueLabels(matchedSymbols).slice(0, 6);
-  const emotionalAnalysis = `${EMOTION_TONE[input.emotion].emotional} ${symbolText}`;
-  const relatedPurposeMatch = matchedSymbols.some((symbol) => symbol.relatedPurpose.includes(input.purpose));
+  const pairedKeywords = matchedSymbols.map((symbol) => symbol.keyword).join(", ");
+  const labelMixText = describeLabelMix(labelFocus);
 
-  const coreMeaning = relatedPurposeMatch
-    ? `이 꿈은 ${PURPOSE_LABELS[input.purpose]}과 연결된 변화 신호를 담고 있습니다.`
-    : "이 꿈은 지금 내면에 쌓인 감정과 다가오는 변화의 조짐을 상징적으로 보여줍니다.";
+  const coreMeaning = secondarySymbol
+    ? `${primarySymbol.keyword}와 ${secondarySymbol.keyword} 상징이 함께 나타난 것은 ${labelMixText}과 맞닿아 있는 변화가 지금 삶 안에서 동시에 움직이고 있음을 보여줍니다.`
+    : `${primarySymbol.keyword} 상징은 ${labelMixText}을 드러내며, 지금 마음속에서 놓치지 말아야 할 흐름이 선명해지고 있음을 보여줍니다.`;
 
-  const lifeInterpretation = `${PURPOSE_INTERPRETATION[input.purpose]} 꿈에서 드러난 ${matchedSymbols
-    .map((symbol) => symbol.keyword)
-    .join(", ")} 상징은 현재 삶의 한가운데에서 중요한 선택의 순간에 가까워지고 있음을 시사합니다.`;
+  const lifeInterpretation = `${pairedKeywords} 상징은 현재 삶의 표면적인 사건보다 그 아래에 깔린 패턴을 먼저 보라고 말하고 있습니다. 지금은 단순히 좋은 징조나 나쁜 징조로 나누기보다, 반복되는 상황 속에서 무엇이 바뀌어야 하는지 읽어내는 것이 더 중요합니다.`;
+
+  const emotionalAnalysis = `${primarySymbol.meaning} ${
+    secondarySymbol
+      ? `여기에 ${secondarySymbol.keyword} 상징이 겹치면서 ${secondarySymbol.meaning.toLowerCase()}`
+      : "이 장면은 지금 무의식이 가장 강하게 주목하고 있는 주제를 직접적으로 비추고 있습니다."
+  } 꿈 전체로 보면 ${labelMixText}이 한 방향으로 연결되며, 형식적인 신호가 아니라 현재 삶의 핵심 주제를 압축해서 보여주는 장면에 가깝습니다.`;
 
   return {
     core_meaning: coreMeaning,
     symbols,
     emotional_analysis: emotionalAnalysis,
     life_interpretation: lifeInterpretation,
-    advice: PURPOSE_ADVICE[input.purpose],
-    warning: EMOTION_TONE[input.emotion].warning,
-    related_flow: PURPOSE_FLOW[input.purpose],
+    advice: pickFirstMessage(
+      labelFocus,
+      LABEL_ADVICE,
+      "지금은 꿈의 인상을 빨리 결론내리기보다, 가장 강하게 남는 장면이 현실의 어떤 문제와 닮아 있는지 연결해서 적어보는 것이 도움이 됩니다.",
+    ),
+    warning: pickFirstMessage(
+      labelFocus,
+      LABEL_WARNING,
+      "꿈이 강하게 남을수록 의미를 과장해서 해석하기 쉬우니, 현재 상황과 닮은 부분을 차분히 구분해 보는 태도가 필요합니다.",
+    ),
+    related_flow: pickFirstMessage(
+      labelFocus,
+      LABEL_FLOW,
+      "지금은 외부 사건 하나보다 내면의 반응과 생활 리듬을 함께 읽어야 흐름이 더 선명해지는 시기입니다.",
+    ),
     premium_preview:
-      "이 꿈이 실제 삶의 흐름과 어떤 변화로 이어지는지, 반복되는 패턴과 행동 방향까지 더 깊이 분석해드립니다.",
+      "꿈은 우리의 무의식을 반영하며, 지금 마음 깊은 곳에서 어떤 메시지가 올라오고 있는지 보여주는 상징의 언어입니다.",
     matchedSymbols,
   };
 }

@@ -32,13 +32,6 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
   const params = await searchParams;
   const validated = validateDreamInput({
     dream_text: getSingleValue(params.dream_text),
-    emotion: getSingleValue(params.emotion) as "good" | "neutral" | "bad" | undefined,
-    purpose: getSingleValue(params.purpose) as
-      | "wealth"
-      | "love"
-      | "career"
-      | "healing"
-      | undefined,
   });
 
   if (!validated.success) {
@@ -87,7 +80,7 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
         <GlassPanel className="result-panel-glow p-8">
           <div className="grid gap-4">
             <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-white/42">Emotional Analysis</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-white/42">Symbol Reading</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">
                 {result.emotional_analysis}
               </p>

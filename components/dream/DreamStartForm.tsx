@@ -9,8 +9,6 @@ import { type DreamInput } from "@/types/dream";
 
 const INITIAL_FORM: DreamInput = {
   dream_text: "",
-  emotion: "neutral",
-  purpose: "healing",
 };
 
 export function DreamStartForm() {
@@ -53,7 +51,7 @@ export function DreamStartForm() {
           {[
             "1. 꿈 내용에서 상징 추출",
             "2. 상징 의미 매핑",
-            "3. 감정 상태 반영",
+            "3. 상징의 연결 의미 해석",
             "4. 현재 흐름과 행동 방향 제시",
           ].map((item) => (
             <div

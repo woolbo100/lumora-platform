@@ -1,11 +1,7 @@
-export type DreamEmotion = "good" | "neutral" | "bad";
-
 export type DreamPurpose = "wealth" | "love" | "career" | "healing";
 
 export type DreamInput = {
   dream_text: string;
-  emotion: DreamEmotion;
-  purpose: DreamPurpose;
 };
 
 export type DreamSymbolMeaning = {

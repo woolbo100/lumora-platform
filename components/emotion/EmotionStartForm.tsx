@@ -3,7 +3,6 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
-import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { validateEmotionInput } from "@/lib/emotion/interpreter";
 import { type EmotionInput, type EmotionTag } from "@/types/emotion";
@@ -151,9 +150,6 @@ export function EmotionStartForm() {
             >
               {isPending ? "리딩 생성 중..." : "감정 리딩 시작하기"}
             </button>
-            <CTAButton href="/emotion/premium" variant="secondary">
-              심층 분석 보기
-            </CTAButton>
           </div>
         </form>
       </GlassPanel>

@@ -18,73 +18,73 @@ const EMOTION_TAG_LABELS = {
 
 const EMOTION_FOCUS_GUIDES = {
   anxiety: {
-    rhythm: "Pause and organize",
+    rhythm: "잠시 멈추고 정리하는 흐름",
     needed:
-      "Reacting quickly is less helpful right now than slowing down and reading what your current state is trying to tell you.",
+      "지금은 빠르게 반응하는 것보다, 현재 상태가 무엇을 말하고 있는지 천천히 읽어보는 것이 더 중요합니다.",
     actions: [
-      "Notice your body for 3 minutes and focus on what feels tight before trying to solve anything.",
-      "Reduce today's decisions to one priority so your mind has a single direction to return to.",
-      "Write down the exact source of pressure instead of holding it as a vague feeling.",
+      "무언가를 해결하려 하기 전에 3분만 몸의 긴장부터 천천히 살펴보세요.",
+      "오늘의 결정은 한 가지 우선순위로만 좁혀 마음이 돌아올 기준점을 만들어 주세요.",
+      "막연한 불안으로 두기보다, 압박의 원인을 문장으로 적어 보세요.",
     ],
   },
   sad: {
-    rhythm: "Recover and reconnect",
+    rhythm: "회복하고 다시 연결되는 흐름",
     needed:
-      "This is a moment to acknowledge what hurts and rebuild stability gently instead of forcing an immediate change.",
+      "지금은 억지로 바꾸려 하기보다, 무엇이 아픈지 인정하고 안정감을 천천히 다시 세우는 시간이 더 필요합니다.",
     actions: [
-      "Name the feeling in one sentence so it becomes clearer and less shapeless.",
-      "Do one basic recovery action such as water, a short walk, or real rest.",
-      "Reach out to one safe person instead of carrying the whole mood alone.",
+      "지금 감정을 한 문장으로 붙잡아 보세요. 감정이 훨씬 선명해집니다.",
+      "물 마시기, 짧은 산책, 충분한 휴식처럼 기본 회복 행동 하나를 바로 해보세요.",
+      "혼자 다 버티기보다, 안전하게 기대할 수 있는 사람 한 명과 연결해 보세요.",
     ],
   },
   excited: {
-    rhythm: "Expand with direction",
+    rhythm: "방향을 만들며 확장하는 흐름",
     needed:
-      "Your energy is strong, but it will become meaningful only when it is gathered into a clear next move.",
+      "에너지는 충분히 올라와 있지만, 그것이 의미 있는 결과가 되려면 분명한 다음 움직임으로 모아져야 합니다.",
     actions: [
-      "Choose one opportunity worth acting on now instead of trying to chase everything at once.",
-      "Turn today's motivation into one concrete action before the momentum scatters.",
-      "Keep a little space between confidence and overcommitment.",
+      "모든 가능성을 다 잡으려 하기보다, 지금 바로 움직일 한 가지 기회를 선택하세요.",
+      "퍼져 있는 의욕을 흩어지기 전에 오늘의 구체적인 행동 하나로 바꿔 보세요.",
+      "자신감과 무리한 확장 사이의 간격을 조금 남겨 두세요.",
     ],
   },
   tired: {
-    rhythm: "Restore before pushing",
+    rhythm: "밀어붙이기보다 회복이 먼저인 흐름",
     needed:
-      "The priority is not adding more effort, but reducing overload and recovering enough clarity to move again.",
+      "지금의 우선순위는 더 애쓰는 것이 아니라, 과부하를 줄이고 다시 움직일 수 있을 만큼의 여유를 회복하는 것입니다.",
     actions: [
-      "Separate what truly must be done today from what can wait.",
-      "Block a short recovery window and protect it like an appointment.",
-      "Track what is draining you most so recovery becomes more targeted.",
+      "오늘 반드시 해야 할 일과 미뤄도 되는 일을 분리해 보세요.",
+      "짧더라도 회복 시간을 일정처럼 확보하고 지켜 주세요.",
+      "무엇이 가장 많이 에너지를 빼앗는지 기록해 회복 방향을 분명히 하세요.",
     ],
   },
   empty: {
-    rhythm: "Reconnect with meaning",
+    rhythm: "의미와 다시 연결되는 흐름",
     needed:
-      "Rather than filling the emptiness quickly, it may help more to notice what you have lost touch with emotionally.",
+      "공허함을 급하게 채우기보다, 지금 내가 무엇과 감정적으로 멀어져 있는지 알아차리는 일이 더 도움이 됩니다.",
     actions: [
-      "Write down three words for what your inner state feels like today.",
-      "Return to one small thing that used to make you feel grounded or alive.",
-      "Reduce numbness by adding a little more real contact, reflection, or movement to your day.",
+      "오늘 내 안이 어떤 느낌인지 세 단어로 적어 보세요.",
+      "예전에 나를 살아 있게 하던 작은 감각 하나로 다시 돌아가 보세요.",
+      "하루에 연결, 성찰, 움직임을 조금 더 넣어 무감각을 줄여 보세요.",
     ],
   },
   happy: {
-    rhythm: "Expand with balance",
+    rhythm: "균형 있게 확장되는 흐름",
     needed:
-      "This is a good flow to build on, especially if you anchor it into gratitude, rhythm, and sustainable action.",
+      "지금의 좋은 흐름은 감사, 리듬, 그리고 지속 가능한 행동과 연결될 때 더 오래 이어질 수 있습니다.",
     actions: [
-      "Record what is making this moment feel good so you can revisit the pattern later.",
-      "Use the current lift to move one meaningful thing forward.",
-      "Protect the balance so good momentum does not turn into overextension.",
+      "무엇이 지금을 좋게 만드는지 기록해 두면 나중에 같은 흐름을 다시 만들 수 있습니다.",
+      "현재의 좋은 기운으로 의미 있는 일 하나를 앞으로 밀어 보세요.",
+      "좋은 흐름이 과한 확장으로 바뀌지 않도록 균형을 지켜 주세요.",
     ],
   },
 } as const;
 
 const INTENSITY_SUMMARIES = {
-  1: "The emotional signal is light, but still worth noticing.",
-  2: "The feeling is subtle and may be easy to overlook if you stay busy.",
-  3: "This emotion is clear enough to guide your next step.",
-  4: "The feeling is strong and deserves deliberate care.",
-  5: "Your emotional state is intense and should be handled gently and intentionally.",
+  1: "감정 신호는 가볍지만 충분히 알아차릴 가치가 있습니다.",
+  2: "미세한 감정이라 바쁘면 쉽게 놓칠 수 있는 상태입니다.",
+  3: "지금의 감정은 다음 선택을 이끌 만큼 충분히 선명합니다.",
+  4: "감정의 강도가 높아 의식적인 돌봄이 필요한 상태입니다.",
+  5: "감정이 매우 강하게 올라와 있으니 부드럽고 의도적으로 다루는 것이 좋습니다.",
 } as const;
 
 function getSingleValue(value: string | string[] | undefined) {
@@ -204,7 +204,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
       </div>
 
       <GlassPanel className="p-8 sm:p-10">
-        <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Emotion Guide</p>
+        <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">감정 가이드</p>
         <h2 className="mt-4 font-display text-3xl text-[var(--foreground)] sm:text-4xl">
           {EMOTION_TAG_LABELS[result.detected_tag]} 상태에서 지금 가장 필요한 흐름
         </h2>
@@ -213,7 +213,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
         </p>
         <div className="mt-8 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="rounded-[24px] border border-white/10 bg-white/6 p-6">
-            <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">Recommended Rhythm</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">추천 리듬</p>
             <p className="mt-3 text-2xl font-display text-[var(--foreground)]">
               {EMOTION_FOCUS_GUIDES[result.detected_tag].rhythm}
             </p>
@@ -222,7 +222,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
             </p>
           </div>
           <div className="rounded-[24px] border border-white/10 bg-white/6 p-6">
-            <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">Recommended Actions</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">추천 행동</p>
             <div className="mt-4 grid gap-3">
               {EMOTION_FOCUS_GUIDES[result.detected_tag].actions.map((action) => (
                 <p
@@ -237,7 +237,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
         </div>
         <div className="mt-8 rounded-[24px] border border-[var(--color-secondary)]/18 bg-[linear-gradient(135deg,rgba(255,255,255,0.09),rgba(157,139,227,0.1)_55%,rgba(108,92,198,0.12))] p-6">
           <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
-            Recommended Affirmations
+            맞춤 확언 추천
           </p>
           <h2 className="mt-3 font-display text-2xl text-[var(--foreground)] sm:text-3xl">
             {EMOTION_TAG_LABELS[result.detected_tag]} 흐름에 맞는 확언 추천
@@ -252,7 +252,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
                 className="rounded-[20px] border border-white/10 bg-white/8 px-4 py-4 text-base text-[var(--foreground)]"
               >
                 <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-secondary)]">
-                  Affirmation {index + 1}
+                  확언 {index + 1}
                 </p>
                 <p className="mt-3 leading-7">{line}</p>
               </div>

@@ -13,7 +13,7 @@ export default function Home() {
   const blogItem = services.find((service) => service.type === "blog");
 
   return (
-    <main className="relative z-0 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
+    <main className="relative z-0 flex min-h-screen w-full flex-col overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-30 overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(180deg,#090814_0%,#0f1020_24%,#14142b_56%,#101126_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(144,126,255,0.18)_0%,rgba(99,89,188,0.12)_18%,rgba(35,34,72,0.08)_38%,transparent_68%),radial-gradient(circle_at_52%_32%,rgba(124,160,255,0.1)_0%,rgba(69,86,170,0.07)_22%,transparent_54%),radial-gradient(circle_at_24%_18%,rgba(193,145,255,0.08)_0%,transparent_34%),radial-gradient(circle_at_78%_24%,rgba(132,196,255,0.08)_0%,transparent_32%)]" />
@@ -23,7 +23,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,transparent_0%,rgba(8,8,18,0.08)_42%,rgba(7,7,16,0.22)_66%,rgba(4,4,10,0.46)_86%,rgba(2,2,7,0.76)_100%)]" />
       </div>
 
-      <section className="relative left-1/2 right-1/2 z-0 flex w-screen flex-1 items-center justify-center overflow-visible -translate-x-1/2 pb-28 pt-28 lg:pb-36 lg:pt-36">
+      <section className="relative z-0 flex w-full flex-1 items-center justify-center overflow-visible pb-28 pt-28 lg:pb-36 lg:pt-36">
         <div className="pointer-events-none absolute inset-x-0 top-[-6rem] bottom-[-8rem] -z-20">
           <Image
             src={heroAuroraImage}
@@ -51,12 +51,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center justify-center px-6 text-center sm:px-8 lg:px-12">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-6 text-center sm:px-8 lg:px-12">
           <div className="pointer-events-none absolute inset-x-0 top-[46%] -z-0 h-[28rem] -translate-y-1/2 opacity-46">
             <HeroSplineScene scene="https://prod.spline.design/0btuJlO8ODRyNQ1h/scene.splinecode" />
           </div>
 
-          <div className="relative z-10 space-y-6">
+          <div className="relative z-10 w-full max-w-4xl space-y-6">
             <p className="text-sm uppercase tracking-[0.3em] text-[var(--foreground-muted)]">
               AURA · LIGHT · ENERGY
             </p>
@@ -88,9 +88,11 @@ export default function Home() {
         </div>
       </section>
 
-      <AdBanner className="pb-8 lg:pb-10" />
+      <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12">
+        <AdBanner className="pb-8 lg:pb-10" />
+      </div>
 
-      <section className="pb-20 pt-10 lg:pt-14">
+      <section className="mx-auto w-full max-w-7xl px-6 pb-20 pt-10 sm:px-8 lg:px-12 lg:pt-14">
         <div className="mb-8 flex items-end justify-between gap-4">
           <div className="space-y-2">
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--foreground-muted)]">

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { HomeRedirectButton } from "@/components/shared/HomeRedirectButton";
+
 export default function NewHeader() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -19,19 +21,19 @@ export default function NewHeader() {
   return (
     <header
       className={[
-        "sticky top-0 z-50 w-full transition-all duration-300",
+        "sticky top-0 z-50 w-full border-b border-transparent transition-[background-color,box-shadow,backdrop-filter,border-color] duration-500 ease-out",
         scrolled
-          ? "bg-[rgba(10,12,28,0.72)] backdrop-blur-md border-b border-white/10 shadow-[0_10px_30px_rgba(140,120,255,0.18)]"
-          : "bg-transparent"
+          ? "border-[rgba(118,98,214,0.08)] bg-[rgba(10,12,28,0.68)] backdrop-blur-[14px] shadow-[0_14px_38px_rgba(9,11,30,0.34),0_0_26px_rgba(126,108,232,0.12)]"
+          : "bg-[rgba(10,12,28,0.02)] shadow-none backdrop-blur-0"
       ].join(" ")}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <Link
-          href="/"
+        <HomeRedirectButton
+          ariaLabel="Go to home"
           className="text-sm font-medium tracking-[0.2em] text-white/90 hover:text-white"
         >
           LUMORA
-        </Link>
+        </HomeRedirectButton>
 
         <nav className="flex items-center gap-6 text-sm text-white/80">
           <Link href="/about" className="hover:text-white">

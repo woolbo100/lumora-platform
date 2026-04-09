@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 
+import { HomeRedirectAnchorHandler } from "@/components/shared/HomeRedirectAnchorHandler";
 import NewHeader from "@/components/shared/NewHeader";
 import { SiteFooter } from "@/components/shared/SiteFooter";
 
@@ -54,6 +55,7 @@ export default function RootLayout({
         className="min-h-full bg-[var(--background)] text-[var(--foreground)] antialiased"
         suppressHydrationWarning
       >
+        <HomeRedirectAnchorHandler />
         <NewHeader />
         {children}
         <SiteFooter />

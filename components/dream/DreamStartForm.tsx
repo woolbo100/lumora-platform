@@ -8,11 +8,17 @@ import { validateDreamInput } from "@/lib/dream/interpreter";
 import {
   type DreamCompanion,
   type DreamEmotion,
-  type DreamInput,
   type DreamSituation,
 } from "@/types/dream";
 
-const INITIAL_FORM: DreamInput = {
+type DreamDraftInput = {
+  dream_text: string;
+  emotion?: DreamEmotion;
+  situation?: DreamSituation;
+  companion?: DreamCompanion;
+};
+
+const INITIAL_FORM: DreamDraftInput = {
   dream_text: "",
 };
 
@@ -49,11 +55,11 @@ const STEP_ITEMS = [
 export function DreamStartForm() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const [form, setForm] = useState<DreamInput>(INITIAL_FORM);
+  const [form, setForm] = useState<DreamDraftInput>(INITIAL_FORM);
   const [errors, setErrors] = useState<string[]>([]);
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3 | 4>(1);
 
-  function updateField<K extends keyof DreamInput>(key: K, value: DreamInput[K]) {
+  function updateField<K extends keyof DreamDraftInput>(key: K, value: DreamDraftInput[K]) {
     setForm((current) => ({ ...current, [key]: value }));
   }
 

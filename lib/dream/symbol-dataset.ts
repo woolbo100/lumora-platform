@@ -68,6 +68,12 @@ export const DREAM_SYMBOLS: DreamSymbolMeaning[] = [
     relatedPurpose: ["wealth", "career"],
   },
   {
+    keyword: "동전",
+    labels: ["재물", "기회", "풍요"],
+    meaning: "동전은 작지만 분명한 기회와 재물의 흐름, 현실적인 보상의 가능성을 상징합니다.",
+    relatedPurpose: ["wealth", "career", "love"],
+  },
+  {
     keyword: "집",
     labels: ["내면", "안정", "기반"],
     meaning: "집은 현재의 심리 상태와 삶의 기반, 안전감에 대한 감각을 보여줍니다.",

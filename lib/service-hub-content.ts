@@ -164,9 +164,12 @@ export const serviceHubContent: Record<string, ServiceHubContentConfig> = {
       { question: "매력은 바뀌나요?", answer: "표현 방식에 따라 달라집니다." },
       { question: "연애에도 영향 있나요?", answer: "매우 중요합니다." },
       { question: "첫인상도 알 수 있나요?", answer: "가능합니다." },
+      { question: "나에게 어울리는 매력 표현도 알 수 있나요?", answer: "결과를 통해 더 자연스럽게 드러나는 분위기 방향을 확인할 수 있습니다." },
     ],
     ctaLabel: "나의 매력코드 보기",
     ctaHref: "/attraction-code/test",
+    stepsClassName: "md:grid-cols-4",
+    faqClassName: "space-y-0 grid gap-6 md:grid-cols-2",
   },
   aura: {
     introText: [

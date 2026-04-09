@@ -33,6 +33,7 @@ const LABEL_READING: Partial<Record<string, string>> = {
   표현: "마음속 것을 밖으로 드러낼 타이밍이 다가오고 있다는 뜻",
   가치: "내가 무엇을 중요하게 여기는지 다시 점검할 시기라는 의미",
   재정: "현실적인 기반과 선택 기준을 정리할 필요가 있다는 신호",
+  풍요: "작지만 분명한 보상과 풍요의 흐름이 열리고 있다는 암시",
   내면: "바깥 사건보다 마음의 상태를 먼저 살펴야 한다는 흐름",
   안정: "심리적 기반과 생활 리듬을 지키는 일이 중요하다는 안내",
   기반: "지금의 선택이 앞으로의 토대를 만들고 있다는 의미",
@@ -42,6 +43,7 @@ const LABEL_ADVICE: Partial<Record<string, string>> = {
   감정: "지금은 감정을 빨리 정리하려 하기보다 무엇이 흔들리고 있는지 이름 붙여 보는 것이 먼저입니다.",
   흐름: "한 번에 답을 내리기보다 반복되는 장면과 감정의 방향을 며칠 더 관찰해 보세요.",
   재물: "현실적인 기회와 손실을 동시에 따져 보고, 막연한 기대보다 기준을 먼저 세우는 것이 좋습니다.",
+  풍요: "들어오는 기회를 흘려보내지 않도록 작은 가능성도 구체적으로 붙잡아 두는 편이 좋습니다.",
   변화: "변화를 밀어붙이기보다 무엇을 끝내고 무엇을 남길지 구분해 두면 흐름이 훨씬 선명해집니다.",
   관계: "상대 반응을 해석하기 전에 내 안의 서운함과 기대를 먼저 정리해 두는 것이 도움이 됩니다.",
   자신감: "말을 줄이기보다 지금 가장 위축되는 지점을 정확히 적어보면 자신감 회복에 도움이 됩니다.",
@@ -59,11 +61,14 @@ const LABEL_WARNING: Partial<Record<string, string>> = {
   경고: "반복되는 장면이 있다면 무시하지 말고 현재 삶의 어떤 상황과 닮아 있는지 연결해서 보세요.",
   관계: "상대의 의도만 추측하다 보면 내 감정의 핵심을 놓칠 수 있습니다.",
   재정: "기회처럼 보이는 제안도 타이밍과 조건을 확인하지 않으면 부담으로 바뀔 수 있습니다.",
+  풍요: "풍요의 신호가 보여도 과한 기대로 바로 확신해 버리면 흐름을 놓칠 수 있습니다.",
 };
 
 const LABEL_FLOW: Partial<Record<string, string>> = {
   흐름: "멈춰 있던 일이 다시 움직일 준비를 하면서, 마음과 현실 사이의 리듬이 서서히 맞춰지고 있습니다.",
   변화: "익숙한 방식에서 벗어나 새로운 선택 기준을 세우는 전환 흐름이 시작되고 있습니다.",
+  재물: "현실적인 보상과 기회가 조금씩 눈에 보이기 시작하는 흐름이 강화되고 있습니다.",
+  풍요: "작은 가능성이 쌓여 실제 성과로 이어질 수 있는 풍요의 흐름이 열리고 있습니다.",
   관계: "감정 표현과 거리 조절 방식이 바뀌면서 관계의 온도도 함께 달라질 수 있습니다.",
   정리: "정리와 마무리를 거친 뒤에야 다음 단계가 보이는 흐름이 강해지고 있습니다.",
   자유: "답답했던 구조를 벗어나 시야를 넓히려는 흐름이 점점 선명해지고 있습니다.",
@@ -92,7 +97,12 @@ export function validateDreamInput(input: Partial<DreamInput>): DreamValidationR
 }
 
 function extractMatchedSymbols(text: string): DreamSymbolMeaning[] {
-  const matches = DREAM_SYMBOLS.filter((symbol) => text.includes(symbol.keyword));
+  const particles = "(이|가|은|는|을|를|와|과|도|만|의|에|에서|로|으로|처럼|같은|까지|부터)?";
+  const matches = DREAM_SYMBOLS.filter((symbol) => {
+    const escapedKeyword = symbol.keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const pattern = new RegExp(`(^|[^가-힣])${escapedKeyword}(?=$|[^가-힣]|${particles})`);
+    return pattern.test(text);
+  });
   return matches.length > 0 ? matches : [DREAM_SYMBOLS[0]];
 }
 

@@ -24,7 +24,7 @@ export function ServiceCard({
   return (
     <Link href={href} className="group block h-full w-full" aria-label={`${title} 서비스로 이동`}>
       <GlassPanel
-        className={`aurora-hover-surface aurora-hover-soft flex h-full flex-col transition duration-300 hover:-translate-y-1.5 hover:border-[rgba(255,255,255,0.3)] ${
+        className={`result-panel-glow aurora-hover-surface aurora-hover-soft flex h-full flex-col transition duration-300 hover:-translate-y-1.5 hover:border-[rgba(255,255,255,0.3)] ${
           isBlog ? "min-h-[124px] p-5 sm:min-h-[132px] sm:p-6" : "min-h-[250px] p-6 sm:p-7"
         }`}
       >

@@ -156,7 +156,7 @@ export function AttractionCodeExperience() {
         <p className="text-sm uppercase tracking-[0.3em] text-white/50">
           Question {currentQuestion.id}
         </p>
-        <h3 className="mt-4 font-display text-4xl text-[var(--foreground)] sm:text-5xl">
+        <h3 className="mt-4 font-display text-[2rem] leading-[1.22] text-[var(--foreground)] sm:text-[2.75rem] sm:leading-[1.18]">
           {currentQuestion.question}
         </h3>
 

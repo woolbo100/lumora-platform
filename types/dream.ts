@@ -1,15 +1,21 @@
 export type DreamPurpose = "wealth" | "love" | "career" | "healing";
 
-export type DreamEmotion = "fear" | "sadness" | "anger" | "calm" | "surprise";
+export type DreamEmotion = "fear" | "sadness" | "anger" | "calm" | "surprise" | "joy";
 
-export type DreamSituation = "chased" | "falling" | "conflict" | "discovery" | "movement";
+export type DreamSituation =
+  | "chased"
+  | "falling"
+  | "conflict"
+  | "discovery"
+  | "movement"
+  | "pause";
 
 export type DreamCompanion = "alone" | "known" | "unknown" | "family";
 
 export type DreamInput = {
   dream_text: string;
   emotion: DreamEmotion;
-  situation: DreamSituation;
+  situation?: DreamSituation;
   companion?: DreamCompanion;
 };
 

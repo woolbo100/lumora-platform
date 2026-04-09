@@ -28,6 +28,7 @@ const EMOTION_OPTIONS: Array<{ value: DreamEmotion; label: string; emoji: string
   { value: "anger", label: "분노", emoji: "😠" },
   { value: "calm", label: "평온", emoji: "😌" },
   { value: "surprise", label: "놀람", emoji: "😮" },
+  { value: "joy", label: "기쁨", emoji: "😄" },
 ];
 
 const SITUATION_OPTIONS: Array<{ value: DreamSituation; label: string }> = [
@@ -36,6 +37,7 @@ const SITUATION_OPTIONS: Array<{ value: DreamSituation; label: string }> = [
   { value: "conflict", label: "싸움" },
   { value: "discovery", label: "발견" },
   { value: "movement", label: "이동" },
+  { value: "pause", label: "멈춤" },
 ];
 
 const COMPANION_OPTIONS: Array<{ value: DreamCompanion; label: string }> = [
@@ -223,6 +225,17 @@ export function DreamStartForm() {
                   );
                 })}
               </div>
+              <button
+                type="button"
+                onClick={() => updateField("situation", undefined)}
+                className={`inline-flex min-h-11 items-center justify-center rounded-full border px-4 py-2 text-sm transition ${
+                  form.situation == null
+                    ? "border-[rgba(214,194,255,0.4)] bg-white/10 text-[var(--foreground)]"
+                    : "border-white/10 text-[var(--foreground-soft)] hover:border-[rgba(214,194,255,0.24)]"
+                }`}
+              >
+                선택 없이 진행
+              </button>
             </div>
           ) : null}
 

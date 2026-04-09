@@ -152,7 +152,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 sm:px-8 lg:px-12">
-      <GlassPanel className="border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
+      <GlassPanel className="result-panel-glow border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">
           Emotion Result
         </p>
@@ -179,7 +179,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
           {summaryChips.map((chip) => (
             <div
               key={chip.label}
-              className={`rounded-[24px] border p-5 ${
+              className={`result-card-glow rounded-[24px] border p-5 ${
                 chip.tone === "accent"
                   ? "border-[var(--color-secondary)]/18 bg-[linear-gradient(135deg,rgba(255,255,255,0.09),rgba(157,139,227,0.12)_55%,rgba(108,92,198,0.16))]"
                   : "border-white/10 bg-white/6"
@@ -200,21 +200,21 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
       </GlassPanel>
 
       <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-        <GlassPanel className="p-8">
+        <GlassPanel className="result-panel-glow p-8">
           <div className="grid gap-4">
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">감정 해석</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">
                 {result.emotion_analysis}
               </p>
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">에너지 상태</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">
                 {result.energy_state}
               </p>
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">흐름 방향</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">
                 {result.flow_direction}
@@ -223,9 +223,9 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
           </div>
         </GlassPanel>
 
-        <GlassPanel className="p-8">
+        <GlassPanel className="result-panel-glow p-8">
           <div className="grid gap-4">
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">추천 확언</p>
               <div className="mt-3 grid gap-3">
                 {result.affirmation.map((line) => (
@@ -238,11 +238,11 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
                 ))}
               </div>
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">지금의 조언</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{result.advice}</p>
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">주의할 점</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{result.warning}</p>
             </div>
@@ -250,7 +250,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
         </GlassPanel>
       </div>
 
-      <GlassPanel className="p-8 sm:p-10">
+      <GlassPanel className="result-panel-glow p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">감정 가이드</p>
         <h2 className="mt-4 font-display text-3xl text-[var(--foreground)] sm:text-4xl">
           {emotionLabel} 상태에서 지금 가장 필요한 흐름
@@ -259,7 +259,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
           {guide.needed}
         </p>
         <div className="mt-8 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-[24px] border border-white/10 bg-white/6 p-6">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-white/6 p-6">
             <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
               추천 리듬
             </p>
@@ -268,7 +268,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
               {intensitySummary}
             </p>
           </div>
-          <div className="rounded-[24px] border border-white/10 bg-white/6 p-6">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-white/6 p-6">
             <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
               추천 행동
             </p>
@@ -284,7 +284,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
             </div>
           </div>
         </div>
-        <div className="mt-8 rounded-[24px] border border-[var(--color-secondary)]/18 bg-[linear-gradient(135deg,rgba(255,255,255,0.09),rgba(157,139,227,0.1)_55%,rgba(108,92,198,0.12))] p-6">
+        <div className="result-card-glow mt-8 rounded-[24px] border border-[var(--color-secondary)]/18 bg-[linear-gradient(135deg,rgba(255,255,255,0.09),rgba(157,139,227,0.1)_55%,rgba(108,92,198,0.12))] p-6">
           <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
             맞춤 확언 추천
           </p>
@@ -298,7 +298,7 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
             {result.affirmation.map((line, index) => (
               <div
                 key={line}
-                className="rounded-[20px] border border-white/10 bg-white/8 px-4 py-4 text-base text-[var(--foreground)]"
+                className="result-card-glow rounded-[20px] border border-white/10 bg-white/8 px-4 py-4 text-base text-[var(--foreground)]"
               >
                 <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-secondary)]">
                   확언 {index + 1}

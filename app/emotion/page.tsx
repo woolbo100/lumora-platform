@@ -30,7 +30,7 @@ export default function EmotionPage() {
           <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row">
             <Link
               href="/emotion/start"
-              className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(157,139,227,0.94)_55%,rgba(108,92,198,0.92))] px-8 py-4 text-base font-semibold text-[#1c1830]"
+              className="inline-flex min-h-14 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-8 py-4 text-base font-semibold text-[#1c1830] shadow-[0_20px_60px_rgba(115,88,232,0.28)]"
             >
               지금 감정 입력하기
             </Link>

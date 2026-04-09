@@ -131,12 +131,12 @@ a {
 .aurora-hover-surface::before {
   z-index: -2;
   background:
-    radial-gradient(circle at 18% 30%, rgba(214, 171, 255, 0.22), transparent 34%),
-    radial-gradient(circle at 76% 24%, rgba(255, 205, 235, 0.18), transparent 30%),
-    radial-gradient(circle at 56% 72%, rgba(138, 224, 220, 0.16), transparent 34%),
-    radial-gradient(circle at 34% 82%, rgba(118, 178, 255, 0.2), transparent 32%);
-  filter: blur(22px);
-  transform: scale(0.94);
+    radial-gradient(circle at 18% 30%, rgba(214, 171, 255, 0.14), transparent 32%),
+    radial-gradient(circle at 76% 24%, rgba(255, 205, 235, 0.12), transparent 28%),
+    radial-gradient(circle at 56% 72%, rgba(138, 224, 220, 0.1), transparent 32%),
+    radial-gradient(circle at 34% 82%, rgba(118, 178, 255, 0.12), transparent 30%);
+  filter: blur(16px);
+  transform: scale(0.96);
 }
 
 .aurora-hover::after,
@@ -144,50 +144,81 @@ a {
   inset: -18%;
   z-index: -3;
   background:
-    radial-gradient(circle at 50% 50%, rgba(173, 147, 255, 0.14), transparent 42%),
-    radial-gradient(circle at 22% 78%, rgba(255, 205, 235, 0.1), transparent 30%),
-    radial-gradient(circle at 78% 22%, rgba(122, 214, 255, 0.12), transparent 28%);
-  filter: blur(34px);
-  transform: scale(0.9);
+    radial-gradient(circle at 50% 50%, rgba(173, 147, 255, 0.08), transparent 38%),
+    radial-gradient(circle at 22% 78%, rgba(255, 205, 235, 0.06), transparent 28%),
+    radial-gradient(circle at 78% 22%, rgba(122, 214, 255, 0.07), transparent 26%);
+  filter: blur(24px);
+  transform: scale(0.94);
 }
 
 .aurora-hover:hover::before,
 .aurora-hover:focus-visible::before,
 .aurora-hover-surface:hover::before,
 .aurora-hover-surface:focus-visible::before {
-  opacity: 1;
-  transform: scale(1);
+  opacity: 0.6;
+  transform: scale(0.99);
 }
 
 .aurora-hover:hover::after,
 .aurora-hover:focus-visible::after,
 .aurora-hover-surface:hover::after,
 .aurora-hover-surface:focus-visible::after {
-  opacity: 0.9;
-  transform: scale(1.03);
+  opacity: 0.45;
+  transform: scale(1.01);
 }
 
 .aurora-hover:hover,
 .aurora-hover:focus-visible {
   box-shadow:
-    0 16px 38px rgba(11, 14, 30, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.06),
-    0 0 30px rgba(178, 181, 255, 0.14);
+    0 12px 28px rgba(11, 14, 30, 0.24),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 18px rgba(178, 181, 255, 0.08);
 }
 
 .aurora-hover-strong:hover,
 .aurora-hover-strong:focus-visible {
   box-shadow:
-    0 18px 44px rgba(12, 14, 32, 0.34),
-    0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 0 36px rgba(190, 159, 255, 0.18);
+    0 14px 34px rgba(12, 14, 32, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 24px rgba(190, 159, 255, 0.12);
 }
 
 .aurora-hover-soft:hover,
 .aurora-hover-soft:focus-visible {
   box-shadow:
-    0 14px 34px rgba(11, 14, 30, 0.28),
-    0 0 26px rgba(171, 201, 255, 0.12);
+    0 10px 24px rgba(11, 14, 30, 0.22),
+    0 0 16px rgba(171, 201, 255, 0.08);
+}
+
+.result-panel-glow {
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.result-panel-glow:hover,
+.result-panel-glow:focus-within {
+  border-color: rgba(214, 194, 255, 0.32);
+  box-shadow:
+    0 0 0 1px rgba(214, 194, 255, 0.12),
+    0 0 28px rgba(126, 98, 236, 0.18),
+    var(--shadow-glow-soft);
+}
+
+.result-card-glow {
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.result-card-glow:hover,
+.result-card-glow:focus-within {
+  border-color: rgba(214, 194, 255, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(214, 194, 255, 0.08),
+    0 0 22px rgba(126, 98, 236, 0.12);
 }
 
 .aurora-link {

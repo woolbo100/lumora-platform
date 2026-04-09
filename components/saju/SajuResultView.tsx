@@ -42,7 +42,7 @@ function SectionCard({
   eyebrow?: string;
 }) {
   return (
-    <div className="rounded-[26px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.2))] p-6">
+    <div className="result-card-glow rounded-[26px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.2))] p-6">
       {eyebrow ? (
         <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">{eyebrow}</p>
       ) : null}
@@ -149,7 +149,7 @@ function OhaengTab({ result }: { result: SajuResult }) {
   return (
     <div className="grid gap-5">
       <div className="grid gap-5 lg:grid-cols-[1fr_1fr]">
-        <GlassPanel className="p-6">
+        <GlassPanel className="result-panel-glow p-6">
           <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">Five Elements</p>
           <h3 className="mt-3 text-2xl font-semibold text-[var(--foreground)]">오행 분포</h3>
           <div className="mt-6 grid gap-4 sm:grid-cols-5">
@@ -157,7 +157,7 @@ function OhaengTab({ result }: { result: SajuResult }) {
               ([element, value]) => (
                 <div
                   key={element}
-                  className={`rounded-[24px] border p-4 text-center ${ELEMENT_STYLES[element]}`}
+                  className={`result-card-glow rounded-[24px] border p-4 text-center ${ELEMENT_STYLES[element]}`}
                 >
                   <p className="text-sm text-white/55">{element.toUpperCase()}</p>
                   <p className="mt-3 text-3xl font-semibold">{value}%</p>
@@ -176,15 +176,15 @@ function OhaengTab({ result }: { result: SajuResult }) {
       </div>
 
       <div className="grid gap-5 xl:grid-cols-[0.95fr_1.05fr]">
-        <GlassPanel className="p-6">
+        <GlassPanel className="result-panel-glow p-6">
           <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">Details</p>
           <h3 className="mt-3 text-2xl font-semibold text-[var(--foreground)]">상세 분석</h3>
           <div className="mt-6 grid gap-4">
             {interp.ohaeng_analysis.details.map((detail) => (
-              <div
-                key={detail.element}
-                className="rounded-[22px] border border-white/10 bg-white/6 p-5"
-              >
+                <div
+                  key={detail.element}
+                  className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5"
+                >
                 <p className="text-sm font-semibold text-[var(--foreground)]">
                   {detail.element.toUpperCase()} · {detail.status}
                 </p>
@@ -194,7 +194,7 @@ function OhaengTab({ result }: { result: SajuResult }) {
           </div>
         </GlassPanel>
 
-        <GlassPanel className="p-6">
+        <GlassPanel className="result-panel-glow p-6">
           <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">Ten Gods</p>
           <h3 className="mt-3 text-2xl font-semibold text-[var(--foreground)]">십성 정보</h3>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -202,7 +202,7 @@ function OhaengTab({ result }: { result: SajuResult }) {
               ([key, value]) => (
                 <div
                   key={key}
-                  className="rounded-[22px] border border-white/10 bg-white/6 p-5"
+                  className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5"
                 >
                   <p className="text-xs uppercase tracking-[0.24em] text-white/42">{key}</p>
                   <p className="mt-3 text-lg font-semibold text-[var(--foreground)]">천간 {value.gan}</p>
@@ -222,7 +222,7 @@ function GmhsTab({ result }: { result: SajuResult }) {
     <div className="grid gap-5">
       {(Object.entries(result.interp.gmhs) as [keyof typeof result.interp.gmhs, (typeof result.interp.gmhs)[keyof typeof result.interp.gmhs]][]).map(
         ([key, item]) => (
-          <GlassPanel key={key} className="p-6 sm:p-7">
+          <GlassPanel key={key} className="result-panel-glow p-6 sm:p-7">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
               <div>
                 <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
@@ -237,13 +237,13 @@ function GmhsTab({ result }: { result: SajuResult }) {
               </div>
 
               <div className="grid min-w-[15rem] gap-3">
-                <div className="rounded-[22px] border border-white/10 bg-white/6 p-4 text-center">
+                <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-4 text-center">
                   <p className="text-xs uppercase tracking-[0.24em] text-white/42">천간</p>
                   <p className={`mt-3 text-3xl font-bold ${ELEMENT_STYLES[item.pillar.gan_element]}`}>
                     {item.pillar.gan}
                   </p>
                 </div>
-                <div className="rounded-[22px] border border-white/10 bg-white/6 p-4 text-center">
+                <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-4 text-center">
                   <p className="text-xs uppercase tracking-[0.24em] text-white/42">지지</p>
                   <p className={`mt-3 text-3xl font-bold ${ELEMENT_STYLES[item.pillar.zhi_element]}`}>
                     {item.pillar.zhi}
@@ -264,7 +264,7 @@ function DaewoonTab({ result }: { result: SajuResult }) {
       <SectionCard title="대운 흐름 총평" body={result.interp.daewoon_trend} eyebrow="Daewoon Trend" />
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {result.interp.daewoon.map((item) => (
-          <GlassPanel key={`${item.age}-${item.gan}${item.zhi}`} className="p-6">
+          <GlassPanel key={`${item.age}-${item.gan}${item.zhi}`} className="result-panel-glow p-6">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">{item.age}세 시작</p>
             <div className="mt-4 flex items-center gap-3">
               <span className={`text-4xl font-bold ${ELEMENT_STYLES[item.gan_element]}`}>{item.gan}</span>
@@ -287,7 +287,7 @@ export function SajuResultView({ result }: SajuResultViewProps) {
 
   return (
     <div className="grid gap-6">
-      <GlassPanel className="border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
+      <GlassPanel className="result-panel-glow border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">Saju Report</p>
         <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -308,7 +308,7 @@ export function SajuResultView({ result }: SajuResultViewProps) {
         </div>
       </GlassPanel>
 
-      <GlassPanel className="p-6 sm:p-8">
+      <GlassPanel className="result-panel-glow p-6 sm:p-8">
         <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">Pillars</p>
         <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)]">사주 원국표</h2>
         <div className="mt-6">
@@ -341,7 +341,7 @@ export function SajuResultView({ result }: SajuResultViewProps) {
       {tab === "gmhs" ? <GmhsTab result={result} /> : null}
       {tab === "daewoon" ? <DaewoonTab result={result} /> : null}
 
-      <GlassPanel className="p-8">
+      <GlassPanel className="result-panel-glow p-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Continue</p>

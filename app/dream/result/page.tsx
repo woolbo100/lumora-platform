@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { DreamShareButton } from "@/components/dream/DreamShareButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { interpretDream, validateDreamInput } from "@/lib/dream/interpreter";
 
@@ -49,10 +50,11 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
   }
 
   const result = interpretDream(validated.data);
+  const primarySymbol = result.matchedSymbols[0];
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 sm:px-8 lg:px-12">
-      <GlassPanel className="border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
+      <GlassPanel className="result-panel-glow border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">Dream Result</p>
         <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
           꿈이 전하는 핵심 메시지
@@ -60,6 +62,15 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
           {result.core_meaning}
         </p>
+        <div className="result-card-glow mt-6 rounded-[22px] border border-white/10 bg-white/6 p-5">
+          <p className="text-xs uppercase tracking-[0.24em] text-white/42">Main Symbol</p>
+          <p className="mt-3 text-lg font-semibold text-[var(--foreground)]">
+            {primarySymbol.keyword} 상징
+          </p>
+          <p className="mt-2 text-base leading-7 text-[var(--foreground-soft)]">
+            {primarySymbol.meaning}
+          </p>
+        </div>
         <div className="mt-8 flex flex-wrap gap-3">
           {result.symbols.map((symbol) => (
             <span
@@ -73,15 +84,15 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
       </GlassPanel>
 
       <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-        <GlassPanel className="p-8">
+        <GlassPanel className="result-panel-glow p-8">
           <div className="grid gap-4">
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">Emotional Analysis</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">
                 {result.emotional_analysis}
               </p>
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">Life Interpretation</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">
                 {result.life_interpretation}
@@ -90,17 +101,17 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
           </div>
         </GlassPanel>
 
-        <GlassPanel className="p-8">
+        <GlassPanel className="result-panel-glow p-8">
           <div className="grid gap-4">
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">Advice</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{result.advice}</p>
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">Warning</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{result.warning}</p>
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">Related Flow</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">{result.related_flow}</p>
             </div>
@@ -108,16 +119,11 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
         </GlassPanel>
       </div>
 
-      <GlassPanel className="p-8">
+      <GlassPanel className="result-panel-glow p-8">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Premium Preview</p>
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)]">{result.premium_preview}</p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/dream/premium"
-            className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(157,139,227,0.94)_55%,rgba(108,92,198,0.92))] px-6 py-3 text-sm font-semibold text-[#1c1830]"
-          >
-            심층 해석 보기
-          </Link>
+          <DreamShareButton />
           <Link
             href="/dream/start"
             className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/20 px-6 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"

@@ -43,7 +43,7 @@ export function ServiceHubHero({
         <div className="relative z-20 mt-12 flex flex-col items-center gap-4 sm:flex-row">
           <Link
             href={primaryHref}
-            className={`relative z-20 inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(243,217,213,0.92)_42%,rgba(216,179,84,0.92))] px-10 py-4 text-lg font-semibold text-[#1c1830] shadow-[0_20px_65px_rgba(212,175,55,0.24)] transition duration-300 hover:-translate-y-1 ${primaryClassName}`}
+            className={`relative z-20 inline-flex min-h-14 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-10 py-4 text-lg font-semibold text-[#1c1830] shadow-[0_20px_65px_rgba(115,88,232,0.28)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(236,228,255,0.78)] ${primaryClassName}`}
           >
             {primaryLabel}
             <span className="ml-3 text-xl" aria-hidden="true">

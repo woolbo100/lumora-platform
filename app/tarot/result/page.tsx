@@ -64,7 +64,7 @@ export default async function TarotResultPage(
         ))}
       </section>
 
-      <GlassPanel className="p-8 sm:p-10">
+      <GlassPanel className="result-panel-glow p-8 sm:p-10">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-secondary)]/72">
@@ -98,7 +98,7 @@ export default async function TarotResultPage(
                       return (
                         <p
                           key={paragraph}
-                          className="rounded-2xl border border-[var(--color-secondary)]/18 bg-[var(--color-secondary)]/8 px-4 py-4 text-[var(--color-secondary)]"
+                          className="result-card-glow rounded-2xl border border-[var(--color-secondary)]/18 bg-[var(--color-secondary)]/8 px-4 py-4 text-[var(--color-secondary)]"
                         >
                           {paragraph.replace("**핵심 키워드** ", "핵심 키워드: ")}
                         </p>

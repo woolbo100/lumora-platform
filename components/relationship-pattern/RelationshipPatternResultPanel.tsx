@@ -82,7 +82,7 @@ export function RelationshipPatternResultPanel({
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-      <GlassPanel className="border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
+      <GlassPanel className="result-panel-glow border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
           Pattern Reading
         </p>
@@ -97,7 +97,7 @@ export function RelationshipPatternResultPanel({
         </p>
 
         <div className="mt-10 grid gap-4">
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-white/45">
               관계 패턴
             </p>
@@ -105,7 +105,7 @@ export function RelationshipPatternResultPanel({
               {result.relationshipPattern}
             </p>
           </div>
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-white/45">
               주의 포인트
             </p>
@@ -113,7 +113,7 @@ export function RelationshipPatternResultPanel({
               {result.warningPoint}
             </p>
           </div>
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-white/45">
               회복 가이드
             </p>
@@ -135,12 +135,12 @@ export function RelationshipPatternResultPanel({
         </div>
       </GlassPanel>
 
-      <GlassPanel className="p-8">
+      <GlassPanel className="result-panel-glow p-8">
         <p className="text-sm uppercase tracking-[0.3em] text-white/50">
           Reading Notes
         </p>
         <div className="mt-6 grid gap-4">
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">
               응답 현황
             </p>
@@ -148,7 +148,7 @@ export function RelationshipPatternResultPanel({
               {storedResult.answeredCount} / {relationshipPatternQuestions.length}
             </p>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">
               주요 코드
             </p>
@@ -156,7 +156,7 @@ export function RelationshipPatternResultPanel({
               {scoreLabels[resultType]}
             </p>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">
               추천 메시지
             </p>
@@ -164,7 +164,7 @@ export function RelationshipPatternResultPanel({
               {result.recommendedMessage}
             </p>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">
               키워드 요약
             </p>
@@ -179,7 +179,7 @@ export function RelationshipPatternResultPanel({
               ))}
             </div>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">
               다음 리딩
             </p>

@@ -33,7 +33,7 @@ export default function AttractionCodePage() {
           <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row">
             <Link
               href="/attraction-code/test"
-              className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(244,201,221,0.94),rgba(213,195,165,0.92)_48%,rgba(157,139,227,0.94))] px-10 py-4 text-lg font-semibold text-[#231a34] shadow-[0_22px_70px_rgba(151,101,166,0.28)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(151,101,166,0.34)]"
+              className="inline-flex min-h-14 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-10 py-4 text-lg font-semibold text-[#231a34] shadow-[0_22px_70px_rgba(115,88,232,0.32)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(236,228,255,0.78)] hover:shadow-[0_28px_80px_rgba(115,88,232,0.36)]"
             >
               시작하기
               <span className="ml-3 text-xl" aria-hidden="true">

@@ -3,7 +3,6 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
-import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { validateDreamInput } from "@/lib/dream/interpreter";
 import { type DreamInput } from "@/types/dream";
@@ -55,8 +54,7 @@ export function DreamStartForm() {
             "1. 꿈 내용에서 상징 추출",
             "2. 상징 의미 매핑",
             "3. 감정 상태 반영",
-            "4. 해석 목적 반영",
-            "5. 현재 흐름과 행동 방향 제시",
+            "4. 현재 흐름과 행동 방향 제시",
           ].map((item) => (
             <div
               key={item}
@@ -71,10 +69,10 @@ export function DreamStartForm() {
       <GlassPanel className="p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.3em] text-white/50">Start</p>
         <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
-          무료 해몽 시작
+          무료 꿈해몽 시작
         </h1>
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-          꿈의 장면, 감정, 해석 방향을 함께 받아 지금 무의식이 전하는 메시지를 읽어냅니다.
+          꿈의 장면을 바탕으로 지금 무의식이 전하는 메시지와 흐름을 읽어냅니다.
         </p>
 
         <form className="mt-10 grid gap-6" onSubmit={handleSubmit}>
@@ -90,39 +88,6 @@ export function DreamStartForm() {
             />
           </label>
 
-          <div className="grid gap-6 sm:grid-cols-2">
-            <label className="grid gap-3">
-              <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
-                Emotion
-              </span>
-              <select
-                className="min-h-14 rounded-[22px] border border-white/10 bg-white/8 px-5 text-base text-[var(--foreground)] outline-none"
-                value={form.emotion}
-                onChange={(event) => updateField("emotion", event.target.value as DreamInput["emotion"])}
-              >
-                <option value="good">good</option>
-                <option value="neutral">neutral</option>
-                <option value="bad">bad</option>
-              </select>
-            </label>
-
-            <label className="grid gap-3">
-              <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
-                Purpose
-              </span>
-              <select
-                className="min-h-14 rounded-[22px] border border-white/10 bg-white/8 px-5 text-base text-[var(--foreground)] outline-none"
-                value={form.purpose}
-                onChange={(event) => updateField("purpose", event.target.value as DreamInput["purpose"])}
-              >
-                <option value="wealth">wealth</option>
-                <option value="love">love</option>
-                <option value="career">career</option>
-                <option value="healing">healing</option>
-              </select>
-            </label>
-          </div>
-
           {errors.length > 0 ? (
             <div className="rounded-[24px] border border-rose-400/24 bg-rose-300/8 p-5 text-sm leading-7 text-rose-100">
               {errors.map((error) => (
@@ -135,13 +100,10 @@ export function DreamStartForm() {
             <button
               type="submit"
               disabled={isPending}
-              className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(157,139,227,0.94)_55%,rgba(108,92,198,0.92))] px-8 py-4 text-base font-semibold text-[#1c1830] shadow-[0_24px_70px_rgba(89,72,173,0.28)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-65"
+              className="inline-flex min-h-14 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-8 py-4 text-base font-semibold text-[#1c1830] shadow-[0_24px_70px_rgba(115,88,232,0.28)] transition hover:-translate-y-0.5 hover:border-[rgba(236,228,255,0.78)] disabled:cursor-not-allowed disabled:opacity-65"
             >
-              {isPending ? "해몽 생성 중..." : "무료 해몽 시작하기"}
+              {isPending ? "해몽 생성 중..." : "무료 꿈해몽 시작하기"}
             </button>
-            <CTAButton href="/dream/premium" variant="secondary">
-              심층 해석 보기
-            </CTAButton>
           </div>
         </form>
       </GlassPanel>

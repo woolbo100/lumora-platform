@@ -80,7 +80,7 @@ export function ReunionResultPanel({
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-      <GlassPanel className="border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
+      <GlassPanel className="result-panel-glow border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
           Reunion Reading
         </p>
@@ -92,7 +92,7 @@ export function ReunionResultPanel({
         </p>
 
         <div className="mt-10 grid gap-4">
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-white/45">
               현재 관계의 흐름
             </p>
@@ -100,7 +100,7 @@ export function ReunionResultPanel({
               {result.emotionalFlow}
             </p>
           </div>
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-white/45">
               감정 거리와 현실 해석
             </p>
@@ -108,7 +108,7 @@ export function ReunionResultPanel({
               {result.detailedDescription}
             </p>
           </div>
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-white/45">
               주의 포인트
             </p>
@@ -116,7 +116,7 @@ export function ReunionResultPanel({
               {result.warningPoint}
             </p>
           </div>
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-white/45">
               행동 조언
             </p>
@@ -138,12 +138,12 @@ export function ReunionResultPanel({
         </div>
       </GlassPanel>
 
-      <GlassPanel className="p-8">
+      <GlassPanel className="result-panel-glow p-8">
         <p className="text-sm uppercase tracking-[0.3em] text-white/50">
           Reading Notes
         </p>
         <div className="mt-6 grid gap-4">
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">
               응답 현황
             </p>
@@ -151,7 +151,7 @@ export function ReunionResultPanel({
               {storedResult.answeredCount} / {reunionQuestions.length}
             </p>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">
               결과 유형
             </p>
@@ -159,7 +159,7 @@ export function ReunionResultPanel({
               {scoreLabels[resultType]}
             </p>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">
               추천 메시지
             </p>
@@ -167,7 +167,7 @@ export function ReunionResultPanel({
               {result.recommendedMessage}
             </p>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">
               핵심 키워드
             </p>
@@ -182,7 +182,7 @@ export function ReunionResultPanel({
               ))}
             </div>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">
               다른 리딩 이어보기
             </p>

@@ -87,7 +87,7 @@ export default function Home() {
           <div className="relative z-10 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <CTAButton
               href="/tarot"
-              className="bg-[linear-gradient(135deg,#f7e7ce_0%,#f3d9d5_42%,#d8b354_100%)] text-[#15121f] shadow-[0_10px_28px_rgba(212,175,55,0.22),0_0_22px_rgba(255,210,245,0.12)] hover:brightness-103 hover:shadow-[0_14px_36px_rgba(212,175,55,0.28),0_0_30px_rgba(186,155,255,0.18)]"
+              className="bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] text-[#1c1830] shadow-[0_12px_28px_rgba(115,88,232,0.28),0_0_22px_rgba(214,194,255,0.12)] hover:brightness-102 hover:shadow-[0_14px_36px_rgba(115,88,232,0.32),0_0_28px_rgba(186,155,255,0.16)]"
             >
               나의 코드 열기
             </CTAButton>

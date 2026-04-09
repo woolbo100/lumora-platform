@@ -78,7 +78,7 @@ export function AttachmentResultPanel({
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-      <GlassPanel className="border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
+      <GlassPanel className="result-panel-glow border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
           Result Profile
         </p>
@@ -93,25 +93,25 @@ export function AttachmentResultPanel({
         </p>
 
         <div className="mt-10 grid gap-4">
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-white/45">
               관계 패턴 설명
             </p>
             <p className="mt-3 leading-7 text-[var(--foreground-soft)]">{result.relationshipPattern}</p>
           </div>
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-white/45">
               감정 습관
             </p>
             <p className="mt-3 leading-7 text-[var(--foreground-soft)]">{result.emotionalHabit}</p>
           </div>
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-white/45">
               두려움 포인트
             </p>
             <p className="mt-3 leading-7 text-[var(--foreground-soft)]">{result.fearPoint}</p>
           </div>
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+          <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-white/45">
               회복 가이드
             </p>
@@ -131,26 +131,26 @@ export function AttachmentResultPanel({
         </div>
       </GlassPanel>
 
-      <GlassPanel className="p-8">
+      <GlassPanel className="result-panel-glow p-8">
         <p className="text-sm uppercase tracking-[0.3em] text-white/50">Analysis Notes</p>
         <div className="mt-6 grid gap-4">
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">응답 현황</p>
             <p className="mt-3 text-3xl font-semibold text-[var(--foreground)]">
               {storedResult.answeredCount} / {attachmentQuestions.length}
             </p>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">주요 코드</p>
             <p className="mt-3 text-3xl font-semibold text-[var(--foreground)]">
               {scoreLabels[resultType]}
             </p>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">추천 메시지</p>
             <p className="mt-3 leading-7 text-[var(--foreground-soft)]">{result.recommendedMessage}</p>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">키워드 요약</p>
             <div className="mt-4 flex flex-wrap gap-2">
               {result.keywords.map((keyword) => (
@@ -163,7 +163,7 @@ export function AttachmentResultPanel({
               ))}
             </div>
           </div>
-          <div className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
+          <div className="result-card-glow rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">백도화 리포트</p>
             <p className="mt-3 leading-7 text-[var(--foreground-soft)]">
               관계의 서사와 감정 패턴을 더 깊이 읽고 싶다면, 백도화 리포트에서

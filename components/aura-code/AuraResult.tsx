@@ -49,7 +49,7 @@ export function AuraResult() {
 
   if (!stored.result) {
     return (
-      <GlassPanel className="p-8 text-center sm:p-10">
+      <GlassPanel className="result-panel-glow p-8 text-center sm:p-10">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
           Aura Result
         </p>
@@ -83,7 +83,7 @@ export function AuraResult() {
   return (
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
-        <GlassPanel className="p-8 sm:p-10">
+        <GlassPanel className="result-panel-glow p-8 sm:p-10">
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
             Aura Report
           </p>
@@ -95,7 +95,7 @@ export function AuraResult() {
           </p>
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <div className="rounded-[24px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[24px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">메인 오라</p>
               <p className="mt-3 text-2xl font-semibold text-[var(--foreground)]">
                 {result.mainAura.name}
@@ -104,7 +104,7 @@ export function AuraResult() {
                 {result.mainAura.hue}
               </p>
             </div>
-            <div className="rounded-[24px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[24px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">서브 오라</p>
               <p className="mt-3 text-2xl font-semibold text-[var(--foreground)]">
                 {result.subAura.name}
@@ -113,7 +113,7 @@ export function AuraResult() {
                 {result.subAura.hue}
               </p>
             </div>
-            <div className="rounded-[24px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[24px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">상태 배지</p>
               <p className="mt-3 text-2xl font-semibold text-[var(--foreground)]">
                 {result.stateBadge}
@@ -125,11 +125,11 @@ export function AuraResult() {
           </div>
 
           <div className="mt-8 grid gap-4">
-            <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+            <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
               <p className="text-xs uppercase tracking-[0.25em] text-white/45">요약 해석</p>
               <p className="mt-3 leading-8 text-[var(--foreground-soft)]">{result.interpretation}</p>
             </div>
-            <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
+            <div className="result-card-glow rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03)_58%,rgba(7,9,18,0.18))] p-5">
               <p className="text-xs uppercase tracking-[0.25em] text-white/45">전체 에너지 흐름</p>
               <p className="mt-3 leading-8 text-[var(--foreground-soft)]">{result.flowMessage}</p>
             </div>
@@ -147,22 +147,22 @@ export function AuraResult() {
           </div>
         </GlassPanel>
 
-        <GlassPanel className="p-8">
+        <GlassPanel className="result-panel-glow p-8">
           <p className="text-sm uppercase tracking-[0.3em] text-white/50">Reading Notes</p>
           <div className="mt-6 grid gap-4">
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">응답 현황</p>
               <p className="mt-3 text-3xl font-semibold text-[var(--foreground)]">
                 {stored.answeredCount} / {auraQuestions.length}
               </p>
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">전체 상태</p>
               <p className="mt-3 text-3xl font-semibold text-[var(--foreground)]">
                 {result.stateBadge}
               </p>
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">마무리 문구</p>
               <p className="mt-3 leading-7 text-[var(--foreground-soft)]">{result.closing}</p>
             </div>
@@ -182,7 +182,7 @@ export function AuraResult() {
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {result.primaryChakras.map((chakra) => (
-            <GlassPanel key={chakra.chakra} className="p-6">
+            <GlassPanel key={chakra.chakra} className="result-panel-glow p-6">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">주요 차크라</p>
               <h3 className="mt-3 text-2xl font-semibold text-[var(--foreground)]">
                 {chakraLabels[chakra.chakra]}
@@ -203,7 +203,7 @@ export function AuraResult() {
           ))}
 
           {result.strengthChakra ? (
-            <GlassPanel className="p-6">
+            <GlassPanel className="result-panel-glow p-6">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">강점 차크라</p>
               <h3 className="mt-3 text-2xl font-semibold text-[var(--foreground)]">
                 {chakraLabels[result.strengthChakra.chakra]}

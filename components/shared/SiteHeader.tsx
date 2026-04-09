@@ -70,7 +70,7 @@ export function SiteHeader() {
           ))}
           <Link
             href="/tarot"
-            className="aurora-hover-surface aurora-hover-strong hidden min-h-10 items-center justify-center rounded-full border border-[#f7e7ce]/52 bg-[linear-gradient(135deg,#f7e7ce_0%,#f3d9d5_42%,#d8b354_100%)] px-5 py-2 text-sm font-semibold tracking-[0.14em] text-[#15121f] shadow-[0_10px_26px_rgba(212,175,55,0.22),0_0_20px_rgba(255,210,245,0.12)] transition duration-300 hover:-translate-y-0.5 hover:brightness-103 sm:inline-flex"
+            className="aurora-hover-surface aurora-hover-strong hidden min-h-10 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-5 py-2 text-sm font-semibold tracking-[0.14em] text-[#1c1830] shadow-[0_12px_28px_rgba(115,88,232,0.28),0_0_20px_rgba(214,194,255,0.12)] transition duration-300 hover:-translate-y-0.5 hover:brightness-102 sm:inline-flex"
           >
             나의 코드 열기
           </Link>

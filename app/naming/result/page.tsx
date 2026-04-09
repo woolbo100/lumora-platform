@@ -65,7 +65,7 @@ export default async function NamingResultPage({ searchParams }: NamingResultPag
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 sm:px-8 lg:px-12">
-      <GlassPanel className="border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
+      <GlassPanel className="result-panel-glow border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">Naming Result</p>
         <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
           당신에게 필요한 이름의 방향
@@ -95,18 +95,18 @@ export default async function NamingResultPage({ searchParams }: NamingResultPag
       </GlassPanel>
 
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <GlassPanel className="p-8">
+        <GlassPanel className="result-panel-glow p-8">
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Saju Summary</p>
           <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)]">{result.sajuSummary}</p>
 
           <div className="mt-8 grid gap-4">
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">core</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">
                 {result.sajuResult.interp.core}
               </p>
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/6 p-5">
+            <div className="result-card-glow rounded-[22px] border border-white/10 bg-white/6 p-5">
               <p className="text-xs uppercase tracking-[0.24em] text-white/42">사회 / 재물 / 관계</p>
               <p className="mt-3 text-base leading-7 text-[var(--foreground-soft)]">
                 {result.sajuResult.interp.social_analysis}
@@ -121,7 +121,7 @@ export default async function NamingResultPage({ searchParams }: NamingResultPag
           </div>
         </GlassPanel>
 
-        <GlassPanel className="p-8">
+        <GlassPanel className="result-panel-glow p-8">
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Premium CTA</p>
           <h2 className="mt-4 text-3xl font-semibold text-[var(--foreground)]">
             이름별 상세 해석까지 이어서 볼 수 있습니다
@@ -130,7 +130,7 @@ export default async function NamingResultPage({ searchParams }: NamingResultPag
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/naming/premium"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(157,139,227,0.94)_55%,rgba(108,92,198,0.92))] px-6 py-3 text-sm font-semibold text-[#1c1830]"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-6 py-3 text-sm font-semibold text-[#1c1830]"
             >
               프리미엄 리포트 보기
             </Link>

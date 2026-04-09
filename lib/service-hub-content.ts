@@ -205,9 +205,12 @@ export const serviceHubContent: Record<string, ServiceHubContentConfig> = {
       { question: "꿈은 왜 꾸나요?", answer: "무의식의 반영입니다." },
       { question: "의미가 항상 있나요?", answer: "대부분 감정과 연결됩니다." },
       { question: "반복되는 꿈은요?", answer: "해결되지 않은 신호일 수 있습니다." },
+      { question: "기억이 흐린 꿈도 해석할 수 있나요?", answer: "남아 있는 장면과 감정만으로도 흐름을 읽을 수 있습니다." },
     ],
     ctaLabel: "무료 꿈해몽 시작",
     ctaHref: "/dream/start",
+    stepsClassName: "md:grid-cols-4",
+    faqClassName: "space-y-0 grid gap-6 md:grid-cols-2",
   },
   emotion: {
     introText: [
@@ -225,7 +228,7 @@ export const serviceHubContent: Record<string, ServiceHubContentConfig> = {
     ctaLabel: "감정 리딩 시작하기",
     ctaHref: "/emotion/start",
     ctaClassName:
-      "border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(157,139,227,0.94)_55%,rgba(108,92,198,0.92))] text-[#1c1830] shadow-[0_24px_70px_rgba(89,72,173,0.28)] hover:-translate-y-0.5 hover:border-white/12 hover:brightness-100",
+      "border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] text-[#1c1830] shadow-[0_24px_70px_rgba(115,88,232,0.28)] hover:-translate-y-0.5 hover:border-[rgba(236,228,255,0.78)] hover:brightness-100",
     stepsClassName: "md:grid-cols-4",
     faqClassName: "space-y-0 grid gap-6 md:grid-cols-2",
   },

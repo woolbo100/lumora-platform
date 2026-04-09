@@ -47,14 +47,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const { category } = await searchParams;
   const selectedCategory = getSelectedCategory(category);
   const isConfigured = hasSupabaseConfig();
-  const adminSession = await getAdminSession();
   let posts = [] as Awaited<ReturnType<typeof listBlogPosts>>;
   let fetchError: string | null = null;
 
   if (isConfigured) {
     try {
       posts = await listBlogPosts(selectedCategory, {
-        includeDrafts: Boolean(adminSession),
+        includeDrafts: true,
       });
     } catch (error) {
       fetchError =
@@ -63,6 +62,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           : "An unexpected error occurred while loading blog posts.";
     }
   }
+  const adminSession = await getAdminSession();
   const selectedCategoryMeta = selectedCategory
     ? blogCategories.find((item) => item.slug === selectedCategory)
     : undefined;

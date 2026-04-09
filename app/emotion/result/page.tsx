@@ -16,6 +16,77 @@ const EMOTION_TAG_LABELS = {
   happy: "행복",
 } as const;
 
+const EMOTION_FOCUS_GUIDES = {
+  anxiety: {
+    rhythm: "Pause and organize",
+    needed:
+      "Reacting quickly is less helpful right now than slowing down and reading what your current state is trying to tell you.",
+    actions: [
+      "Notice your body for 3 minutes and focus on what feels tight before trying to solve anything.",
+      "Reduce today's decisions to one priority so your mind has a single direction to return to.",
+      "Write down the exact source of pressure instead of holding it as a vague feeling.",
+    ],
+  },
+  sad: {
+    rhythm: "Recover and reconnect",
+    needed:
+      "This is a moment to acknowledge what hurts and rebuild stability gently instead of forcing an immediate change.",
+    actions: [
+      "Name the feeling in one sentence so it becomes clearer and less shapeless.",
+      "Do one basic recovery action such as water, a short walk, or real rest.",
+      "Reach out to one safe person instead of carrying the whole mood alone.",
+    ],
+  },
+  excited: {
+    rhythm: "Expand with direction",
+    needed:
+      "Your energy is strong, but it will become meaningful only when it is gathered into a clear next move.",
+    actions: [
+      "Choose one opportunity worth acting on now instead of trying to chase everything at once.",
+      "Turn today's motivation into one concrete action before the momentum scatters.",
+      "Keep a little space between confidence and overcommitment.",
+    ],
+  },
+  tired: {
+    rhythm: "Restore before pushing",
+    needed:
+      "The priority is not adding more effort, but reducing overload and recovering enough clarity to move again.",
+    actions: [
+      "Separate what truly must be done today from what can wait.",
+      "Block a short recovery window and protect it like an appointment.",
+      "Track what is draining you most so recovery becomes more targeted.",
+    ],
+  },
+  empty: {
+    rhythm: "Reconnect with meaning",
+    needed:
+      "Rather than filling the emptiness quickly, it may help more to notice what you have lost touch with emotionally.",
+    actions: [
+      "Write down three words for what your inner state feels like today.",
+      "Return to one small thing that used to make you feel grounded or alive.",
+      "Reduce numbness by adding a little more real contact, reflection, or movement to your day.",
+    ],
+  },
+  happy: {
+    rhythm: "Expand with balance",
+    needed:
+      "This is a good flow to build on, especially if you anchor it into gratitude, rhythm, and sustainable action.",
+    actions: [
+      "Record what is making this moment feel good so you can revisit the pattern later.",
+      "Use the current lift to move one meaningful thing forward.",
+      "Protect the balance so good momentum does not turn into overextension.",
+    ],
+  },
+} as const;
+
+const INTENSITY_SUMMARIES = {
+  1: "The emotional signal is light, but still worth noticing.",
+  2: "The feeling is subtle and may be easy to overlook if you stay busy.",
+  3: "This emotion is clear enough to guide your next step.",
+  4: "The feeling is strong and deserves deliberate care.",
+  5: "Your emotional state is intense and should be handled gently and intentionally.",
+} as const;
+
 function getSingleValue(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
 }
@@ -74,10 +145,13 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <span className="rounded-full border border-[var(--color-secondary)]/18 bg-[var(--color-secondary)]/8 px-4 py-2 text-sm font-medium text-[var(--color-secondary)]">
-            detected · {result.detected_tag}
+            detected · {EMOTION_TAG_LABELS[result.detected_tag]}
           </span>
           <span className="rounded-full border border-white/10 bg-white/6 px-4 py-2 text-sm font-medium text-[var(--foreground-soft)]">
             intensity · {result.intensity}
+          </span>
+          <span className="rounded-full border border-white/10 bg-white/6 px-4 py-2 text-sm font-medium text-[var(--foreground-soft)]">
+            {INTENSITY_SUMMARIES[result.intensity as keyof typeof INTENSITY_SUMMARIES]}
           </span>
         </div>
       </GlassPanel>
@@ -129,9 +203,38 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
         </GlassPanel>
       </div>
 
-      <GlassPanel className="p-8">
-        <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Premium Preview</p>
-        <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)]">{result.premium_preview}</p>
+      <GlassPanel className="p-8 sm:p-10">
+        <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Emotion Guide</p>
+        <h2 className="mt-4 font-display text-3xl text-[var(--foreground)] sm:text-4xl">
+          {EMOTION_TAG_LABELS[result.detected_tag]} 상태에서 지금 가장 필요한 흐름
+        </h2>
+        <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+          {EMOTION_FOCUS_GUIDES[result.detected_tag].needed}
+        </p>
+        <div className="mt-8 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="rounded-[24px] border border-white/10 bg-white/6 p-6">
+            <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">Recommended Rhythm</p>
+            <p className="mt-3 text-2xl font-display text-[var(--foreground)]">
+              {EMOTION_FOCUS_GUIDES[result.detected_tag].rhythm}
+            </p>
+            <p className="mt-4 text-sm leading-7 text-[var(--foreground-soft)]">
+              {INTENSITY_SUMMARIES[result.intensity as keyof typeof INTENSITY_SUMMARIES]}
+            </p>
+          </div>
+          <div className="rounded-[24px] border border-white/10 bg-white/6 p-6">
+            <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">Recommended Actions</p>
+            <div className="mt-4 grid gap-3">
+              {EMOTION_FOCUS_GUIDES[result.detected_tag].actions.map((action) => (
+                <p
+                  key={action}
+                  className="rounded-[18px] border border-white/10 bg-white/8 px-4 py-3 text-sm leading-7 text-[var(--foreground-soft)]"
+                >
+                  {action}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
         <div className="mt-8 rounded-[24px] border border-[var(--color-secondary)]/18 bg-[linear-gradient(135deg,rgba(255,255,255,0.09),rgba(157,139,227,0.1)_55%,rgba(108,92,198,0.12))] p-6">
           <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
             Recommended Affirmations
@@ -157,12 +260,6 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
           </div>
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/emotion/premium"
-            className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(157,139,227,0.94)_55%,rgba(108,92,198,0.92))] px-6 py-3 text-sm font-semibold text-[#1c1830]"
-          >
-            심층 분석 보기
-          </Link>
           <Link
             href="/emotion/start"
             className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/20 px-6 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"

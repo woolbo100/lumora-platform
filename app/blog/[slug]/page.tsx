@@ -28,7 +28,9 @@ export async function generateMetadata(
   }
 
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug, {
+    includeDrafts: true,
+  });
 
   if (!post) {
     return {
@@ -69,7 +71,7 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const query = await searchParams;
   const post = await getBlogPostBySlug(slug, {
-    includeDrafts: Boolean(adminSession),
+    includeDrafts: true,
   });
 
   if (!post) {

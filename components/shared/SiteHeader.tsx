@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+const HOME_URL = "https://www.lumoracode.kr";
+
 const navigationLinks = [
   { href: "/about", label: "소개" },
   { href: "/contact", label: "문의" },
@@ -44,7 +46,7 @@ export function SiteHeader() {
       </div>
       <div className="relative z-[121] mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-8 lg:px-12">
         <Link
-          href="/"
+          href={HOME_URL}
           aria-label="홈으로 이동"
           className="aurora-link relative z-[122] flex min-h-[56px] min-w-[220px] cursor-pointer flex-col justify-center rounded-xl px-2 py-1 pointer-events-auto transition duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary)]/60"
         >

@@ -7,12 +7,15 @@ type CTAButtonProps = {
   className?: string;
 };
 
+const HOME_URL = "https://www.lumoracode.kr";
+
 export function CTAButton({
   href,
   children,
   variant = "primary",
   className = "",
 }: CTAButtonProps) {
+  const resolvedHref = href === "/" ? HOME_URL : href;
   const styles =
     variant === "primary"
       ? "aurora-hover-surface aurora-hover-strong border border-[#f7e7ce]/50 bg-[linear-gradient(135deg,#f7e7ce_0%,#f3d9d5_42%,#d8b354_100%)] text-[#15121f] shadow-[0_10px_26px_rgba(212,175,55,0.22),0_0_20px_rgba(255,210,245,0.12)] hover:border-[#f7e7ce]/72 hover:brightness-103"
@@ -20,7 +23,7 @@ export function CTAButton({
 
   return (
     <Link
-      href={href}
+      href={resolvedHref}
       className={`relative z-20 inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold tracking-[0.16em] transition duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary)]/70 ${styles} ${className}`}
     >
       {children}

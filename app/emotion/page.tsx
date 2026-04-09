@@ -4,6 +4,8 @@ import { GlassPanel } from "@/components/shared/GlassPanel";
 import { ServiceHubContent } from "@/components/shared/ServiceHubContent";
 import { serviceHubContent } from "@/lib/service-hub-content";
 
+const HOME_URL = "https://www.lumoracode.kr";
+
 export default function EmotionPage() {
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 py-12 sm:px-8 lg:px-12">
@@ -33,7 +35,7 @@ export default function EmotionPage() {
               지금 감정 입력하기
             </Link>
             <Link
-              href="/"
+              href={HOME_URL}
               className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] px-8 py-4 text-sm font-semibold tracking-[0.18em] text-[var(--foreground-soft)] transition duration-300 hover:-translate-y-1 hover:border-[var(--color-secondary)]/28 hover:text-[var(--color-secondary)]"
             >
               LUMORA 홈으로 돌아가기

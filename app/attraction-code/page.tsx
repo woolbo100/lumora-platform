@@ -20,7 +20,6 @@ export default function AttractionCodePage() {
             매력코드
           </h1>
           <p className="mt-5 text-2xl text-[#f4c9dd] sm:text-3xl">당신의 매력은 이미 코드로 존재합니다</p>
-          <p className="mt-4 text-base uppercase tracking-[0.32em] text-white/46">약 1~2분 소요</p>
           <p className="mt-8 max-w-3xl whitespace-pre-line text-lg leading-9 text-[var(--foreground-soft)] sm:text-xl">
             당신이 가진 고유한 매력의 결을 분석하여 사람들에게 비치는{"\n"}인상과 관계 안에서 드러나는
             강점을 보여드립니다.

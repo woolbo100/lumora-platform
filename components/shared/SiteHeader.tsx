@@ -12,15 +12,48 @@ export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    function handleScroll() {
-      setIsScrolled(window.scrollY > 24);
+    let frameId = 0;
+
+    function readScrollTop() {
+      return Math.max(
+        window.scrollY,
+        window.pageYOffset,
+        document.documentElement.scrollTop,
+        document.body.scrollTop,
+      );
     }
 
-    handleScroll();
+    function updateScrollState() {
+      frameId = 0;
+      setIsScrolled(readScrollTop() > 8);
+    }
+
+    function handleScroll() {
+      if (frameId !== 0) {
+        return;
+      }
+
+      frameId = window.requestAnimationFrame(updateScrollState);
+    }
+
+    updateScrollState();
     window.addEventListener("scroll", handleScroll, { passive: true });
+    document.addEventListener("scroll", handleScroll, {
+      passive: true,
+      capture: true,
+    });
+    window.addEventListener("touchmove", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     return () => {
+      if (frameId !== 0) {
+        window.cancelAnimationFrame(frameId);
+      }
+
       window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("scroll", handleScroll, true);
+      window.removeEventListener("touchmove", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 

@@ -4,18 +4,22 @@ const HOME_URL = "https://www.lumoracode.kr";
 
 type ServiceHubHeroProps = {
   title: string;
+  titleClassName?: string;
   subtitle: string;
   description: string;
   primaryHref: string;
   primaryLabel: string;
+  primaryClassName?: string;
 };
 
 export function ServiceHubHero({
   title,
+  titleClassName = "",
   subtitle,
   description,
   primaryHref,
   primaryLabel,
+  primaryClassName = "",
 }: ServiceHubHeroProps) {
   return (
     <main className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2">
@@ -24,7 +28,9 @@ export function ServiceHubHero({
           ✦
         </div>
 
-        <h1 className="font-display text-6xl leading-none text-[var(--foreground)] [text-shadow:0_0_30px_rgba(213,195,165,0.08)] sm:text-7xl md:text-8xl">
+        <h1
+          className={`font-display text-6xl leading-none text-[var(--foreground)] [text-shadow:0_0_30px_rgba(213,195,165,0.08)] sm:text-7xl md:text-8xl ${titleClassName}`}
+        >
           {title}
         </h1>
         <p className="mt-5 text-2xl text-[var(--color-secondary)] sm:text-3xl">
@@ -37,7 +43,7 @@ export function ServiceHubHero({
         <div className="relative z-20 mt-12 flex flex-col items-center gap-4 sm:flex-row">
           <Link
             href={primaryHref}
-            className="relative z-20 inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(157,139,227,0.94)_55%,rgba(108,92,198,0.92))] px-10 py-4 text-lg font-semibold text-[#1c1830] shadow-[0_22px_70px_rgba(89,72,173,0.32)] transition duration-300 hover:-translate-y-1"
+            className={`relative z-20 inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(213,195,165,0.92),rgba(243,217,213,0.92)_42%,rgba(216,179,84,0.92))] px-10 py-4 text-lg font-semibold text-[#1c1830] shadow-[0_20px_65px_rgba(212,175,55,0.24)] transition duration-300 hover:-translate-y-1 ${primaryClassName}`}
           >
             {primaryLabel}
             <span className="ml-3 text-xl" aria-hidden="true">

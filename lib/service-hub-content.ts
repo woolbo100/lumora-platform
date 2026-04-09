@@ -120,6 +120,8 @@ export const serviceHubContent: Record<string, ServiceHubContentConfig> = {
     ],
     ctaLabel: "테스트 시작하기",
     ctaHref: "/egen-vs-teto/test",
+    ctaClassName:
+      "border-white/12 bg-[linear-gradient(135deg,rgba(255,236,236,0.96),rgba(198,176,255,0.96)_48%,rgba(142,116,255,0.95))] text-[#1c1830] shadow-[0_24px_70px_rgba(115,88,232,0.34)] hover:-translate-y-0.5 hover:border-white/12 hover:brightness-100",
   },
   lovePattern: {
     introText: [

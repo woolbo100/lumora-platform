@@ -125,16 +125,20 @@ export function EgenVsTetoTestClient() {
                 key={option.label}
                 type="button"
                 onClick={() => handleSelect(option.value)}
-                className={`aurora-hover rounded-[24px] border px-5 py-5 text-left transition duration-300 ${
+                className={`rounded-[24px] border px-5 py-5 text-left transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary)]/35 ${
                   isSelected
-                    ? "border-[var(--color-secondary)]/70 bg-[linear-gradient(135deg,rgba(240,205,161,0.12),rgba(185,144,255,0.08)_65%,rgba(255,255,255,0.05))] shadow-[0_18px_50px_rgba(76,60,144,0.22)]"
+                    ? "border-[rgba(214,194,255,0.9)] bg-[linear-gradient(135deg,rgba(255,238,244,0.18),rgba(198,176,255,0.2)_54%,rgba(142,116,255,0.16))] shadow-[0_16px_36px_rgba(76,60,144,0.16)]"
                     : "border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] hover:border-[var(--color-primary)]/45 hover:bg-white/10"
                 }`}
               >
                 <span className="block text-xs uppercase tracking-[0.28em] text-[var(--color-secondary)]">
                   {option.label}
                 </span>
-                <span className="mt-3 block text-base leading-7 text-[var(--foreground)]">
+                <span
+                  className={`mt-3 block text-base leading-7 ${
+                    isSelected ? "text-white" : "text-[var(--foreground)]"
+                  }`}
+                >
                   {option.text}
                 </span>
               </button>

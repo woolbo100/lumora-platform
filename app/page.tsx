@@ -15,27 +15,24 @@ export default function Home() {
   return (
     <main className="relative z-0 flex min-h-screen w-full flex-col overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-30 overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,#14091e_0%,#1a0d28_22%,#221133_48%,#190c29_72%,#12081e_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_14%,rgba(214,156,255,0.2)_0%,rgba(146,101,226,0.14)_20%,rgba(73,42,126,0.08)_40%,transparent_70%),radial-gradient(circle_at_50%_34%,rgba(154,126,255,0.14)_0%,rgba(115,88,208,0.1)_24%,transparent_56%),radial-gradient(circle_at_22%_18%,rgba(203,132,255,0.1)_0%,transparent_34%),radial-gradient(circle_at_78%_22%,rgba(169,126,255,0.08)_0%,transparent_32%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(168,98,255,0.09)_0%,transparent_26%,rgba(129,96,228,0.08)_46%,transparent_68%,rgba(182,116,255,0.08)_100%)]" />
-        <div className="absolute inset-x-[-12%] top-[-10%] h-[44rem] bg-[radial-gradient(ellipse_at_center,rgba(184,132,255,0.2)_0%,rgba(137,96,224,0.14)_34%,rgba(58,30,94,0.06)_56%,transparent_80%)] blur-3xl" />
-        <div className="absolute inset-x-[-6%] top-[24%] h-[36rem] bg-[radial-gradient(ellipse_at_center,rgba(126,88,214,0.16)_0%,rgba(96,62,175,0.1)_28%,rgba(48,24,85,0.04)_54%,transparent_78%)] blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,transparent_0%,rgba(11,5,21,0.08)_42%,rgba(10,4,20,0.2)_66%,rgba(8,2,16,0.44)_84%,rgba(4,1,10,0.76)_100%)]" />
+        <div className="absolute inset-x-[-10%] top-[-12%] h-[42rem] bg-[radial-gradient(ellipse_at_center,rgba(184,132,255,0.18)_0%,rgba(137,96,224,0.12)_34%,rgba(58,30,94,0.05)_58%,transparent_82%)] blur-3xl" />
+        <div className="absolute inset-x-[-8%] top-[26%] h-[30rem] bg-[radial-gradient(ellipse_at_center,rgba(126,88,214,0.1)_0%,rgba(96,62,175,0.06)_30%,rgba(48,24,85,0.03)_54%,transparent_80%)] blur-3xl" />
+      </div>
+      <div className="pointer-events-none absolute inset-x-0 top-[-6rem] h-[78rem] -z-20">
+        <Image
+          src={heroAuroraImage}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-[0.26] blur-[2px]"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,9,32,0.16)_0%,rgba(26,12,40,0.08)_14%,rgba(28,14,44,0.03)_30%,rgba(29,14,46,0.02)_48%,rgba(28,13,43,0.08)_62%,rgba(22,10,35,0.16)_76%,rgba(18,8,28,0.26)_88%,rgba(15,6,23,0.36)_100%)]" />
+        <div className="absolute inset-x-[-8%] bottom-[-8rem] h-[28rem] bg-[radial-gradient(ellipse_at_center,rgba(176,126,255,0.18)_0%,rgba(130,86,222,0.12)_30%,rgba(68,32,116,0.05)_56%,transparent_78%)] blur-3xl" />
+        <div className="absolute inset-x-0 bottom-0 h-[20rem] bg-[linear-gradient(180deg,rgba(18,8,28,0)_0%,rgba(18,8,28,0.08)_28%,rgba(18,8,28,0.18)_52%,rgba(18,8,28,0.3)_76%,rgba(18,8,28,0.4)_100%)]" />
       </div>
 
       <section className="relative z-0 flex w-full flex-1 items-center justify-center overflow-visible pb-28 pt-28 lg:pb-36 lg:pt-36">
-        <div className="pointer-events-none absolute inset-x-0 top-[-7rem] bottom-[-18rem] -z-20">
-          <Image
-            src={heroAuroraImage}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center opacity-[0.22] blur-[3px]"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(21,10,34,0.12)_0%,rgba(27,14,42,0.08)_20%,rgba(28,14,44,0.02)_40%,rgba(24,11,39,0.18)_58%,rgba(20,9,32,0.42)_74%,rgba(16,7,25,0.72)_88%,rgba(13,5,20,0.94)_100%)]" />
-          <div className="absolute inset-x-[-8%] bottom-[-4rem] h-[22rem] bg-[radial-gradient(ellipse_at_center,rgba(164,118,250,0.16)_0%,rgba(115,78,206,0.1)_30%,rgba(51,24,89,0.04)_56%,transparent_76%)] blur-3xl" />
-        </div>
         <div className="pointer-events-none absolute inset-x-0 top-[2%] bottom-[-4rem] -z-10">
           <div className="absolute left-[9%] top-[12%] h-5 w-5 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.88),rgba(255,255,255,0.1)_46%,transparent_72%)] opacity-60 blur-[1px] [animation:lumoraSparkle_4.6s_ease-in-out_infinite]" />
           <div className="absolute left-[18%] top-[30%] h-3 w-3 rounded-full bg-[radial-gradient(circle,rgba(214,226,255,0.82),rgba(214,226,255,0.1)_50%,transparent_76%)] opacity-54 [animation:lumoraSparkle_4s_ease-in-out_infinite_0.8s]" />

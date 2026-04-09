@@ -38,10 +38,10 @@ html {
   color-scheme: dark;
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 18% 8%, rgba(255, 210, 245, 0.22), transparent 30%),
-    radial-gradient(circle at 78% 10%, rgba(186, 155, 255, 0.22), transparent 34%),
-    radial-gradient(circle at 52% -12%, rgba(132, 196, 255, 0.18), transparent 28%),
-    linear-gradient(156deg, #0f0f1a 0%, #17142a 48%, #221a3a 100%);
+    radial-gradient(circle at 50% 14%, rgba(214, 156, 255, 0.2) 0%, rgba(146, 101, 226, 0.14) 20%, rgba(73, 42, 126, 0.08) 40%, transparent 70%),
+    radial-gradient(circle at 22% 18%, rgba(203, 132, 255, 0.1) 0%, transparent 34%),
+    radial-gradient(circle at 78% 22%, rgba(169, 126, 255, 0.08) 0%, transparent 32%),
+    linear-gradient(180deg, #14091e 0%, #1a0d28 22%, #221133 48%, #190c29 72%, #12081e 100%);
 }
 
 body {
@@ -53,10 +53,10 @@ body {
   line-height: 1.72;
   letter-spacing: 0.01em;
   background:
-    radial-gradient(circle at 12% 14%, rgba(255, 210, 245, 0.12), transparent 28%),
-    radial-gradient(circle at 84% 20%, rgba(186, 155, 255, 0.16), transparent 30%),
-    radial-gradient(circle at 45% -8%, rgba(132, 196, 255, 0.12), transparent 26%),
-    linear-gradient(180deg, rgba(11, 10, 24, 0.14), rgba(15, 12, 30, 0.34));
+    radial-gradient(circle at 50% 16%, rgba(214, 156, 255, 0.12) 0%, rgba(146, 101, 226, 0.08) 22%, transparent 58%),
+    radial-gradient(circle at 24% 22%, rgba(190, 122, 255, 0.07) 0%, transparent 30%),
+    radial-gradient(circle at 76% 20%, rgba(169, 126, 255, 0.06) 0%, transparent 28%),
+    linear-gradient(180deg, rgba(18, 9, 30, 0.06), rgba(17, 8, 28, 0.12));
 }
 
 body::before {
@@ -87,10 +87,10 @@ body::after {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 50% -8%, rgba(255, 210, 245, 0.09), transparent 40%),
-    radial-gradient(circle at 88% 56%, rgba(132, 196, 255, 0.08), transparent 34%);
-  mix-blend-mode: screen;
-  opacity: 0.34;
+    radial-gradient(circle at 50% 38%, transparent 0%, rgba(11, 5, 21, 0.08) 44%, rgba(10, 4, 20, 0.22) 66%, rgba(8, 2, 16, 0.46) 84%, rgba(4, 1, 10, 0.72) 100%),
+    radial-gradient(circle at 50% 4%, rgba(255, 210, 245, 0.08), transparent 36%);
+  mix-blend-mode: normal;
+  opacity: 1;
   z-index: -3;
 }
 

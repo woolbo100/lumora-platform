@@ -138,7 +138,6 @@ export function validateDreamInput(input: Partial<DreamInput>): DreamValidationR
 
   if (
     companion != null &&
-    companion !== "" &&
     !["alone", "known", "unknown", "family"].includes(companion)
   ) {
     errors.push("등장 인물 선택값을 다시 확인해 주세요.");

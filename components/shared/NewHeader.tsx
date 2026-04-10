@@ -34,7 +34,7 @@ export default function NewHeader() {
       <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12 relative z-20">
         <HomeRedirectButton
           ariaLabel="Go to home"
-          className="text-base font-semibold tracking-[0.22em] text-[rgba(255,255,255,0.85)] transition-colors duration-300 hover:text-white"
+          className="text-base font-semibold tracking-[0.22em] bg-clip-text text-transparent bg-gradient-to-br from-white via-[#e5d4ff] to-[#bfa3ff] opacity-95 drop-shadow-[0_0_12px_rgba(180,140,255,0.25)] transition-all duration-700 hover:opacity-100 hover:drop-shadow-[0_0_16px_rgba(190,160,255,0.4)]"
         >
           LUMORA
         </HomeRedirectButton>

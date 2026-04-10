@@ -10,17 +10,22 @@ export default function NewHeader() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 24);
+      const currentScrollY = window.scrollY || document.documentElement.scrollTop;
+      setScrolled(currentScrollY > 24);
     };
 
     onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
     <header
-      className={`fixed left-0 top-0 z-50 w-full transition-all duration-500 ease-out ${
+      className={`fixed left-0 top-0 z-50 w-full isolate transform-gpu transition-all duration-500 ease-out ${
         scrolled
           ? "border-b border-[#a488ff]/10 bg-[#080514]/70 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent backdrop-blur-0"

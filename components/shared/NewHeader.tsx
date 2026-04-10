@@ -20,13 +20,13 @@ export default function NewHeader() {
 
   return (
     <header
-      className={`fixed left-0 top-0 z-50 w-full transition-[background-color,backdrop-filter,border-color] duration-500 ease-out ${
+      className={`fixed left-0 top-0 z-50 w-full transition-all duration-500 ease-out ${
         scrolled
-          ? "border-b border-[rgba(164,136,255,0.08)] bg-[rgba(8,5,20,0.68)] backdrop-blur-xl"
+          ? "border-b border-[#a488ff]/10 bg-[#080514]/70 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent backdrop-blur-0"
       }`}
     >
-      <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12">
+      <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12 relative z-20">
         <HomeRedirectButton
           ariaLabel="Go to home"
           className="text-base font-semibold tracking-[0.22em] text-[rgba(255,255,255,0.85)] transition-colors duration-300 hover:text-white"
@@ -47,15 +47,15 @@ export default function NewHeader() {
         </nav>
       </div>
 
-      {/* 헤더 하단 오로라 빛 번짐 레이어 (선이 아닌 은은한 번짐) */}
+      {/* 헤더 하단 오로라 빛 번짐 레이어 (확실히 보이게 농도 증가) */}
       <div
-        className={`pointer-events-none absolute inset-x-0 top-full h-16 bg-[radial-gradient(ellipse_at_top,rgba(152,112,244,0.14),transparent_60%)] blur-xl transition-opacity duration-700 ease-out ${
+        className={`pointer-events-none absolute inset-x-0 top-full h-20 bg-[radial-gradient(ellipse_at_top,rgba(164,124,255,0.4),transparent_70%)] blur-2xl transition-opacity duration-700 ease-out z-10 ${
           scrolled ? "opacity-100" : "opacity-0"
         }`}
       />
       {/* 화면 위쪽부터 넓게 퍼져 내려오는 더 넓은 공간감 글로우 */}
       <div
-        className={`pointer-events-none absolute inset-x-0 -bottom-32 h-[12rem] bg-[radial-gradient(ellipse_at_top,rgba(112,72,214,0.08),transparent_65%)] blur-3xl transition-opacity duration-700 ease-out -z-10 ${
+        className={`pointer-events-none absolute inset-x-0 -bottom-40 h-[16rem] bg-[radial-gradient(ellipse_at_top,rgba(132,88,234,0.25),transparent_65%)] blur-3xl transition-opacity duration-700 ease-out -z-10 ${
           scrolled ? "opacity-100" : "opacity-0"
         }`}
       />

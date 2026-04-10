@@ -5,8 +5,13 @@ import { CTAButton } from "@/components/shared/CTAButton";
 import { ServiceCard } from "@/components/shared/ServiceCard";
 import { services } from "@/data/services";
 
-{/* 전역 PageBackground가 layout.tsx에서 렌더링되므로 여기서는 제거함 */ }
+export default function Home() {
+  const serviceItems = services.filter((service) => service.type === "service");
+  const blogItem = services.find((service) => service.type === "blog");
 
+  return (
+    <main className="relative z-0 flex min-h-screen w-full flex-col overflow-hidden">
+      {/* 전역 PageBackground가 layout.tsx에서 렌더링되므로 여기서는 제거함 */}
       <section className="relative z-0 flex w-full flex-1 items-center justify-center overflow-visible pb-28 pt-28 lg:pb-36 lg:pt-36">
         <div className="pointer-events-none absolute inset-x-0 top-[2%] bottom-[-4rem] -z-10">
           <div className="absolute left-[9%] top-[12%] h-5 w-5 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.88),rgba(255,255,255,0.1)_46%,transparent_72%)] opacity-60 blur-[1px] [animation:lumoraSparkle_4.6s_ease-in-out_infinite]" />

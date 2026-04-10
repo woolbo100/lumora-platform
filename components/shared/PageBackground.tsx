@@ -21,14 +21,14 @@ export function PageBackground() {
         className="object-cover object-center opacity-[0.22] blur-[4px]"
       />
 
-      {/* 비네팅 효과 (가장자리를 깊고 어둡게, 중앙으로 향할수록 투명하게) */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,transparent_35%,rgba(8,5,16,0.75)_70%,rgba(4,2,8,0.98)_100%)]" />
+      {/* 비네팅 효과 (가장자리를 깊고 어둡게, 중앙으로 향할수록 투명하게) - 살짝 완화하여 이미지 노출 */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,transparent_35%,rgba(8,5,16,0.65)_75%,rgba(4,2,8,0.92)_100%)]" />
 
-      {/* 하단 시네마틱 페이드 오버레이 (bottom gradient: 부드럽게 점진적으로 어두워짐) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(12,6,28,0.35)] to-[rgba(4,2,10,0.95)]" />
+      {/* 하단 시네마틱 페이드 오버레이 (bottom gradient) - 투명도 조절로 너무 까맣게 덮지 않음 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(12,6,28,0.25)] to-[rgba(4,2,10,0.85)]" />
       
-      {/* 하단 가장자리 딥 글로우 섀도우 (착 가라앉는 무게감을 위한 내부 그림자) */}
-      <div className="absolute inset-0 shadow-[inset_0_-120px_120px_-30px_rgba(2,1,6,1)]" />
+      {/* 하단 가장자리 딥 글로우 섀도우 - 답답하지 않게 조절 */}
+      <div className="absolute inset-0 shadow-[inset_0_-100px_100px_-30px_rgba(2,1,6,0.85)]" />
 
       {/* 빛 입자와 신비로운 분위기를 더해주는 미세 노이즈 오버레이 방어 레이어 */}
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:4px_4px]" />

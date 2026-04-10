@@ -24,13 +24,17 @@ export default function NewHeader() {
   }, []);
 
   return (
-    <header
-      className={`fixed left-0 top-0 z-50 w-full isolate transform-gpu transition-all duration-500 ease-out ${
-        scrolled
-          ? "border-b border-[#a488ff]/10 bg-[#080514]/70 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent backdrop-blur-0"
-      }`}
-    >
+    <header className="fixed left-0 top-0 w-full z-50 group">
+      {/* 분리된 배경 레이어: 3D Canvas(Spline) 위에서 블러/배경이 죽는 렌더링 버그 방지를 위해 독립적 stacking context 부여 */}
+      <div 
+        className={`absolute inset-0 -z-10 transition-all duration-500 ease-out border-b ${
+          scrolled
+            ? "border-[#a488ff]/15 bg-[rgba(8,5,20,0.75)] backdrop-blur-lg"
+            : "border-transparent bg-transparent backdrop-blur-none"
+        }`}
+      />
+
+      {/* 컨텐츠 레이어 */}
       <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12 relative z-20">
         <HomeRedirectButton
           ariaLabel="Go to home"

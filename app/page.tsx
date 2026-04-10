@@ -43,9 +43,9 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-6 text-center sm:px-8 lg:px-12">
-          <div className="pointer-events-none absolute inset-x-0 top-[46%] -z-0 h-[28rem] -translate-y-1/2 opacity-46">
+          {/* <div className="pointer-events-none absolute inset-x-0 top-[46%] -z-0 h-[28rem] -translate-y-1/2 opacity-46">
             <HeroSplineScene scene="https://prod.spline.design/0btuJlO8ODRyNQ1h/scene.splinecode" />
-          </div>
+          </div> */}
 
           <div className="relative z-10 w-full max-w-4xl space-y-6">
             <p className="text-sm uppercase tracking-[0.3em] text-[var(--foreground-muted)]">

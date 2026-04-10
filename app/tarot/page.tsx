@@ -7,18 +7,7 @@ import { serviceHubContent } from "@/lib/service-hub-content";
 export default function TarotPage() {
   return (
     <div className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-[-9rem] h-[61rem] sm:top-[-10rem] sm:h-[68rem]">
-        <Image
-          src="/images/tarot/tarotmain.png"
-          alt="타로 허브 배경"
-          fill
-          priority
-          className="scale-[1.04] object-cover object-center opacity-30"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_24%,rgba(245,228,175,0.05),transparent_16%),radial-gradient(circle_at_22%_20%,rgba(116,94,210,0.08),transparent_24%),radial-gradient(circle_at_82%_24%,rgba(181,144,255,0.06),transparent_20%),linear-gradient(180deg,rgba(10,9,24,0.1)_0%,rgba(9,8,22,0.2)_34%,rgba(8,8,20,0.34)_58%,rgba(8,8,20,0.44)_76%,rgba(8,8,20,0.12)_92%,rgba(8,8,20,0)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-44 bg-[linear-gradient(180deg,rgba(8,8,20,0)_0%,rgba(8,8,20,0.18)_52%,rgba(8,8,20,0)_100%)]" />
-      </div>
+      {/* 타로 서브페이지 내 고유 배경 영역이었으나, 통일된 PageBackground 사용을 위해 삭제됨 */}
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pb-20 pt-2 sm:px-8 lg:px-12">
         <section className="mx-auto flex min-h-[calc(100vh-9rem)] max-w-3xl flex-col items-center justify-center px-0 py-12 text-center">

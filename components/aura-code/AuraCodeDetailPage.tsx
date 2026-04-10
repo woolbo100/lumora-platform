@@ -41,11 +41,7 @@ export function AuraCodeDetailPage() {
   return (
     <div className="space-y-16 pb-20 lg:space-y-24">
       <section className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(155,128,255,0.16),transparent_26%),radial-gradient(circle_at_84%_20%,rgba(255,188,138,0.1),transparent_20%),radial-gradient(circle_at_76%_72%,rgba(98,196,214,0.12),transparent_24%),linear-gradient(180deg,rgba(13,12,27,0.14),rgba(8,11,24,0.18)_44%,rgba(7,9,20,0.06)_100%)]" />
-        <div className="pointer-events-none absolute left-[12%] top-[14%] h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(194,168,255,0.18),transparent_68%)] blur-3xl" />
-        <div className="pointer-events-none absolute right-[10%] top-[18%] h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(255,206,153,0.12),transparent_70%)] blur-3xl" />
-        <div className="pointer-events-none absolute left-1/2 top-[48%] h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(113,196,222,0.1),transparent_64%)] blur-3xl" />
-
+        {/* 오라코드 고유 배경 레이어들을 제거하여 공통 PageBackground 사용 */}
         <div className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-7xl flex-col justify-center px-6 py-10 sm:px-8 lg:px-12">
           <div className="mx-auto max-w-5xl text-center">
             <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-secondary)]">

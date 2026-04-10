@@ -4,6 +4,7 @@ import Script from "next/script";
 import { HomeRedirectAnchorHandler } from "@/components/shared/HomeRedirectAnchorHandler";
 import NewHeader from "@/components/shared/NewHeader";
 import { SiteFooter } from "@/components/shared/SiteFooter";
+import { PageBackground } from "@/components/shared/PageBackground";
 
 import "./globals.css";
 
@@ -52,9 +53,10 @@ export default function RootLayout({
         ) : null}
       </head>
       <body
-        className="min-h-full bg-[var(--background)] text-[var(--foreground)] antialiased"
+        className="min-h-full bg-transparent text-[var(--foreground)] antialiased"
         suppressHydrationWarning
       >
+        <PageBackground />
         <HomeRedirectAnchorHandler />
         <NewHeader />
         {children}

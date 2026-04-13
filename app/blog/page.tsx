@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { blogCategories, isBlogCategory } from "@/data/blogCategories";
+import { isBlogCategory } from "@/data/blogCategories";
 import { BlogCategoryFilter } from "@/components/blog/BlogCategoryFilter";
 import { BlogPostGrid } from "@/components/blog/BlogPostGrid";
 import { GlassPanel } from "@/components/shared/GlassPanel";
@@ -56,17 +56,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         : "An unexpected error occurred while loading blog posts.";
   }
 
-  const selectedCategoryMeta = selectedCategory
-    ? blogCategories.find((item) => item.slug === selectedCategory)
-    : undefined;
-
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 pt-28 pb-12 sm:px-8 sm:pt-32 lg:px-12">
       <GlassPanel className="overflow-hidden">
         <section className="relative px-8 py-10 sm:px-10 sm:py-12">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(147,131,235,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(120,162,255,0.14),transparent_28%)]" />
 
-          <div className="relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="relative">
             <div className="max-w-3xl space-y-4">
               <p className="text-xs uppercase tracking-[0.32em] text-[var(--color-secondary)]">
                 LUMORA JOURNAL
@@ -81,19 +77,6 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               </p>
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-black/10 px-5 py-4 text-sm text-[var(--foreground-soft)] backdrop-blur">
-              <p className="text-xs uppercase tracking-[0.24em] text-[var(--foreground-muted)]">
-                POSTS
-              </p>
-              <p className="mt-2 text-3xl font-semibold text-[var(--foreground)]">
-                {posts.length}
-              </p>
-              <p className="mt-1">
-                {selectedCategoryMeta
-                  ? `${selectedCategoryMeta.label} selected`
-                  : "All categories"}
-              </p>
-            </div>
           </div>
         </section>
       </GlassPanel>

@@ -79,7 +79,7 @@ function renderInlineMarkdown(text: string) {
 
     if (boldMatch) {
       return (
-        <strong key={`${segment}-${index}`} className="font-semibold text-[#6f45a3]">
+        <strong key={`${segment}-${index}`} className="font-semibold text-[#5f3692]">
           {boldMatch[1]}
         </strong>
       );
@@ -98,7 +98,7 @@ function renderInlineMarkdown(text: string) {
             href={href}
             target="_blank"
             rel="noreferrer"
-            className="text-[#6e48a1] underline decoration-[#a88dcb] underline-offset-4 transition hover:text-[#56367f]"
+            className="text-[#613998] underline decoration-[#9877c5] underline-offset-4 transition hover:text-[#4f2d80]"
           >
             {label}
           </a>
@@ -109,7 +109,7 @@ function renderInlineMarkdown(text: string) {
         <Link
           key={`${href}-${index}`}
           href={href}
-          className="text-[#6e48a1] underline decoration-[#a88dcb] underline-offset-4 transition hover:text-[#56367f]"
+          className="text-[#613998] underline decoration-[#9877c5] underline-offset-4 transition hover:text-[#4f2d80]"
         >
           {label}
         </Link>
@@ -191,7 +191,7 @@ export function BlogPostDetail({
         </div>
       </GlassPanel>
 
-      <div className="relative overflow-hidden rounded-[28px] border border-white/22 bg-[linear-gradient(180deg,rgba(245,238,252,0.69),rgba(241,233,248,0.64))] shadow-[0_24px_70px_rgba(36,22,72,0.12)] backdrop-blur-[20px]">
+      <div className="relative overflow-hidden rounded-[28px] border border-[var(--color-border)] bg-[linear-gradient(180deg,rgba(245,238,252,0.69),rgba(241,233,248,0.64))] shadow-[var(--shadow-glow-soft),0_24px_70px_rgba(36,22,72,0.12)] backdrop-blur-[20px]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_14%_16%,rgba(255,255,255,0.13),transparent_26%),radial-gradient(circle_at_84%_18%,rgba(209,183,252,0.08),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(255,223,241,0.06),transparent_34%)]" />
         <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
 
@@ -220,7 +220,7 @@ export function BlogPostDetail({
               if (block.type === "h2") {
                 return (
                   <section key={`h2-${block.text}-${index}`} className="space-y-4 pt-2">
-                    <h2 className="font-display text-3xl leading-tight text-[#6c429f] sm:text-[2rem]">
+                    <h2 className="font-display text-3xl leading-tight text-[#5d3693] sm:text-[2.05rem]">
                       {renderInlineMarkdown(block.text)}
                     </h2>
                   </section>
@@ -231,7 +231,7 @@ export function BlogPostDetail({
                 return (
                   <h3
                     key={`h3-${block.text}-${index}`}
-                    className="font-display text-2xl leading-tight text-[#7a54ab]"
+                    className="font-display text-[2.05rem] leading-tight text-[#69439f]"
                   >
                     {renderInlineMarkdown(block.text)}
                   </h3>
@@ -260,7 +260,7 @@ export function BlogPostDetail({
                 return (
                   <ul
                     key={`list-${index}`}
-                    className="space-y-3 rounded-[24px] border border-[#bea8df]/55 bg-white/34 px-5 py-5 text-base leading-8 text-[#4f465c]"
+                    className="space-y-3 rounded-[24px] border border-[#bea8df]/55 bg-white/34 px-5 py-5 text-[17px] leading-8 text-[#453b52]"
                   >
                     {block.items.map((item, itemIndex) => (
                       <li key={`item-${itemIndex}`} className="flex gap-3">
@@ -275,7 +275,7 @@ export function BlogPostDetail({
               return (
                 <p
                   key={`paragraph-${index}`}
-                  className="max-w-none text-[17px] leading-9 text-[#4b4357]"
+                  className="max-w-none text-[18px] leading-9 text-[#41384f]"
                 >
                   {renderParagraphLines(block.lines)}
                 </p>
@@ -293,7 +293,7 @@ export function BlogPostDetail({
             <p className="text-xs uppercase tracking-[0.28em] text-[var(--foreground-muted)]">
               RELATED POSTS
             </p>
-            <h2 className="font-display text-2xl text-[#6c429f]">
+            <h2 className="font-display text-2xl text-[#5d3693]">
               같은 카테고리의 글
             </h2>
           </div>

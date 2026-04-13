@@ -20,7 +20,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 
   return (
     <Link href={`/blog/${post.slug}`} className="group block h-full">
-      <GlassPanel className="flex h-full flex-col p-6 transition duration-300 group-hover:-translate-y-1 group-hover:border-white/20">
+      <GlassPanel className="result-panel-glow aurora-hover-surface aurora-hover-soft flex h-full flex-col p-6 transition duration-300 group-hover:-translate-y-1.5 group-hover:border-[rgba(255,255,255,0.3)]">
         {post.imageUrl ? (
           <div className="mb-5 overflow-hidden rounded-[22px] border border-white/10">
             <img

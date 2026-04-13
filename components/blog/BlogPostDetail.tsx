@@ -81,7 +81,7 @@ function renderInlineMarkdown(text: string) {
 
     if (boldMatch) {
       return (
-        <strong key={`${segment}-${index}`} className="font-semibold text-[#7f58b0]">
+        <strong key={`${segment}-${index}`} className="font-semibold text-[#6f45a3]">
           {boldMatch[1]}
         </strong>
       );
@@ -100,7 +100,7 @@ function renderInlineMarkdown(text: string) {
             href={href}
             target="_blank"
             rel="noreferrer"
-            className="text-[#7b5aa6] underline decoration-[#b9a3d6] underline-offset-4 transition hover:text-[#5d457d]"
+            className="text-[#6e48a1] underline decoration-[#a88dcb] underline-offset-4 transition hover:text-[#56367f]"
           >
             {label}
           </a>
@@ -111,7 +111,7 @@ function renderInlineMarkdown(text: string) {
         <Link
           key={`${href}-${index}`}
           href={href}
-          className="text-[#7b5aa6] underline decoration-[#b9a3d6] underline-offset-4 transition hover:text-[#5d457d]"
+          className="text-[#6e48a1] underline decoration-[#a88dcb] underline-offset-4 transition hover:text-[#56367f]"
         >
           {label}
         </Link>
@@ -196,7 +196,9 @@ export function BlogPostDetail({
         </div>
       </GlassPanel>
 
-      <GlassPanel className="overflow-hidden border-white/30 bg-[linear-gradient(160deg,rgba(245,236,255,0.94),rgba(236,227,250,0.9)_46%,rgba(230,222,247,0.88)_100%)] p-8 shadow-[0_30px_80px_rgba(36,22,72,0.2)] backdrop-blur-xl sm:p-10 lg:p-12">
+      <GlassPanel className="overflow-hidden border-white/35 bg-[linear-gradient(160deg,rgba(248,240,255,0.88),rgba(239,230,252,0.82)_46%,rgba(231,223,247,0.78)_100%)] p-8 shadow-[0_30px_80px_rgba(36,22,72,0.2)] backdrop-blur-xl sm:p-10 lg:p-12">
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.34),rgba(255,255,255,0.08)_22%,transparent_48%,rgba(168,121,255,0.05)_100%)]" />
+        <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent" />
         <article className="space-y-8">
           {post.imageUrl ? (
             <div className="overflow-hidden rounded-[28px] border border-[#bda5dc]/45 bg-white/30">
@@ -222,7 +224,7 @@ export function BlogPostDetail({
               if (block.type === "h2") {
                   return (
                     <section key={`h2-${block.text}-${index}`} className="space-y-4 pt-2">
-                    <h2 className="font-display text-3xl leading-tight text-[#7f58b0] sm:text-[2rem]">
+                    <h2 className="font-display text-3xl leading-tight text-[#6c429f] sm:text-[2rem]">
                       {renderInlineMarkdown(block.text)}
                     </h2>
                   </section>
@@ -233,7 +235,7 @@ export function BlogPostDetail({
                 return (
                   <h3
                     key={`h3-${block.text}-${index}`}
-                    className="font-display text-2xl leading-tight text-[#8f6aba]"
+                    className="font-display text-2xl leading-tight text-[#7a54ab]"
                   >
                     {renderInlineMarkdown(block.text)}
                   </h3>
@@ -295,7 +297,7 @@ export function BlogPostDetail({
             <p className="text-xs uppercase tracking-[0.28em] text-[var(--foreground-muted)]">
               QUICK NOTES
             </p>
-            <h2 className="font-display text-2xl text-[#d6b6ff]">이 글 정보</h2>
+            <h2 className="font-display text-2xl text-[#6c429f]">이 글 정보</h2>
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">
@@ -341,7 +343,7 @@ export function BlogPostDetail({
             <p className="text-xs uppercase tracking-[0.28em] text-[var(--foreground-muted)]">
               RELATED POSTS
             </p>
-            <h2 className="font-display text-2xl text-[#d6b6ff]">
+            <h2 className="font-display text-2xl text-[#6c429f]">
               같은 카테고리의 글
             </h2>
           </div>

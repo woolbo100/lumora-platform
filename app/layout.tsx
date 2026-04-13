@@ -43,7 +43,7 @@ export default function RootLayout({
           content="Cyw4aUDav7WKHtcNDrnjhHmuRF_v2HKk0pi0p81SRh4"
         />
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-H86NT2M7KT"
+          src="https://www.googletagmanager.com/gtag/js?id=G-PV553EDK9W"
           strategy="afterInteractive"
         />
         <Script id="ga-script" strategy="afterInteractive">
@@ -51,7 +51,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-H86NT2M7KT');
+            gtag('config', 'G-PV553EDK9W');
           `}
         </Script>
         {shouldRenderAdsenseScript ? (

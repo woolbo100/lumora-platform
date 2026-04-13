@@ -6,7 +6,6 @@ import { AdBanner } from "@/components/AdBanner";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import {
-  getBlogHeroLabel,
   getBlogParagraphs,
   getBlogReadTime,
 } from "@/lib/blog-posts";
@@ -163,9 +162,6 @@ export function BlogPostDetail({
             </Link>
 
             <div className="space-y-4">
-              <p className="text-xs uppercase tracking-[0.32em] text-[var(--color-secondary)]">
-                {getBlogHeroLabel(post.category)}
-              </p>
               <span className="inline-flex rounded-full border border-[#c69dff]/20 bg-[#b786ff]/10 px-3 py-1 text-sm text-[#eddcff]">
                 {category.label}
               </span>
@@ -195,8 +191,8 @@ export function BlogPostDetail({
         </div>
       </GlassPanel>
 
-      <div className="relative overflow-hidden rounded-[28px] border border-white/24 bg-[linear-gradient(180deg,rgba(245,238,252,0.76),rgba(241,233,248,0.72))] shadow-[0_24px_70px_rgba(36,22,72,0.14)] backdrop-blur-[18px]">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_14%_16%,rgba(255,255,255,0.16),transparent_26%),radial-gradient(circle_at_84%_18%,rgba(209,183,252,0.09),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(255,223,241,0.07),transparent_34%)]" />
+      <div className="relative overflow-hidden rounded-[28px] border border-white/22 bg-[linear-gradient(180deg,rgba(245,238,252,0.69),rgba(241,233,248,0.64))] shadow-[0_24px_70px_rgba(36,22,72,0.12)] backdrop-blur-[20px]">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_14%_16%,rgba(255,255,255,0.13),transparent_26%),radial-gradient(circle_at_84%_18%,rgba(209,183,252,0.08),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(255,223,241,0.06),transparent_34%)]" />
         <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
 
         <article className="relative space-y-8 p-8 sm:p-10 lg:p-12">

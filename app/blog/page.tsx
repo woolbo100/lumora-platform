@@ -75,9 +75,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 루모라 블로그
               </h1>
               <p className="text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-                로컬 `md` 파일로 관리되는 글을 카테고리별로 모아볼 수 있어요.
-                배경과 전체 레이아웃은 그대로 두고, 블로그만 더 편하게 읽도록
-                정리했습니다.
+                루모라는 사람과 감정에 대한 이야기를 깊이 있게 풀어내는
+                공간입니다. 당신이 미처 알아차리지 못했던 마음의 흐름을 함께
+                들여다봅니다.
               </p>
             </div>
 

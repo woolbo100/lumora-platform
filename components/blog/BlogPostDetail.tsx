@@ -195,9 +195,8 @@ export function BlogPostDetail({
         </div>
       </GlassPanel>
 
-      <GlassPanel className="overflow-hidden border-white/28 bg-[linear-gradient(155deg,rgba(249,242,255,0.74),rgba(241,233,252,0.68)_38%,rgba(236,230,250,0.6)_62%,rgba(231,224,247,0.56)_100%)] p-8 shadow-[0_28px_80px_rgba(36,22,72,0.18)] backdrop-blur-[22px] sm:p-10 lg:p-12">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(255,255,255,0.34),transparent_24%),radial-gradient(circle_at_82%_14%,rgba(218,184,255,0.22),transparent_28%),radial-gradient(circle_at_68%_72%,rgba(255,214,236,0.16),transparent_30%),radial-gradient(circle_at_18%_82%,rgba(167,206,255,0.12),transparent_26%)] opacity-95" />
-        <div className="pointer-events-none absolute inset-[1px] rounded-[27px] border border-white/18" />
+      <GlassPanel className="overflow-hidden border-white/22 bg-[linear-gradient(180deg,rgba(245,238,252,0.78),rgba(242,235,249,0.76))] p-8 shadow-[0_24px_70px_rgba(36,22,72,0.16)] backdrop-blur-[18px] sm:p-10 lg:p-12">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_20%,rgba(255,255,255,0.18),transparent_22%),radial-gradient(circle_at_82%_18%,rgba(214,184,255,0.1),transparent_24%),radial-gradient(circle_at_70%_78%,rgba(255,214,236,0.08),transparent_26%)] opacity-90" />
 
         <article className="space-y-8">
           {post.imageUrl ? (

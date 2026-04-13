@@ -9,7 +9,7 @@ export function BlogPostGrid({ posts }: BlogPostGridProps) {
   if (posts.length === 0) {
     return (
       <div className="rounded-[28px] border border-dashed border-white/14 bg-white/4 px-6 py-12 text-center text-[var(--foreground-soft)]">
-        No posts match the current filter yet.
+        선택한 카테고리에 아직 등록된 글이 없습니다.
       </div>
     );
   }

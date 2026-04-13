@@ -1,36 +1,34 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getAdminSession } from "@/lib/admin-auth";
 import { BlogPostDetail } from "@/components/blog/BlogPostDetail";
 import {
   getBlogExcerpt,
   getBlogPostBySlug,
+  listBlogPosts,
   listRelatedBlogPosts,
 } from "@/lib/blog-posts";
-import { hasSupabaseConfig } from "@/lib/supabase";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ error?: string | string[]; message?: string | string[] }>;
 };
 
-export const dynamic = "force-dynamic";
+export async function generateStaticParams() {
+  const posts = await listBlogPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export const dynamicParams = false;
 
 export async function generateMetadata(
   { params }: Omit<BlogPostPageProps, "searchParams">,
 ): Promise<Metadata> {
-  if (!hasSupabaseConfig()) {
-    return {
-      title: "Blog | LUMORA",
-      description: "Configure Supabase to view blog posts.",
-    };
-  }
-
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug, {
-    includeDrafts: true,
-  });
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     return {
@@ -45,6 +43,9 @@ export async function generateMetadata(
   return {
     title: `${post.title} | LUMORA`,
     description,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
     openGraph: {
       title: `${post.title} | LUMORA`,
       description,
@@ -63,16 +64,9 @@ export default async function BlogPostPage({
   params,
   searchParams,
 }: BlogPostPageProps) {
-  if (!hasSupabaseConfig()) {
-    notFound();
-  }
-
-  const adminSession = await getAdminSession();
   const { slug } = await params;
   const query = await searchParams;
-  const post = await getBlogPostBySlug(slug, {
-    includeDrafts: true,
-  });
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -88,7 +82,6 @@ export default async function BlogPostPage({
     <BlogPostDetail
       post={post}
       relatedPosts={relatedPosts}
-      canManage={Boolean(adminSession)}
       error={error === "delete-failed" ? "Delete failed." : undefined}
       message={error === "delete-failed" ? message : undefined}
     />

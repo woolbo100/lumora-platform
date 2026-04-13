@@ -1,5 +1,9 @@
+import "server-only";
+
+import { promises as fs } from "node:fs";
+import path from "node:path";
+
 import { getCategoryMeta, isBlogCategory } from "@/data/blogCategories";
-import { supabaseRestRequest } from "@/lib/supabase";
 import type {
   BlogCategory,
   BlogPost,
@@ -7,153 +11,189 @@ import type {
   CreateBlogPostInput,
 } from "@/types/blog";
 
-type SupabasePostRow = {
-  title: string;
-  slug: string;
-  category: string;
+const BLOG_CONTENT_ROOT = path.join(process.cwd(), "content", "blog");
+
+type BlogFileFrontmatter = {
+  title?: string;
+  slug?: string;
+  category?: string;
+  summary?: string;
+  metaDescription?: string;
+  imageUrl?: string;
+  imageAltText?: string;
+  publishedAt?: string;
+  updatedAt?: string;
   status?: string;
-  summary?: string | null;
-  meta_description?: string | null;
-  image_alt_text?: string | null;
-  ai_generated?: boolean | null;
-  content: string;
-  created_at: string;
-  updated_at?: string | null;
-  image_url?: string | null;
+  aiGenerated?: string;
 };
 
-function isMissingColumnError(error: unknown) {
-  const message = error instanceof Error ? error.message : "";
-  return (
-    message.includes("column posts.status does not exist") ||
-    message.includes("column posts.image_alt_text does not exist") ||
-    message.includes("column posts.ai_generated does not exist") ||
-    message.includes("column posts.updated_at does not exist")
-  );
-}
-
 function resolvePostStatus(value: string | undefined): BlogPostStatus {
-  return value === "published" ? "published" : "draft";
+  return value === "draft" ? "draft" : "published";
 }
 
-function resolvePostCategory(value: string): BlogCategory {
-  if (isBlogCategory(value)) {
+function resolvePostCategory(value: string | undefined, fallback: BlogCategory) {
+  if (value && isBlogCategory(value)) {
     return value;
   }
 
-  return "mind-study";
+  return fallback;
 }
 
-function mapPost(row: SupabasePostRow): BlogPost {
-  const category = resolvePostCategory(row.category);
+function normalizeFrontmatterValue(value: string) {
+  const trimmed = value.trim();
+
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1).trim();
+  }
+
+  return trimmed;
+}
+
+function parseFrontmatter(source: string) {
+  if (!source.startsWith("---\n")) {
+    return {
+      frontmatter: {} as BlogFileFrontmatter,
+      content: source.trim(),
+    };
+  }
+
+  const endIndex = source.indexOf("\n---\n", 4);
+
+  if (endIndex === -1) {
+    return {
+      frontmatter: {} as BlogFileFrontmatter,
+      content: source.trim(),
+    };
+  }
+
+  const rawFrontmatter = source.slice(4, endIndex);
+  const content = source.slice(endIndex + 5).trim();
+  const frontmatter = rawFrontmatter
+    .split("\n")
+    .reduce<BlogFileFrontmatter>((result, line) => {
+      const separatorIndex = line.indexOf(":");
+
+      if (separatorIndex === -1) {
+        return result;
+      }
+
+      const key = line.slice(0, separatorIndex).trim() as keyof BlogFileFrontmatter;
+      const value = normalizeFrontmatterValue(line.slice(separatorIndex + 1));
+
+      result[key] = value;
+
+      return result;
+    }, {});
+
+  return { frontmatter, content };
+}
+
+function parseBoolean(value: string | undefined) {
+  return value?.toLowerCase() === "true";
+}
+
+async function readPostFile(filePath: string, fallbackCategory: BlogCategory) {
+  const source = await fs.readFile(filePath, "utf8");
+  const { frontmatter, content } = parseFrontmatter(source);
+  const slug = frontmatter.slug?.trim() || path.basename(filePath, ".md");
+  const title = frontmatter.title?.trim() || slug;
+  const category = resolvePostCategory(frontmatter.category, fallbackCategory);
+  const publishedAt = frontmatter.publishedAt?.trim() || new Date(0).toISOString();
+  const updatedAt = frontmatter.updatedAt?.trim() || null;
 
   return {
-    title: row.title,
-    slug: row.slug,
+    slug,
+    title,
     category,
-    status: resolvePostStatus(row.status),
-    summary: row.summary ?? null,
-    metaDescription: row.meta_description ?? null,
-    imageAltText: row.image_alt_text ?? null,
-    aiGenerated: Boolean(row.ai_generated),
-    content: row.content,
-    publishedAt: row.created_at,
-    updatedAt: row.updated_at ?? null,
-    imageUrl: row.image_url ?? null,
-  };
+    status: resolvePostStatus(frontmatter.status),
+    summary: frontmatter.summary?.trim() || null,
+    metaDescription: frontmatter.metaDescription?.trim() || null,
+    imageAltText: frontmatter.imageAltText?.trim() || null,
+    aiGenerated: parseBoolean(frontmatter.aiGenerated),
+    content,
+    publishedAt,
+    updatedAt,
+    imageUrl: frontmatter.imageUrl?.trim() || null,
+  } satisfies BlogPost;
 }
 
-function buildPostsQuery(
-  category?: BlogCategory,
-  options?: { includeDrafts?: boolean },
-) {
-  const query = new URLSearchParams({
-    select:
-      "title,slug,category,status,summary,meta_description,image_alt_text,ai_generated,content,created_at,updated_at,image_url",
-    order: "created_at.desc",
-  });
+async function readCategoryPosts(category: BlogCategory) {
+  const categoryDirectory = path.join(BLOG_CONTENT_ROOT, category);
 
-  if (category) {
-    query.set("category", `eq.${category}`);
+  try {
+    const entries = await fs.readdir(categoryDirectory, { withFileTypes: true });
+    const posts = await Promise.all(
+      entries
+        .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+        .map((entry) => readPostFile(path.join(categoryDirectory, entry.name), category)),
+    );
+
+    return posts;
+  } catch (error) {
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      error.code === "ENOENT"
+    ) {
+      return [];
+    }
+
+    throw error;
   }
-
-  if (!options?.includeDrafts) {
-    query.set("status", "eq.published");
-  }
-
-  return `posts?${query.toString()}`;
 }
 
-function buildLegacyPostsQuery(category?: BlogCategory) {
-  const query = new URLSearchParams({
-    select: "title,slug,category,summary,meta_description,content,created_at,image_url",
-    order: "created_at.desc",
-  });
+async function readAllPosts() {
+  const posts = await Promise.all(
+    ([
+      "romance-reunion",
+      "tarot-saju",
+      "psychology-code",
+      "mind-study",
+    ] as const).map((category) => readCategoryPosts(category)),
+  );
 
-  if (category) {
-    query.set("category", `eq.${category}`);
-  }
-
-  return `posts?${query.toString()}`;
+  return posts
+    .flat()
+    .sort(
+      (left, right) =>
+        new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime(),
+    );
 }
 
 export async function listBlogPosts(
   category?: BlogCategory,
   options?: { includeDrafts?: boolean },
 ) {
-  try {
-    const response = await supabaseRestRequest(buildPostsQuery(category, options));
-    const rows = (await response.json()) as SupabasePostRow[];
+  const posts = category ? await readCategoryPosts(category) : await readAllPosts();
 
-    return rows.map(mapPost);
-  } catch (error) {
-    if (!isMissingColumnError(error)) {
-      throw error;
-    }
-
-    const fallbackResponse = await supabaseRestRequest(buildLegacyPostsQuery(category));
-    const fallbackRows = (await fallbackResponse.json()) as SupabasePostRow[];
-
-    return fallbackRows.map(mapPost);
-  }
+  return posts
+    .filter((post) => options?.includeDrafts || post.status === "published")
+    .sort(
+      (left, right) =>
+        new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime(),
+    );
 }
 
 export async function getBlogPostBySlug(
   slug: string,
   options?: { includeDrafts?: boolean },
 ) {
-  try {
-    const query = new URLSearchParams({
-      select:
-        "title,slug,category,status,summary,meta_description,image_alt_text,ai_generated,content,created_at,updated_at,image_url",
-      slug: `eq.${slug}`,
-      limit: "1",
-    });
+  const posts = await readAllPosts();
+  const post = posts.find((entry) => entry.slug === slug);
 
-    if (!options?.includeDrafts) {
-      query.set("status", "eq.published");
-    }
-
-    const response = await supabaseRestRequest(`posts?${query.toString()}`);
-    const rows = (await response.json()) as SupabasePostRow[];
-
-    return rows[0] ? mapPost(rows[0]) : undefined;
-  } catch (error) {
-    if (!isMissingColumnError(error)) {
-      throw error;
-    }
-
-    const fallbackQuery = new URLSearchParams({
-      select: "title,slug,category,summary,meta_description,content,created_at,image_url",
-      slug: `eq.${slug}`,
-      limit: "1",
-    });
-
-    const fallbackResponse = await supabaseRestRequest(`posts?${fallbackQuery.toString()}`);
-    const fallbackRows = (await fallbackResponse.json()) as SupabasePostRow[];
-
-    return fallbackRows[0] ? mapPost(fallbackRows[0]) : undefined;
+  if (!post) {
+    return undefined;
   }
+
+  if (!options?.includeDrafts && post.status !== "published") {
+    return undefined;
+  }
+
+  return post;
 }
 
 export async function listRelatedBlogPosts(
@@ -166,109 +206,48 @@ export async function listRelatedBlogPosts(
   return posts.filter((post) => post.slug !== slug).slice(0, limit);
 }
 
+function throwMarkdownManagementError(): never {
+  throw new Error(
+    "Blog posts are now managed with local Markdown files in content/blog. Use the filesystem workflow instead of the admin editor.",
+  );
+}
+
 export async function createBlogPost(
   input: CreateBlogPostInput,
   authToken: string,
-) {
-  const now = new Date().toISOString();
-
-  const response = await supabaseRestRequest(
-    "posts",
-    {
-      method: "POST",
-      headers: {
-        Prefer: "return=representation",
-      },
-      body: JSON.stringify({
-        title: input.title,
-        slug: input.slug,
-        category: input.category,
-        status: input.status ?? "draft",
-        summary: input.summary?.trim() || null,
-        meta_description: input.metaDescription?.trim() || null,
-        image_alt_text: input.imageAltText?.trim() || null,
-        ai_generated: Boolean(input.aiGenerated),
-        content: input.content,
-        updated_at: now,
-        image_url: input.imageUrl?.trim() || null,
-      }),
-    },
-    authToken,
-  );
-
-  const rows = (await response.json()) as SupabasePostRow[];
-
-  if (!rows[0]) {
-    throw new Error("Insert returned no rows.");
-  }
-
-  return mapPost(rows[0]);
+): Promise<BlogPost> {
+  void input;
+  void authToken;
+  return throwMarkdownManagementError();
 }
 
 export async function updateBlogPost(
   originalSlug: string,
   input: CreateBlogPostInput,
   authToken: string,
-) {
-  const now = new Date().toISOString();
-  const query = new URLSearchParams({
-    slug: `eq.${originalSlug}`,
-    select:
-      "title,slug,category,status,summary,meta_description,image_alt_text,ai_generated,content,created_at,updated_at,image_url",
-  });
-
-  const response = await supabaseRestRequest(
-    `posts?${query.toString()}`,
-    {
-      method: "PATCH",
-      headers: {
-        Prefer: "return=representation",
-      },
-      body: JSON.stringify({
-        title: input.title,
-        slug: input.slug,
-        category: input.category,
-        status: input.status ?? "draft",
-        summary: input.summary?.trim() || null,
-        meta_description: input.metaDescription?.trim() || null,
-        image_alt_text: input.imageAltText?.trim() || null,
-        ai_generated: Boolean(input.aiGenerated),
-        content: input.content,
-        updated_at: now,
-        image_url: input.imageUrl?.trim() || null,
-      }),
-    },
-    authToken,
-  );
-
-  const rows = (await response.json()) as SupabasePostRow[];
-
-  if (!rows[0]) {
-    throw new Error("Update returned no rows.");
-  }
-
-  return mapPost(rows[0]);
+): Promise<BlogPost> {
+  void originalSlug;
+  void input;
+  void authToken;
+  return throwMarkdownManagementError();
 }
 
-export async function deleteBlogPost(slug: string, authToken: string) {
-  const query = new URLSearchParams({
-    slug: `eq.${slug}`,
-  });
-
-  await supabaseRestRequest(
-    `posts?${query.toString()}`,
-    {
-      method: "DELETE",
-      headers: {
-        Prefer: "return=minimal",
-      },
-    },
-    authToken,
-  );
+export async function deleteBlogPost(
+  slug: string,
+  authToken: string,
+): Promise<void> {
+  void slug;
+  void authToken;
+  return throwMarkdownManagementError();
 }
 
 export function getBlogExcerpt(content: string) {
-  return content.replace(/\s+/g, " ").trim().slice(0, 140);
+  return content
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/[*_`>#-]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 140);
 }
 
 export function getBlogReadTime(content: string) {
@@ -290,5 +269,6 @@ export function getBlogParagraphs(content: string) {
   return content
     .split(/\n\s*\n/)
     .map((paragraph) => paragraph.trim())
-    .filter(Boolean);
+    .filter(Boolean)
+    .map((paragraph) => paragraph.replace(/^#{1,6}\s+/gm, "").trim());
 }

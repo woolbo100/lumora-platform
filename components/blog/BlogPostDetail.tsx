@@ -4,7 +4,6 @@ import Link from "next/link";
 import { getCategoryMeta } from "@/data/blogCategories";
 import { AdBanner } from "@/components/AdBanner";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
-import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import {
   getBlogHeroLabel,
@@ -151,11 +150,12 @@ export function BlogPostDetail({
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-12 sm:px-8 lg:px-12">
-      <GlassPanel className="overflow-hidden">
-        <div className="relative p-8 sm:p-10 lg:p-12">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(168,121,255,0.24),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(120,162,255,0.12),transparent_28%)]" />
+      <GlassPanel className="overflow-hidden border-white/28 bg-[linear-gradient(155deg,rgba(249,242,255,0.74),rgba(241,233,252,0.68)_38%,rgba(236,230,250,0.6)_62%,rgba(231,224,247,0.56)_100%)] p-8 shadow-[0_28px_80px_rgba(36,22,72,0.18)] backdrop-blur-[22px] sm:p-10 lg:p-12">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(168,121,255,0.18),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(120,162,255,0.1),transparent_26%),radial-gradient(circle_at_14%_18%,rgba(255,255,255,0.28),transparent_24%),radial-gradient(circle_at_82%_14%,rgba(218,184,255,0.18),transparent_28%),radial-gradient(circle_at_68%_72%,rgba(255,214,236,0.14),transparent_30%),radial-gradient(circle_at_18%_82%,rgba(167,206,255,0.1),transparent_26%)] opacity-95" />
+        <div className="pointer-events-none absolute inset-[1px] rounded-[27px] border border-white/18" />
 
-          <div className="relative space-y-6">
+        <div className="relative space-y-8">
+          <div className="space-y-6">
             <Link
               href="/blog"
               className="inline-flex items-center text-sm text-[var(--foreground-muted)] transition hover:text-white"
@@ -193,147 +193,97 @@ export function BlogPostDetail({
               </div>
             ) : null}
           </div>
-        </div>
-      </GlassPanel>
 
-      <GlassPanel className="overflow-hidden border-white/28 bg-[linear-gradient(155deg,rgba(249,242,255,0.74),rgba(241,233,252,0.68)_38%,rgba(236,230,250,0.6)_62%,rgba(231,224,247,0.56)_100%)] p-8 shadow-[0_28px_80px_rgba(36,22,72,0.18)] backdrop-blur-[22px] sm:p-10 lg:p-12">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(255,255,255,0.34),transparent_24%),radial-gradient(circle_at_82%_14%,rgba(218,184,255,0.22),transparent_28%),radial-gradient(circle_at_68%_72%,rgba(255,214,236,0.16),transparent_30%),radial-gradient(circle_at_18%_82%,rgba(167,206,255,0.12),transparent_26%)] opacity-95" />
-        <div className="pointer-events-none absolute inset-[1px] rounded-[27px] border border-white/18" />
-        <article className="space-y-8">
-          {post.imageUrl ? (
-            <div className="overflow-hidden rounded-[28px] border border-[#bda5dc]/45 bg-white/30">
-              <img
-                src={post.imageUrl}
-                alt={post.imageAltText?.trim() || post.title}
-                className="max-h-[34rem] w-full object-cover"
-              />
-            </div>
-          ) : null}
+          <article className="space-y-8">
+            {post.imageUrl ? (
+              <div className="overflow-hidden rounded-[28px] border border-[#bda5dc]/45 bg-white/30">
+                <img
+                  src={post.imageUrl}
+                  alt={post.imageAltText?.trim() || post.title}
+                  className="max-h-[34rem] w-full object-cover"
+                />
+              </div>
+            ) : null}
 
-          <div className="space-y-7">
-            {blocks.map((block, index) => {
-              if (block.type === "divider") {
-                return (
-                  <div
-                    key={`divider-${index}`}
-                    className="h-px w-full bg-gradient-to-r from-transparent via-[#b786ff]/40 to-transparent"
-                  />
-                );
-              }
+            <div className="space-y-7">
+              {blocks.map((block, index) => {
+                if (block.type === "divider") {
+                  return (
+                    <div
+                      key={`divider-${index}`}
+                      className="h-px w-full bg-gradient-to-r from-transparent via-[#b786ff]/40 to-transparent"
+                    />
+                  );
+                }
 
-              if (block.type === "h2") {
+                if (block.type === "h2") {
                   return (
                     <section key={`h2-${block.text}-${index}`} className="space-y-4 pt-2">
-                    <h2 className="font-display text-3xl leading-tight text-[#6c429f] sm:text-[2rem]">
+                      <h2 className="font-display text-3xl leading-tight text-[#6c429f] sm:text-[2rem]">
+                        {renderInlineMarkdown(block.text)}
+                      </h2>
+                    </section>
+                  );
+                }
+
+                if (block.type === "h3") {
+                  return (
+                    <h3
+                      key={`h3-${block.text}-${index}`}
+                      className="font-display text-2xl leading-tight text-[#7a54ab]"
+                    >
                       {renderInlineMarkdown(block.text)}
-                    </h2>
-                  </section>
-                );
-              }
+                    </h3>
+                  );
+                }
 
-              if (block.type === "h3") {
+                if (block.type === "image") {
+                  return (
+                    <figure
+                      key={`image-${block.src}-${index}`}
+                      className="overflow-hidden rounded-[26px] border border-[#bda5dc]/45 bg-white/30"
+                    >
+                      <img
+                        src={block.src}
+                        alt={block.alt}
+                        className="max-h-[30rem] w-full object-cover"
+                      />
+                      <figcaption className="border-t border-[#c9b3e1]/45 px-5 py-3 text-sm text-[#64556f]">
+                        {block.alt}
+                      </figcaption>
+                    </figure>
+                  );
+                }
+
+                if (block.type === "list") {
+                  return (
+                    <ul
+                      key={`list-${index}`}
+                      className="space-y-3 rounded-[24px] border border-[#bea8df]/55 bg-white/34 px-5 py-5 text-base leading-8 text-[#4f465c]"
+                    >
+                      {block.items.map((item, itemIndex) => (
+                        <li key={`item-${itemIndex}`} className="flex gap-3">
+                          <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#8f6aba] shadow-[0_0_16px_rgba(143,106,186,0.35)]" />
+                          <span>{renderInlineMarkdown(item)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  );
+                }
+
                 return (
-                  <h3
-                    key={`h3-${block.text}-${index}`}
-                    className="font-display text-2xl leading-tight text-[#7a54ab]"
+                  <p
+                    key={`paragraph-${index}`}
+                    className="max-w-none text-[17px] leading-9 text-[#4b4357]"
                   >
-                    {renderInlineMarkdown(block.text)}
-                  </h3>
+                    {renderParagraphLines(block.lines)}
+                  </p>
                 );
-              }
-
-              if (block.type === "image") {
-                return (
-                  <figure
-                    key={`image-${block.src}-${index}`}
-                    className="overflow-hidden rounded-[26px] border border-[#bda5dc]/45 bg-white/30"
-                  >
-                    <img
-                      src={block.src}
-                      alt={block.alt}
-                      className="max-h-[30rem] w-full object-cover"
-                    />
-                    <figcaption className="border-t border-[#c9b3e1]/45 px-5 py-3 text-sm text-[#64556f]">
-                      {block.alt}
-                    </figcaption>
-                  </figure>
-                );
-              }
-
-              if (block.type === "list") {
-                return (
-                  <ul
-                    key={`list-${index}`}
-                    className="space-y-3 rounded-[24px] border border-[#bea8df]/55 bg-white/34 px-5 py-5 text-base leading-8 text-[#4f465c]"
-                  >
-                    {block.items.map((item, itemIndex) => (
-                      <li key={`item-${itemIndex}`} className="flex gap-3">
-                        <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#8f6aba] shadow-[0_0_16px_rgba(143,106,186,0.35)]" />
-                        <span>{renderInlineMarkdown(item)}</span>
-                      </li>
-                    ))}
-                  </ul>
-                );
-              }
-
-              return (
-                <p
-                  key={`paragraph-${index}`}
-                  className="max-w-none text-[17px] leading-9 text-[#4b4357]"
-                >
-                  {renderParagraphLines(block.lines)}
-                </p>
-              );
-            })}
-          </div>
-
-          <AdBanner className="pt-4" />
-        </article>
-      </GlassPanel>
-
-      <GlassPanel className="p-6 sm:p-8">
-        <div className="space-y-5">
-          <div className="space-y-2">
-            <p className="text-xs uppercase tracking-[0.28em] text-[var(--foreground-muted)]">
-              QUICK NOTES
-            </p>
-            <h2 className="font-display text-2xl text-[#6c429f]">이 글 정보</h2>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            <div className="rounded-[22px] border border-white/10 bg-white/4 px-5 py-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-[var(--foreground-muted)]">
-                카테고리
-              </p>
-              <p className="mt-2 text-base text-[var(--foreground)]">{category.label}</p>
+              })}
             </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/4 px-5 py-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-[var(--foreground-muted)]">
-                발행일
-              </p>
-              <p className="mt-2 text-base text-[var(--foreground)]">{publishedDate}</p>
-            </div>
-            <div className="rounded-[22px] border border-white/10 bg-white/4 px-5 py-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-[var(--foreground-muted)]">
-                읽는 시간
-              </p>
-              <p className="mt-2 text-base text-[var(--foreground)]">
-                {getBlogReadTime(post.content)}
-              </p>
-            </div>
-          </div>
 
-          {post.metaDescription ? (
-            <p className="text-sm leading-7 text-[var(--foreground-soft)]">
-              {post.metaDescription}
-            </p>
-          ) : null}
-
-          <div className="max-w-sm">
-            <CTAButton href="/blog" variant="secondary" className="w-full">
-              다른 글 더 보기
-            </CTAButton>
-          </div>
+            <AdBanner className="pt-4" />
+          </article>
         </div>
       </GlassPanel>
 

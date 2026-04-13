@@ -61,7 +61,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     : undefined;
 
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-12 sm:px-8 lg:px-12">
+    <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 pt-28 pb-12 sm:px-8 sm:pt-32 lg:px-12">
       <GlassPanel className="overflow-hidden">
         <section className="relative px-8 py-10 sm:px-10 sm:py-12">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(147,131,235,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(120,162,255,0.14),transparent_28%)]" />

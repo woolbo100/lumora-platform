@@ -81,7 +81,7 @@ function renderInlineMarkdown(text: string) {
 
     if (boldMatch) {
       return (
-        <strong key={`${segment}-${index}`} className="font-semibold text-[#d6b6ff]">
+        <strong key={`${segment}-${index}`} className="font-semibold text-[#7f58b0]">
           {boldMatch[1]}
         </strong>
       );
@@ -100,7 +100,7 @@ function renderInlineMarkdown(text: string) {
             href={href}
             target="_blank"
             rel="noreferrer"
-            className="text-[#d6b6ff] underline decoration-white/20 underline-offset-4 transition hover:text-white"
+            className="text-[#7b5aa6] underline decoration-[#b9a3d6] underline-offset-4 transition hover:text-[#5d457d]"
           >
             {label}
           </a>
@@ -111,7 +111,7 @@ function renderInlineMarkdown(text: string) {
         <Link
           key={`${href}-${index}`}
           href={href}
-          className="text-[#d6b6ff] underline decoration-white/20 underline-offset-4 transition hover:text-white"
+          className="text-[#7b5aa6] underline decoration-[#b9a3d6] underline-offset-4 transition hover:text-[#5d457d]"
         >
           {label}
         </Link>
@@ -196,10 +196,10 @@ export function BlogPostDetail({
         </div>
       </GlassPanel>
 
-      <GlassPanel className="overflow-hidden p-8 sm:p-10 lg:p-12">
+      <GlassPanel className="overflow-hidden border-white/30 bg-[linear-gradient(160deg,rgba(245,236,255,0.94),rgba(236,227,250,0.9)_46%,rgba(230,222,247,0.88)_100%)] p-8 shadow-[0_30px_80px_rgba(36,22,72,0.2)] backdrop-blur-xl sm:p-10 lg:p-12">
         <article className="space-y-8">
           {post.imageUrl ? (
-            <div className="overflow-hidden rounded-[28px] border border-white/10 bg-black/10">
+            <div className="overflow-hidden rounded-[28px] border border-[#bda5dc]/45 bg-white/30">
               <img
                 src={post.imageUrl}
                 alt={post.imageAltText?.trim() || post.title}
@@ -220,9 +220,9 @@ export function BlogPostDetail({
               }
 
               if (block.type === "h2") {
-                return (
-                  <section key={`h2-${block.text}-${index}`} className="space-y-4 pt-2">
-                    <h2 className="font-display text-3xl leading-tight text-[#d6b6ff] sm:text-[2rem]">
+                  return (
+                    <section key={`h2-${block.text}-${index}`} className="space-y-4 pt-2">
+                    <h2 className="font-display text-3xl leading-tight text-[#7f58b0] sm:text-[2rem]">
                       {renderInlineMarkdown(block.text)}
                     </h2>
                   </section>
@@ -233,7 +233,7 @@ export function BlogPostDetail({
                 return (
                   <h3
                     key={`h3-${block.text}-${index}`}
-                    className="font-display text-2xl leading-tight text-[#c99bff]"
+                    className="font-display text-2xl leading-tight text-[#8f6aba]"
                   >
                     {renderInlineMarkdown(block.text)}
                   </h3>
@@ -244,14 +244,14 @@ export function BlogPostDetail({
                 return (
                   <figure
                     key={`image-${block.src}-${index}`}
-                    className="overflow-hidden rounded-[26px] border border-white/10 bg-black/10"
+                    className="overflow-hidden rounded-[26px] border border-[#bda5dc]/45 bg-white/30"
                   >
                     <img
                       src={block.src}
                       alt={block.alt}
                       className="max-h-[30rem] w-full object-cover"
                     />
-                    <figcaption className="border-t border-white/10 px-5 py-3 text-sm text-[var(--foreground-muted)]">
+                    <figcaption className="border-t border-[#c9b3e1]/45 px-5 py-3 text-sm text-[#64556f]">
                       {block.alt}
                     </figcaption>
                   </figure>
@@ -262,11 +262,11 @@ export function BlogPostDetail({
                 return (
                   <ul
                     key={`list-${index}`}
-                    className="space-y-3 rounded-[24px] border border-[#b786ff]/12 bg-white/4 px-5 py-5 text-base leading-8 text-[var(--foreground-soft)]"
+                    className="space-y-3 rounded-[24px] border border-[#bea8df]/55 bg-white/34 px-5 py-5 text-base leading-8 text-[#4f465c]"
                   >
                     {block.items.map((item, itemIndex) => (
                       <li key={`item-${itemIndex}`} className="flex gap-3">
-                        <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#c99bff] shadow-[0_0_16px_rgba(201,155,255,0.6)]" />
+                        <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#8f6aba] shadow-[0_0_16px_rgba(143,106,186,0.35)]" />
                         <span>{renderInlineMarkdown(item)}</span>
                       </li>
                     ))}
@@ -277,7 +277,7 @@ export function BlogPostDetail({
               return (
                 <p
                   key={`paragraph-${index}`}
-                  className="max-w-none text-[17px] leading-9 text-[var(--foreground-soft)]"
+                  className="max-w-none text-[17px] leading-9 text-[#4b4357]"
                 >
                   {renderParagraphLines(block.lines)}
                 </p>

@@ -140,7 +140,7 @@ export function TarotSelectionClient({
         </div>
       ) : null}
 
-      <div className="sticky bottom-6 mt-10 flex flex-col items-center justify-center gap-4 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(15,16,34,0.88),rgba(10,12,24,0.78)_58%,rgba(28,21,55,0.82))] px-5 py-5 shadow-[0_24px_70px_rgba(8,10,25,0.38)] backdrop-blur-2xl sm:flex-row">
+      <div className="sticky bottom-6 mx-auto mt-10 flex w-full max-w-5xl flex-col items-center justify-center gap-4 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(15,16,34,0.88),rgba(10,12,24,0.78)_58%,rgba(28,21,55,0.82))] px-5 py-5 shadow-[0_24px_70px_rgba(8,10,25,0.38)] backdrop-blur-2xl sm:flex-row">
         <button
           type="button"
           onClick={() => router.push("/tarot")}

@@ -7,6 +7,8 @@ create table if not exists public.posts (
       'romance-reunion',
       'tarot-saju',
       'psychology-code',
+      'attraction-self-esteem',
+      'level-up-self-development',
       'mind-study'
     )
   ),

@@ -21,6 +21,16 @@ export const blogCategories: ReadonlyArray<{
     description: "Patterns, attachment, and emotional habits.",
   },
   {
+    slug: "attraction-self-esteem",
+    label: "\uB9E4\uB825/\uC790\uC874\uAC10",
+    description: "Presence, confidence, and self-worth rituals.",
+  },
+  {
+    slug: "level-up-self-development",
+    label: "\uB808\uBCA8\uC5C5\uC790\uAE30\uACC4\uBC1C",
+    description: "Growth systems for focus, habits, and momentum.",
+  },
+  {
     slug: "mind-study",
     label: "\uB9C8\uC74C\uACF5\uBD80",
     description: "Gentle practices for emotional grounding.",

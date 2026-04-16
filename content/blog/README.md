@@ -5,6 +5,8 @@ Create one `.md` file per post inside the matching category folder:
 - `content/blog/romance-reunion`
 - `content/blog/tarot-saju`
 - `content/blog/psychology-code`
+- `content/blog/attraction-self-esteem`
+- `content/blog/level-up-self-development`
 - `content/blog/mind-study`
 
 Use this format:

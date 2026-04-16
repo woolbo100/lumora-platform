@@ -21,7 +21,19 @@ export const metadata: Metadata = {
 
 export default function AuraCodeTestPage() {
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 pt-32 pb-12 sm:px-8 lg:px-12">
+    <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-12 sm:px-8 lg:px-12">
+      <section className="mb-10 max-w-3xl">
+        <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-secondary)]">
+          Aura & Energy Analysis
+        </p>
+        <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
+          오라코드
+        </h1>
+        <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+          지금 당신의 에너지 상태와 고유한 오라 컬러를 분석합니다. 7개의 차크라
+          밸런스와 함께 당신이 지닌 가장 빛나는 결을 읽어드립니다.
+        </p>
+      </section>
 
 
       <AuraTestClient embedded />

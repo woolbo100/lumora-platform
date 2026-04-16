@@ -46,7 +46,6 @@ export function SiteFooter() {
           당신의 마음을 읽고, 흐름을 비추는 공간
         </p>
       </div>
-      </div>
     </footer>
   );
 }

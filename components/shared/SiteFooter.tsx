@@ -20,7 +20,7 @@ export function SiteFooter() {
               <span className="text-[10px] uppercase tracking-[0.35em] text-[var(--color-secondary)] sm:text-xs">
                 Inner Symbolism Platform
               </span>
-              <span className="mt-1 font-display text-2xl tracking-wider text-[var(--foreground)] sm:text-3xl">
+              <span className="mt-1 font-display text-2xl tracking-wider bg-clip-text text-transparent bg-gradient-to-br from-white via-[#e5d4ff] to-[#bfa3ff] sm:text-3xl">
                 LUMORA
               </span>
             </Link>

@@ -107,8 +107,8 @@ export function TarotSelectionClient({
               onClick={() => handleCategorySelect(category.key)}
               className={`aurora-hover rounded-[26px] border p-7 text-left transition duration-300 ${
                 active
-                  ? "border-[var(--color-secondary)]/32 bg-[linear-gradient(135deg,rgba(164,138,255,0.18),rgba(255,255,255,0.06)_55%,rgba(10,12,35,0.22))] shadow-[0_18px_50px_rgba(110,88,232,0.18)]"
-                  : "border-white/10 bg-white/5 hover:-translate-y-1 hover:border-white/20 hover:bg-white/8 hover:shadow-[0_18px_48px_rgba(8,10,24,0.32)]"
+                  ? "border-[var(--color-secondary)]/32 bg-[linear-gradient(135deg,rgba(122,104,217,0.25),rgba(45,35,82,0.65)_65%,rgba(20,15,45,0.85))] shadow-[0_18px_50px_rgba(60,50,124,0.28)]"
+                  : "border-white/8 bg-[linear-gradient(135deg,rgba(12,14,35,0.72),rgba(10,12,28,0.58)_58%,rgba(8,10,22,0.78))] hover:-translate-y-1 hover:border-white/18 hover:bg-[linear-gradient(135deg,rgba(20,15,45,0.85),rgba(12,14,35,0.72))] hover:shadow-[0_18px_48px_rgba(9,11,24,0.38)]"
               }`}
             >
               <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-secondary)]/72">

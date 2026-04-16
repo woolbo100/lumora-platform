@@ -22,7 +22,7 @@ export default function TarotPage() {
           }}
         />
         <div 
-          className="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,20,0.7)] via-[rgba(10,10,20,0.4)] to-[var(--background)]"
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(10,10,20,0.3)] to-[var(--background)]"
         />
       </div>
 

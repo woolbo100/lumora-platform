@@ -14,7 +14,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <p className="flex items-center gap-2 text-lg font-bold tracking-tight text-[var(--foreground-muted)]">
             <span>©</span>
-            <span className="bg-[linear-gradient(135deg,var(--color-secondary)_0%,#b19fff_45%,var(--color-primary)_100%)] bg-clip-text text-transparent">
+            <span className="bg-[linear-gradient(135deg,#A78BFF_0%,#FF8EAD_50%,#B19FFF_100%)] bg-clip-text text-transparent">
               Lumora
             </span>
           </p>

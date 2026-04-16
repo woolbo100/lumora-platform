@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { ResultShareSection } from "@/components/shared/ResultShareSection";
 import { interpretEmotion, validateEmotionInput } from "@/lib/emotion/interpreter";
 
 type EmotionResultPageProps = {
@@ -316,6 +317,18 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
             다시 리딩하기
           </Link>
         </div>
+
+        <ResultShareSection
+          shareTitle="나의 감정 리딩 결과 💫"
+          results={{
+            "감지된 감정": emotionLabel,
+            "감정 강도": `${result.intensity}단계`,
+            "에너지 상태": result.energy_state,
+          }}
+          description={result.core_reading}
+          testUrl="https://www.lumoracode.kr/emotion/start"
+          hubUrl="https://www.lumoracode.kr/emotion"
+        />
       </GlassPanel>
     </main>
   );

@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { ResultShareSection } from "@/components/shared/ResultShareSection";
 import { relationshipPatternQuestions } from "@/data/relationshipPatternQuestions";
 import { getRelationshipPatternResultByType } from "@/lib/relationshipPatternCalculator";
 import { type RelationshipPatternType } from "@/types/relationshipPattern";
@@ -133,6 +134,17 @@ export function RelationshipPatternResultPanel({
             결과 초기화
           </button>
         </div>
+
+        <ResultShareSection
+          shareTitle="나의 연애패턴 결과 💫"
+          results={{
+            "현재 흐름": result.title,
+            "연애 패턴": scoreLabels[resultType],
+          }}
+          description={result.recommendedMessage}
+          testUrl="https://www.lumoracode.kr/relationship-pattern/test"
+          hubUrl="https://www.lumoracode.kr/relationship-pattern"
+        />
       </GlassPanel>
 
       <GlassPanel className="result-panel-glow p-8">

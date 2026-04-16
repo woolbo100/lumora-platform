@@ -8,15 +8,21 @@ export default function TarotPage() {
   return (
     <div className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden">
       {/* 타로 히어로 전용 배경 레이어 */}
-      <div className="absolute inset-x-0 top-0 h-[85vh] overflow-hidden">
+      <div 
+        className="absolute inset-x-0 top-0 h-[90vh] overflow-hidden"
+        style={{
+          maskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
+          WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)"
+        }}
+      >
         <div 
-          className="absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat blur-[2px]"
+          className="absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat opacity-80 blur-[2px]"
           style={{ 
             backgroundImage: "url('/images/tarot/tarotmain.png')",
           }}
         />
         <div 
-          className="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,20,0.65)] via-[rgba(10,10,20,0.75)] to-[var(--background)]"
+          className="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,20,0.7)] via-[rgba(10,10,20,0.4)] to-[var(--background)]"
         />
       </div>
 

@@ -107,8 +107,8 @@ export function TarotSelectionClient({
               onClick={() => handleCategorySelect(category.key)}
               className={`rounded-[26px] border px-6 py-6 text-left transition duration-300 ${
                 active
-                  ? "border-[var(--color-secondary)]/36 bg-[linear-gradient(135deg,rgba(213,195,165,0.12),rgba(122,104,217,0.08)_65%,rgba(255,255,255,0.05))] shadow-[0_18px_50px_rgba(60,50,124,0.2)]"
-                  : "border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_18px_48px_rgba(9,11,24,0.28)]"
+                  ? "border-[var(--color-secondary)]/32 bg-[linear-gradient(135deg,rgba(122,104,217,0.15),rgba(45,35,82,0.65)_65%,rgba(20,15,45,0.85))] shadow-[0_18px_50px_rgba(60,50,124,0.22)]"
+                  : "border-white/8 bg-[linear-gradient(135deg,rgba(255,255,255,0.02),rgba(15,12,32,0.45)_58%,rgba(8,10,22,0.65))] hover:-translate-y-1 hover:border-white/18 hover:shadow-[0_18px_48px_rgba(9,11,24,0.32)]"
               }`}
             >
               <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-secondary)]/72">

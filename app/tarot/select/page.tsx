@@ -16,8 +16,8 @@ export default async function TarotSelectPage(
       : undefined;
 
   return (
-    <main className="flex flex-1 flex-col pb-8">
-      <GlassPanel className="p-6 sm:p-8">
+    <main className="flex flex-1 flex-col pt-16 pb-8">
+      <GlassPanel className="bg-[rgba(10,12,32,0.42)] p-6 sm:p-10">
         <TarotSelectionClient initialCategoryKey={category} />
       </GlassPanel>
     </main>

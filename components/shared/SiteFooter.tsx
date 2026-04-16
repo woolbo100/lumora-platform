@@ -12,7 +12,12 @@ export function SiteFooter() {
     <footer className="mt-16 border-t border-[rgba(255,255,255,0.1)]">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 py-8 sm:px-8 lg:px-12">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <p className="text-sm text-[var(--foreground-muted)]">© Lumora</p>
+          <p className="flex items-center gap-2 text-lg font-bold tracking-tight text-[var(--foreground-muted)]">
+            <span>©</span>
+            <span className="bg-[linear-gradient(135deg,var(--color-secondary)_0%,#b19fff_45%,var(--color-primary)_100%)] bg-clip-text text-transparent">
+              Lumora
+            </span>
+          </p>
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {footerLinks.map((link) => (
               <Link

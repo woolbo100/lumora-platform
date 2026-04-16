@@ -7,10 +7,21 @@ import { serviceHubContent } from "@/lib/service-hub-content";
 export default function TarotPage() {
   return (
     <div className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden">
-      {/* 타로 서브페이지 내 고유 배경 영역이었으나, 통일된 PageBackground 사용을 위해 삭제됨 */}
+      {/* 타로 히어로 전용 배경 레이어 */}
+      <div className="absolute inset-x-0 top-0 h-[85vh] overflow-hidden">
+        <div 
+          className="absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat blur-[2px]"
+          style={{ 
+            backgroundImage: "url('/images/tarot/tarotmain.png')",
+          }}
+        />
+        <div 
+          className="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,20,0.65)] via-[rgba(10,10,20,0.75)] to-[var(--background)]"
+        />
+      </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pb-20 pt-32 sm:px-8 lg:px-12">
-        <section className="mx-auto flex min-h-[calc(100vh-9rem)] max-w-3xl flex-col items-center justify-start px-0 pt-12 pb-24 text-center">
+        <section className="mx-auto flex min-h-[calc(85vh-9rem)] max-w-3xl flex-col items-center justify-start px-0 pt-12 pb-24 text-center">
           <div className="mb-8 flex h-22 w-22 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 bg-[radial-gradient(circle,rgba(213,195,165,0.18),rgba(255,255,255,0.03))] text-5xl text-[var(--color-secondary)] shadow-[0_0_60px_rgba(122,104,217,0.16)]">
             ✦
           </div>

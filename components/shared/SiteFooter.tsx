@@ -10,8 +10,8 @@ const footerLinks = [
 export function SiteFooter() {
   return (
     <footer className="mt-16 border-t border-[rgba(255,255,255,0.1)]">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 py-12 sm:px-8 lg:px-12">
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 sm:px-8 lg:px-12">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex flex-col gap-4">
             <Link
               href="/"
@@ -24,12 +24,12 @@ export function SiteFooter() {
                 LUMORA
               </span>
             </Link>
-            <p className="text-xs text-[var(--foreground-muted)] opacity-60">
-              © 2026 Lumora. All rights reserved.
+            <p className="text-[13px] font-light tracking-wide text-[var(--foreground-soft)] opacity-80">
+              당신의 마음을 읽고, 흐름을 비추는 공간
             </p>
           </div>
-          
-          <nav className="flex flex-wrap items-center gap-x-8 gap-y-4">
+
+          <nav className="flex flex-wrap items-center gap-x-6 gap-y-3 lg:pt-2">
             {footerLinks.map((link) => (
               <Link
                 key={link.href}
@@ -41,10 +41,12 @@ export function SiteFooter() {
             ))}
           </nav>
         </div>
-        
-        <p className="border-t border-white/5 pt-8 text-[13px] font-light tracking-wide text-[var(--foreground-muted)] opacity-60">
-          당신의 마음을 읽고, 흐름을 비추는 공간
-        </p>
+
+        <div className="flex flex-col border-t border-white/5 pt-8 lg:flex-row lg:items-center lg:justify-between">
+          <p className="text-xs text-[var(--foreground-muted)] opacity-60">
+            © 2026 Lumora. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );

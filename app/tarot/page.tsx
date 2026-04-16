@@ -18,7 +18,7 @@ export default function TarotPage() {
         <div 
           className="absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat opacity-80 blur-[2px]"
           style={{ 
-            backgroundImage: "url('/images/tarot/tarotmain.png')",
+            backgroundImage: "url('/images/tarot/tarotmain.jpg')",
           }}
         />
         <div 

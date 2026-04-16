@@ -48,7 +48,7 @@ export function AttachmentCodeExperience() {
   const [state, setState] = useState<AttachmentRuntimeState>(
     getInitialAttachmentRuntimeState,
   );
-  const [hasEnteredExperience, setHasEnteredExperience] = useState(false);
+  const [hasEnteredExperience, setHasEnteredExperience] = useState(true);
   const totalQuestions = attachmentQuestions.length;
   const currentQuestion = attachmentQuestions[Math.min(state.currentIndex, totalQuestions - 1)];
   const progress = Math.min(((state.currentIndex + 1) / totalQuestions) * 100, 100);
@@ -116,7 +116,7 @@ export function AttachmentCodeExperience() {
           </div>
 
           <h2 className="font-display text-6xl text-[var(--foreground)] sm:text-7xl">
-            Luna Attachment
+            애착유형 코드
           </h2>
           <p className="mt-5 text-2xl font-medium text-[var(--color-secondary)] sm:text-3xl">
             당신의 애착유형을 알아보세요

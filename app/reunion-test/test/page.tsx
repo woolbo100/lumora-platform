@@ -2,7 +2,7 @@ import { ReunionTestExperience } from "@/components/reunion-test/ReunionTestExpe
 
 export default function ReunionTestRunPage() {
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-12 sm:px-8 lg:px-12">
+    <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 pb-12 pt-20 sm:px-8 sm:pt-24 lg:px-12 lg:pt-28">
       <section className="mb-10 max-w-3xl">
         <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-secondary)]">
           Reunion Possibility Test

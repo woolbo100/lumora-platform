@@ -42,7 +42,7 @@ export function AuraCodeDetailPage() {
     <div className="space-y-16 pb-20 lg:space-y-24">
       <section className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden">
         {/* 오라코드 고유 배경 레이어들을 제거하여 공통 PageBackground 사용 */}
-        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-7xl flex-col justify-center px-6 py-10 sm:px-8 lg:px-12">
+        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-7xl flex-col justify-center px-6 pt-32 pb-12 sm:px-8 lg:px-12">
           <div className="mx-auto max-w-5xl text-center">
             <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-secondary)]">
               Aura Reading

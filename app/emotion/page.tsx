@@ -6,9 +6,9 @@ import { serviceHubContent } from "@/lib/service-hub-content";
 
 export default function EmotionPage() {
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 py-12 sm:px-8 lg:px-12">
+    <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 pt-32 pb-12 sm:px-8 lg:px-12">
       <section className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2">
-        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-4xl flex-col items-center justify-center px-6 py-16 text-center sm:px-8">
+        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-4xl flex-col items-center justify-start px-6 pt-12 pb-24 text-center sm:px-8">
           <div className="mb-6 flex h-22 w-22 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 bg-[radial-gradient(circle,rgba(255,236,236,0.16),rgba(255,255,255,0.03))] text-5xl text-[var(--color-secondary)] shadow-[0_0_60px_rgba(142,116,255,0.16)]">
             ✦
           </div>

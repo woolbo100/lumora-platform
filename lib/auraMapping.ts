@@ -10,6 +10,16 @@ export const chakraLabels: Record<AuraChakraKey, string> = {
   crown: "크라운 차크라",
 };
 
+export const chakraMetadata: Record<AuraChakraKey, { number: string; color: string }> = {
+  root: { number: "1차크라", color: "#FF4B2B" },
+  sacral: { number: "2차크라", color: "#FF8C42" },
+  solar: { number: "3차크라", color: "#FFD072" },
+  heart: { number: "4차크라", color: "#28CC9E" },
+  throat: { number: "5차크라", color: "#60A5FA" },
+  thirdEye: { number: "6차크라", color: "#6366F1" },
+  crown: { number: "7차크라", color: "#A855F7" },
+};
+
 export const chakraFocus: Record<AuraChakraKey, string> = {
   root: "안정감과 기반",
   sacral: "감정과 즐거움의 흐름",

@@ -18,7 +18,7 @@ export default async function ReunionResultPage({
     : undefined;
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 pb-12 pt-20 sm:px-8 sm:pt-24 lg:px-12 lg:pt-28">
+    <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 pb-12 pt-32 sm:px-8 sm:pt-40 lg:px-12 lg:pt-44">
       <section className="mb-10 max-w-3xl">
         <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-secondary)]">
           Reunion Result

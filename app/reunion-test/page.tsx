@@ -10,8 +10,8 @@ export default function ReunionTestPage() {
   return (
     <>
       <main className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2">
-        <section className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-5xl flex-col items-center justify-center px-6 pb-12 pt-6 text-center sm:px-8 sm:pt-8">
-          <div className="flex w-full max-w-[56rem] flex-col items-center justify-center -translate-y-[4vh]">
+        <section className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-5xl flex-col items-center justify-center px-6 pb-12 pt-32 text-center sm:px-8 sm:pt-40">
+          <div className="flex w-full max-w-[56rem] flex-col items-center justify-center">
             <div className="mb-10 flex h-22 w-22 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 bg-[radial-gradient(circle,rgba(213,195,165,0.18),rgba(255,255,255,0.03))] text-5xl text-[var(--color-secondary)] shadow-[0_0_60px_rgba(122,104,217,0.16)]">
               ✦
             </div>

@@ -28,11 +28,11 @@ export function ServiceCard({
           isBlog ? "min-h-[124px] p-5 sm:min-h-[132px] sm:p-6" : "min-h-[250px] p-6 sm:p-7"
         }`}
       >
-        <div className={`flex items-center justify-between gap-4 ${isBlog ? "mb-4" : "mb-7"}`}>
-          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--foreground-muted)]">
+        <div className={`flex flex-nowrap items-start justify-between gap-3 ${isBlog ? "mb-4" : "mb-7"}`}>
+          <span className="truncate text-xs font-semibold uppercase tracking-[0.22em] text-[var(--foreground-muted)]">
             {eyebrow}
           </span>
-          <span className="rounded-full border border-[rgba(255,255,255,0.24)] bg-[linear-gradient(135deg,rgba(255,210,245,0.2),rgba(186,155,255,0.12)_55%,rgba(132,196,255,0.08))] px-3 py-1 text-[11px] font-medium text-[var(--foreground)] shadow-[0_0_18px_rgba(186,155,255,0.14)]">
+          <span className="shrink-0 whitespace-nowrap rounded-full border border-[rgba(255,255,255,0.24)] bg-[linear-gradient(135deg,rgba(255,210,245,0.2),rgba(186,155,255,0.12)_55%,rgba(132,196,255,0.08))] px-3 py-1 text-[11px] font-medium text-[var(--foreground)] shadow-[0_0_18px_rgba(186,155,255,0.14)]">
             {badge}
           </span>
         </div>

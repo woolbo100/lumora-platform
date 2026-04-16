@@ -9,8 +9,8 @@ export default function TarotPage() {
     <div className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden">
       {/* 타로 서브페이지 내 고유 배경 영역이었으나, 통일된 PageBackground 사용을 위해 삭제됨 */}
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-20 pt-2 sm:px-8 lg:px-12">
-        <section className="mx-auto flex min-h-[calc(100vh-9rem)] max-w-3xl flex-col items-center justify-center px-0 py-12 text-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-20 pt-32 sm:px-8 lg:px-12">
+        <section className="mx-auto flex min-h-[calc(100vh-9rem)] max-w-3xl flex-col items-center justify-start px-0 pt-12 pb-24 text-center">
           <div className="mb-8 flex h-22 w-22 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 bg-[radial-gradient(circle,rgba(213,195,165,0.18),rgba(255,255,255,0.03))] text-5xl text-[var(--color-secondary)] shadow-[0_0_60px_rgba(122,104,217,0.16)]">
             ✦
           </div>

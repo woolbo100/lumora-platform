@@ -19,7 +19,7 @@ export function ServiceHubLayout({
   return (
     <div className="relative isolate overflow-hidden">
       {/* ServiceHubLayout 고유 배경 레이어들을 제거하여 통배경과 일치시킴 */}
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 pt-32 pb-12 sm:px-8 lg:px-12">
         {children}
       </div>
     </div>

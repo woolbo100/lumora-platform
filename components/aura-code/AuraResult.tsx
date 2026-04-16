@@ -7,7 +7,7 @@ import { GlassPanel } from "@/components/shared/GlassPanel";
 import { ServiceCard } from "@/components/shared/ServiceCard";
 import { services } from "@/data/services";
 import { auraQuestions } from "@/data/auraQuestions";
-import { auraToneLabels, chakraFocus, chakraLabels } from "@/lib/auraMapping";
+import { auraToneLabels, chakraFocus, chakraLabels, chakraMetadata } from "@/lib/auraMapping";
 import { type AuraComputedResult } from "@/types/auraCode";
 
 const STORAGE_KEY = "lumora-aura-code-v2";
@@ -181,43 +181,63 @@ export function AuraResult() {
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {result.primaryChakras.map((chakra) => (
-            <GlassPanel key={chakra.chakra} className="result-panel-glow p-6">
-              <p className="text-xs uppercase tracking-[0.24em] text-white/42">주요 차크라</p>
-              <h3 className="mt-3 text-2xl font-semibold text-[var(--foreground)]">
-                {chakraLabels[chakra.chakra]}
-              </h3>
-              <p className="mt-2 text-sm text-[var(--color-secondary)]">
-                {chakraFocus[chakra.chakra]}
-              </p>
-              <p className="mt-4 text-sm leading-7 text-[var(--foreground-soft)]">
-                {chakra.state === "blocked"
-                  ? "지금은 이 차크라의 흐름이 안쪽으로 조용히 웅크린 상태에 가깝습니다."
-                  : chakra.state === "overactive"
-                    ? "지금은 이 차크라의 흐름이 바깥으로 강하게 뻗어 나가며 존재감을 드러내는 상태에 가깝습니다."
-                    : chakra.state === "mixed"
-                      ? "지금은 막힘과 확장이 함께 스치며 전환의 결이 감지되는 상태에 가깝습니다."
-                      : "이 차크라는 비교적 안정적인 결을 유지하고 있습니다."}
-              </p>
-            </GlassPanel>
-          ))}
+          {result.primaryChakras.map((chakra) => {
+            const meta = chakraMetadata[chakra.chakra];
+            return (
+              <GlassPanel key={chakra.chakra} className="result-panel-glow p-6">
+                <p className="text-xs uppercase tracking-[0.24em] text-white/42">주요 차크라</p>
+                <div className="mt-3 flex items-center gap-2.5">
+                  <div 
+                    className="h-3 w-3 shrink-0 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.15)]" 
+                    style={{ backgroundColor: meta.color }}
+                  />
+                  <h3 className="text-2xl font-semibold text-[var(--foreground)]">
+                    {chakraLabels[chakra.chakra]}
+                    <span className="ml-1.5 text-lg font-medium opacity-50">({meta.number})</span>
+                  </h3>
+                </div>
+                <p className="mt-2 text-sm text-[var(--color-secondary)]">
+                  {chakraFocus[chakra.chakra]}
+                </p>
+                <p className="mt-4 text-sm leading-7 text-[var(--foreground-soft)]">
+                  {chakra.state === "blocked"
+                    ? "지금은 이 차크라의 흐름이 안쪽으로 조용히 웅크린 상태에 가깝습니다."
+                    : chakra.state === "overactive"
+                      ? "지금은 이 차크라의 흐름이 바깥으로 강하게 뻗어 나가며 존재감을 드러내는 상태에 가깝습니다."
+                      : chakra.state === "mixed"
+                        ? "지금은 막힘과 확장이 함께 스치며 전환의 결이 감지되는 상태에 가깝습니다."
+                        : "이 차크라는 비교적 안정적인 결을 유지하고 있습니다."}
+                </p>
+              </GlassPanel>
+            );
+          })}
 
-          {result.strengthChakra ? (
-            <GlassPanel className="result-panel-glow p-6">
-              <p className="text-xs uppercase tracking-[0.24em] text-white/42">강점 차크라</p>
-              <h3 className="mt-3 text-2xl font-semibold text-[var(--foreground)]">
-                {chakraLabels[result.strengthChakra.chakra]}
-              </h3>
-              <p className="mt-2 text-sm text-[var(--color-secondary)]">
-                {chakraFocus[result.strengthChakra.chakra]}
-              </p>
-              <p className="mt-4 text-sm leading-7 text-[var(--foreground-soft)]">
-                지금의 당신 안에서 비교적 안정적으로 흐르며 전체 리듬을 지지하는
-                결입니다. 완벽한 균형이라기보다, 현재의 자신을 붙들어주는 조용한
-                중심으로 이해해보면 좋습니다.
-              </p>
-            </GlassPanel>
-          ) : null}
+          {result.strengthChakra ? (() => {
+            const meta = chakraMetadata[result.strengthChakra.chakra];
+            return (
+              <GlassPanel className="result-panel-glow p-6">
+                <p className="text-xs uppercase tracking-[0.24em] text-white/42">강점 차크라</p>
+                <div className="mt-3 flex items-center gap-2.5">
+                  <div 
+                    className="h-3 w-3 shrink-0 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.15)]" 
+                    style={{ backgroundColor: meta.color }}
+                  />
+                  <h3 className="text-2xl font-semibold text-[var(--foreground)]">
+                    {chakraLabels[result.strengthChakra.chakra]}
+                    <span className="ml-1.5 text-lg font-medium opacity-50">({meta.number})</span>
+                  </h3>
+                </div>
+                <p className="mt-2 text-sm text-[var(--color-secondary)]">
+                  {chakraFocus[result.strengthChakra.chakra]}
+                </p>
+                <p className="mt-4 text-sm leading-7 text-[var(--foreground-soft)]">
+                  지금의 당신 안에서 비교적 안정적으로 흐르며 전체 리듬을 지지하는
+                  결입니다. 완벽한 균형이라기보다, 현재의 자신을 붙들어주는 조용한
+                  중심으로 이해해보면 좋습니다.
+                </p>
+              </GlassPanel>
+            );
+          })() : null}
         </div>
       </section>
 

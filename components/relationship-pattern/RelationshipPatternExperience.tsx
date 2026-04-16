@@ -56,7 +56,7 @@ export function RelationshipPatternExperience() {
   const [state, setState] = useState<RelationshipPatternRuntimeState>(
     getInitialRelationshipPatternState,
   );
-  const [hasEnteredExperience, setHasEnteredExperience] = useState(false);
+  const [hasEnteredExperience, setHasEnteredExperience] = useState(true);
   const totalQuestions = relationshipPatternQuestions.length;
   const currentQuestion =
     relationshipPatternQuestions[Math.min(state.currentIndex, totalQuestions - 1)];
@@ -128,7 +128,7 @@ export function RelationshipPatternExperience() {
           </div>
 
           <h2 className="font-display text-6xl text-[var(--foreground)] sm:text-7xl">
-            Luna Pattern
+            연애패턴코드
           </h2>
           <p className="mt-5 text-2xl font-medium text-[var(--color-secondary)] sm:text-3xl">
             연애패턴 코드를 읽어보세요

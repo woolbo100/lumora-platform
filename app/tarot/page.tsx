@@ -33,13 +33,14 @@ export default function TarotPage() {
           </div>
 
           <h1 className="font-display text-6xl leading-none text-[var(--foreground)] [text-shadow:0_0_30px_rgba(213,195,165,0.08)] sm:text-7xl md:text-8xl">
-            Luna Tarot
+            타로 리딩
           </h1>
           <p className="mt-5 font-myeongjo text-2xl text-[var(--color-secondary)] sm:text-3xl">
             지금 필요한 메시지를 카드로 확인해보세요
           </p>
-          <p className="mt-8 max-w-2xl text-lg leading-9 text-[var(--foreground-soft)] sm:text-xl">
+          <p className="mt-8 max-w-3xl text-lg leading-9 text-[var(--foreground-soft)] sm:text-xl">
             현재 감정과 관계의 흐름, 지금 필요한 방향을 타로 카드로 조용히 해석합니다.
+            <br className="hidden sm:block" />
             질문을 고르고 카드를 선택하면 지금의 상태와 앞으로의 흐름을 읽어드릴게요.
           </p>
 

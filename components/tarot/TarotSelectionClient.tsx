@@ -108,7 +108,7 @@ export function TarotSelectionClient({
               className={`aurora-hover rounded-[26px] border p-7 text-left transition duration-300 ${
                 active
                   ? "border-[var(--color-secondary)]/32 bg-[linear-gradient(135deg,rgba(122,104,217,0.25),rgba(45,35,82,0.65)_65%,rgba(20,15,45,0.85))] shadow-[0_18px_50px_rgba(60,50,124,0.28)]"
-                  : "border-white/8 bg-[linear-gradient(135deg,rgba(12,14,35,0.72),rgba(10,12,28,0.58)_58%,rgba(8,10,22,0.78))] hover:-translate-y-1 hover:border-white/18 hover:bg-[linear-gradient(135deg,rgba(20,15,45,0.85),rgba(12,14,35,0.72))] hover:shadow-[0_18px_48px_rgba(9,11,24,0.38)]"
+                  : "border-white/8 bg-[linear-gradient(135deg,rgba(25,18,48,0.75),rgba(18,12,38,0.62)_58%,rgba(12,10,32,0.8))] hover:-translate-y-1 hover:border-white/18 hover:bg-[linear-gradient(135deg,rgba(35,22,65,0.85),rgba(25,18,48,0.75))] hover:shadow-[0_18px_48px_rgba(22,14,45,0.38)]"
               }`}
             >
               <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-secondary)]/72">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
+import { TarotBackground } from "@/components/tarot/TarotBackground";
 
 export const metadata: Metadata = {
   title: "LUMORA | 타로 리딩",
@@ -14,8 +15,8 @@ export default function TarotLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="relative overflow-hidden">
-      {/* 타로 전용 배경 레이어들을 제거하여 공통 PageBackground 사용 */}
+    <div className="relative min-h-screen overflow-hidden">
+      <TarotBackground />
       <div className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 pt-32 pb-12 sm:px-8 lg:px-12">
         {children}
       </div>

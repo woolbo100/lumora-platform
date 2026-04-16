@@ -6,28 +6,9 @@ import { serviceHubContent } from "@/lib/service-hub-content";
 
 export default function TarotPage() {
   return (
-    <div className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden">
-      {/* 타로 히어로 전용 배경 레이어 */}
-      <div 
-        className="absolute inset-x-0 top-0 h-[90vh] overflow-hidden"
-        style={{
-          maskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
-          WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)"
-        }}
-      >
-        <div 
-          className="absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat opacity-80 blur-[2px]"
-          style={{ 
-            backgroundImage: "url('/images/tarot/tarotmain.jpg')",
-          }}
-        />
-        <div 
-          className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(10,10,20,0.3)] to-[var(--background)]"
-        />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-20 pt-32 sm:px-8 lg:px-12">
-        <section className="mx-auto flex min-h-[calc(85vh-9rem)] max-w-3xl flex-col items-center justify-start px-0 pt-12 pb-24 text-center">
+    <div className="mx-auto w-full max-w-7xl">
+      <div className="relative z-10 mx-auto max-w-7xl pb-20 sm:px-8 lg:px-12">
+        <section className="mx-auto flex min-h-[calc(100vh-9rem)] max-w-3xl flex-col items-center justify-start px-0 pt-12 pb-24 text-center">
           <div className="mb-8 flex h-22 w-22 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 bg-[radial-gradient(circle,rgba(213,195,165,0.18),rgba(255,255,255,0.03))] text-5xl text-[var(--color-secondary)] shadow-[0_0_60px_rgba(122,104,217,0.16)]">
             ✦
           </div>

@@ -140,7 +140,7 @@ export function TarotSelectionClient({
         </div>
       ) : null}
 
-      <div className="sticky bottom-6 mx-auto mt-10 flex w-full max-w-5xl flex-col items-center justify-center gap-4 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(15,16,34,0.88),rgba(10,12,24,0.78)_58%,rgba(28,21,55,0.82))] px-5 py-5 shadow-[0_24px_70px_rgba(8,10,25,0.38)] backdrop-blur-2xl sm:flex-row">
+      <div className="sticky bottom-6 mx-auto mt-10 flex w-full max-w-5xl flex-col items-center justify-center gap-4 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(25,18,48,0.92),rgba(18,12,38,0.88)_58%,rgba(12,10,32,0.94))] px-5 py-5 shadow-[0_24px_70px_rgba(8,6,20,0.42)] backdrop-blur-2xl sm:flex-row">
         <button
           type="button"
           onClick={() => router.push("/tarot")}
@@ -152,7 +152,7 @@ export function TarotSelectionClient({
           type="button"
           onClick={handleNext}
           disabled={!selectedCategoryKey || selectedCardIds.length !== 3}
-          className="aurora-hover-surface aurora-hover-strong inline-flex min-h-12 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-8 py-3 text-sm font-semibold tracking-[0.18em] text-[#0a0812] shadow-[0_12px_28px_rgba(115,88,232,0.28),0_0_20px_rgba(214,194,255,0.12)] transition duration-300 hover:-translate-y-0.5 hover:brightness-102 disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/40"
+          className="aurora-hover-surface aurora-hover-strong inline-flex min-h-12 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-10 py-3 text-sm font-bold tracking-[0.18em] text-black shadow-[0_12px_28px_rgba(115,88,232,0.28),0_0_20px_rgba(214,194,255,0.12)] transition duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/40"
         >
           결과 보기
         </button>

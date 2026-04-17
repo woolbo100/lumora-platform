@@ -22,11 +22,16 @@ export function PageBackground() {
   // background4.png를 사용해야 하는 서비스 (사주, 작명, 에겐테토)
   const bg4Paths = ["/saju", "/naming", "/egen-vs-teto"];
   const isBg4 = bg4Paths.some(path => pathname?.startsWith(path));
+
+  // background5.png를 사용해야 하는 서비스 (매력코드, 블로그)
+  const bg5Paths = ["/attraction-code", "/blog"];
+  const isBg5 = bg5Paths.some(path => pathname?.startsWith(path));
   
   let heroAuroraImage = "/images/main/background.png";
   if (isBg2) heroAuroraImage = "/images/main/background2.png";
   else if (isBg3) heroAuroraImage = "/images/main/background3.png";
   else if (isBg4) heroAuroraImage = "/images/main/background4.png";
+  else if (isBg5) heroAuroraImage = "/images/main/background5.png";
   return (
     <div className="pointer-events-none fixed inset-0 -z-50 bg-[#0a0514]">
       {/* 베이스 오로라 & 글로우 (은은한 라일락/블루 글로우) */}

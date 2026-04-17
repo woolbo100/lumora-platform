@@ -17,8 +17,8 @@ export function SiteFooter() {
               href="/"
               className="flex flex-col transition duration-200 hover:opacity-90"
             >
-              <span className="text-[10px] uppercase tracking-[0.35em] text-[var(--color-secondary)] sm:text-xs">
-                Inner Symbolism Platform
+              <span className="text-[10px] uppercase tracking-[0.35em] text-[var(--foreground-muted)] opacity-80 sm:text-xs">
+                AURA · LIGHT · ENERGY
               </span>
               <span className="mt-1 font-display text-2xl tracking-wider bg-clip-text text-transparent bg-gradient-to-br from-white via-[#e5d4ff] to-[#bfa3ff] sm:text-3xl">
                 LUMORA

@@ -6,21 +6,22 @@ import { usePathname } from "next/navigation";
 export function PageBackground() {
   const pathname = usePathname();
   
-  // background2.png를 사용해야 하는 서비스 경로들
-  const servicePaths = [
-    "/aura-code",
-    "/emotion",
-    "/dream",
+  // background2.png를 사용해야 하는 서비스 (오라, 감정, 꿈)
+  const bg2Paths = ["/aura-code", "/emotion", "/dream"];
+  const isBg2 = bg2Paths.some(path => pathname?.startsWith(path));
+
+  // background3.png를 사용해야 하는 서비스 (러브, 애착, 연애패턴, 재회)
+  const bg3Paths = [
     "/love-code",
     "/attachment-code",
     "/relationship-pattern",
     "/reunion-test",
   ];
-  const isServicePage = servicePaths.some(path => pathname?.startsWith(path));
+  const isBg3 = bg3Paths.some(path => pathname?.startsWith(path));
   
-  const heroAuroraImage = isServicePage 
-    ? "/images/main/background2.png" 
-    : "/images/main/background.png";
+  let heroAuroraImage = "/images/main/background.png";
+  if (isBg2) heroAuroraImage = "/images/main/background2.png";
+  else if (isBg3) heroAuroraImage = "/images/main/background3.png";
   return (
     <div className="pointer-events-none fixed inset-0 -z-50 bg-[#0a0514]">
       {/* 베이스 오로라 & 글로우 (은은한 라일락/블루 글로우) */}

@@ -15,53 +15,45 @@ const BG_IMAGES = {
 export function PageBackground() {
   const pathname = usePathname();
   
-  // 현재 경로에 맞는 이미지 결정 로직
   const getTargetImage = (path: string | null) => {
     if (["/aura-code", "/emotion", "/dream"].some(p => path?.startsWith(p))) return BG_IMAGES.bg2;
     if (["/love-code", "/attachment-code", "/relationship-pattern", "/reunion-test"].some(p => path?.startsWith(p))) return BG_IMAGES.bg3;
     if (["/saju", "/naming", "/egen-vs-teto"].some(p => path?.startsWith(p))) return BG_IMAGES.bg4;
     if (["/attraction-code", "/blog"].some(p => path?.startsWith(p))) return BG_IMAGES.bg5;
-    return BG_IMAGES.main; // 메인 페이지와 기타 페이지의 기본값으로 main-background 사용
+    return BG_IMAGES.main;
   };
 
   const targetImage = getTargetImage(pathname);
   
-  // 상태 관리: 현재 보이는 이미지와 이전 이미지를 추적
   const [currentImage, setCurrentImage] = useState(targetImage);
   const [prevImage, setPrevImage] = useState(targetImage);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
 
   useEffect(() => {
     if (targetImage !== currentImage) {
       setPrevImage(currentImage);
       setCurrentImage(targetImage);
-      setIsTransitioning(true);
-      
-      // 애니메이션 지속 시간 후 트랜지션 상태 해제 (1초)
-      const timer = setTimeout(() => {
-        setIsTransitioning(false);
-      }, 1000);
-      return () => clearTimeout(timer);
+      setIsLoaded(false); // 새로운 이미지 로딩 시작 시 투명하게 설정
     }
   }, [targetImage, currentImage]);
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-50 bg-[#0a0514]">
-      {/* 1. 이미지 프리로딩 레이어 (숨김 처리) */}
+      {/* 1. 이미지 프리로딩 (숨김) */}
       <div className="hidden">
         {Object.values(BG_IMAGES).map((src) => (
           <Image key={src} src={src} alt="" width={1} height={1} priority />
         ))}
       </div>
 
-      {/* 2. 베이스 오로라 & 글로우 (공통 레이어) */}
+      {/* 2. 공통 효과 레이어 */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(146,88,244,0.18)_0%,rgba(102,52,188,0.12)_30%,rgba(55,24,106,0.06)_60%,transparent_90%)] blur-3xl" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(184,132,255,0.12)_0%,transparent_50%)] blur-2xl" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_70%,rgba(214,164,255,0.1)_0%,transparent_50%)] blur-2xl" />
 
-      {/* 3. 이중 배경 레이어 (크로스페이드) */}
-      {/* 이전 이미지 레이어 (서서히 사라짐) */}
-      <div className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${isTransitioning ? "opacity-0" : "opacity-0"}`}>
+      {/* 3. 이중 배경 레이어 (Fade-on-Load 최적화) */}
+      {/* 하단 레이어: 이전 이미지 (항상 유지) */}
+      <div className="absolute inset-0">
         <Image
           src={prevImage}
           alt=""
@@ -71,25 +63,26 @@ export function PageBackground() {
         />
       </div>
 
-      {/* 현재 이미지 레이어 (서서히 나타남) */}
-      <div className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${isTransitioning ? "opacity-100" : "opacity-100"}`}>
+      {/* 상단 레이어: 현재 이미지 (로딩 완료 시 0.4초 페이드인) */}
+      <div className={`absolute inset-0 transition-opacity duration-400 ease-out ${isLoaded ? "opacity-100" : "opacity-0"}`}>
         <Image
           src={currentImage}
           alt=""
           fill
           priority
           sizes="100vw"
+          onLoad={() => setIsLoaded(true)}
           className="object-cover object-center opacity-[0.32] blur-[2px]"
         />
       </div>
 
-      {/* 4. 오벌레이 효과 (비네팅, 그라데이션 등) */}
+      {/* 4. 오벌레이 효과 */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,transparent_35%,rgba(8,5,16,0.65)_75%,rgba(4,2,8,0.92)_100%)]" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(12,6,28,0.25)] to-[rgba(4,2,10,0.85)]" />
       <div className="absolute inset-0 shadow-[inset_0_-100px_100px_-30px_rgba(2,1,6,0.85)]" />
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:4px_4px]" />
 
-      {/* 5. 메인 페이지 전용 입자 애니메이션 */}
+      {/* 5. 메인 페이지 전용 입자 */}
       {pathname === "/" && (
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-full">

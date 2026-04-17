@@ -17,7 +17,7 @@ export function PageBackground() {
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center opacity-[0.22] blur-[4px]"
+        className="object-cover object-center opacity-[0.32] blur-[2px]"
       />
 
       {/* 비네팅 효과 (가장자리를 깊고 어둡게, 중앙으로 향할수록 투명하게) - 살짝 완화하여 이미지 노출 */}

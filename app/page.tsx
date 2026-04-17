@@ -24,11 +24,11 @@ export default function Home() {
             </p>
             <div className="space-y-4">
               <h2 className="font-display text-[var(--foreground)] [text-shadow:0_0_30px_rgba(255,210,245,0.12)]">
-                <span className="inline-block text-6xl bg-[linear-gradient(to_right,#fff_0%,#e9d5ff_25%,#ffffff_50%,#e9d5ff_75%,#c084fc_100%)] bg-clip-text font-bold tracking-[0.1em] text-transparent bg-[length:200%_auto] [animation:lumoraShimmer_8s_linear_infinite] leading-tight sm:text-7xl lg:text-8xl">
+                <span className="inline-block text-6xl bg-[linear-gradient(to_right,#e9d5ff_0%,#c084fc_30%,#fff_50%,#c084fc_70%,#e9d5ff_100%)] bg-clip-text font-bold tracking-[0.1em] text-transparent bg-[length:200%_auto] [animation:lumoraShimmer_8s_linear_infinite] leading-tight sm:text-7xl lg:text-8xl">
                   LUMORA
                 </span>
                 <br />
-                <span className="inline-block mt-1 text-3xl font-medium tracking-tighter opacity-95 leading-[1.1] sm:text-5xl lg:text-5xl">
+                <span className="inline-block mt-2 text-4xl font-medium tracking-tighter opacity-95 leading-[1.1] sm:text-6xl lg:text-6xl">
                   보이지 않는 끌림의 구조
                 </span>
               </h2>

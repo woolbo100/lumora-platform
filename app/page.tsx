@@ -23,8 +23,12 @@ export default function Home() {
               AURA · LIGHT · ENERGY
             </p>
             <div className="space-y-4">
-              <h2 className="font-display text-5xl leading-[1.14] whitespace-pre-line text-[var(--foreground)] [text-shadow:0_0_30px_rgba(255,210,245,0.2)] sm:text-6xl lg:text-7xl">
-                {"루모라\n보이지 않는 끌림의 구조"}
+              <h2 className="font-display text-5xl leading-[1.14] text-[var(--foreground)] [text-shadow:0_0_30px_rgba(255,210,245,0.15)] sm:text-6xl lg:text-7xl">
+                <span className="inline-block bg-[linear-gradient(135deg,#fff_0%,#d8b4fe_50%,#818cf8_100%)] bg-clip-text font-bold tracking-wider text-transparent">
+                  LUMORA
+                </span>
+                <br />
+                보이지 않는 끌림의 구조
               </h2>
               <p className="text-2xl font-medium whitespace-pre-line text-[var(--color-secondary)] sm:text-3xl">
                 {"루모라, 아우라와 빛이 만나는 지점\n당신의 마음을 읽고 흐름을 비추는 공간"}

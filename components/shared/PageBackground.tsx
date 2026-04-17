@@ -7,7 +7,15 @@ export function PageBackground() {
   const pathname = usePathname();
   
   // background2.png를 사용해야 하는 서비스 경로들
-  const servicePaths = ["/aura-code", "/emotion", "/dream"];
+  const servicePaths = [
+    "/aura-code",
+    "/emotion",
+    "/dream",
+    "/love-code",
+    "/attachment-code",
+    "/relationship-pattern",
+    "/reunion-test",
+  ];
   const isServicePage = servicePaths.some(path => pathname?.startsWith(path));
   
   const heroAuroraImage = isServicePage 

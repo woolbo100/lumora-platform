@@ -1,7 +1,6 @@
 import Image from "next/image";
 
-const heroAuroraImage =
-  "/images/main/buzasun_aura_energy_background_glowing_light_waves_purple_pin_32813a50-5dc5-4f7a-ae75-17b23889eccd_3.png";
+const heroAuroraImage = "/images/main/background.png";
 
 export function PageBackground() {
   return (

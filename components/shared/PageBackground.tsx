@@ -1,8 +1,18 @@
-import Image from "next/image";
+"use client";
 
-const heroAuroraImage = "/images/main/background.png";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export function PageBackground() {
+  const pathname = usePathname();
+  
+  // background2.png를 사용해야 하는 서비스 경로들
+  const servicePaths = ["/aura-code", "/emotion", "/dream"];
+  const isServicePage = servicePaths.some(path => pathname?.startsWith(path));
+  
+  const heroAuroraImage = isServicePage 
+    ? "/images/main/background2.png" 
+    : "/images/main/background.png";
   return (
     <div className="pointer-events-none fixed inset-0 -z-50 bg-[#0a0514]">
       {/* 베이스 오로라 & 글로우 (은은한 라일락/블루 글로우) */}

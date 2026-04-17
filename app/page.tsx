@@ -49,8 +49,8 @@ export default function Home() {
             >
               나의 코드 열기
             </CTAButton>
-            <CTAButton href="/emotion" variant="secondary">
-              매력 흐름 확인하기
+            <CTAButton href="/blog" variant="secondary">
+              연애 칼럼 보러가기
             </CTAButton>
           </div>
         </div>

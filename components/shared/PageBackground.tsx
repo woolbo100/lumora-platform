@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const BG_IMAGES = {
+  main: "/images/main/main-background.png",
   bg2: "/images/main/background2.png",
   bg3: "/images/main/background3.png",
   bg4: "/images/main/background4.png",
@@ -20,7 +21,7 @@ export function PageBackground() {
     if (["/love-code", "/attachment-code", "/relationship-pattern", "/reunion-test"].some(p => path?.startsWith(p))) return BG_IMAGES.bg3;
     if (["/saju", "/naming", "/egen-vs-teto"].some(p => path?.startsWith(p))) return BG_IMAGES.bg4;
     if (["/attraction-code", "/blog"].some(p => path?.startsWith(p))) return BG_IMAGES.bg5;
-    return BG_IMAGES.bg2; // 메인 페이지와 기타 페이지의 기본값으로 bg2 사용
+    return BG_IMAGES.main; // 메인 페이지와 기타 페이지의 기본값으로 main-background 사용
   };
 
   const targetImage = getTargetImage(pathname);

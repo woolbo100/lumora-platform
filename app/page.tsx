@@ -24,10 +24,10 @@ export default function Home() {
             </p>
             <div className="space-y-4">
               <h2 className="font-display text-5xl leading-[1.14] whitespace-pre-line text-[var(--foreground)] [text-shadow:0_0_30px_rgba(255,210,245,0.2)] sm:text-6xl lg:text-7xl">
-                {"루모라, 아우라와 빛이 만나는 지점"}
+                {"루모라\n보이지 않는 끌림의 구조"}
               </h2>
               <p className="text-2xl font-medium whitespace-pre-line text-[var(--color-secondary)] sm:text-3xl">
-                {"당신의 마음을 읽고\n흐름을 비추는 공간"}
+                {"루모라, 아우라와 빛이 만나는 지점\n당신의 마음을 읽고 흐름을 비추는 공간"}
               </p>
             </div>
             <p className="mx-auto max-w-3xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">

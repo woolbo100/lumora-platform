@@ -27,7 +27,7 @@ export default function Home() {
                 {"루모라\n보이지 않는 끌림의 구조"}
               </h2>
               <p className="text-2xl font-medium whitespace-pre-line text-[var(--color-secondary)] sm:text-3xl">
-                {"당신의 내면에는 이미\n빛나는 코드가 존재합니다"}
+                {"당신의 마음을 읽고\n흐름을 비추는 공간"}
               </p>
             </div>
             <p className="mx-auto max-w-3xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">

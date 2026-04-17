@@ -24,7 +24,7 @@ export default function Home() {
             </p>
             <div className="space-y-4">
               <h2 className="font-display text-5xl leading-[1.14] whitespace-pre-line text-[var(--foreground)] [text-shadow:0_0_30px_rgba(255,210,245,0.2)] sm:text-6xl lg:text-7xl">
-                {"보이지 않던 당신의 빛,\n루모라에서 선명해지다"}
+                {"루모라\n보이지 않는 끌림의 구조"}
               </h2>
               <p className="text-2xl font-medium whitespace-pre-line text-[var(--color-secondary)] sm:text-3xl">
                 {"당신의 내면에는 이미\n빛나는 코드가 존재합니다"}

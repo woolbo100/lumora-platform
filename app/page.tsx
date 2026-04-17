@@ -18,8 +18,8 @@ export default function Home() {
             <HeroSplineScene scene="https://prod.spline.design/0btuJlO8ODRyNQ1h/scene.splinecode" />
           </div> */}
 
-          <div className="relative z-10 w-full max-w-4xl space-y-6">
-            <p className="text-sm uppercase tracking-[0.3em] text-[var(--foreground-muted)]">
+          <div className="relative z-10 w-full max-w-4xl space-y-4">
+            <p className="text-sm uppercase tracking-[0.3em] text-[var(--foreground-muted)] opacity-80">
               AURA · LIGHT · ENERGY
             </p>
             <div className="space-y-4">

@@ -257,3 +257,12 @@ a {
     filter: brightness(1.1);
   }
 }
+
+@keyframes lumoraShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

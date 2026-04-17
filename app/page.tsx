@@ -24,7 +24,7 @@ export default function Home() {
             </p>
             <div className="space-y-4">
               <h2 className="font-display text-[var(--foreground)] [text-shadow:0_0_30px_rgba(255,210,245,0.12)]">
-                <span className="inline-block text-6xl bg-[linear-gradient(to_right,#8b5cf6_0%,#6366f1_25%,#ddd6fe_50%,#6366f1_75%,#8b5cf6_100%)] bg-clip-text font-bold tracking-[0.1em] text-transparent bg-[length:200%_auto] [animation:lumoraShimmer_10s_linear_infinite] leading-tight sm:text-7xl lg:text-8xl">
+                <span className="inline-block text-6xl bg-[linear-gradient(to_right,#6d28d9_0%,#c4b5fd_25%,#fff_50%,#c4b5fd_75%,#6d28d9_100%)] bg-clip-text font-bold tracking-[0.1em] text-transparent bg-[length:200%_auto] [animation:lumoraShimmer_10s_linear_infinite] leading-tight sm:text-7xl lg:text-8xl">
                   LUMORA
                 </span>
                 <br />

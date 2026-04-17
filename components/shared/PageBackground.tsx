@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const BG_IMAGES = {
-  main: "/images/main/main-background.png",
+  main: "/images/main/main-background2.png",
   bg2: "/images/main/background2.png",
   bg3: "/images/main/background3.png",
   bg4: "/images/main/background4.png",

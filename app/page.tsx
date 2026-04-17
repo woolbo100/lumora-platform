@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className="relative z-0 flex min-h-screen w-full flex-col overflow-hidden">
       {/* 전역 PageBackground가 layout.tsx에서 렌더링되므로 여기서는 제거함 */}
-      <section className="relative z-0 flex w-full flex-1 items-center justify-center overflow-visible pb-28 pt-28 lg:pb-36 lg:pt-36">
+      <section className="relative z-0 flex w-full flex-1 items-center justify-center overflow-visible pb-28 pt-32 lg:pb-36 lg:pt-48">
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-6 text-center sm:px-8 lg:px-12">
           {/* <div className="pointer-events-none absolute inset-x-0 top-[46%] -z-0 h-[28rem] -translate-y-1/2 opacity-46">
             <HeroSplineScene scene="https://prod.spline.design/0btuJlO8ODRyNQ1h/scene.splinecode" />

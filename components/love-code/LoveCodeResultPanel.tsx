@@ -103,6 +103,24 @@ export function LoveCodeResultPanel({ result }: LoveCodeResultPanelProps) {
             <p className="mt-8 text-lg leading-[1.8] text-white/80 max-w-2xl mx-auto sm:text-xl">
               {result.detailedCompatibility}
             </p>
+
+            <div className="mt-14 w-full grid grid-cols-1 gap-6 sm:grid-cols-2 text-left">
+              {result.compatibilityMetrics.map((metric) => (
+                <div key={metric.label} className="group relative flex flex-col gap-3 rounded-2xl border border-white/5 bg-white/[0.03] p-6 transition-all hover:bg-white/[0.06] hover:border-white/10">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold tracking-wider text-white/90">{metric.label}</span>
+                    <span className="text-sm font-bold text-[var(--color-secondary)]">{metric.score}%</span>
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                    <div 
+                      className="h-full rounded-full bg-gradient-to-r from-[var(--color-secondary)]/60 to-[var(--color-secondary)] transition-all duration-1000 ease-out"
+                      style={{ width: `${metric.score}%` }}
+                    />
+                  </div>
+                  <p className="text-xs leading-relaxed text-white/50">{metric.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </GlassPanel>
       </section>

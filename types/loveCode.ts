@@ -36,6 +36,12 @@ export type ZodiacSign =
   | "aquarius"
   | "pisces";
 
+export type CompatibilityMetric = {
+  label: string;
+  score: number;
+  description: string;
+};
+
 export type LoveCodeResult = {
   compatibilityScore: number;
   oneLineDiagnosis: string;
@@ -57,6 +63,7 @@ export type LoveCodeResult = {
   partnerSignKeyword: string;
   partnerSignDeepReading: string;
   detailedCompatibility: string;
+  compatibilityMetrics: CompatibilityMetric[];
   todayActionList: string[];
   todayActionExampleList: string[];
   coreMindset: string;

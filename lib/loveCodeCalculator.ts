@@ -235,6 +235,45 @@ function buildDetailedCompatibility(mySign: ZodiacSign, partnerSign: ZodiacSign)
   return synergy[`${myMeta.element}-${partnerMeta.element}`] || synergy[`${partnerMeta.element}-${myMeta.element}`] || "서로 다른 리듬을 가졌기에 배울 점이 많은 관계입니다. 각자의 고유한 장점을 존중하면서 접점을 찾아가는 과정 그 자체가 관계의 큰 성장이 될 것입니다.";
 }
 
+function buildCompatibilityMetrics(mySign: ZodiacSign, partnerSign: ZodiacSign, status: LoveCodeRelationshipStatus): { label: string; score: number; description: string }[] {
+  const myMeta = zodiacMeta[mySign];
+  const partnerMeta = zodiacMeta[partnerSign];
+  
+  // 기본 점수 설정 (속성 궁합 기반)
+  const isSameElement = myMeta.element === partnerMeta.element;
+  const isComplementary = 
+    (myMeta.element === "fire" && partnerMeta.element === "air") ||
+    (myMeta.element === "air" && partnerMeta.element === "fire") ||
+    (myMeta.element === "earth" && partnerMeta.element === "water") ||
+    (myMeta.element === "water" && partnerMeta.element === "earth");
+
+  const baseScore = isSameElement ? 85 : isComplementary ? 78 : 65;
+  const statusMod = status === "dating" ? 5 : status === "some" ? 2 : -3;
+
+  return [
+    {
+      label: "대화의 리듬",
+      score: Math.min(98, baseScore + (myMeta.element === "air" || partnerMeta.element === "air" ? 10 : 0) + statusMod),
+      description: "생각을 공유하고 서로의 의도를 파악하는 속도와 정확도입니다."
+    },
+    {
+      label: "정서적 유대",
+      score: Math.min(98, baseScore + (myMeta.element === "water" || partnerMeta.element === "water" ? 12 : 0) + statusMod),
+      description: "말하지 않아도 느껴지는 감정적인 연결감과 깊은 공감 능력입니다."
+    },
+    {
+      label: "에너지 시너지",
+      score: Math.min(98, baseScore + (myMeta.element === "fire" || partnerMeta.element === "fire" ? 8 : 0) + statusMod),
+      description: "함께 있을 때 만들어내는 활력과 서로에게 주는 영감의 크기입니다."
+    },
+    {
+      label: "현실적 안정감",
+      score: Math.min(98, baseScore + (myMeta.element === "earth" || partnerMeta.element === "earth" ? 10 : 0) + statusMod),
+      description: "관계를 지속 가능하게 만드는 신뢰의 두께와 생활 양식의 조화입니다."
+    }
+  ];
+}
+
 function buildTodayActionList(situation: LoveCodeCurrentSituation): string[] {
   const map: Record<LoveCodeCurrentSituation, string[]> = {
     "no-contact-first": ["상대의 침묵을 부정적인 신호로만 읽지 않기", "부담을 덜어낸 아주 가벼운 인사 건네기", "상대의 관심사와 연결된 짧은 정보 공유하기"],
@@ -316,6 +355,7 @@ export function calculateLoveCodeResult(input: LoveCodeInput): LoveCodeResult {
     partnerSignKeyword: partnerMeta.keyword,
     partnerSignDeepReading: partnerMeta.deepReading,
     detailedCompatibility: buildDetailedCompatibility(mySign, partnerSign),
+    compatibilityMetrics: buildCompatibilityMetrics(mySign, partnerSign, input.relationshipStatus),
     todayActionList: buildTodayActionList(input.currentSituation),
     todayActionExampleList: buildTodayActionExampleList(input.currentSituation),
     coreMindset: buildCoreMindset(input.currentSituation),

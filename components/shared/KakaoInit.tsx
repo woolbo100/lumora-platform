@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Script from "next/script";
 
 declare global {
   interface Window {
@@ -49,16 +50,9 @@ export default function KakaoInit() {
     // 1. 이미 로드되어 있는지 확인
     if (tryInit()) return;
 
-    // 2. 스크립트 로드 이벤트 대기
-    const handleScriptLoad = () => {
-      console.log("[Kakao] script load event received in KakaoInit");
-      tryInit();
-    };
-    window.addEventListener("kakao-script-loaded", handleScriptLoad);
-
-    // 3. 폴링 (보조 수단)
+    // 2. 폴링 (백업용)
     let retryCount = 0;
-    const maxRetries = 10; // 10 * 500ms = 5 seconds
+    const maxRetries = 20; // 10 seconds
     const interval = setInterval(() => {
       retryCount++;
       if (tryInit() || retryCount >= maxRetries) {
@@ -71,11 +65,18 @@ export default function KakaoInit() {
       }
     }, 500);
 
-    return () => {
-      window.removeEventListener("kakao-script-loaded", handleScriptLoad);
-      clearInterval(interval);
-    };
+    return () => clearInterval(interval);
   }, []);
 
-  return null;
+  return (
+    <Script
+      src="https://developers.kakao.com/sdk/js/kakao.js"
+      strategy="afterInteractive"
+      onLoad={() => {
+        console.log("[Kakao] script loaded via Script component");
+        window.dispatchEvent(new CustomEvent("kakao-script-loaded"));
+        // tryInit은 useEffect 내의 폴링이나 이벤트를 통해 실행됨
+      }}
+    />
+  );
 }

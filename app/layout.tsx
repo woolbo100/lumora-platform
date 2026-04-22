@@ -64,14 +64,6 @@ export default function RootLayout({
             strategy="afterInteractive"
           />
         ) : null}
-        <Script
-          src="https://developers.kakao.com/sdk/js/kakao.js"
-          strategy="afterInteractive"
-          onLoad={() => {
-            console.log("[Kakao] script loaded");
-            window.dispatchEvent(new CustomEvent("kakao-script-loaded"));
-          }}
-        />
       </head>
       <body
         className="min-h-full bg-transparent text-[var(--foreground)] antialiased"

@@ -219,19 +219,8 @@ export function LoveCodeResultPanel({ result }: LoveCodeResultPanelProps) {
           resultTitle={`${result.mySignLabel} × ${result.partnerSignLabel} 궁합`}
           resultSummary={result.constellationSummary}
           hubUrl="/love-code"
+          restartUrl="/love-code"
         />
-        
-        <div className="mt-20 flex flex-col gap-8 items-center">
-          <CTAButton href="/love-code" variant="secondary" className="px-16 py-5 text-lg">
-            다시 분석하기
-          </CTAButton>
-          <Link 
-            href="/services" 
-            className="text-sm tracking-widest uppercase font-bold text-white/30 hover:text-[var(--color-secondary)] hover:text-white/60 transition-all duration-300 border-b border-transparent hover:border-white/20 pb-1"
-          >
-            Explore All Services
-          </Link>
-        </div>
       </section>
     </div>
   );

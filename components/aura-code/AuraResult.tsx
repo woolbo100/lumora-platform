@@ -136,22 +136,12 @@ export function AuraResult() {
             </div>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-4">
-            <CTAButton href="/aura-code/test">다시 테스트하기</CTAButton>
-            <button
-              type="button"
-              onClick={reset}
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/20 px-5 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
-            >
-              결과 초기화
-            </button>
-          </div>
-
           <ResultShareActions
             testName="오라코드 테스트"
             resultTitle={result.mainAura.name}
             resultSummary={result.summary}
             hubUrl="/aura-code"
+            restartUrl="/aura-code/test"
           />
         </GlassPanel>
 

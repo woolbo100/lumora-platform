@@ -141,21 +141,12 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
       <GlassPanel className="result-panel-glow p-8">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Premium Preview</p>
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)]">{result.premium_preview}</p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/dream/start"
-            className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/20 px-6 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
-          >
-            다시 해몽하기
-          </Link>
-        </div>
-      </GlassPanel>
-
       <ResultShareActions
         testName="꿈 해몽"
         resultTitle="꿈 해몽 결과"
         resultSummary={result.summary}
         hubUrl="/dream"
+        restartUrl="/dream/start"
       />
     </main>
   );

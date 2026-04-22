@@ -115,26 +115,12 @@ export default async function TarotResultPage(
         </div>
       </GlassPanel>
 
-      <div className="flex flex-wrap gap-4">
-        <Link
-          href={`/tarot/select?category=${category}`}
-          className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/15 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.22))] px-6 py-3 text-sm font-semibold tracking-[0.18em] text-[var(--foreground-soft)] transition duration-300 hover:-translate-y-0.5 hover:border-white/25"
-        >
-          카드 다시 고르기
-        </Link>
-        <Link
-          href="/tarot"
-          className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(135deg,rgba(147,131,235,0.92),rgba(112,96,204,0.9)_52%,rgba(77,62,152,0.92))] px-6 py-3 text-sm font-semibold tracking-[0.18em] text-[#fbf6f0] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(88,69,173,0.32)]"
-        >
-          다른 주제로 다시 보기
-        </Link>
-      </div>
-
       <ResultShareActions
         testName="타로 리딩"
         resultTitle={`${categoryInfo.label} 타로 리딩 결과`}
         resultSummary={`선택한 카드: ${selectedCards.map((c) => c.nameKr).join(", ")}`}
         hubUrl="/tarot"
+        restartUrl={`/tarot/select?category=${category}`}
       />
     </main>
   );

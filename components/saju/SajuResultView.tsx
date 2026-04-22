@@ -351,7 +351,6 @@ export function SajuResultView({ result }: SajuResultViewProps) {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <CTAButton href="/saju/reading">다시 입력하기</CTAButton>
             <Link
               href="/tarot"
               className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/20 px-5 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
@@ -367,6 +366,7 @@ export function SajuResultView({ result }: SajuResultViewProps) {
         resultTitle={`${result.profile.name}님의 사주 분석`}
         resultSummary={result.interp.core}
         hubUrl="/saju"
+        restartUrl="/saju/reading"
       />
     </div>
   );

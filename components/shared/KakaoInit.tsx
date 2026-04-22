@@ -12,9 +12,15 @@ export default function KakaoInit() {
   useEffect(() => {
     const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
     
-    if (typeof window !== "undefined" && window.Kakao) {
-      if (!window.Kakao.isInitialized() && kakaoKey) {
-        window.Kakao.init(kakaoKey);
+    if (typeof window !== "undefined") {
+      console.log("Kakao SDK Object:", window.Kakao);
+      if (window.Kakao) {
+        if (!window.Kakao.isInitialized() && kakaoKey) {
+          window.Kakao.init(kakaoKey);
+          console.log("Kakao SDK Initialized:", window.Kakao.isInitialized());
+        }
+      } else {
+        console.warn("Kakao SDK not found on window object.");
       }
     }
   }, []);

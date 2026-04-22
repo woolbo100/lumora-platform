@@ -127,22 +127,12 @@ export function ReunionResultPanel({
           </div>
         </div>
 
-        <div className="mt-8 flex flex-wrap gap-4">
-          <CTAButton href="/reunion-test/test">테스트 다시하기</CTAButton>
-          <button
-            type="button"
-            onClick={resetStoredResult}
-            className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/20 px-5 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
-          >
-            결과 초기화
-          </button>
-        </div>
-
         <ResultShareActions
           testName="재회 가능성 테스트"
           resultTitle={result.title}
           resultSummary={result.shortDescription}
           hubUrl="/reunion-test"
+          restartUrl="/reunion-test/test"
         />
       </GlassPanel>
 

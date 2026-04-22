@@ -309,20 +309,12 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
             ))}
           </div>
         </div>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/emotion/start"
-            className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/20 px-6 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
-          >
-            다시 리딩하기
-          </Link>
-        </div>
-
         <ResultShareActions
           testName="감정 리딩"
           resultTitle="감정 리딩 결과"
           resultSummary={`감지된 감정: ${emotionLabel}, 강도: ${result.intensity}단계`}
           hubUrl="/emotion"
+          restartUrl="/emotion/start"
         />
       </GlassPanel>
     </main>

@@ -135,12 +135,6 @@ export default async function NamingResultPage({ searchParams }: NamingResultPag
             >
               프리미엄 리포트 보기
             </Link>
-            <Link
-              href="/naming/start"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/20 px-6 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
-            >
-              다시 설계하기
-            </Link>
           </div>
         </GlassPanel>
       </div>
@@ -156,6 +150,7 @@ export default async function NamingResultPage({ searchParams }: NamingResultPag
         resultTitle="나에게 어울리는 이름 방향"
         resultSummary={result.namingDirection}
         hubUrl="/naming"
+        restartUrl="/naming/start"
       />
     </main>
   );

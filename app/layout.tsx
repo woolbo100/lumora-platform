@@ -66,7 +66,7 @@ export default function RootLayout({
         ) : null}
         <Script
           src="https://developers.kakao.com/sdk/js/kakao.js"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
       </head>
       <body

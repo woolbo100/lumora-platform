@@ -141,6 +141,8 @@ export default async function DreamResultPage({ searchParams }: DreamResultPageP
       <GlassPanel className="result-panel-glow p-8">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Premium Preview</p>
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)]">{result.premium_preview}</p>
+      </GlassPanel>
+
       <ResultShareActions
         testName="꿈 해몽"
         resultTitle="꿈 해몽 결과"

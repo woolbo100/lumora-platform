@@ -24,9 +24,24 @@ export function ResultShareActions({
 }: ResultShareActionsProps) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [currentUrl, setCurrentUrl] = useState("");
+  const [isSdkReady, setIsSdkReady] = useState(false);
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
+    
+    // 초기 상태 확인
+    if (window.isKakaoInitialized) {
+      setIsSdkReady(true);
+    }
+
+    // 이벤트 리스너 등록
+    const handleInitComplete = () => {
+      console.log("Kakao SDK initialization event received in ResultShareActions");
+      setIsSdkReady(true);
+    };
+
+    window.addEventListener("kakao-init-complete", handleInitComplete);
+    return () => window.removeEventListener("kakao-init-complete", handleInitComplete);
   }, []);
 
   const effectiveResultUrl = initialResultUrl || currentUrl;
@@ -85,48 +100,37 @@ export function ResultShareActions({
   };
 
   const handleKakaoShare = () => {
-    if (typeof window !== "undefined") {
-      if (window.Kakao) {
-        try {
-          const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
-          
-          if (!window.Kakao.isInitialized()) {
-            if (kakaoKey) {
-              window.Kakao.init(kakaoKey);
-            } else {
-              throw new Error("카카오 JS 키가 설정되지 않았습니다.");
-            }
-          }
-          
-          window.Kakao.Share.sendDefault({
-            objectType: "feed",
-            content: {
-              title: `[루모라] ${testName} 결과 공유`,
-              description: `내 결과: ${resultTitle}\n${resultSummary}`,
-              imageUrl: "https://lumoracode.kr/images/main/main-background.png",
+    if (!isSdkReady) {
+      showToast("카카오톡 SDK를 로딩 중입니다. 잠시 후 다시 시도해주세요.");
+      return;
+    }
+
+    if (typeof window !== "undefined" && window.Kakao) {
+      try {
+        window.Kakao.Share.sendDefault({
+          objectType: "feed",
+          content: {
+            title: `[루모라] ${testName} 결과 공유`,
+            description: `내 결과: ${resultTitle}\n${resultSummary}`,
+            imageUrl: "https://lumoracode.kr/images/main/main-background.png",
+            link: {
+              mobileWebUrl: effectiveResultUrl,
+              webUrl: effectiveResultUrl,
+            },
+          },
+          buttons: [
+            {
+              title: "결과 보러가기",
               link: {
                 mobileWebUrl: effectiveResultUrl,
                 webUrl: effectiveResultUrl,
               },
             },
-            buttons: [
-              {
-                title: "결과 보러가기",
-                link: {
-                  mobileWebUrl: effectiveResultUrl,
-                  webUrl: effectiveResultUrl,
-                },
-              },
-            ],
-          });
-        } catch (error) {
-          console.error("카카오톡 공유 에러 상세:", error);
-          const errorMessage = (error as Error).message;
-          showToast(`공유 에러: ${errorMessage || "알 수 없는 오류"}`);
-        }
-      } else {
-        console.error("window.Kakao 객체를 찾을 수 없습니다.");
-        showToast("카카오톡 SDK가 아직 로드되지 않았습니다.");
+          ],
+        });
+      } catch (error) {
+        console.error("카카오톡 공유 에러 상세:", error);
+        showToast("공유 중 오류가 발생했습니다.");
       }
     }
   };
@@ -170,12 +174,16 @@ export function ResultShareActions({
         {/* 카카오톡 공유하기 */}
         <button
           onClick={handleKakaoShare}
-          className="aurora-hover-surface relative z-20 flex min-h-[58px] w-full items-center justify-center gap-2.5 rounded-[24px] border border-[#FEE500]/30 bg-[#FEE500] px-8 py-4 text-base font-bold tracking-[0.05em] text-[#191919] shadow-[0_12px_28px_rgba(254,229,0,0.15)] transition duration-300 hover:-translate-y-1 hover:brightness-105 active:scale-[0.98]"
+          disabled={!isSdkReady}
+          className={`aurora-hover-surface relative z-20 flex min-h-[58px] w-full items-center justify-center gap-2.5 rounded-[24px] border border-[#FEE500]/30 bg-[#FEE500] px-8 py-4 text-base font-bold tracking-[0.05em] text-[#191919] shadow-[0_12px_28px_rgba(254,229,0,0.15)] transition duration-300 ${
+            isSdkReady ? "hover:-translate-y-1 hover:brightness-105 active:scale-[0.98]" : "opacity-50 cursor-not-allowed"
+          }`}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 3C7.029 3 3 6.128 3 9.986C3 12.482 4.603 14.68 7.032 15.932L6.012 19.673C5.928 19.981 6.282 20.218 6.541 20.046L11.002 17.075C11.33 17.108 11.662 17.126 12 17.126C16.971 17.126 21 13.998 21 10.14C21 6.282 16.971 3 12 3Z" fill="#191919"/>
           </svg>
           카카오톡 공유하기
+          {!isSdkReady && <span className="ml-2 text-xs font-normal opacity-70">(로딩 중...)</span>}
         </button>
 
         {/* 내 테스트 결과 공유하기 (시스템 공유 / 링크 복사) */}

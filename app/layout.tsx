@@ -68,7 +68,7 @@ export default function RootLayout({
           src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
           integrity="sha384-978vR9Vp7fUre/Nno7Yp2k97TshvI+jU68B0r4KqA6N3L9K2vS3M3E4M6G/0iXyL"
           crossOrigin="anonymous"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
       </head>
       <body

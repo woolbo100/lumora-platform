@@ -142,7 +142,7 @@ export function ResultShareActions({
   };
 
   return (
-    <div className="relative mt-16 flex flex-col items-center gap-10 w-full max-w-md mx-auto px-4 pb-12">
+    <div className="relative mt-10 flex flex-col items-center gap-12 w-full max-w-md mx-auto px-4 pb-12">
       {/* 1차 액션 영역: 다시 분석하기 & 홈 바로가기 */}
       <div className="grid w-full grid-cols-2 gap-4">
         <Link
@@ -160,7 +160,7 @@ export function ResultShareActions({
       </div>
 
       {/* 공유 섹션 */}
-      <div className="flex w-full flex-col items-center gap-4 pt-10 border-t border-white/10 relative">
+      <div className="flex w-full flex-col items-center gap-4 pt-12 border-t border-white/10 relative">
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0C0E1C] px-4 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-secondary)]/70">
           Share Results
         </div>

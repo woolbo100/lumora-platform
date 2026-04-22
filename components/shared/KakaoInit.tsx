@@ -6,45 +6,54 @@ declare global {
   interface Window {
     Kakao: any;
     isKakaoInitialized: boolean;
+    kakaoInitError: string | null;
   }
 }
 
 export default function KakaoInit() {
   useEffect(() => {
     const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
+    
     if (!kakaoKey) {
-      console.warn("Kakao JS Key is missing in environment variables.");
+      console.error("Kakao JS Key is missing! Please set NEXT_PUBLIC_KAKAO_JS_KEY in your environment variables.");
+      window.kakaoInitError = "JS 키 누락";
+      window.dispatchEvent(new CustomEvent("kakao-init-failed", { detail: "키 누락" }));
       return;
     }
 
     let retryCount = 0;
-    const maxRetries = 20; // 20 * 500ms = 10 seconds
+    const maxRetries = 30; // 30 * 500ms = 15 seconds
 
     const initKakao = () => {
       if (typeof window !== "undefined" && window.Kakao) {
-        if (!window.Kakao.isInitialized()) {
-          window.Kakao.init(kakaoKey);
-          console.log("Kakao SDK Initialized successfully");
+        try {
+          if (!window.Kakao.isInitialized()) {
+            window.Kakao.init(kakaoKey);
+          }
+          console.log("Kakao SDK Status: Initialized successfully");
+          window.isKakaoInitialized = true;
+          window.dispatchEvent(new CustomEvent("kakao-init-complete"));
+          return true;
+        } catch (err) {
+          console.error("Kakao initialization error:", err);
+          window.kakaoInitError = (err as Error).message;
+          window.dispatchEvent(new CustomEvent("kakao-init-failed", { detail: (err as Error).message }));
+          return true; // Stop retrying on actual error
         }
-        window.isKakaoInitialized = true;
-        // 알림 이벤트 발생 (다른 컴포넌트에서 감지 가능하도록)
-        window.dispatchEvent(new CustomEvent("kakao-init-complete"));
-        return true;
       }
       return false;
     };
 
     // 즉시 시도
     if (!initKakao()) {
-      // 로드되지 않았으면 폴링 시작
       const interval = setInterval(() => {
         retryCount++;
-        console.log(`Retrying Kakao SDK initialization... (${retryCount}/${maxRetries})`);
-        
         if (initKakao() || retryCount >= maxRetries) {
           clearInterval(interval);
           if (retryCount >= maxRetries && !window.isKakaoInitialized) {
-            console.error("Kakao SDK failed to load after maximum retries.");
+            console.error("Kakao SDK failed to load within 15s. Check for ad-blockers or network issues.");
+            window.kakaoInitError = "로딩 시간 초과";
+            window.dispatchEvent(new CustomEvent("kakao-init-failed", { detail: "시간 초과" }));
           }
         }
       }, 500);

@@ -25,6 +25,7 @@ export function ResultShareActions({
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [currentUrl, setCurrentUrl] = useState("");
   const [isSdkReady, setIsSdkReady] = useState(false);
+  const [sdkError, setSdkError] = useState<string | null>(null);
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
@@ -32,16 +33,29 @@ export function ResultShareActions({
     // 초기 상태 확인
     if (window.isKakaoInitialized) {
       setIsSdkReady(true);
+    } else if (window.kakaoInitError) {
+      setSdkError(window.kakaoInitError);
     }
 
-    // 이벤트 리스너 등록
+    // 성공 이벤트 리스너
     const handleInitComplete = () => {
-      console.log("Kakao SDK initialization event received in ResultShareActions");
       setIsSdkReady(true);
+      setSdkError(null);
+    };
+
+    // 실패 이벤트 리스너
+    const handleInitFailed = (e: any) => {
+      setSdkError(e.detail || "초기화 실패");
+      setIsSdkReady(false);
     };
 
     window.addEventListener("kakao-init-complete", handleInitComplete);
-    return () => window.removeEventListener("kakao-init-complete", handleInitComplete);
+    window.addEventListener("kakao-init-failed", handleInitFailed);
+    
+    return () => {
+      window.removeEventListener("kakao-init-complete", handleInitComplete);
+      window.removeEventListener("kakao-init-failed", handleInitFailed);
+    };
   }, []);
 
   const effectiveResultUrl = initialResultUrl || currentUrl;
@@ -183,7 +197,11 @@ export function ResultShareActions({
             <path d="M12 3C7.029 3 3 6.128 3 9.986C3 12.482 4.603 14.68 7.032 15.932L6.012 19.673C5.928 19.981 6.282 20.218 6.541 20.046L11.002 17.075C11.33 17.108 11.662 17.126 12 17.126C16.971 17.126 21 13.998 21 10.14C21 6.282 16.971 3 12 3Z" fill="#191919"/>
           </svg>
           카카오톡 공유하기
-          {!isSdkReady && <span className="ml-2 text-xs font-normal opacity-70">(로딩 중...)</span>}
+          {!isSdkReady && (
+            <span className="ml-2 text-xs font-normal opacity-70">
+              {sdkError ? `(${sdkError})` : "(로딩 중...)"}
+            </span>
+          )}
         </button>
 
         {/* 내 테스트 결과 공유하기 (시스템 공유 / 링크 복사) */}

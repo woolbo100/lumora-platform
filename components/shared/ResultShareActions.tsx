@@ -88,9 +88,14 @@ export function ResultShareActions({
     if (typeof window !== "undefined") {
       if (window.Kakao) {
         try {
+          const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
+          
           if (!window.Kakao.isInitialized()) {
-            const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
-            if (kakaoKey) window.Kakao.init(kakaoKey);
+            if (kakaoKey) {
+              window.Kakao.init(kakaoKey);
+            } else {
+              throw new Error("카카오 JS 키가 설정되지 않았습니다.");
+            }
           }
           
           window.Kakao.Share.sendDefault({
@@ -98,7 +103,7 @@ export function ResultShareActions({
             content: {
               title: `[루모라] ${testName} 결과 공유`,
               description: `내 결과: ${resultTitle}\n${resultSummary}`,
-              imageUrl: "https://www.lumoracode.kr/images/share/lovecode.jpg",
+              imageUrl: "https://lumoracode.kr/images/main/main-background.png",
               link: {
                 mobileWebUrl: effectiveResultUrl,
                 webUrl: effectiveResultUrl,
@@ -115,12 +120,13 @@ export function ResultShareActions({
             ],
           });
         } catch (error) {
-          console.error("카카오톡 공유 에러:", error);
-          showToast("카카오톡 공유 중 에러가 발생했습니다.");
+          console.error("카카오톡 공유 에러 상세:", error);
+          const errorMessage = (error as Error).message;
+          showToast(`공유 에러: ${errorMessage || "알 수 없는 오류"}`);
         }
       } else {
         console.error("window.Kakao 객체를 찾을 수 없습니다.");
-        showToast("카카오톡 SDK가 아직 로드되지 않았습니다. 잠시 후 다시 시도해주세요.");
+        showToast("카카오톡 SDK가 아직 로드되지 않았습니다.");
       }
     }
   };

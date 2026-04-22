@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
-import { ResultShareSection } from "@/components/shared/ResultShareSection";
+import { ResultShareActions } from "@/components/shared/ResultShareActions";
 import { reunionQuestions } from "@/data/reunionQuestions";
 import { getReunionResultByType } from "@/lib/reunionCalculator";
 import { type ReunionType } from "@/types/reunion";
@@ -138,14 +138,11 @@ export function ReunionResultPanel({
           </button>
         </div>
 
-        <ResultShareSection
-          shareTitle="나의 재회 가능성 결과 💫"
-          results={{
-            "현재 흐름": result.title,
-            "재회 가능성": scoreLabels[resultType],
-          }}
-          description={result.recommendedMessage}
-          testUrl="https://www.lumoracode.kr/reunion-test/test"
+        <ResultShareActions
+          testName="재회 가능성 테스트"
+          resultTitle={result.title}
+          resultSummary={result.shortDescription}
+          resultUrl={typeof window !== "undefined" ? window.location.href : ""}
           hubUrl="https://www.lumoracode.kr/reunion-test"
         />
       </GlassPanel>

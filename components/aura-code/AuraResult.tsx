@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
-import { ResultShareSection } from "@/components/shared/ResultShareSection";
+import { ResultShareActions } from "@/components/shared/ResultShareActions";
 import { ServiceCard } from "@/components/shared/ServiceCard";
 import { services } from "@/data/services";
 import { auraQuestions } from "@/data/auraQuestions";
@@ -147,14 +147,11 @@ export function AuraResult() {
             </button>
           </div>
 
-          <ResultShareSection
-            shareTitle="나의 오라코드 결과 💫"
-            results={{
-              "메인 오라": result.mainAura.name,
-              "상태 배지": result.stateBadge,
-            }}
-            description={result.flowMessage}
-            testUrl="https://www.lumoracode.kr/aura-code/test"
+          <ResultShareActions
+            testName="오라코드 테스트"
+            resultTitle={result.mainAura.name}
+            resultSummary={result.summary}
+            resultUrl={typeof window !== "undefined" ? window.location.href : ""}
             hubUrl="https://www.lumoracode.kr/aura-code"
           />
         </GlassPanel>

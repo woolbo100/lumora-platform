@@ -34,7 +34,7 @@ export function ServiceHubHero({
         <p className="mt-5 text-2xl text-[var(--color-secondary)] sm:text-3xl">
           {subtitle}
         </p>
-        <p className="mt-8 max-w-2xl text-lg leading-9 text-[var(--foreground-soft)] sm:text-xl">
+        <p className="mt-8 max-w-2xl whitespace-pre-line text-lg leading-9 text-[var(--foreground-soft)] sm:text-xl">
           {description}
         </p>
 

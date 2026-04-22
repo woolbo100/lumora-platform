@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
-import { ResultShareSection } from "@/components/shared/ResultShareSection";
+import { ResultShareActions } from "@/components/shared/ResultShareActions";
 import { attachmentQuestions } from "@/data/attachmentQuestions";
 import { getAttachmentResultByType } from "@/lib/attachmentCalculator";
 import { type AttachmentType } from "@/types/attachment";
@@ -131,14 +131,11 @@ export function AttachmentResultPanel({
           </button>
         </div>
 
-        <ResultShareSection
-          shareTitle="나의 애착유형 결과 💫"
-          results={{
-            "현재 흐름": result.title,
-            "애착 유형": scoreLabels[resultType],
-          }}
-          description={result.recommendedMessage}
-          testUrl="https://www.lumoracode.kr/attachment-code/test"
+        <ResultShareActions
+          testName="애착유형 테스트"
+          resultTitle={result.title}
+          resultSummary={result.shortDescription}
+          resultUrl={typeof window !== "undefined" ? window.location.href : ""}
           hubUrl="https://www.lumoracode.kr/attachment-code"
         />
       </GlassPanel>

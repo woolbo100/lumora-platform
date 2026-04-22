@@ -30,17 +30,13 @@ export default async function LoveCodeResultPage({
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-12 sm:px-8 lg:px-12">
-      <section className="mb-10 max-w-3xl">
-        <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-secondary)]">
-          Love Code Result
+      <section className="mb-10 w-full text-center">
+        <p className="text-xs uppercase tracking-[0.4em] text-[var(--color-secondary)]/60">
+          Personal Analysis Report
         </p>
-        <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
-          러브코드 결과
+        <h1 className="mt-4 font-display text-4xl text-[var(--foreground)] sm:text-5xl">
+          당신의 러브코드
         </h1>
-        <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-          오늘의 연애 행동 추천과 현재 관계 흐름을 짧고 직관적인 카드로 정리한
-          결과 페이지입니다.
-        </p>
       </section>
 
       {validated.success ? (

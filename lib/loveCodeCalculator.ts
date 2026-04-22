@@ -262,6 +262,39 @@ function buildTodayAction(
   return map[currentSituation];
 }
 
+function buildTodayActionExample(currentSituation: LoveCodeCurrentSituation): string {
+  const map: Record<LoveCodeCurrentSituation, string> = {
+    "no-contact-first": '"잘 지내? 갑자기 생각나서 연락해봤어."',
+    "i-like-more": '"오늘 하늘이 진짜 예쁘더라. 너도 봤어?"',
+    "mutual-no-progress": '"이번 주말에 맛있는 거 먹으러 갈래? 가보고 싶은 곳이 생겼어."',
+    "recent-fight": '"아까는 내가 좀 예민했던 것 같아. 미안해, 대화 좀 할 수 있을까?"',
+    "want-reconnect": '"오랜만이네. 그동안 어떻게 지냈는지 궁금해서."',
+    "push-pull": '"나 내일 너랑 영화 보고 싶은데, 시간 어때?"',
+    "hard-to-express": '"사실 네가 많이 보고 싶었어."',
+  };
+
+  return map[currentSituation];
+}
+
+function buildConstellationSummary(mySign: ZodiacSign, partnerSign: ZodiacSign): string {
+  const myMeta = zodiacMeta[mySign];
+  const partnerMeta = zodiacMeta[partnerSign];
+  
+  if (myMeta.element === partnerMeta.element) {
+    return "서로 닮은 결을 가진 두 사람, 이해와 공감의 속도가 매우 빠릅니다.";
+  }
+  
+  if ((myMeta.element === "water" && partnerMeta.element === "earth") || (myMeta.element === "earth" && partnerMeta.element === "water")) {
+    return "깊은 감정과 단단한 안정이 만난 조화로운 흐름입니다.";
+  }
+  
+  if ((myMeta.element === "fire" && partnerMeta.element === "air") || (myMeta.element === "air" && partnerMeta.element === "fire")) {
+    return "서로의 열정과 영감을 자극하는 활기찬 에너지의 만남입니다.";
+  }
+
+  return "서로의 다름이 매력이 되어 새로운 가능성을 열어주는 관계입니다.";
+}
+
 function buildAvoidAction(currentSituation: LoveCodeCurrentSituation): string {
   const map: Record<LoveCodeCurrentSituation, string> = {
     "no-contact-first": "반응이 없다는 이유만으로 감정을 몰아붙이거나 답을 재촉하지 마세요.",
@@ -343,10 +376,12 @@ export function calculateLoveCodeResult(input: LoveCodeInput): LoveCodeResult {
       input.currentSituation,
       partnerSign,
     ),
+    todayActionExample: buildTodayActionExample(input.currentSituation),
     avoidAction: buildAvoidAction(input.currentSituation),
     simpleStrategy: buildStrategy(input.relationshipStatus, mySign, partnerSign),
     oneLineConclusion: buildConclusion(compatibilityScore),
     mySignLabel: myMeta.label,
     partnerSignLabel: partnerMeta.label,
+    constellationSummary: buildConstellationSummary(mySign, partnerSign),
   };
 }

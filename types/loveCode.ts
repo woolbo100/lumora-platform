@@ -43,9 +43,11 @@ export type LoveCodeResult = {
   currentRelationshipReading: string;
   keyIssue: string;
   todayAction: string;
+  todayActionExample: string;
   avoidAction: string;
   simpleStrategy: string;
   oneLineConclusion: string;
   mySignLabel: string;
   partnerSignLabel: string;
+  constellationSummary: string;
 };

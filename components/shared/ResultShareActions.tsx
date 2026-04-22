@@ -82,6 +82,34 @@ export function ResultShareActions({
     }
   };
 
+  const handleKakaoShare = () => {
+    if (typeof window !== "undefined" && window.Kakao) {
+      window.Kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title: `[루모라] ${testName} 결과 공유`,
+          description: `내 결과: ${resultTitle}\n${resultSummary}`,
+          imageUrl: "https://www.lumoracode.kr/images/share/lovecode.jpg",
+          link: {
+            mobileWebUrl: effectiveResultUrl,
+            webUrl: effectiveResultUrl,
+          },
+        },
+        buttons: [
+          {
+            title: "결과 보러가기",
+            link: {
+              mobileWebUrl: effectiveResultUrl,
+              webUrl: effectiveResultUrl,
+            },
+          },
+        ],
+      });
+    } else {
+      showToast("카카오톡 SDK를 로드 중입니다. 잠시 후 다시 시도해주세요.");
+    }
+  };
+
   const copyToClipboard = async (text: string, successMessage: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -94,15 +122,26 @@ export function ResultShareActions({
 
   return (
     <div className="relative mt-12 flex flex-col items-center gap-4 w-full max-w-md mx-auto px-4 pb-8">
-      {/* 1순위: 내 결과 공유하기 */}
+      {/* 1순위: 카카오톡 공유하기 */}
+      <button
+        onClick={handleKakaoShare}
+        className="aurora-hover-surface relative z-20 flex min-h-[58px] w-full items-center justify-center gap-2.5 rounded-[24px] border border-[#FEE500]/30 bg-[#FEE500] px-8 py-4 text-base font-bold tracking-[0.05em] text-[#191919] shadow-[0_12px_28px_rgba(254,229,0,0.2)] transition duration-300 hover:-translate-y-1 hover:brightness-105 active:scale-[0.98]"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3C7.029 3 3 6.128 3 9.986C3 12.482 4.603 14.68 7.032 15.932L6.012 19.673C5.928 19.981 6.282 20.218 6.541 20.046L11.002 17.075C11.33 17.108 11.662 17.126 12 17.126C16.971 17.126 21 13.998 21 10.14C21 6.282 16.971 3 12 3Z" fill="#191919"/>
+        </svg>
+        카카오톡 공유하기
+      </button>
+
+      {/* 2순위: 내 결과 공유하기 (시스템 공유 / 링크 복사) */}
       <button
         onClick={handleShareResult}
         className="aurora-hover-surface aurora-hover-strong relative z-20 flex min-h-[58px] w-full items-center justify-center rounded-[24px] border border-[rgba(229,218,255,0.6)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-8 py-4 text-base font-bold tracking-[0.05em] text-[#1c1830] shadow-[0_12px_28px_rgba(115,88,232,0.3),0_0_20px_rgba(214,194,255,0.15)] transition duration-300 hover:-translate-y-1 hover:brightness-110 active:scale-[0.98]"
       >
-        내 결과 공유하기
+        링크로 공유하기
       </button>
 
-      {/* 2순위: 이 테스트 추천하기 */}
+      {/* 3순위: 이 테스트 추천하기 */}
       <button
         onClick={handleRecommendTest}
         className="aurora-hover-surface aurora-hover-soft relative z-20 flex min-h-[54px] w-full items-center justify-center rounded-[24px] border border-white/25 bg-white/10 backdrop-blur-md px-8 py-4 text-base font-semibold tracking-[0.05em] text-white/95 transition duration-300 hover:-translate-y-1 hover:bg-white/20 active:scale-[0.98]"

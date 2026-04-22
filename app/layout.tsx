@@ -4,6 +4,7 @@ import Script from "next/script";
 import NewHeader from "@/components/shared/NewHeader";
 import { SiteFooter } from "@/components/shared/SiteFooter";
 import { PageBackground } from "@/components/shared/PageBackground";
+import KakaoInit from "@/components/shared/KakaoInit";
 
 import "./globals.css";
 
@@ -63,11 +64,16 @@ export default function RootLayout({
             strategy="afterInteractive"
           />
         ) : null}
+        <Script
+          src="https://developers.kakao.com/sdk/js/kakao.js"
+          strategy="afterInteractive"
+        />
       </head>
       <body
         className="min-h-full bg-transparent text-[var(--foreground)] antialiased"
         suppressHydrationWarning
       >
+        <KakaoInit />
         <PageBackground />
         <NewHeader />
         {children}

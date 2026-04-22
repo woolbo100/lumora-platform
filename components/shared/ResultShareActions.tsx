@@ -66,8 +66,10 @@ export function ResultShareActions({
   };
 
   const handleShareResult = async () => {
-    const title = `[루모라] ${testName} 결과 공유`;
-    const text = `내 결과는 "${resultTitle}"이야.\n한 줄 해석: ${resultSummary}\n너도 한번 확인해봐.\n\n${effectiveResultUrl}`;
+    // [루모라] 내 테스트 결과
+    const title = `[루모라] 내 테스트 결과`;
+    // 내 결과는 "{resultTitle}"이야. {resultSummary} 너도 해봐!
+    const text = `내 결과는 "${resultTitle}"이야. ${resultSummary} 너도 해봐!`;
 
     if (navigator.share) {
       try {
@@ -79,11 +81,11 @@ export function ResultShareActions({
         showToast("내 결과를 공유했어요 ✨");
       } catch (err) {
         if ((err as Error).name !== "AbortError") {
-          copyToClipboard(text, "내 결과 링크를 복사했어요 🔗");
+          copyToClipboard(`${text}\n\n${effectiveResultUrl}`, "내 결과 링크를 복사했어요 🔗");
         }
       }
     } else {
-      copyToClipboard(text, "내 결과 링크를 복사했어요 🔗");
+      copyToClipboard(`${text}\n\n${effectiveResultUrl}`, "내 결과 링크를 복사했어요 🔗");
     }
   };
 
@@ -124,8 +126,8 @@ export function ResultShareActions({
         window.Kakao.Share.sendDefault({
           objectType: "feed",
           content: {
-            title: `[루모라] ${testName} 결과 공유`,
-            description: `내 결과: ${resultTitle}\n${resultSummary}`,
+            title: `[루모라] ${resultTitle}`,
+            description: resultSummary,
             imageUrl: "https://lumoracode.kr/images/main/main-background.png",
             link: {
               mobileWebUrl: effectiveResultUrl,

@@ -138,7 +138,7 @@ export function ResultShareActions({
         onClick={handleShareResult}
         className="aurora-hover-surface aurora-hover-strong relative z-20 flex min-h-[58px] w-full items-center justify-center rounded-[24px] border border-[rgba(229,218,255,0.6)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-8 py-4 text-base font-bold tracking-[0.05em] text-[#1c1830] shadow-[0_12px_28px_rgba(115,88,232,0.3),0_0_20px_rgba(214,194,255,0.15)] transition duration-300 hover:-translate-y-1 hover:brightness-110 active:scale-[0.98]"
       >
-        링크로 공유하기
+        내 테스트 결과 공유하기
       </button>
 
       {/* 3순위: 이 테스트 추천하기 */}

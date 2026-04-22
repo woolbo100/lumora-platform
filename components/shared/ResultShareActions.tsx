@@ -199,7 +199,7 @@ export function ResultShareActions({
           카카오톡 공유하기
           {!isSdkReady && (
             <span className="ml-2 text-xs font-normal opacity-70">
-              {sdkError ? `(${sdkError})` : "(로딩 중...)"}
+              {sdkError ? "(불러오지 못했습니다)" : "(로딩 중...)"}
             </span>
           )}
         </button>

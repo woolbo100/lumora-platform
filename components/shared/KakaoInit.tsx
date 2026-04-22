@@ -15,51 +15,66 @@ export default function KakaoInit() {
     const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
     
     if (!kakaoKey) {
-      console.error("Kakao JS Key is missing! Please set NEXT_PUBLIC_KAKAO_JS_KEY in your environment variables.");
-      window.kakaoInitError = "JS 키 누락";
+      console.error("[Kakao] NEXT_PUBLIC_KAKAO_JS_KEY is missing");
+      window.kakaoInitError = "키 누락";
       window.dispatchEvent(new CustomEvent("kakao-init-failed", { detail: "키 누락" }));
       return;
     }
 
-    let retryCount = 0;
-    const maxRetries = 30; // 30 * 500ms = 15 seconds
-
-    const initKakao = () => {
+    const tryInit = () => {
       if (typeof window !== "undefined" && window.Kakao) {
+        console.log("[Kakao] window.Kakao detected");
         try {
           if (!window.Kakao.isInitialized()) {
+            console.log("[Kakao] init called");
             window.Kakao.init(kakaoKey);
           }
-          console.log("Kakao SDK Status: Initialized successfully");
-          window.isKakaoInitialized = true;
-          window.dispatchEvent(new CustomEvent("kakao-init-complete"));
-          return true;
+          if (window.Kakao.isInitialized()) {
+            console.log("[Kakao] init success");
+            console.log("[Kakao] sdkReady true");
+            window.isKakaoInitialized = true;
+            window.dispatchEvent(new CustomEvent("kakao-init-complete"));
+            return true;
+          }
         } catch (err) {
-          console.error("Kakao initialization error:", err);
-          window.kakaoInitError = (err as Error).message;
-          window.dispatchEvent(new CustomEvent("kakao-init-failed", { detail: (err as Error).message }));
-          return true; // Stop retrying on actual error
+          console.error("[Kakao] init failed", err);
+          window.kakaoInitError = "초기화 에러";
+          window.dispatchEvent(new CustomEvent("kakao-init-failed", { detail: "초기화 에러" }));
+          return true;
         }
       }
       return false;
     };
 
-    // 즉시 시도
-    if (!initKakao()) {
-      const interval = setInterval(() => {
-        retryCount++;
-        if (initKakao() || retryCount >= maxRetries) {
-          clearInterval(interval);
-          if (retryCount >= maxRetries && !window.isKakaoInitialized) {
-            console.error("Kakao SDK failed to load within 15s. Check for ad-blockers or network issues.");
-            window.kakaoInitError = "로딩 시간 초과";
-            window.dispatchEvent(new CustomEvent("kakao-init-failed", { detail: "시간 초과" }));
-          }
-        }
-      }, 500);
+    // 1. 이미 로드되어 있는지 확인
+    if (tryInit()) return;
 
-      return () => clearInterval(interval);
-    }
+    // 2. 스크립트 로드 이벤트 대기
+    const handleScriptLoad = () => {
+      console.log("[Kakao] script load event received in KakaoInit");
+      tryInit();
+    };
+    window.addEventListener("kakao-script-loaded", handleScriptLoad);
+
+    // 3. 폴링 (보조 수단)
+    let retryCount = 0;
+    const maxRetries = 10; // 10 * 500ms = 5 seconds
+    const interval = setInterval(() => {
+      retryCount++;
+      if (tryInit() || retryCount >= maxRetries) {
+        clearInterval(interval);
+        if (retryCount >= maxRetries && !window.isKakaoInitialized) {
+          console.error("[Kakao] sdkReady failed (timeout)");
+          window.kakaoInitError = "시간 초과";
+          window.dispatchEvent(new CustomEvent("kakao-init-failed", { detail: "시간 초과" }));
+        }
+      }
+    }, 500);
+
+    return () => {
+      window.removeEventListener("kakao-script-loaded", handleScriptLoad);
+      clearInterval(interval);
+    };
   }, []);
 
   return null;

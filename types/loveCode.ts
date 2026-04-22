@@ -50,4 +50,15 @@ export type LoveCodeResult = {
   mySignLabel: string;
   partnerSignLabel: string;
   constellationSummary: string;
+  mySignPersonality: string;
+  mySignKeyword: string;
+  mySignDeepReading: string;
+  partnerSignPersonality: string;
+  partnerSignKeyword: string;
+  partnerSignDeepReading: string;
+  detailedCompatibility: string;
+  todayActionList: string[];
+  todayActionExampleList: string[];
+  coreMindset: string;
+  finalActionTip: string;
 };

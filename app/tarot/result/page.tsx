@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import TarotCardItem from "@/components/tarot/TarotCard";
 import { GlassPanel } from "@/components/shared/GlassPanel";
-import { ResultShareSection } from "@/components/shared/ResultShareSection";
+import { ResultShareActions } from "@/components/shared/ResultShareActions";
 import { tarotCategoryMap } from "@/data/tarotCards";
 import {
   findTarotCardsByIds,
@@ -130,15 +130,11 @@ export default async function TarotResultPage(
         </Link>
       </div>
 
-      <ResultShareSection
-        shareTitle={`나의 ${categoryInfo.label} 타로 리딩 결과 💫`}
-        results={{
-          "선택한 카드": selectedCards.map((c) => c.nameKr).join(", "),
-          "리딩 카테고리": categoryInfo.label,
-        }}
-        description="카드가 전하는 메시지를 통해 현재의 흐름과 감정의 실마리를 찾아보세요."
-        testUrl={`https://www.lumoracode.kr/tarot/result?category=${category}&cards=${cardIds.join(",")}`}
-        hubUrl="https://www.lumoracode.kr/tarot"
+      <ResultShareActions
+        testName="타로 리딩"
+        resultTitle={`${categoryInfo.label} 타로 리딩 결과`}
+        resultSummary={`선택한 카드: ${selectedCards.map((c) => c.nameKr).join(", ")}`}
+        hubUrl="/tarot"
       />
     </main>
   );

@@ -155,8 +155,8 @@ export function LoveCodeResultPanel({ result }: LoveCodeResultPanelProps) {
                     {action}
                   </p>
                 </div>
-                <div className="ml-14 rounded-3xl bg-white/5 border border-white/10 p-8 relative group overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-secondary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="ml-14 rounded-3xl bg-white/5 border border-white/10 p-8 relative group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-secondary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[inherit]" />
                   <div className="absolute -top-3 left-8 px-4 bg-[#1A1825] text-[10px] uppercase font-bold text-[var(--color-secondary)] tracking-widest border border-white/10 rounded-full z-10">
                     이렇게 말하거나 행동해보세요
                   </div>

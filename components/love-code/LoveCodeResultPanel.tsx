@@ -196,7 +196,12 @@ export function LoveCodeResultPanel({ result }: LoveCodeResultPanelProps) {
 
       {/* 공유 및 하단 내비게이션 */}
       <section className="w-full mt-10">
-        <ResultShareActions />
+        <ResultShareActions
+          testName="러브코드 분석"
+          resultTitle={`${result.mySignLabel} × ${result.partnerSignLabel} 궁합`}
+          resultSummary={result.constellationSummary}
+          hubUrl="/love-code"
+        />
         
         <div className="mt-20 flex flex-col gap-8 items-center">
           <CTAButton href="/love-code" variant="secondary" className="px-16 py-5 text-lg">

@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { ResultShareActions } from "@/components/shared/ResultShareActions";
 import { type SajuElement, type SajuResult } from "@/types/saju";
 
 const TABS = [
@@ -357,15 +358,16 @@ export function SajuResultView({ result }: SajuResultViewProps) {
             >
               타로 보기
             </Link>
-            <Link
-              href="/"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 px-5 py-3 text-sm font-semibold text-[var(--foreground-soft)] transition hover:border-[var(--color-secondary)]/28 hover:text-[var(--color-secondary)]"
-            >
-              홈으로
-            </Link>
           </div>
         </div>
       </GlassPanel>
+
+      <ResultShareActions
+        testName="사주 리포트"
+        resultTitle={`${result.profile.name}님의 사주 분석`}
+        resultSummary={result.interp.core}
+        hubUrl="/saju"
+      />
     </div>
   );
 }

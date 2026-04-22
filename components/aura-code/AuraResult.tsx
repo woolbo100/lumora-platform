@@ -151,8 +151,7 @@ export function AuraResult() {
             testName="오라코드 테스트"
             resultTitle={result.mainAura.name}
             resultSummary={result.summary}
-            resultUrl={typeof window !== "undefined" ? window.location.href : ""}
-            hubUrl="https://www.lumoracode.kr/aura-code"
+            hubUrl="/aura-code"
           />
         </GlassPanel>
 

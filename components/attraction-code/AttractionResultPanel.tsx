@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { ResultShareActions } from "@/components/shared/ResultShareActions";
 import { attractionQuestions } from "@/data/attractionQuestions";
 import { getAttractionResultByType } from "@/lib/attractionCalculator";
 import { type AttractionType } from "@/types/attraction";
@@ -137,6 +138,12 @@ export function AttractionResultPanel({
             결과 초기화
           </button>
         </div>
+        <ResultShareActions
+          testName="매력 리포트"
+          resultTitle={result.title}
+          resultSummary={result.shortDescription}
+          hubUrl="/attraction-code"
+        />
       </GlassPanel>
 
       <GlassPanel className="result-panel-glow p-8">

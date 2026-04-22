@@ -139,8 +139,7 @@ export function RelationshipPatternResultPanel({
           testName="연애패턴 테스트"
           resultTitle={result.title}
           resultSummary={result.shortDescription}
-          resultUrl={typeof window !== "undefined" ? window.location.href : ""}
-          hubUrl="https://www.lumoracode.kr/relationship-pattern"
+          hubUrl="/relationship-pattern"
         />
       </GlassPanel>
 

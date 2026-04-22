@@ -142,8 +142,7 @@ export function ReunionResultPanel({
           testName="재회 가능성 테스트"
           resultTitle={result.title}
           resultSummary={result.shortDescription}
-          resultUrl={typeof window !== "undefined" ? window.location.href : ""}
-          hubUrl="https://www.lumoracode.kr/reunion-test"
+          hubUrl="/reunion-test"
         />
       </GlassPanel>
 

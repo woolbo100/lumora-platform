@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { NamingResultCard } from "@/components/naming/NamingResultCard";
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { ResultShareActions } from "@/components/shared/ResultShareActions";
 import { generateNamingResult, validateNamingInput } from "@/lib/naming/name-generator";
 
 type NamingResultPageProps = {
@@ -149,6 +150,13 @@ export default async function NamingResultPage({ searchParams }: NamingResultPag
           <NamingResultCard key={candidate.id} candidate={candidate} rank={index + 1} />
         ))}
       </div>
+
+      <ResultShareActions
+        testName="네이밍 분석"
+        resultTitle="나에게 어울리는 이름 방향"
+        resultSummary={result.namingDirection}
+        hubUrl="/naming"
+      />
     </main>
   );
 }

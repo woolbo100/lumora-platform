@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { ResultShareActions } from "@/components/shared/ResultShareActions";
 import { type EgenVsTetoResult } from "@/types/egenVsTeto";
 
 type EgenVsTetoResultPanelProps = {
@@ -11,25 +12,12 @@ type EgenVsTetoResultPanelProps = {
 };
 
 export function EgenVsTetoResultPanel({ result }: EgenVsTetoResultPanelProps) {
-  const [copied, setCopied] = useState(false);
   const purpleButtonClassName =
     "border-white/12 bg-[linear-gradient(135deg,rgba(255,236,236,0.96),rgba(198,176,255,0.96)_48%,rgba(142,116,255,0.95))] text-[#1c1830] shadow-[0_24px_70px_rgba(115,88,232,0.34)] hover:-translate-y-0.5 hover:border-white/12 hover:brightness-100";
   const panelGlowClassName =
     "transition duration-300 hover:border-[rgba(214,194,255,0.32)] hover:shadow-[0_0_0_1px_rgba(214,194,255,0.12),0_0_28px_rgba(126,98,236,0.18)]";
   const cardGlowClassName =
     "transition duration-300 hover:border-[rgba(214,194,255,0.28)] hover:shadow-[0_0_0_1px_rgba(214,194,255,0.08),0_0_22px_rgba(126,98,236,0.12)]";
-
-  async function handleCopyLink() {
-    if (typeof window === "undefined" || !navigator.clipboard) {
-      return;
-    }
-
-    const shareUrl = `${window.location.origin}/egen-vs-teto`;
-    const payload = `${result.shareText}\n${shareUrl}`;
-    await navigator.clipboard.writeText(payload);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1800);
-  }
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
@@ -99,17 +87,12 @@ export function EgenVsTetoResultPanel({ result }: EgenVsTetoResultPanelProps) {
 
         <GlassPanel className={`${panelGlowClassName} p-8`}>
           <p className="text-sm uppercase tracking-[0.3em] text-white/50">Share</p>
-          <div className={`${cardGlowClassName} mt-6 rounded-[22px] border border-white/10 bg-white/6 p-5`}>
-            <p className="text-xs uppercase tracking-[0.24em] text-white/42">공유 문구</p>
-            <p className="mt-3 leading-7 text-[var(--foreground-soft)]">{result.shareText}</p>
-          </div>
-          <button
-            type="button"
-            onClick={handleCopyLink}
-            className={`mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-full border px-5 py-3 text-sm font-semibold transition ${purpleButtonClassName}`}
-          >
-            {copied ? "복사 완료" : "링크 복사"}
-          </button>
+          <ResultShareActions
+            testName="연애 본능 테스트"
+            resultTitle={result.title}
+            resultSummary={result.subtitle}
+            hubUrl="/egen-vs-teto"
+          />
         </GlassPanel>
       </div>
     </div>

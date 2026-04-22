@@ -135,8 +135,7 @@ export function AttachmentResultPanel({
           testName="애착유형 테스트"
           resultTitle={result.title}
           resultSummary={result.shortDescription}
-          resultUrl={typeof window !== "undefined" ? window.location.href : ""}
-          hubUrl="https://www.lumoracode.kr/attachment-code"
+          hubUrl="/attachment-code"
         />
       </GlassPanel>
 

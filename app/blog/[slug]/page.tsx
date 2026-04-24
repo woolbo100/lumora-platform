@@ -8,14 +8,10 @@ import {
   listBlogPosts,
   listRelatedBlogPosts,
 } from "@/lib/blog-posts";
-import { getServerLanguage } from "@/lib/language";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{
-    error?: string | string[];
-    message?: string | string[];
-  }>;
+  searchParams: Promise<{ error?: string | string[]; message?: string | string[] }>;
 };
 
 export async function generateStaticParams() {
@@ -26,14 +22,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export const dynamicParams = true; // Change to true because language depends on cookies
+export const dynamicParams = false;
 
 export async function generateMetadata(
   { params }: Omit<BlogPostPageProps, "searchParams">,
 ): Promise<Metadata> {
   const { slug } = await params;
-  const language = await getServerLanguage();
-  const post = await getBlogPostBySlug(slug, { language });
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     return {
@@ -71,8 +66,7 @@ export default async function BlogPostPage({
 }: BlogPostPageProps) {
   const { slug } = await params;
   const query = await searchParams;
-  const language = await getServerLanguage();
-  const post = await getBlogPostBySlug(slug, { language });
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -83,7 +77,6 @@ export default async function BlogPostPage({
   const message = Array.isArray(query.message)
     ? query.message[0]
     : query.message;
-
 
   return (
     <BlogPostDetail

@@ -1,5 +1,3 @@
-"use client";
-
 import type { ReactNode } from "react";
 import Link from "next/link";
 
@@ -7,7 +5,6 @@ import { getCategoryMeta } from "@/data/blogCategories";
 import { AdBanner } from "@/components/AdBanner";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
 import { GlassPanel } from "@/components/shared/GlassPanel";
-import { useLanguageStore } from "@/store/languageStore";
 import {
   getBlogParagraphs,
   getBlogReadTime,
@@ -141,12 +138,10 @@ export function BlogPostDetail({
   error,
   message,
 }: BlogPostDetailProps) {
-  const { language } = useLanguageStore();
-  const isEn = language === "en";
   const category = getCategoryMeta(post.category);
   const blocks = parseMarkdownBlocks(post.content);
   const paragraphs = getBlogParagraphs(post.content);
-  const publishedDate = new Intl.DateTimeFormat(isEn ? "en-US" : "ko-KR", {
+  const publishedDate = new Intl.DateTimeFormat("ko-KR", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -163,25 +158,25 @@ export function BlogPostDetail({
               href="/blog"
               className="inline-flex items-center text-sm text-[var(--foreground-muted)] transition hover:text-white"
             >
-              {isEn ? "← Back to Blog" : "← 블로그로 돌아가기"}
+              블로그로 돌아가기
             </Link>
 
             <div className="space-y-4">
               <span className="inline-flex rounded-full border border-[#c69dff]/20 bg-[#b786ff]/10 px-3 py-1 text-sm text-[#eddcff]">
-                {isEn ? category.enLabel : category.label}
+                {category.label}
               </span>
               <h1 className="max-w-4xl font-display text-4xl leading-tight text-[var(--foreground)] sm:text-5xl">
                 {post.title}
               </h1>
               <p className="max-w-4xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-                {post.summary?.trim() || paragraphs[0] || (isEn ? "Content is not ready yet." : "콘텐츠가 아직 준비되지 않았습니다.")}
+                {post.summary?.trim() || paragraphs[0] || "콘텐츠가 아직 준비되지 않았습니다."}
               </p>
             </div>
 
             <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-[var(--foreground-muted)]">
               <time dateTime={post.publishedAt}>{publishedDate}</time>
               <span className="text-white/20">•</span>
-              <span>{getBlogReadTime(post.content)} {isEn ? "read" : "읽기"}</span>
+              <span>{getBlogReadTime(post.content)} 읽기</span>
             </div>
 
             {error ? (
@@ -296,10 +291,10 @@ export function BlogPostDetail({
         <section className="space-y-5">
           <div className="space-y-2 px-1">
             <p className="text-xs uppercase tracking-[0.28em] text-[var(--foreground-muted)]">
-              {isEn ? "RELATED POSTS" : "RELATED POSTS"}
+              RELATED POSTS
             </p>
             <h2 className="font-display text-2xl text-[#5d3693]">
-              {isEn ? "More from this Category" : "같은 카테고리의 글"}
+              같은 카테고리의 글
             </h2>
           </div>
 
@@ -313,4 +308,3 @@ export function BlogPostDetail({
     </main>
   );
 }
-

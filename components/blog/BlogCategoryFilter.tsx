@@ -1,8 +1,6 @@
-"use client";
-
 import Link from "next/link";
+
 import { blogCategories } from "@/data/blogCategories";
-import { useLanguageStore } from "@/store/languageStore";
 import type { BlogCategory } from "@/types/blog";
 
 type BlogCategoryFilterProps = {
@@ -12,9 +10,6 @@ type BlogCategoryFilterProps = {
 export function BlogCategoryFilter({
   activeCategory,
 }: BlogCategoryFilterProps) {
-  const { language } = useLanguageStore();
-  const isEn = language === "en";
-
   return (
     <div className="flex flex-wrap gap-3">
       <Link
@@ -25,7 +20,7 @@ export function BlogCategoryFilter({
             : "border-white/10 bg-white/5 text-[var(--foreground-soft)] hover:border-white/20 hover:bg-white/8"
         }`}
       >
-        {isEn ? "All" : "전체"}
+        전체
       </Link>
 
       {blogCategories.map((category) => (
@@ -38,10 +33,9 @@ export function BlogCategoryFilter({
               : "border-white/10 bg-white/5 text-[var(--foreground-soft)] hover:border-white/20 hover:bg-white/8"
           }`}
         >
-          {isEn ? category.enLabel : category.label}
+          {category.label}
         </Link>
       ))}
     </div>
   );
 }
-

@@ -4,13 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { HomeRedirectButton } from "@/components/shared/HomeRedirectButton";
-import { LanguageSwitcher } from "@/components/shared/LanguageSwitcher";
-import { useLanguageStore } from "@/store/languageStore";
 
 export default function NewHeader() {
   const [scrolled, setScrolled] = useState(false);
-  const { language } = useLanguageStore();
-  const isEn = language === "en";
 
   useEffect(() => {
     const onScroll = () => {
@@ -48,18 +44,15 @@ export default function NewHeader() {
         </HomeRedirectButton>
 
         <nav className="flex items-center gap-7 text-[13px] font-medium tracking-wide text-[rgba(255,255,255,0.65)]">
-          <Link href="/about" className="transition-colors hover:text-white uppercase">
-            {isEn ? "ABOUT" : "소개"}
+          <Link href="/about" className="transition-colors hover:text-white">
+            ABOUT
           </Link>
-          <Link href="/tarot" className="transition-colors hover:text-white uppercase">
-            {isEn ? "TAROT" : "타로"}
+          <Link href="/tarot" className="transition-colors hover:text-white">
+            TAROT
           </Link>
-          <Link href="/blog" className="transition-colors hover:text-white uppercase">
-            {isEn ? "BLOG" : "블로그"}
+          <Link href="/blog" className="transition-colors hover:text-white">
+            BLOG
           </Link>
-          <div className="ml-2">
-            <LanguageSwitcher />
-          </div>
         </nav>
       </div>
 

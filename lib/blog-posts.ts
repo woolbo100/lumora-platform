@@ -95,21 +95,10 @@ function parseBoolean(value: string | undefined) {
   return value?.toLowerCase() === "true";
 }
 
-async function readPostFile(filePath: string, fallbackCategory: BlogCategory, language?: string) {
-  let finalPath = filePath;
-  if (language && language !== "ko") {
-    const langPath = filePath.replace(/\.md$/, `.${language}.md`);
-    try {
-      await fs.access(langPath);
-      finalPath = langPath;
-    } catch {
-      // Fallback to original path if translated file doesn't exist
-    }
-  }
-
-  const source = await fs.readFile(finalPath, "utf8");
+async function readPostFile(filePath: string, fallbackCategory: BlogCategory) {
+  const source = await fs.readFile(filePath, "utf8");
   const { frontmatter, content } = parseFrontmatter(source);
-  const slug = frontmatter.slug?.trim() || path.basename(filePath, ".md"); // Use original filename for slug
+  const slug = frontmatter.slug?.trim() || path.basename(filePath, ".md");
   const title = frontmatter.title?.trim() || slug;
   const category = resolvePostCategory(frontmatter.category, fallbackCategory);
   const publishedAt = frontmatter.publishedAt?.trim() || new Date(0).toISOString();
@@ -131,15 +120,15 @@ async function readPostFile(filePath: string, fallbackCategory: BlogCategory, la
   } satisfies BlogPost;
 }
 
-async function readCategoryPosts(category: BlogCategory, language?: string) {
+async function readCategoryPosts(category: BlogCategory) {
   const categoryDirectory = path.join(BLOG_CONTENT_ROOT, category);
 
   try {
     const entries = await fs.readdir(categoryDirectory, { withFileTypes: true });
     const posts = await Promise.all(
       entries
-        .filter((entry) => entry.isFile() && entry.name.endsWith(".md") && !entry.name.match(/\.[a-z]{2}\.md$/))
-        .map((entry) => readPostFile(path.join(categoryDirectory, entry.name), category, language)),
+        .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+        .map((entry) => readPostFile(path.join(categoryDirectory, entry.name), category)),
     );
 
     return posts;
@@ -157,7 +146,7 @@ async function readCategoryPosts(category: BlogCategory, language?: string) {
   }
 }
 
-async function readAllPosts(language?: string) {
+async function readAllPosts() {
   const posts = await Promise.all(
     ([
       "romance-reunion",
@@ -166,7 +155,7 @@ async function readAllPosts(language?: string) {
       "attraction-self-esteem",
       "level-up-self-development",
       "mind-study",
-    ] as const).map((category) => readCategoryPosts(category, language)),
+    ] as const).map((category) => readCategoryPosts(category)),
   );
 
   return posts
@@ -179,9 +168,9 @@ async function readAllPosts(language?: string) {
 
 export async function listBlogPosts(
   category?: BlogCategory,
-  options?: { includeDrafts?: boolean; language?: string },
+  options?: { includeDrafts?: boolean },
 ) {
-  const posts = category ? await readCategoryPosts(category, options?.language) : await readAllPosts(options?.language);
+  const posts = category ? await readCategoryPosts(category) : await readAllPosts();
 
   return posts
     .filter((post) => options?.includeDrafts || post.status === "published")
@@ -193,9 +182,9 @@ export async function listBlogPosts(
 
 export async function getBlogPostBySlug(
   slug: string,
-  options?: { includeDrafts?: boolean; language?: string },
+  options?: { includeDrafts?: boolean },
 ) {
-  const posts = await readAllPosts(options?.language);
+  const posts = await readAllPosts();
   const post = posts.find((entry) => entry.slug === slug);
 
   if (!post) {
@@ -208,7 +197,6 @@ export async function getBlogPostBySlug(
 
   return post;
 }
-
 
 export async function listRelatedBlogPosts(
   category: BlogCategory,

@@ -1,44 +1,62 @@
+"use client";
+
 import Image from "next/image";
 import { HeroSplineScene } from "@/components/home/HeroSplineScene";
 import { AdBanner } from "@/components/AdBanner";
 import { CTAButton } from "@/components/shared/CTAButton";
 import { ServiceCard } from "@/components/shared/ServiceCard";
 import { services } from "@/data/services";
+import { useLanguageStore } from "@/store/languageStore";
 
 export default function Home() {
+  const { language } = useLanguageStore();
+  const isEn = language === "en";
+
   const serviceItems = services.filter((service) => service.type === "service");
   const blogItem = services.find((service) => service.type === "blog");
 
+  const t = {
+    eyebrow: isEn ? "AURA · LIGHT · ENERGY" : "AURA · LIGHT · ENERGY",
+    title: isEn ? "LUMORA" : "LUMORA",
+    subtitle: isEn ? "The Structure of Invisible Attraction" : "보이지 않는 끌림의 구조",
+    description: isEn 
+      ? "Lumora, where aura and light meet.\nA space to read your heart and illuminate the flow."
+      : "루모라, 아우라와 빛이 만나는 지점\n당신의 마음을 읽고 흐름을 비추는 공간",
+    subDescription: isEn
+      ? "Lumora is a space that illuminates the texture of emotions, the flow of atmosphere, and your unique charm more deeply and delicately."
+      : "루모라는 감정의 결, 분위기의 흐름, 그리고 당신만의 매력을 더 깊고 섬세하게 비춰주는 공간입니다.",
+    ctaPrimary: isEn ? "Open My Code" : "나의 코드 열기",
+    ctaSecondary: isEn ? "View Love Columns" : "연애 칼럼 보러가기",
+    signatureEyebrow: isEn ? "SIGNATURE SERVICES" : "SIGNATURE SERVICES",
+    signatureTitle: isEn 
+      ? "Signature Rituals Interpreting Your Energy and Charm Flow"
+      : "당신의 에너지와 매력 흐름을 해석하는 시그니처 리추얼",
+  };
+
   return (
     <main className="relative z-0 flex min-h-screen w-full flex-col overflow-hidden">
-      {/* 전역 PageBackground가 layout.tsx에서 렌더링되므로 여기서는 제거함 */}
       <section className="relative z-0 flex w-full flex-1 items-center justify-center overflow-visible pb-28 pt-32 lg:pb-36 lg:pt-48">
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-6 text-center sm:px-8 lg:px-12">
-          {/* <div className="pointer-events-none absolute inset-x-0 top-[46%] -z-0 h-[28rem] -translate-y-1/2 opacity-46">
-            <HeroSplineScene scene="https://prod.spline.design/0btuJlO8ODRyNQ1h/scene.splinecode" />
-          </div> */}
-
           <div className="relative z-10 w-full max-w-4xl space-y-4">
             <p className="text-sm uppercase tracking-[0.3em] text-[var(--foreground-muted)] opacity-80">
-              AURA · LIGHT · ENERGY
+              {t.eyebrow}
             </p>
             <div className="space-y-4">
               <h2 className="font-display text-[var(--foreground)] [text-shadow:0_0_30px_rgba(255,210,245,0.12)]">
                 <span className="inline-block text-6xl bg-[linear-gradient(to_right,#6d28d9_0%,#c4b5fd_25%,#fff_50%,#c4b5fd_75%,#6d28d9_100%)] bg-clip-text font-bold tracking-[0.1em] text-transparent bg-[length:200%_auto] [animation:lumoraShimmer_10s_linear_infinite] leading-tight sm:text-7xl lg:text-8xl">
-                  LUMORA
+                  {t.title}
                 </span>
                 <br />
                 <span className="inline-block mt-2 text-4xl font-medium tracking-tighter opacity-95 leading-[1.1] sm:text-6xl lg:text-6xl">
-                  보이지 않는 끌림의 구조
+                  {t.subtitle}
                 </span>
               </h2>
               <p className="text-2xl font-medium whitespace-pre-line text-[var(--color-secondary)] sm:text-3xl">
-                {"루모라, 아우라와 빛이 만나는 지점\n당신의 마음을 읽고 흐름을 비추는 공간"}
+                {t.description}
               </p>
             </div>
             <p className="mx-auto max-w-3xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-              루모라는 감정의 결, 분위기의 흐름, 그리고 당신만의 매력을
-              더 깊고 섬세하게 비춰주는 공간입니다.
+              {t.subDescription}
             </p>
           </div>
 
@@ -47,10 +65,10 @@ export default function Home() {
               href="/saju"
               className="bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] text-[#1c1830] shadow-[0_12px_28px_rgba(115,88,232,0.28),0_0_22px_rgba(214,194,255,0.12)] hover:brightness-102 hover:shadow-[0_14px_36px_rgba(115,88,232,0.32),0_0_28px_rgba(186,155,255,0.16)]"
             >
-              나의 코드 열기
+              {t.ctaPrimary}
             </CTAButton>
             <CTAButton href="/blog" variant="secondary">
-              연애 칼럼 보러가기
+              {t.ctaSecondary}
             </CTAButton>
           </div>
         </div>
@@ -64,26 +82,40 @@ export default function Home() {
         <div className="mb-8 flex items-end justify-between gap-4">
           <div className="space-y-2">
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--foreground-muted)]">
-              SIGNATURE SERVICES
+              {t.signatureEyebrow}
             </p>
             <h2 className="font-display text-4xl text-white [text-shadow:0_0_18px_rgba(255,210,245,0.12)]">
-              당신의 에너지와 매력 흐름을 해석하는 시그니처 리추얼
+              {t.signatureTitle}
             </h2>
           </div>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {serviceItems.map((service) => (
-            <ServiceCard key={service.href} {...service} />
+            <ServiceCard 
+              key={service.href} 
+              {...service} 
+              title={isEn ? (service.enTitle || service.title) : service.title}
+              description={isEn ? (service.enDescription || service.description) : service.description}
+              eyebrow={isEn ? (service.enEyebrow || service.eyebrow) : service.eyebrow}
+              badge={isEn ? (service.enBadge || service.badge) : service.badge}
+            />
           ))}
         </div>
 
         {blogItem ? (
           <div className="mt-8">
-            <ServiceCard {...blogItem} />
+            <ServiceCard 
+              {...blogItem} 
+              title={isEn ? (blogItem.enTitle || blogItem.title) : blogItem.title}
+              description={isEn ? (blogItem.enDescription || blogItem.description) : blogItem.description}
+              eyebrow={isEn ? (blogItem.enEyebrow || blogItem.eyebrow) : blogItem.eyebrow}
+              badge={isEn ? (blogItem.enBadge || blogItem.badge) : blogItem.badge}
+            />
           </div>
         ) : null}
       </section>
     </main >
   );
 }
+

@@ -6,6 +6,9 @@ import { isBlogCategory } from "@/data/blogCategories";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { listBlogPosts } from "@/lib/blog-posts";
 import type { BlogCategory } from "@/types/blog";
+import { BlogHeader } from "@/components/blog/BlogHeader";
+
+import { getServerLanguage } from "@/lib/language";
 
 export const metadata: Metadata = {
   title: "Blog | LUMORA",
@@ -43,12 +46,13 @@ function getSelectedCategory(
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
   const { category } = await searchParams;
+  const language = await getServerLanguage();
   const selectedCategory = getSelectedCategory(category);
   let posts = [] as Awaited<ReturnType<typeof listBlogPosts>>;
   let fetchError: string | null = null;
 
   try {
-    posts = await listBlogPosts(selectedCategory);
+    posts = await listBlogPosts(selectedCategory, { language });
   } catch (error) {
     fetchError =
       error instanceof Error
@@ -58,42 +62,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 pt-28 pb-12 sm:px-8 sm:pt-32 lg:px-12">
-      <GlassPanel className="overflow-hidden">
-        <section className="relative px-8 py-10 sm:px-10 sm:py-12">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(147,131,235,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(120,162,255,0.14),transparent_28%)]" />
-
-          <div className="relative">
-            <div className="max-w-3xl space-y-4">
-              <p className="text-xs uppercase tracking-[0.32em] text-[var(--color-secondary)]">
-                LUMORA JOURNAL
-              </p>
-              <h1 className="font-display text-4xl text-[var(--foreground)] sm:text-5xl">
-                루모라 블로그
-              </h1>
-              <p className="text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-                루모라는 관계와 감정, 자기 이해에 관한 이야기를 더 선명하게
-                정리해 나갑니다. 지금의 마음을 읽고 다음 선택을 돕는 글을
-                카테고리별로 편하게 둘러보세요.
-              </p>
-            </div>
-          </div>
-        </section>
-      </GlassPanel>
-
-      <section className="space-y-5">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div className="space-y-3">
-            <h2 className="font-display text-2xl text-[var(--foreground)]">
-              카테고리별 보기
-            </h2>
-            <p className="text-sm leading-7 text-[var(--foreground-soft)]">
-              연애/재회, 타로/사주, 심리코드, 매력/자존감, 레벨업자기계발,
-              마음공부 카테고리를 빠르게 둘러볼 수 있습니다.
-            </p>
-          </div>
-        </div>
+      <BlogHeader />
+      <div className="-mt-16"> {/* Adjust spacing after moving header to component */}
         <BlogCategoryFilter activeCategory={selectedCategory} />
-      </section>
+      </div>
 
       {fetchError ? (
         <GlassPanel className="p-6">

@@ -5,6 +5,7 @@ import NewHeader from "@/components/shared/NewHeader";
 import { SiteFooter } from "@/components/shared/SiteFooter";
 import { PageBackground } from "@/components/shared/PageBackground";
 import KakaoInit from "@/components/shared/KakaoInit";
+import LanguageInitializer from "@/components/shared/LanguageInitializer";
 
 import "./globals.css";
 
@@ -70,6 +71,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <KakaoInit />
+        <LanguageInitializer />
         <PageBackground />
         <NewHeader />
         {children}

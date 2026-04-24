@@ -1,13 +1,28 @@
-import Link from "next/link";
+"use client";
 
-const footerLinks = [
+import Link from "next/link";
+import { useLanguageStore } from "@/store/languageStore";
+
+const footerLinksKo = [
   { href: "/about", label: "소개" },
   { href: "/privacy", label: "개인정보처리방침" },
   { href: "/terms", label: "이용약관" },
   { href: "/contact", label: "문의하기" },
 ];
 
+const footerLinksEn = [
+  { href: "/about", label: "About" },
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Use" },
+  { href: "/contact", label: "Contact Us" },
+];
+
 export function SiteFooter() {
+  const { language } = useLanguageStore();
+  const isEn = language === "en";
+
+  const links = isEn ? footerLinksEn : footerLinksKo;
+
   return (
     <footer className="mt-16 border-t border-[rgba(255,255,255,0.1)]">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 sm:px-8 lg:px-12">
@@ -26,16 +41,16 @@ export function SiteFooter() {
             </Link>
             <div className="space-y-1">
               <p className="text-[13px] font-medium tracking-wide text-[var(--color-secondary)] opacity-90">
-                루모라, 아우라와 빛이 만나는 지점
+                {isEn ? "Lumora, where aura and light meet" : "루모라, 아우라와 빛이 만나는 지점"}
               </p>
               <p className="text-[13px] font-light tracking-wide text-[var(--foreground-soft)] opacity-80">
-                당신의 마음을 읽고, 흐름을 비추는 공간
+                {isEn ? "A space to read your heart and illuminate the flow" : "당신의 마음을 읽고, 흐름을 비추는 공간"}
               </p>
             </div>
           </div>
 
           <nav className="flex flex-wrap items-center gap-x-6 gap-y-3 lg:pt-2">
-            {footerLinks.map((link) => (
+            {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -56,3 +71,4 @@ export function SiteFooter() {
     </footer>
   );
 }
+

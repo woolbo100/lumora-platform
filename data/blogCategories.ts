@@ -3,36 +3,43 @@ import type { BlogCategory } from "@/types/blog";
 export const blogCategories: ReadonlyArray<{
   slug: BlogCategory;
   label: string;
+  enLabel: string;
   description: string;
 }> = [
   {
     slug: "romance-reunion",
-    label: "\uC5F0\uC560/\uC7AC\uD68C",
+    label: "연애/재회",
+    enLabel: "Relationship",
     description: "Relationship flow and reunion insights.",
   },
   {
     slug: "tarot-saju",
-    label: "\uD0C0\uB85C/\uC0AC\uC8FC",
+    label: "타로/사주",
+    enLabel: "Tarot/Saju",
     description: "Tarot and saju readings for your current season.",
   },
   {
     slug: "psychology-code",
-    label: "\uC2EC\uB9AC\uCF54\uB4DC",
+    label: "심리코드",
+    enLabel: "Psychology",
     description: "Patterns, attachment, and emotional habits.",
   },
   {
     slug: "attraction-self-esteem",
-    label: "\uB9E4\uB825/\uC790\uC874\uAC10",
+    label: "매력/자존감",
+    enLabel: "Attraction",
     description: "Presence, confidence, and self-worth rituals.",
   },
   {
     slug: "level-up-self-development",
-    label: "\uB808\uBCA8\uC5C5\uC790\uAE30\uACC4\uBC1C",
+    label: "레벨업자기계발",
+    enLabel: "Growth",
     description: "Growth systems for focus, habits, and momentum.",
   },
   {
     slug: "mind-study",
-    label: "\uB9C8\uC74C\uACF5\uBD80",
+    label: "마음공부",
+    enLabel: "Mindfulness",
     description: "Gentle practices for emotional grounding.",
   },
 ];

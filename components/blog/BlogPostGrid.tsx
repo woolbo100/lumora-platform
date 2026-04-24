@@ -1,4 +1,7 @@
+"use client";
+
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
+import { useLanguageStore } from "@/store/languageStore";
 import type { BlogPost } from "@/types/blog";
 
 type BlogPostGridProps = {
@@ -6,10 +9,13 @@ type BlogPostGridProps = {
 };
 
 export function BlogPostGrid({ posts }: BlogPostGridProps) {
+  const { language } = useLanguageStore();
+  const isEn = language === "en";
+
   if (posts.length === 0) {
     return (
       <div className="rounded-[28px] border border-dashed border-white/14 bg-white/4 px-6 py-12 text-center text-[var(--foreground-soft)]">
-        선택한 카테고리에 아직 등록된 글이 없습니다.
+        {isEn ? "No posts found in this category yet." : "선택한 카테고리에 아직 등록된 글이 없습니다."}
       </div>
     );
   }
@@ -22,3 +28,4 @@ export function BlogPostGrid({ posts }: BlogPostGridProps) {
     </div>
   );
 }
+

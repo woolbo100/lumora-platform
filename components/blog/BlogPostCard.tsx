@@ -1,7 +1,9 @@
-import Link from "next/link";
+"use client";
 
+import Link from "next/link";
 import { getCategoryMeta } from "@/data/blogCategories";
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { useLanguageStore } from "@/store/languageStore";
 import {
   getBlogExcerpt,
   getBlogHeroLabel,
@@ -14,6 +16,8 @@ type BlogPostCardProps = {
 };
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
+  const { language } = useLanguageStore();
+  const isEn = language === "en";
   const category = getCategoryMeta(post.category);
   const excerpt = post.summary?.trim() || getBlogExcerpt(post.content);
   const readTime = getBlogReadTime(post.content);
@@ -33,7 +37,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 
         <div className="mb-5 flex items-center justify-between gap-3">
           <span className="inline-flex rounded-full border border-white/10 bg-white/6 px-3 py-1 text-xs tracking-[0.18em] text-[var(--color-secondary)] uppercase">
-            {category.label}
+            {isEn ? category.enLabel : category.label}
           </span>
           <span className="text-xs text-[var(--foreground-muted)]">
             {readTime}
@@ -54,7 +58,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 
         <div className="mt-6 border-t border-white/10 pt-4 text-sm text-[var(--foreground-muted)]">
           <time dateTime={post.publishedAt}>
-            {new Intl.DateTimeFormat("ko-KR", {
+            {new Intl.DateTimeFormat(isEn ? "en-US" : "ko-KR", {
               year: "numeric",
               month: "long",
               day: "numeric",
@@ -65,3 +69,4 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
     </Link>
   );
 }
+

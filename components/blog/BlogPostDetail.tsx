@@ -148,7 +148,7 @@ export function BlogPostDetail({
   }).format(new Date(post.publishedAt));
 
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-12 sm:px-8 lg:px-12">
+    <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 pt-28 pb-12 sm:px-8 sm:pt-32 lg:px-12">
       <GlassPanel className="overflow-hidden">
         <div className="relative p-8 sm:p-10 lg:p-12">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(168,121,255,0.24),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(120,162,255,0.12),transparent_28%)]" />

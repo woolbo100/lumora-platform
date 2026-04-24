@@ -275,7 +275,7 @@ export function BlogPostDetail({
               return (
                 <p
                   key={`paragraph-${index}`}
-                  className="max-w-none text-[18px] leading-9 text-[#41384f]"
+                  className="max-w-none text-[19px] leading-9 text-[#41384f]"
                 >
                   {renderParagraphLines(block.lines)}
                 </p>

@@ -4,6 +4,7 @@ type ServiceHubHeroProps = {
   title: string;
   titleClassName?: string;
   subtitle: string;
+  subtitleClassName?: string;
   description: string;
   primaryHref: string;
   primaryLabel: string;
@@ -14,6 +15,7 @@ export function ServiceHubHero({
   title,
   titleClassName = "",
   subtitle,
+  subtitleClassName = "",
   description,
   primaryHref,
   primaryLabel,
@@ -21,7 +23,7 @@ export function ServiceHubHero({
 }: ServiceHubHeroProps) {
   return (
     <main className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2">
-      <section className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-3xl flex-col items-center justify-start px-6 pt-32 pb-24 text-center sm:px-8">
+      <section className="relative z-10 mx-auto flex min-h-[calc(100vh-9rem)] max-w-4xl flex-col items-center justify-start px-6 pt-32 pb-24 text-center sm:px-8">
         <div className="mb-8 flex h-22 w-22 items-center justify-center rounded-full border border-[var(--color-secondary)]/18 bg-[radial-gradient(circle,rgba(213,195,165,0.18),rgba(255,255,255,0.03))] text-5xl text-[var(--color-secondary)] shadow-[0_0_60px_rgba(122,104,217,0.16)]">
           ✦
         </div>
@@ -31,7 +33,7 @@ export function ServiceHubHero({
         >
           {title}
         </h1>
-        <p className="mt-5 text-2xl text-[var(--color-secondary)] sm:text-3xl">
+        <p className={`mt-5 text-2xl text-[var(--color-secondary)] sm:text-3xl ${subtitleClassName}`}>
           {subtitle}
         </p>
         <p className="mt-8 max-w-2xl whitespace-pre-line text-lg leading-9 text-[var(--foreground-soft)] sm:text-xl">

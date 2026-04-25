@@ -21,11 +21,11 @@ export const services: ServiceItem[] = [
   },
   {
     href: "/naming",
-    title: "선천코드 이름설계",
+    title: "이름코드",
     eyebrow: "ENERGY NAMING",
     description:
-      "사주 속 부족한 기운과 원하는 삶의 방향을 바탕으로\n당신에게 어울리는 이름의 에너지와\n이미지를 설계합니다.",
-    badge: "이름 설계",
+      "이름의 초성을 발음기관 기준 오행으로 풀어\n내 이름 안에 흐르는 에너지와 부족한 기운,\n보완 발음 방향을 가볍게 읽어드립니다.",
+    badge: "이름코드",
     type: "service",
   },
   {

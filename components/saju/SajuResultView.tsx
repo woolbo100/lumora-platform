@@ -133,34 +133,10 @@ export function SajuResultView({ result, analysisId }: SajuResultViewProps) {
       </GlassPanel>
 
       <div className="grid gap-5 xl:grid-cols-4">
-        <PillarCard
-          label="년주"
-          gan={pillars.year.gan}
-          zhi={pillars.year.zhi}
-          ganElement={pillars.year.gan_element}
-          zhiElement={pillars.year.zhi_element}
-        />
-        <PillarCard
-          label="월주"
-          gan={pillars.month.gan}
-          zhi={pillars.month.zhi}
-          ganElement={pillars.month.gan_element}
-          zhiElement={pillars.month.zhi_element}
-        />
-        <PillarCard
-          label="일주"
-          gan={pillars.day.gan}
-          zhi={pillars.day.zhi}
-          ganElement={pillars.day.gan_element}
-          zhiElement={pillars.day.zhi_element}
-        />
-        <PillarCard
-          label="시주"
-          gan={pillars.hour.gan}
-          zhi={pillars.hour.zhi}
-          ganElement={pillars.hour.gan_element}
-          zhiElement={pillars.hour.zhi_element}
-        />
+        <PillarCard label="년주" gan={pillars.year.gan} zhi={pillars.year.zhi} ganElement={pillars.year.gan_element} zhiElement={pillars.year.zhi_element} />
+        <PillarCard label="월주" gan={pillars.month.gan} zhi={pillars.month.zhi} ganElement={pillars.month.gan_element} zhiElement={pillars.month.zhi_element} />
+        <PillarCard label="일주" gan={pillars.day.gan} zhi={pillars.day.zhi} ganElement={pillars.day.gan_element} zhiElement={pillars.day.zhi_element} />
+        <PillarCard label="시주" gan={pillars.hour.gan} zhi={pillars.hour.zhi} ganElement={pillars.hour.gan_element} zhiElement={pillars.hour.zhi_element} />
       </div>
 
       <SectionCard eyebrow="Summary" title="가볍게 읽는 선천코드" body={interp.total_summary} />
@@ -201,6 +177,17 @@ export function SajuResultView({ result, analysisId }: SajuResultViewProps) {
           본 결과는 입력하신 생년월일과 시간을 기준으로 산출한 참고용 선천코드입니다.출생 시간이 경계(23시 전후 또는 2시간 단위)에 가까운 경우
           결과가 달라질 수 있습니다.
           정밀한 상담 리포트는 별도 분석이 필요할 수 있습니다..
+        </p>
+      </GlassPanel>
+
+      <GlassPanel className="result-panel-glow p-8">
+        <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+          Privacy Note
+        </p>
+        <p className="mt-4 whitespace-pre-line text-base leading-8 text-[var(--foreground-soft)]">
+          입력하신 정보는 사주 분석 결과 생성에만 일시적으로 사용되며
+          별도의 데이터베이스에 저장되지 않습니다.
+          ※ 입력 정보는 저장되지 않으니 안심하고 이용하셔도 됩니다.
         </p>
       </GlassPanel>
 

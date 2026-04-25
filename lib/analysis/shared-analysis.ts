@@ -1,5 +1,4 @@
 import { analyzeSaju, validateSajuInput } from "@/lib/saju-engine";
-import { getSharedAnalysis, saveSharedAnalysis } from "@/lib/analysis/analysis-store";
 import { type SharedSajuAnalysis } from "@/types/analysis";
 import { type SajuElement, type SajuFormInput, type SajuResult } from "@/types/saju";
 
@@ -41,7 +40,7 @@ function extractDominantElements(result: SajuResult): SajuElement[] {
   );
 }
 
-export function createSharedSajuAnalysis(input: Partial<SajuFormInput>) {
+export function buildSharedSajuAnalysis(input: Partial<SajuFormInput>) {
   const validated = validateSajuInput(input);
   if (!validated.success) {
     return validated;
@@ -58,10 +57,6 @@ export function createSharedSajuAnalysis(input: Partial<SajuFormInput>) {
 
   return {
     success: true as const,
-    data: saveSharedAnalysis(analysis),
+    data: analysis,
   };
-}
-
-export function requireSharedSajuAnalysis(id: string) {
-  return getSharedAnalysis(id);
 }

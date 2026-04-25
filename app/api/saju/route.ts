@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { createSharedSajuAnalysis } from "@/lib/analysis/shared-analysis";
+import { buildSharedSajuAnalysis } from "@/lib/analysis/shared-analysis";
 import { type SajuFormInput } from "@/types/saju";
 
 export async function POST(request: Request) {
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const result = createSharedSajuAnalysis(payload);
+  const result = buildSharedSajuAnalysis(payload);
 
   if (!result.success) {
     return NextResponse.json(

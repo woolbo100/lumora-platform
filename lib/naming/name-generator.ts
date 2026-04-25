@@ -1,7 +1,4 @@
-import { buildNamingDirection } from "@/lib/naming/build-naming-direction";
-import { NAME_DATASET } from "@/lib/naming/name-dataset";
-import { scoreNameCandidate } from "@/lib/naming/name-scorer";
-import { requireSharedSajuAnalysis } from "@/lib/analysis/shared-analysis";
+import { type SharedSajuAnalysis } from "@/types/analysis";
 import {
   type ElementType,
   type NamingCandidate,
@@ -10,7 +7,10 @@ import {
   type NamingValidationResult,
   type SajuNamingInput,
 } from "@/types/naming";
-import { type SharedSajuAnalysis } from "@/types/analysis";
+
+import { buildNamingDirection } from "@/lib/naming/build-naming-direction";
+import { NAME_DATASET } from "@/lib/naming/name-dataset";
+import { scoreNameCandidate } from "@/lib/naming/name-scorer";
 
 function isNamingStyle(value: string | undefined): value is NamingStyle {
   return [
@@ -59,7 +59,10 @@ export function validateNamingInput(input: Partial<SajuNamingInput>): NamingVali
   };
 }
 
-function filterDatasetByGender(dataset: NamingCandidate[], gender: SharedSajuAnalysis["saju"]["profile"]["gender"]) {
+function filterDatasetByGender(
+  dataset: NamingCandidate[],
+  gender: SharedSajuAnalysis["saju"]["profile"]["gender"],
+) {
   return dataset.filter((candidate) => candidate.gender === "neutral" || candidate.gender === gender);
 }
 
@@ -137,14 +140,4 @@ export function generateNamingResultFromAnalysis(
     analysisId: analysis.id,
     sajuAnalysis: analysis,
   };
-}
-
-export function generateNamingResult(input: SajuNamingInput): NamingResult {
-  const analysis = requireSharedSajuAnalysis(input.analysis_id);
-
-  if (!analysis) {
-    throw new Error("사주 분석 데이터를 찾을 수 없습니다.");
-  }
-
-  return generateNamingResultFromAnalysis(analysis, input);
 }

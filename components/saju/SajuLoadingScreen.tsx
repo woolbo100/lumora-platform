@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { GlassPanel } from "@/components/shared/GlassPanel";
+import { saveAnalysisToSessionStorage } from "@/lib/analysis/session-storage";
+import { type SharedSajuAnalysis } from "@/types/analysis";
 import { type SajuProfile } from "@/types/saju";
 
 const MESSAGES = [
@@ -53,14 +55,27 @@ export function SajuLoadingScreen({ profile }: SajuLoadingScreenProps) {
         const payload = (await response.json()) as {
           id?: string;
           error?: string;
+          createdAt?: string;
+          analysis?: Pick<SharedSajuAnalysis, "dominantElements" | "lackingElements">;
+          saju?: SharedSajuAnalysis["saju"];
         };
 
-        if (!response.ok || !payload.id) {
+        if (!response.ok || !payload.id || !payload.createdAt || !payload.analysis || !payload.saju) {
           throw new Error(payload.error ?? "출생정보를 다시 확인해주세요");
         }
 
+        const analysis: SharedSajuAnalysis = {
+          id: payload.id,
+          createdAt: payload.createdAt,
+          dominantElements: payload.analysis.dominantElements,
+          lackingElements: payload.analysis.lackingElements,
+          saju: payload.saju,
+        };
+
+        saveAnalysisToSessionStorage(analysis);
+
         if (!cancelled) {
-          router.replace(`/saju/result?id=${encodeURIComponent(payload.id)}`);
+          router.replace(`/saju/result?id=${encodeURIComponent(analysis.id)}`);
         }
       } catch (caughtError) {
         if (!cancelled) {
@@ -108,7 +123,7 @@ export function SajuLoadingScreen({ profile }: SajuLoadingScreenProps) {
         <p className="mt-4 text-sm leading-7 text-white/46">
           {error
             ? "입력한 출생정보를 한 번 더 확인한 뒤 다시 시도해주세요."
-            : "공통 분석 데이터를 한 번만 생성한 뒤, 사주 결과와 이름설계가 같은 기반을 공유할 수 있도록 정리하고 있어요."}
+            : "사주 결과는 브라우저에만 잠시 보관되고, 별도의 데이터베이스에는 저장되지 않아요."}
         </p>
 
         {error ? (

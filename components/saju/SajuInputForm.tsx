@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import { CTAButton } from "@/components/shared/CTAButton";
@@ -30,13 +30,6 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
     gender: initialValue?.gender === "female" ? "female" : "male",
   });
   const [errors, setErrors] = useState<string[]>([]);
-
-  const completionCount = useMemo(
-    () =>
-      [form.name.trim(), form.gender, form.birth_date.trim(), form.birth_time.trim()].filter(Boolean)
-        .length,
-    [form],
-  );
 
   function updateField<K extends keyof SajuProfile>(key: K, value: SajuProfile[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -68,7 +61,7 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
         <h2 className="mt-4 font-display text-4xl leading-[1.08] text-[var(--foreground)] sm:text-5xl">
           당신의 사주
           <br />
-          흐름을
+          에너지 흐름을
           <br />
           루모라 안에서
           <br />
@@ -82,21 +75,15 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
 
         <div className="mt-8 grid gap-4">
           <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.2))] p-5">
-            <p className="text-xs uppercase tracking-[0.24em] text-white/42">입력 진행도</p>
-            <p className="mt-3 text-3xl font-semibold text-[var(--foreground)]">
-              {completionCount} / 4
-            </p>
-          </div>
-          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.2))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">설명 내용</p>
             <p className="mt-3 whitespace-pre-line text-lg leading-7 text-[var(--foreground-soft)]">
-              {"루모라는 사주의 핵심 구조를 바탕으로\n\n타고난 에너지,\n관계의 흐름,\n감정의 리듬,\n재물과 일의 방향\n\n이 네 가지 흐름을 중심으로 해석합니다."}
+              {"루모라는 사주의 핵심 구조를 바탕으로\n타고난 에너지,\n관계의 흐름,\n감정의 리듬,\n재물과 일의 방향\n이 네 가지 흐름을 중심으로 해석합니다."}
             </p>
           </div>
           <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.2))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">기준</p>
             <p className="mt-3 whitespace-pre-line text-lg leading-7 text-[var(--foreground-soft)]">
-              {"현재 결과는 안정적인 기준을 바탕으로 생성되며,\n앞으로 더 다양한 해석 방식이 확장될 예정입니다."}
+              {"루모라는 안정적인 해석 흐름을 위해\n일관된 분석 구조를 기반으로 결과를 제공합니다."}
             </p>
           </div>
         </div>

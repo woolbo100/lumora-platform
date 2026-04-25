@@ -38,5 +38,5 @@ export function SajuResultClient({ analysisId }: { analysisId: string }) {
     return <ErrorPanel />;
   }
 
-  return <SajuResultView result={analysis.saju} analysisId={analysis.id} />;
+  return <SajuResultView result={analysis.saju} />;
 }

@@ -98,7 +98,7 @@ export function ServiceHubContent({
             지금 바로 확인해보세요
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-            지금의 흐름을 읽고, 필요한 방향을 차분하게 확인할 수 있도록 준비해 두었습니다.
+            지금의 흐름을 가볍게 읽어보고, 나에게 닿는 감각을 천천히 확인할 수 있도록 준비했습니다.
           </p>
           <div className="mt-8 flex justify-center">
             <CTAButton href={ctaHref} className={ctaClassName}>

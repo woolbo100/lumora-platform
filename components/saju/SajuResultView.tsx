@@ -105,10 +105,9 @@ function OhaengGrid({ result }: { result: SajuResult }) {
 
 type SajuResultViewProps = {
   result: SajuResult;
-  analysisId: string;
 };
 
-export function SajuResultView({ result, analysisId }: SajuResultViewProps) {
+export function SajuResultView({ result }: SajuResultViewProps) {
   const { profile, pillars, interp } = result;
 
   return (
@@ -206,7 +205,7 @@ export function SajuResultView({ result, analysisId }: SajuResultViewProps) {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <CTAButton href={`/naming/start?analysisId=${encodeURIComponent(analysisId)}`}>
+            <CTAButton href="/naming/start">
               이 분석으로 이름설계 이어가기
             </CTAButton>
             <CTAButton href="/contact">백도화 유료 리포트 문의하기</CTAButton>

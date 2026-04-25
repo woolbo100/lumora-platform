@@ -3,52 +3,30 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
-import { NamingPurposeSelector } from "@/components/naming/NamingPurposeSelector";
 import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { validateNamingInput } from "@/lib/naming/name-generator";
-import { type NamingStyle, type SajuNamingInput } from "@/types/naming";
+import { type NameCodeInput } from "@/types/naming";
 
-const STYLE_OPTIONS: { value: NamingStyle; label: string }[] = [
-  { value: "soft", label: "soft" },
-  { value: "elegant", label: "elegant" },
-  { value: "bright", label: "bright" },
-  { value: "strong", label: "strong" },
-  { value: "luxurious", label: "luxurious" },
-  { value: "modern", label: "modern" },
-  { value: "neutral", label: "neutral" },
-  { value: "calm", label: "calm" },
-];
-
-type NamingStartFormProps = {
-  analysisId: string;
+const INITIAL_FORM: NameCodeInput = {
+  name: "",
+  birth_date: "",
 };
 
-const INITIAL_FORM = (analysisId: string): SajuNamingInput => ({
-  analysis_id: analysisId,
-  purpose: "wealth",
-  current_name: "",
-  preferred_style: undefined,
-});
-
-export function NamingStartForm({ analysisId }: NamingStartFormProps) {
+export function NamingStartForm() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const [form, setForm] = useState<SajuNamingInput>(INITIAL_FORM(analysisId));
+  const [form, setForm] = useState<NameCodeInput>(INITIAL_FORM);
   const [errors, setErrors] = useState<string[]>([]);
 
-  function updateField<K extends keyof SajuNamingInput>(key: K, value: SajuNamingInput[K]) {
+  function updateField<K extends keyof NameCodeInput>(key: K, value: NameCodeInput[K]) {
     setForm((current) => ({ ...current, [key]: value }));
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const validated = validateNamingInput({
-      ...form,
-      analysis_id: analysisId,
-    });
-
+    const validated = validateNamingInput(form);
     if (!validated.success) {
       setErrors(validated.errors);
       return;
@@ -57,16 +35,11 @@ export function NamingStartForm({ analysisId }: NamingStartFormProps) {
     setErrors([]);
 
     const params = new URLSearchParams({
-      analysisId: validated.data.analysis_id,
-      purpose: validated.data.purpose,
+      name: validated.data.name,
     });
 
-    if (validated.data.current_name) {
-      params.set("current_name", validated.data.current_name);
-    }
-
-    if (validated.data.preferred_style) {
-      params.set("preferred_style", validated.data.preferred_style);
+    if (validated.data.birth_date) {
+      params.set("birth_date", validated.data.birth_date);
     }
 
     startTransition(() => {
@@ -75,89 +48,71 @@ export function NamingStartForm({ analysisId }: NamingStartFormProps) {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr]">
+    <div className="grid gap-6 lg:grid-cols-[0.86fr_1.14fr]">
       <GlassPanel className="border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.35))] p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
-          Shared Analysis
+          Name Code
         </p>
         <h2 className="mt-4 font-display text-4xl text-[var(--foreground)] sm:text-5xl">
-          같은 분석 데이터로
+          이름의 첫소리에서
           <br />
-          이름설계를 이어갑니다
+          흐름을 읽어봅니다
         </h2>
+        <p className="mt-6 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+          이름의 초성을 오행으로 풀어보면, 소리의 결이 어떤 리듬으로 이어지는지 가볍게 살펴볼 수 있어요.
+          이름코드는 좋은 이름을 판정하는 서비스가 아니라, 내 이름이 가진 분위기와 흐름을 감성적으로 읽어보는
+          무료 참고용 콘텐츠입니다.
+        </p>
+
         <div className="mt-8 grid gap-4">
           {[
-            "1. 사주 공통 분석 데이터 확인",
-            "2. 부족한 오행과 중심 기운 불러오기",
-            "3. 목적에 맞는 이름 방향 설정",
-            "4. 이름 에너지 후보 추천",
+            "초성 추출 후 발음기관 기준 오행 분포 분석",
+            "이름 에너지 흐름을 3~5문단으로 직관적으로 해석",
+            "비어 있는 기운과 보완 발음 방향 안내",
+            "이름 느낌 추천 카드까지 한 번에 확인",
           ].map((item) => (
             <div
               key={item}
-              className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.2))] p-4 text-base text-[var(--foreground-soft)]"
+              className="rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.2))] p-4 text-base leading-7 text-[var(--foreground-soft)]"
             >
               {item}
             </div>
           ))}
-        </div>
-
-        <div className="mt-8 rounded-[24px] border border-[var(--color-secondary)]/18 bg-[var(--color-secondary)]/8 p-5 text-base leading-8 text-[var(--foreground-soft)]">
-          {analysisId
-            ? `연결된 분석 id: ${analysisId}`
-            : "이름설계는 사주 결과에서 넘어온 분석 id를 기반으로만 진행됩니다."}
         </div>
       </GlassPanel>
 
       <GlassPanel className="p-8 sm:p-10">
         <p className="text-sm uppercase tracking-[0.3em] text-white/50">Start</p>
         <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
-          이름 에너지 설계
+          나의 이름 코드 알아보기
         </h1>
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-          여기서는 새로운 사주 계산을 하지 않고, 이미 만든 분석 데이터를 바탕으로 이름의 방향만 설계합니다.
+          이름은 필수, 생년월일은 선택입니다. 생년월일은 결과에 함께 적어두는 참고 정보로만 사용됩니다.
         </p>
 
         <form className="mt-10 grid gap-6" onSubmit={handleSubmit}>
-          <div className="grid gap-3">
-            <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
-              Purpose
-            </span>
-            <NamingPurposeSelector value={form.purpose} onChange={(value) => updateField("purpose", value)} />
-          </div>
-
           <label className="grid gap-3">
-            <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
-              Current Name
+            <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-secondary)]">
+              Name
             </span>
             <input
-              className="min-h-14 rounded-[22px] border border-white/10 bg-white/8 px-5 text-base text-[var(--foreground)] outline-none"
-              value={form.current_name ?? ""}
-              onChange={(event) => updateField("current_name", event.target.value)}
-              placeholder="선택 입력"
+              className="min-h-14 rounded-[22px] border border-white/10 bg-white/8 px-5 text-base text-[var(--foreground)] outline-none placeholder:text-white/35"
+              value={form.name}
+              onChange={(event) => updateField("name", event.target.value)}
+              placeholder="이름을 입력해주세요"
             />
           </label>
 
           <label className="grid gap-3">
-            <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
-              Preferred Style
+            <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-secondary)]">
+              Birth Date
             </span>
-            <select
+            <input
+              type="date"
               className="min-h-14 rounded-[22px] border border-white/10 bg-white/8 px-5 text-base text-[var(--foreground)] outline-none"
-              value={form.preferred_style ?? ""}
-              onChange={(event) =>
-                updateField(
-                  "preferred_style",
-                  (event.target.value || undefined) as SajuNamingInput["preferred_style"],
-                )
-              }
-            >
-              <option value="">선택 안 함</option>
-              {STYLE_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+              value={form.birth_date ?? ""}
+              onChange={(event) => updateField("birth_date", event.target.value)}
+            />
           </label>
 
           {errors.length > 0 ? (
@@ -171,13 +126,13 @@ export function NamingStartForm({ analysisId }: NamingStartFormProps) {
           <div className="flex flex-wrap gap-4">
             <button
               type="submit"
-              disabled={isPending || !analysisId}
+              disabled={isPending}
               className="inline-flex min-h-14 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-8 py-4 text-base font-semibold text-[#1c1830] shadow-[0_24px_70px_rgba(115,88,232,0.28)] transition hover:-translate-y-0.5 hover:border-[rgba(236,228,255,0.78)] disabled:cursor-not-allowed disabled:opacity-65"
             >
-              {isPending ? "이름 방향을 정리하는 중..." : "이 분석으로 이름설계 보기"}
+              {isPending ? "이름 코드를 읽고 있어요..." : "이름 코드 결과 보기"}
             </button>
-            <CTAButton href="/saju/reading" variant="secondary">
-              사주부터 다시 시작
+            <CTAButton href="/naming" variant="secondary">
+              서비스 소개 보기
             </CTAButton>
           </div>
         </form>

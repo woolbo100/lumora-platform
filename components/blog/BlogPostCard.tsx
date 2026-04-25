@@ -40,14 +40,14 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
           </span>
         </div>
 
-        <div className="space-y-4">
+        <div className="flex flex-1 flex-col">
           <p className="text-xs uppercase tracking-[0.32em] text-[var(--foreground-muted)]">
             {getBlogHeroLabel(post.category)}
           </p>
-          <h2 className="font-display text-2xl leading-tight text-[var(--foreground)]">
+          <h2 className="mt-4 line-clamp-2 min-h-[5.5rem] font-display text-2xl leading-tight text-[var(--foreground)]">
             {post.title}
           </h2>
-          <p className="line-clamp-3 text-sm leading-7 text-[var(--foreground-soft)]">
+          <p className="mt-4 line-clamp-4 min-h-[7rem] text-sm leading-7 text-[var(--foreground-soft)]">
             {excerpt}
           </p>
         </div>

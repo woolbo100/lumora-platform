@@ -77,7 +77,7 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
           <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.2))] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-white/42">설명 내용</p>
             <p className="mt-3 whitespace-pre-line text-lg leading-7 text-[var(--foreground-soft)]">
-              {"루모라는 사주의 핵심 구조를 바탕으로\n타고난 에너지,\n관계의 흐름,\n감정의 리듬,\n재물과 일의 방향\n이 네 가지 흐름을 중심으로 해석합니다."}
+              {"루모라는 사주의 핵심 구조를 바탕으로\n타고난 에너지,\n관계의 흐름,\n감정의 리듬,\n재물과 일의 방향\n네 가지 흐름을 중심으로 해석합니다."}
             </p>
           </div>
           <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.2))] p-5">

@@ -65,14 +65,19 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
           Saju Ritual
         </p>
-        <h2 className="mt-4 font-display text-4xl text-[var(--foreground)] sm:text-5xl">
-          당신의 사주 흐름을
+        <h2 className="mt-4 font-display text-4xl leading-[1.08] text-[var(--foreground)] sm:text-5xl">
+          당신의 사주
           <br />
-          루모라 안에서 읽어냅니다
+          흐름을
+          <br />
+          루모라 안에서
+          <br />
+          읽어냅니다
         </h2>
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-          생년월일과 태어난 시간을 입력하면, 타고난 기운의 결을 따라 당신 안에 흐르는 에너지와 관계의 리듬을
-          차분하게 읽어드립니다. 복잡한 설명보다 지금의 나를 이해하기 쉬운 문장으로 풀어내는 데 집중했습니다.
+          생년월일과 태어난 시간을 입력하면, 타고난 기운의 결을 따라 당신 안에 흐르는
+          에너지와 관계의 리듬을 차분하게 읽어드립니다. 복잡한 설명보다 지금의 나를
+          이해하기 쉬운 문장으로 정리해드립니다.
         </p>
 
         <div className="mt-8 grid gap-4">
@@ -103,7 +108,8 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
           사주 분석 시작
         </h1>
         <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-          이름, 성별, 생년월일, 태어난 시간을 입력하면 당신의 선천적인 흐름을 가볍지만 깊이 있게 읽어드립니다.
+          이름, 성별, 생년월일, 태어난 시간을 입력하면 당신의 선천적인 흐름을 가볍지만 깊이
+          있게 읽어드립니다.
         </p>
 
         <form className="mt-10 grid gap-6" onSubmit={handleSubmit}>
@@ -191,7 +197,7 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
               disabled={isPending}
               className="inline-flex min-h-14 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-8 py-4 text-base font-semibold text-[#1c1830] shadow-[0_24px_70px_rgba(115,88,232,0.28)] transition hover:-translate-y-0.5 hover:border-[rgba(236,228,255,0.78)] disabled:cursor-not-allowed disabled:opacity-65"
             >
-              {isPending ? "분석을 준비하고 있어요..." : "사주 리포트 보기"}
+              {isPending ? "분석을 준비하고 있어요..." : "사주 리딩 보러가기"}
             </button>
             <CTAButton href="/saju" variant="secondary">
               서비스 소개 보기

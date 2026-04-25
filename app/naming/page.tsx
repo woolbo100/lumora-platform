@@ -99,12 +99,6 @@ export default function NamingPage() {
               >
                 무료 시작
               </Link>
-              <Link
-                href="/naming/premium"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-secondary)]/20 px-6 py-3 text-sm font-semibold text-[var(--color-secondary)] transition hover:bg-[var(--color-secondary)]/10"
-              >
-                심화 리포트 보기
-              </Link>
             </div>
           </div>
         </GlassPanel>

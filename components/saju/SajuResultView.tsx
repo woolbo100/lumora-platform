@@ -77,13 +77,15 @@ function SectionCard({
   eyebrow,
   title,
   body,
+  className = "",
 }: {
   eyebrow: string;
   title: string;
   body: string;
+  className?: string;
 }) {
   return (
-    <GlassPanel className="result-panel-glow p-6 sm:p-7">
+    <GlassPanel className={`result-panel-glow p-6 sm:p-7 ${className}`}>
       <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">{eyebrow}</p>
       <h3 className="mt-3 text-2xl font-semibold text-[var(--foreground)]">{title}</h3>
       <p className="mt-4 whitespace-pre-line text-base leading-8 text-[var(--foreground-soft)]">
@@ -152,27 +154,27 @@ function buildCareerDirection(result: SajuResult, dominant: SajuElement[], lacki
     dominant.includes("earth") || dominant.includes("metal")
       ? "안정형"
       : dominant.includes("fire") || dominant.includes("wood")
-      ? "활동형"
-      : "관계형";
+        ? "활동형"
+        : "관계형";
 
   const orientationDescription =
     orientation === "안정형"
-      ? "기준을 세우고 구조를 정리하는 역할에서 편안함이 살아나기 쉽습니다. 루틴을 만들고 책임을 오래 지켜내는 흐름이 강해, 운영·기획·관리처럼 중심을 잡아주는 일과 자연스럽게 맞닿습니다."
+      ? "기준을 세우고 구조를 정리하는 역할에서 편안함이 살아납니다. 리듬을 만들고 책임을 오래 지켜내는 결이 강해, 운영과 기획, 관리처럼 중심을 잡아주는 일과 자연스럽게 맞닿습니다."
       : orientation === "활동형"
-      ? "움직임과 확장이 필요한 장면에서 에너지가 더 또렷하게 살아납니다. 변화에 반응하고 방향을 밀어가는 힘이 있어, 프로젝트형 업무나 표현력과 추진력이 필요한 역할에서 리듬이 붙기 쉽습니다."
-      : "사람과 흐름 사이의 온도를 읽는 감각이 비교적 잘 살아납니다. 조율, 소통, 상담, 브랜드 경험처럼 관계를 다루는 장면에서 장점이 자연스럽게 드러날 수 있습니다.";
+        ? "움직임과 확장이 필요한 장면에서 에너지가 더 또렷하게 살아납니다. 변화에 반응하고 방향을 바꿔가는 힘이 있어, 프로젝트와 실무처럼 표현력과 추진력이 필요한 흐름에서 빛을 냅니다."
+        : "사람과 사람 사이의 온도를 읽는 감각이 비교적 잘 살아납니다. 조율, 소통, 상담, 브랜드 경험처럼 관계를 이어주는 장면에서 강점이 자연스럽게 드러납니다.";
 
   const balanceLine =
     lacking.length > 0
-      ? `지금 구조에서는 ${lackingText}의 결을 의식적으로 보완할수록 적성과 현실감이 더 부드럽게 맞물릴 수 있습니다.`
-      : "오행의 결이 비교적 고르게 퍼져 있어, 한 방향으로만 몰리기보다 상황에 따라 유연하게 적응하는 힘도 함께 가지고 있습니다.";
+      ? `지금 구조에서는 ${lackingText}의 결을 의식적으로 보완할수록 적성과 안정감이 더 부드럽게 맞물릴 수 있습니다.`
+      : "오행의 결이 비교적 고르게 놓여 있어, 한 방향으로만 몰리기보다 상황에 따라 유연하게 적응하는 태도 역시 강점으로 작동합니다.";
 
-  return `${dominantText}의 기운이 중심을 이루며 직업 흐름은 ${orientation}에 가깝게 읽힙니다. ${orientationDescription} ${balanceLine}`;
+  return `${dominantText}의 기운이 중심에 놓이면서 직업 방향은 ${orientation}에 가깝게 보입니다. ${orientationDescription} ${balanceLine}`;
 }
 
 function buildGrowthPoint(result: SajuResult, lacking: SajuElement[]) {
   if (lacking.length === 0) {
-    return "부족한 기운이 크게 비어 보이지 않아, 지금은 새로운 것을 더하기보다 이미 가진 리듬을 선명하게 다듬는 일이 더 중요합니다. 이름의 울림도 지금의 결을 정리하고 또렷하게 만드는 방향으로 이어질 수 있습니다.";
+    return "부족한 기운이 크게 비어 보이지 않아, 지금은 새로운 것을 더하기보다 이미 가진 리듬을 더 선명하게 쓰는 일이 중요합니다. 이름의 울림 또한 지금의 결을 정리하고 또렷하게 만드는 방향으로 이어질 수 있습니다.";
   }
 
   const messages: Record<SajuElement, string> = {
@@ -180,31 +182,38 @@ function buildGrowthPoint(result: SajuResult, lacking: SajuElement[]) {
     fire: "표현하고 드러내는 힘",
     earth: "중심을 잡고 머무는 힘",
     metal: "정리하고 기준을 세우는 힘",
-    water: "감정을 적시고 흐르게 하는 힘",
+    water: "감정을 쉬게 하고 흐르게 하는 힘",
   };
 
   const detail = lacking
     .map((element) => `${ELEMENT_LABELS[element]}의 결은 ${messages[element]}`)
     .join(", ");
 
-  return `${detail}과 연결됩니다. 그래서 성장 포인트는 없는 것을 억지로 채우기보다, 일상 습관과 말의 리듬, 그리고 나를 부르는 이름의 울림 안에서 그 기운을 조금씩 불러오는 데 있습니다. 이런 지점은 이후 이름코드나 이름설계로 자연스럽게 이어서 살펴보기에도 좋은 결입니다.`;
+  return `${detail}과 연결됩니다. 그래서 성장 포인트는 없는 것을 억지로 채우기보다, 일상 습관과 마음의 리듬, 그리고 나를 부르는 이름의 울림 안에서 그 기운을 조금씩 불러오는 데 있습니다. 이런 지점은 이후 이름코드와도 자연스럽게 이어서 살펴보기 좋습니다.`;
 }
 
 function buildCurrentFlowSummary(result: SajuResult, dominant: SajuElement[], lacking: SajuElement[]) {
   const dominantText = formatElementList(dominant);
-  const lackingText = lacking.length > 0 ? formatElementList(lacking) : "특별히 비어 보이는 기운 없이";
+  const lackingText = lacking.length > 0 ? formatElementList(lacking) : "크게 비어 보이는 기운 없이";
 
-  return `전체적으로는 ${dominantText}의 흐름이 앞에 서 있고, ${lackingText}의 여백이 뒤에서 균형을 요청하는 구조입니다. 그래서 지금의 에너지는 이미 강한 결을 밀어붙이기보다, 남은 빈자리를 부드럽게 메우며 리듬을 고르게 만드는 쪽으로 읽힙니다.`;
+  return `전체적으로는 ${dominantText}의 흐름이 앞에 서 있고, ${lackingText}의 여백이 안쪽에서 균형을 요청하는 구조입니다. 그래서 지금의 에너지는 이미 강한 결을 더 밀어붙이기보다, 작은 빈자리를 부드럽게 메우며 리듬을 고르게 만드는 쪽으로 흘러갑니다.`;
 }
 
 function buildClosingInterpretation(result: SajuResult, dominant: SajuElement[], lacking: SajuElement[]) {
   const dominantText = formatElementList(dominant);
+  const lackingText = lacking.length > 0 ? formatElementList(lacking) : "";
+  const core = result.interp.core.trim();
+  const summary = result.interp.total_summary.trim();
 
   if (lacking.length === 0) {
-    return `${result.profile.name}님의 선천코드는 한쪽으로 크게 기울지 않으면서도 ${dominantText}의 결을 조용히 품고 있습니다. 이미 가진 흐름을 믿고 너무 서두르지 않을 때, 삶의 장면들은 조금 더 자연스럽고 단단한 방향으로 정리되기 쉽습니다.`;
+    return `${result.profile.name}님의 선천코드는 한쪽으로 크게 기울지 않으면서도 ${dominantText}의 결을 중심으로 조화롭게 이어집니다. ${core} 지금의 흐름은 무언가를 더 억지로 채우기보다, 이미 타고난 리듬을 믿고 차분하게 펼쳐갈 때 더 선명하게 살아납니다.
+
+${summary} 그래서 지금은 큰 변화를 서두르기보다, 나에게 맞는 관계의 온도와 일의 방식, 그리고 쉬는 리듬을 꾸준히 지켜내는 것이 더 중요합니다. 그 안정감이 쌓일수록 사주 안의 좋은 결은 더 깊고 아름답게 드러납니다.`;
   }
 
-  return `${result.profile.name}님의 선천코드는 ${dominantText}의 결을 선명하게 가지고 있으면서도, 아직 조용히 불러와야 할 기운을 함께 품고 있습니다. 부족함은 결핍이라기보다 앞으로 더 깊어질 여백에 가깝습니다. 그 여백을 다정하게 돌보는 순간, 지금의 흐름은 훨씬 부드럽고 아름답게 이어질 수 있습니다.`;
+  return `${result.profile.name}님의 선천코드는 ${dominantText}의 결을 선명하게 품고 있으면서도, ${lackingText}의 여백을 함께 안고 있습니다. ${core} 이 여백은 결핍이라기보다 앞으로 더 깊어질 감각의 자리처럼 보이며, 삶의 속도를 조금만 다정하게 조율해도 전체 흐름이 훨씬 부드럽게 정돈될 수 있습니다.
+
+${summary} 그래서 지금의 해석은 강한 기운을 더 밀어붙이는 방향보다, 비어 있는 결을 천천히 보살피며 균형을 회복하는 쪽에 가깝습니다. 생활 습관과 관계의 거리감, 그리고 나를 부르는 말의 울림까지 조금씩 정리해갈수록 이 흐름은 더 편안하고 단단한 방향으로 이어질 수 있습니다.`;
 }
 
 type SajuResultViewProps = {
@@ -282,7 +291,7 @@ export function SajuResultView({ result }: SajuResultViewProps) {
 
       <div className="grid gap-5 xl:grid-cols-2">
         <SectionCard eyebrow="Love" title="감정의 리듬" body={interp.love_romance} />
-        <SectionCard eyebrow="Wealth" title="일과 재물의 결" body={interp.wealth_strategy} />
+        <SectionCard eyebrow="Wealth" title="재물과 일의 결" body={interp.wealth_strategy} />
       </div>
 
       <GlassPanel className="result-panel-glow p-6 sm:p-8">
@@ -305,22 +314,25 @@ export function SajuResultView({ result }: SajuResultViewProps) {
 
       <div className="grid gap-5 xl:grid-cols-2">
         <SectionCard eyebrow="Current Flow" title="현재 흐름 요약" body={currentFlowSummary} />
-        <SectionCard eyebrow="Closing" title="종합 해석" body={closingInterpretation} />
+        <SectionCard eyebrow="Health" title="몸과 마음의 안내" body={interp.health_analysis} />
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-2">
-        <SectionCard eyebrow="Health" title="몸과 마음의 안내" body={interp.health_analysis} />
-        <SectionCard eyebrow="Note" title="해석 범위" body={interp.daewoon_trend} />
-      </div>
+      <SectionCard
+        eyebrow="Closing"
+        title="종합 해석"
+        body={closingInterpretation}
+        className="px-8 py-8 sm:px-10 sm:py-9"
+      />
 
       <GlassPanel className="result-panel-glow p-8">
         <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
           Reference Note
         </p>
         <p className="mt-4 whitespace-pre-line text-base leading-8 text-[var(--foreground-soft)]">
-          본 결과는 입력하신 생년월일과 시간을 기준으로 산출한 참고용 선천코드입니다.
-          출생 시간이 경계(23시 전후 또는 2시간 단위)에 가까운 경우 결과가 달라질 수 있습니다.
-          정밀한 상담 리포트는 별도 분석이 필요할 수 있습니다.
+          본 결과는 입력하신 생년월일과 시간을 기준으로 산출한 참고용 선천코드 간단
+          해석입니다. 태양시, 야자시, 대운과 세운의 정밀 분석은 포함하지 않았습니다.
+          출생 시간이 경계(23시 전후 또는 2시간 단위)에 가까운 경우 결과가 달라질 수
+          있습니다. 정밀한 상담 리포트는 별도 분석이 필요할 수 있습니다.
         </p>
       </GlassPanel>
 
@@ -329,8 +341,8 @@ export function SajuResultView({ result }: SajuResultViewProps) {
           Privacy Note
         </p>
         <p className="mt-4 whitespace-pre-line text-base leading-8 text-[var(--foreground-soft)]">
-          입력하신 정보는 사주 분석 결과 생성에만 일시적으로 사용되며 별도의 데이터베이스에 저장되지 않습니다.
-          ※ 입력 정보는 저장되지 않으니 안심하고 이용하셔도 됩니다.
+          입력하신 정보는 사주 분석 결과 생성에만 일시적으로 사용되며 별도의 데이터베이스에
+          저장되지 않습니다. 입력 정보는 저장되지 않으니 안심하고 이용하셔도 됩니다.
         </p>
       </GlassPanel>
 

@@ -36,7 +36,7 @@ export function NamingResultCard({ card }: NamingResultCardProps) {
           {card.examples.map((example) => (
             <span
               key={example}
-              className="rounded-full border border-[var(--color-secondary)]/18 bg-[var(--color-secondary)]/8 px-3 py-1 text-xs font-medium text-[var(--color-secondary)]"
+              className="rounded-full border border-[var(--color-secondary)]/18 bg-[var(--color-secondary)]/8 px-4 py-2 text-sm font-semibold text-[var(--color-secondary)]"
             >
               {example}
             </span>

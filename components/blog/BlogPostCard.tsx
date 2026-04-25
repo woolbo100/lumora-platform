@@ -47,12 +47,12 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
           <h2 className="mt-4 line-clamp-2 min-h-[5.5rem] font-display text-2xl leading-tight text-[var(--foreground)]">
             {post.title}
           </h2>
-          <p className="mt-4 line-clamp-4 min-h-[7rem] text-sm leading-7 text-[var(--foreground-soft)]">
+          <p className="mt-4 line-clamp-3 min-h-[5.25rem] text-sm leading-7 text-[var(--foreground-soft)]">
             {excerpt}
           </p>
         </div>
 
-        <div className="mt-6 border-t border-white/10 pt-4 text-sm text-[var(--foreground-muted)]">
+        <div className="mt-4 border-t border-white/10 pt-3 text-sm text-[var(--foreground-muted)]">
           <time dateTime={post.publishedAt}>
             {new Intl.DateTimeFormat("ko-KR", {
               year: "numeric",

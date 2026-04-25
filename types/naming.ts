@@ -1,4 +1,5 @@
-import { type SajuElement, type SajuGender, type SajuResult } from "@/types/saju";
+import { type SharedSajuAnalysis } from "@/types/analysis";
+import { type SajuElement, type SajuGender } from "@/types/saju";
 
 export type ElementType = SajuElement;
 
@@ -28,9 +29,7 @@ export type NamingCandidate = {
 };
 
 export type SajuNamingInput = {
-  gender: SajuGender;
-  birth_date: string;
-  birth_time: string;
+  analysis_id: string;
   purpose: NamingPurpose;
   current_name?: string;
   preferred_style?: NamingStyle;
@@ -55,7 +54,8 @@ export type NamingResult = {
   namingDirection: string;
   recommendations: ScoredNamingCandidate[];
   premiumPreview: string;
-  sajuResult: SajuResult;
+  analysisId: string;
+  sajuAnalysis: SharedSajuAnalysis;
 };
 
 export type NamingValidationResult =

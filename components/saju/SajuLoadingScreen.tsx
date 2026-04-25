@@ -7,11 +7,10 @@ import { GlassPanel } from "@/components/shared/GlassPanel";
 import { type SajuProfile } from "@/types/saju";
 
 const MESSAGES = [
-  "하늘의 결을 읽고 있습니다...",
-  "사주 원국의 기둥을 정리하고 있습니다...",
-  "오행의 균형과 십성 흐름을 계산 중입니다...",
-  "근묘화실과 대운 서사를 다듬고 있습니다...",
-  "루모라 리포트 형식으로 정리하고 있습니다...",
+  "출생정보의 결을 읽고 있어요...",
+  "년주, 월주, 일주, 시주의 흐름을 정리하고 있어요...",
+  "오행의 균형과 부족한 결을 함께 살펴보고 있어요...",
+  "루모라만의 선천코드 문장으로 다듬고 있어요...",
 ];
 
 type SajuLoadingScreenProps = {
@@ -21,7 +20,8 @@ type SajuLoadingScreenProps = {
 export function SajuLoadingScreen({ profile }: SajuLoadingScreenProps) {
   const router = useRouter();
   const [index, setIndex] = useState(0);
-  const query = useMemo(
+  const [error, setError] = useState<string | null>(null);
+  const fallbackQuery = useMemo(
     () =>
       new URLSearchParams({
         name: profile.name,
@@ -36,17 +36,51 @@ export function SajuLoadingScreen({ profile }: SajuLoadingScreenProps) {
   useEffect(() => {
     const messageTimer = window.setInterval(() => {
       setIndex((current) => (current + 1) % MESSAGES.length);
-    }, 1300);
+    }, 1200);
+
+    let cancelled = false;
+
+    const createAnalysis = async () => {
+      try {
+        const response = await fetch("/api/saju", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(profile),
+        });
+
+        const payload = (await response.json()) as {
+          id?: string;
+          error?: string;
+        };
+
+        if (!response.ok || !payload.id) {
+          throw new Error(payload.error ?? "출생정보를 다시 확인해주세요");
+        }
+
+        if (!cancelled) {
+          router.replace(`/saju/result?id=${encodeURIComponent(payload.id)}`);
+        }
+      } catch (caughtError) {
+        if (!cancelled) {
+          setError(
+            caughtError instanceof Error ? caughtError.message : "출생정보를 다시 확인해주세요",
+          );
+        }
+      }
+    };
 
     const redirectTimer = window.setTimeout(() => {
-      router.replace(`/saju/result?${query}`);
-    }, 2800);
+      void createAnalysis();
+    }, 2200);
 
     return () => {
+      cancelled = true;
       window.clearInterval(messageTimer);
       window.clearTimeout(redirectTimer);
     };
-  }, [query, router]);
+  }, [profile, router]);
 
   return (
     <section className="relative flex min-h-[78vh] items-center justify-center overflow-hidden">
@@ -63,18 +97,29 @@ export function SajuLoadingScreen({ profile }: SajuLoadingScreenProps) {
         </div>
 
         <p className="mt-8 text-sm uppercase tracking-[0.35em] text-[var(--color-secondary)]">
-          Mystic Processing
+          Saju Analysis
         </p>
         <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
-          {profile.name}님의 운명을 읽는 중
+          {profile.name}님의 선천코드를 정리하는 중
         </h1>
         <p className="mt-6 min-h-8 text-lg text-[var(--foreground-soft)] sm:text-xl">
-          {MESSAGES[index]}
+          {error ?? MESSAGES[index]}
         </p>
         <p className="mt-4 text-sm leading-7 text-white/46">
-          입력값 검증, 사주 원국 계산, 오행 분석, 십성 매핑, 근묘화실/대운 생성 순서로
-          리포트를 준비하고 있습니다.
+          {error
+            ? "입력한 출생정보를 한 번 더 확인한 뒤 다시 시도해주세요."
+            : "공통 분석 데이터를 한 번만 생성한 뒤, 사주 결과와 이름설계가 같은 기반을 공유할 수 있도록 정리하고 있어요."}
         </p>
+
+        {error ? (
+          <button
+            type="button"
+            onClick={() => router.replace(`/saju/reading?${fallbackQuery}`)}
+            className="mt-8 inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 px-6 py-3 text-sm font-semibold text-[var(--foreground-soft)] transition hover:border-white/24 hover:text-[var(--foreground)]"
+          >
+            다시 입력하기
+          </button>
+        ) : null}
       </GlassPanel>
     </section>
   );

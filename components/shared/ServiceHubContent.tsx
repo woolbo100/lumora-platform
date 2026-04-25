@@ -32,7 +32,7 @@ export function ServiceHubContent({
   faqClassName,
 }: ServiceHubContentProps) {
   return (
-    <section className="mx-auto mt-20 w-full max-w-4xl px-6 pb-20 sm:px-8 lg:px-0">
+    <section className="mx-auto mt-20 w-full max-w-5xl px-6 pb-20 sm:px-8 lg:px-0">
       <div className="space-y-16">
         <GlassPanel className="aurora-hover-surface aurora-hover flex p-8 sm:p-10">
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">Overview</p>
@@ -97,7 +97,7 @@ export function ServiceHubContent({
           <h2 className="mt-4 font-display text-3xl text-[var(--foreground)] sm:text-4xl">
             지금 바로 확인해보세요
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+          <p className="mx-auto mt-4 max-w-full text-sm leading-8 text-[var(--foreground-soft)] md:whitespace-nowrap sm:text-base lg:text-lg">
             지금의 흐름을 가볍게 읽어보고, 나에게 닿는 감각을 천천히 확인할 수 있도록 준비했습니다.
           </p>
           <div className="mt-8 flex justify-center">

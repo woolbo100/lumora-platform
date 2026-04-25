@@ -1,8 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
-import { CTAButton } from "@/components/shared/CTAButton";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { ResultShareActions } from "@/components/shared/ResultShareActions";
 import { type SajuElement, type SajuResult } from "@/types/saju";
@@ -335,33 +332,6 @@ export function SajuResultView({ result }: SajuResultViewProps) {
           입력하신 정보는 사주 분석 결과 생성에만 일시적으로 사용되며 별도의 데이터베이스에 저장되지 않습니다.
           ※ 입력 정보는 저장되지 않으니 안심하고 이용하셔도 됩니다.
         </p>
-      </GlassPanel>
-
-      <GlassPanel className="result-panel-glow p-8">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
-              Premium
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)]">
-              백도화 유료 리포트로 더 깊게 보기
-            </h2>
-            <p className="mt-3 max-w-3xl text-base leading-8 text-[var(--foreground-soft)]">
-              무료 선천코드가 지금의 결을 가볍게 보여준다면, 백도화 리포트에서는 관계와 감정의 맥락까지 더 깊고 세밀하게 읽어볼 수 있습니다.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <CTAButton href="/naming/start">이름코드로 이어서 보기</CTAButton>
-            <CTAButton href="/contact">백도화 유료 리포트 문의</CTAButton>
-            <Link
-              href="/saju/reading"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 px-6 py-3 text-sm font-semibold text-[var(--foreground-soft)] transition hover:border-white/24 hover:text-[var(--foreground)]"
-            >
-              다시 입력하기
-            </Link>
-          </div>
-        </div>
       </GlassPanel>
 
       <ResultShareActions

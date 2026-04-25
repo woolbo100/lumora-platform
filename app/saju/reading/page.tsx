@@ -11,8 +11,7 @@ export default function SajuReadingPage() {
           사주 입력
         </h1>
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-          입력부터 결과까지 기존 별하 UX의 흐름을 유지하되, 루모라 안에서 유지보수 가능한
-          서비스 구조로 통합했습니다.
+          태어난 순간의 정보를 바탕으로, 지금의 나를 이루는 기운의 흐름을 차분하게 읽어보는 시작점입니다.
         </p>
       </section>
 

@@ -66,14 +66,13 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
           Saju Ritual
         </p>
         <h2 className="mt-4 font-display text-4xl text-[var(--foreground)] sm:text-5xl">
-          당신의 사주 원국을
+          당신의 사주 흐름을
           <br />
           루모라 안에서 읽어냅니다
         </h2>
         <p className="mt-5 text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-          기존 별하의 정보 밀도는 유지하고, 루모라의 공통 구조 안에서 읽기 좋은 프리미엄
-          리포트로 재구성했습니다. 이름, 성별, 생년월일, 태어난 시간을 입력하면 원국,
-          오행, 십성, 근묘화실, 대운 흐름까지 한 번에 분석합니다.
+          생년월일과 태어난 시간을 입력하면, 타고난 기운의 결을 따라 당신 안에 흐르는 에너지와 관계의 리듬을
+          차분하게 읽어드립니다. 복잡한 설명보다 지금의 나를 이해하기 쉬운 문장으로 풀어내는 데 집중했습니다.
         </p>
 
         <div className="mt-8 grid gap-4">
@@ -84,17 +83,15 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
             </p>
           </div>
           <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.2))] p-5">
-            <p className="text-xs uppercase tracking-[0.24em] text-white/42">분석 모드</p>
-            <p className="mt-3 text-lg leading-7 text-[var(--foreground-soft)]">
-              현재는 안정적인 통합을 위해 No-AI 기반 내러티브 엔진을 기본값으로 사용합니다.
-              결과 스키마는 AI 버전과 호환되도록 유지했습니다.
+            <p className="text-xs uppercase tracking-[0.24em] text-white/42">설명 내용</p>
+            <p className="mt-3 whitespace-pre-line text-lg leading-7 text-[var(--foreground-soft)]">
+              {"루모라는 사주의 핵심 구조를 바탕으로\n\n타고난 에너지,\n관계의 흐름,\n감정의 리듬,\n재물과 일의 방향\n\n이 네 가지 흐름을 중심으로 해석합니다."}
             </p>
           </div>
           <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03)_58%,rgba(12,14,28,0.2))] p-5">
-            <p className="text-xs uppercase tracking-[0.24em] text-white/42">유지된 핵심 구조</p>
-            <p className="mt-3 text-lg leading-7 text-[var(--foreground-soft)]">
-              `pillars`, `today_luck`, `gmhs`, `daewoon`, `ten_gods`, `ohaeng_analysis`
-              구조를 기존 명세에 맞춰 유지합니다.
+            <p className="text-xs uppercase tracking-[0.24em] text-white/42">기준</p>
+            <p className="mt-3 whitespace-pre-line text-lg leading-7 text-[var(--foreground-soft)]">
+              {"현재 결과는 안정적인 기준을 바탕으로 생성되며,\n앞으로 더 다양한 해석 방식이 확장될 예정입니다."}
             </p>
           </div>
         </div>
@@ -106,13 +103,12 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
           사주 분석 시작
         </h1>
         <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-          입력값은 프론트와 서버에서 모두 검증됩니다. 생년월일은 `YYYY-MM-DD`, 시간은
-          `HH:MM` 형식으로 맞춰 주세요.
+          이름, 성별, 생년월일, 태어난 시간을 입력하면 당신의 선천적인 흐름을 가볍지만 깊이 있게 읽어드립니다.
         </p>
 
         <form className="mt-10 grid gap-6" onSubmit={handleSubmit}>
           <label className="grid gap-3">
-            <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
+            <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-secondary)]">
               Name
             </span>
             <input
@@ -120,13 +116,13 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
               name="name"
               value={form.name}
               onChange={(event) => updateField("name", event.target.value)}
-              placeholder="홍길동"
+              placeholder="이름을 입력해주세요"
               autoComplete="name"
             />
           </label>
 
           <div className="grid gap-3">
-            <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
+            <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-secondary)]">
               Gender
             </span>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -155,7 +151,7 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
 
           <div className="grid gap-6 sm:grid-cols-2">
             <label className="grid gap-3">
-              <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
+              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-secondary)]">
                 Birth Date
               </span>
               <input
@@ -168,7 +164,7 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
             </label>
 
             <label className="grid gap-3">
-              <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
+              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-secondary)]">
                 Birth Time
               </span>
               <input
@@ -179,17 +175,6 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
                 onChange={(event) => updateField("birth_time", event.target.value)}
               />
             </label>
-          </div>
-
-          <div className="grid gap-3">
-            <span className="text-sm font-semibold tracking-[0.18em] text-[var(--color-secondary)] uppercase">
-              Mode
-            </span>
-            <div className="rounded-[24px] border border-[var(--color-secondary)]/18 bg-[var(--color-secondary)]/7 p-4 text-sm leading-7 text-[var(--foreground-soft)]">
-              기본값은 <strong className="text-[var(--foreground)]">No-AI</strong> 입니다. 추후 AI
-              확장을 고려해 `mode` 필드는 유지하지만, 현재 결과는 안정적인 규칙 기반 엔진으로
-              생성됩니다.
-            </div>
           </div>
 
           {errors.length > 0 ? (
@@ -206,10 +191,10 @@ export function SajuInputForm({ initialValue }: SajuInputFormProps) {
               disabled={isPending}
               className="inline-flex min-h-14 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-8 py-4 text-base font-semibold text-[#1c1830] shadow-[0_24px_70px_rgba(115,88,232,0.28)] transition hover:-translate-y-0.5 hover:border-[rgba(236,228,255,0.78)] disabled:cursor-not-allowed disabled:opacity-65"
             >
-              {isPending ? "분석 준비 중..." : "사주 리포트 보기"}
+              {isPending ? "분석을 준비하고 있어요..." : "사주 리포트 보기"}
             </button>
             <CTAButton href="/saju" variant="secondary">
-              서비스 소개로
+              서비스 소개 보기
             </CTAButton>
           </div>
         </form>

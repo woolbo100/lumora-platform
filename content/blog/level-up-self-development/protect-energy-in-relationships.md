@@ -10,7 +10,7 @@ imageAltText: 관계에서 에너지를 지키는 여성의 고요한 실루엣,
 status: published
 ---
 
-![관계에서 에너지를 지키는 여성의 고요한 실루엣, 새벽빛과 에메랄드 빛 공간](/images/level-up-self-development/protect-energy-in-relationships-thumbnail.webp)
+
 
 # 관계에서 에너지를 지키는 방법 — 소진되지 않고 연결되는 기술
 

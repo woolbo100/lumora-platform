@@ -9,6 +9,7 @@ type ServiceHubHeroProps = {
   primaryHref: string;
   primaryLabel: string;
   primaryClassName?: string;
+  footerText?: string;
 };
 
 export function ServiceHubHero({
@@ -20,6 +21,7 @@ export function ServiceHubHero({
   primaryHref,
   primaryLabel,
   primaryClassName = "",
+  footerText,
 }: ServiceHubHeroProps) {
   return (
     <main className="relative left-1/2 right-1/2 min-h-[calc(100vh-9rem)] w-screen -translate-x-1/2">
@@ -57,6 +59,12 @@ export function ServiceHubHero({
             LUMORA로 돌아가기
           </Link>
         </div>
+
+        {footerText && (
+          <p className="mt-12 text-xs text-[var(--foreground-soft)]/40">
+            {footerText}
+          </p>
+        )}
       </section>
     </main>
   );

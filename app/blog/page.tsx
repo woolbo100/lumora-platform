@@ -107,7 +107,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         </GlassPanel>
       ) : null}
 
-      <BlogPostGrid posts={posts} />
+      <BlogPostGrid posts={posts} activeCategory={selectedCategory} />
     </main>
   );
 }

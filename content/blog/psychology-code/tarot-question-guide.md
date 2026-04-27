@@ -1,11 +1,11 @@
 ---
 title: 타로 질문 잘하는 법 3가지, 답이 달라지는 이유
 slug: tarot-question-guide
-category: tarot-saju
+category: psychology-code
 summary: 타로 질문 잘하는 법은 결과보다 흐름을 묻는 데서 시작됩니다. 같은 카드도 질문에 따라 전혀 다른 답을 보여주는 이유를 이해해보세요.
 metaDescription: 타로 질문 잘하는 법은 결과보다 흐름을 묻는 데서 시작됩니다. 같은 카드도 질문에 따라 전혀 다른 답을 보여주는 이유를 이해해보세요.
 publishedAt: 2026-04-24
-imageUrl: /images/tarot-saju/tarot-question-thumbnail.webp
+imageUrl: /images/psychology-code/tarot-question-thumbnail.webp
 imageAltText: 핑크 퍼플 톤의 타로 분위기 속 질문의 방향을 떠올리게 하는 장면
 status: published
 ---
@@ -64,7 +64,7 @@ status: published
 
 질문이 바뀌지 않으면 보는 흐름도 달라지지 않기 때문입니다.
 
-![어두운 톤의 타로 분위기 속 긴장감이 감도는 장면](/images/tarot-saju/tarot-question-dark.webp)
+![어두운 톤의 타로 분위기 속 긴장감이 감도는 장면](/images/psychology-code/tarot-question-dark.webp)
 
 ---
 
@@ -80,7 +80,7 @@ status: published
 
 타로가 깊어지는 순간은 카드가 잘 나왔을 때가 아니라 질문이 바뀌는 순간입니다.
 
-![따뜻한 톤의 타로 장면 속 차분한 안정감이 느껴지는 분위기](/images/tarot-saju/tarot-question-warm.webp)
+![따뜻한 톤의 타로 장면 속 차분한 안정감이 느껴지는 분위기](/images/psychology-code/tarot-question-warm.webp)
 
 ---
 

@@ -1,6 +1,5 @@
 export type BlogCategory =
   | "romance-reunion"
-  | "tarot-saju"
   | "psychology-code"
   | "attraction-self-esteem"
   | "level-up-self-development"

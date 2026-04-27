@@ -11,11 +11,6 @@ export const blogCategories: ReadonlyArray<{
     description: "Relationship flow and reunion insights.",
   },
   {
-    slug: "tarot-saju",
-    label: "\uD0C0\uB85C/\uC0AC\uC8FC",
-    description: "Tarot and saju readings for your current season.",
-  },
-  {
     slug: "psychology-code",
     label: "\uC2EC\uB9AC\uCF54\uB4DC",
     description: "Patterns, attachment, and emotional habits.",

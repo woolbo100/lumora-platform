@@ -5,7 +5,6 @@ create table if not exists public.posts (
   category text not null check (
     category in (
       'romance-reunion',
-      'tarot-saju',
       'psychology-code',
       'attraction-self-esteem',
       'level-up-self-development',

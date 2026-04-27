@@ -150,7 +150,6 @@ async function readAllPosts() {
   const posts = await Promise.all(
     ([
       "romance-reunion",
-      "tarot-saju",
       "psychology-code",
       "attraction-self-esteem",
       "level-up-self-development",

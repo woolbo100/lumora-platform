@@ -1,12 +1,11 @@
 import Link from "next/link";
-
 import { getCategoryMeta } from "@/data/blogCategories";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import {
   getBlogExcerpt,
   getBlogHeroLabel,
   getBlogReadTime,
-} from "@/lib/blog-posts";
+} from "@/lib/blog-utils";
 import type { BlogPost } from "@/types/blog";
 
 type BlogPostCardProps = {

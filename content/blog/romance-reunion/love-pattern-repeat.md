@@ -10,8 +10,6 @@ imageAltText: 반복되는 연애 패턴과 무의식을 표현한 여성 이미
 status: published
 ---
 
-![반복되는 연애 패턴과 무의식을 표현한 여성 이미지](/images/romance-reunion/love-pattern-repeat-thumbnail.webp)
-
 # 연애가 반복되는 이유 — 같은 사람만 만나는 당신에게
 
 이번엔 다를 거라 믿었는데, 어느새 같은 아픔이 반복되고 있다면 — 그건 당신이 부족한 게 아니라, 아직 자신의 패턴을 모르는 것입니다.

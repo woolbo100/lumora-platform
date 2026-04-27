@@ -197,11 +197,11 @@ export function BlogPostDetail({
 
         <article className="relative space-y-8 p-8 sm:p-10 lg:p-12">
           {post.imageUrl ? (
-            <div className="overflow-hidden rounded-[28px] border border-[#bda5dc]/45 bg-white/30">
+            <div className="aspect-video overflow-hidden rounded-[28px] border border-[#bda5dc]/45 bg-white/30 shadow-lg">
               <img
                 src={post.imageUrl}
                 alt={post.imageAltText?.trim() || post.title}
-                className="max-h-[34rem] w-full object-cover"
+                className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
           ) : null}
@@ -247,16 +247,20 @@ export function BlogPostDetail({
                 return (
                   <figure
                     key={`image-${block.src}-${index}`}
-                    className="overflow-hidden rounded-[26px] border border-[#bda5dc]/45 bg-white/30"
+                    className="group overflow-hidden rounded-[26px] border border-[#bda5dc]/45 bg-white/30 shadow-md transition-all duration-300 hover:shadow-xl"
                   >
-                    <img
-                      src={block.src}
-                      alt={block.alt}
-                      className="max-h-[30rem] w-full object-cover"
-                    />
-                    <figcaption className="border-t border-[#c9b3e1]/45 px-5 py-3 text-sm text-[#64556f]">
-                      {block.alt}
-                    </figcaption>
+                    <div className="aspect-video overflow-hidden">
+                      <img
+                        src={block.src}
+                        alt={block.alt}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                    {block.alt && (
+                      <figcaption className="border-t border-[#c9b3e1]/45 px-5 py-3 text-sm text-[#64556f] transition-colors group-hover:bg-[#f8f5ff]/50">
+                        {block.alt}
+                      </figcaption>
+                    )}
                   </figure>
                 );
               }

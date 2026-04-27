@@ -239,6 +239,11 @@ export function BlogPostDetail({
               }
 
               if (block.type === "image") {
+                // 상단 썸네일과 동일한 이미지가 본문에 포함된 경우 중복 노출 방지
+                if (block.src === post.imageUrl) {
+                  return null;
+                }
+
                 return (
                   <figure
                     key={`image-${block.src}-${index}`}

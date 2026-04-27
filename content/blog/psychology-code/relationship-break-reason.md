@@ -2,12 +2,11 @@
 title: "관계가 틀어지는 이유, 당신이 잘해줬기 때문일 수 있다"
 category: "psychology-code"
 publishedAt: "2026-04-27"
-imageUrl: "/images/romance-reunion/relationship-goes-cold-thumbnail.webp"
+imageUrl: "/images/psychology-code/relationship-goes-cold-thumbnail.webp"
 summary: "열심히 잘해줬는데 왜 관계가 틀어질까. 문제는 노력의 양이 아니라 그 안에 숨은 심리 패턴에 있다. 당신이 놓친 관계의 진실을 들여다보자."
 status: "published"
 ---
 
-![관계가 소원해지는 순간의 심리](/images/romance-reunion/relationship-goes-cold-thumbnail.webp)
 
 # 관계가 틀어지는 이유, 당신이 잘해줬기 때문일 수 있다
 
@@ -27,7 +26,7 @@ status: "published"
 
 잘해준 것이 문제가 아니다. 잘해주는 동안 당신을 지워버린 것이 문제다.
 
-![변화하는 감정의 심리 패턴](/images/romance-reunion/love-emotion-shift-psychology.webp)
+![변화하는 감정의 심리 패턴](/images/psychology-code/love-emotion-shift-psychology.webp)
 
 ---
 
@@ -54,7 +53,7 @@ status: "published"
 
 한없이 맞춰주는 관계에서는 그 마찰이 없다. 마찰이 없으면 깊이도 없다. 깊이 없는 관계는 시간이 흘러도 낯선 채로 남는다. 어느 날 상대는 "당신과 있으면 편한데 뭔가 거리감이 있다"고 말할지 모른다. 당신이 그토록 피하려 했던 그 거리가, 당신이 맞추면 맞출수록 오히려 벌어졌던 것이다.
 
-![내면의 치유와 회복](/images/mind-study/reset-mind-healing.webp)
+![내면의 치유와 회복](/images/psychology-code/reset-mind-healing.webp)
 
 ---
 

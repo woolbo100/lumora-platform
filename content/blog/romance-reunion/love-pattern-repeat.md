@@ -1,11 +1,13 @@
 ---
 title: "연애가 반복되는 이유 — 같은 사람만 만나는 당신에게"
-category: "romance-reunion"
-date: "2026-04-28"
-thumbnail: "/images/romance-reunion/love-pattern-repeat-thumbnail.webp"
-tags: ["연애패턴", "반복되는연애", "연애심리", "무의식", "재회"]
-excerpt: "이번엔 다를 거라 믿었는데, 어느새 같은 아픔이 반복되고 있다면 — 그건 당신이 부족한 게 아니라, 아직 자신의 패턴을 모르는 것입니다."
-seo_keyword: "연애패턴 반복"
+slug: love-pattern-repeat
+category: romance-reunion
+summary: "이번엔 다를 거라 믿었는데, 어느새 같은 아픔이 반복되고 있다면 — 그건 당신이 부족한 게 아니라, 아직 자신의 패턴을 모르는 것입니다."
+metaDescription: "이번엔 다를 거라 믿었는데, 어느새 같은 아픔이 반복되고 있다면 — 그건 당신이 부족한 게 아니라, 아직 자신의 패턴을 모르는 것입니다."
+publishedAt: 2026-04-28
+imageUrl: /images/romance-reunion/love-pattern-repeat-thumbnail.webp
+imageAltText: 반복되는 연애 패턴과 무의식을 표현한 여성 이미지
+status: published
 ---
 
 ![반복되는 연애 패턴과 무의식을 표현한 여성 이미지](/images/romance-reunion/love-pattern-repeat-thumbnail.webp)

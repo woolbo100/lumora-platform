@@ -28,11 +28,11 @@ export default function Home() {
                   LUMORA
                 </span>
                 <br />
-                <span className="inline-block mt-2 text-4xl font-medium tracking-tighter opacity-95 leading-[1.1] sm:text-6xl lg:text-6xl">
+                <span className="inline-block mt-2 break-keep text-[1.75rem] font-medium tracking-tighter opacity-95 leading-[1.2] sm:text-6xl lg:text-6xl">
                   보이지 않는 끌림의 구조
                 </span>
               </h2>
-              <p className="text-2xl font-medium whitespace-pre-line text-[var(--color-secondary)] sm:text-3xl">
+              <p className="break-keep text-lg font-medium whitespace-pre-line text-[var(--color-secondary)] sm:text-3xl">
                 {"루모라, 아우라와 빛이 만나는 지점\n당신의 마음을 읽고 흐름을 비추는 공간"}
               </p>
             </div>

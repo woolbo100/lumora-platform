@@ -127,13 +127,13 @@ export function RelationshipPatternExperience() {
             <span className="font-display text-6xl leading-none">✦</span>
           </div>
 
-          <h2 className="font-display text-6xl text-[var(--foreground)] sm:text-7xl">
+          <h2 className="break-keep font-display text-5xl text-[var(--foreground)] sm:text-7xl">
             연애패턴코드
           </h2>
-          <p className="mt-5 text-2xl font-medium text-[var(--color-secondary)] sm:text-3xl">
+          <p className="mt-5 break-keep text-xl font-medium text-[var(--color-secondary)] sm:text-3xl">
             연애패턴 코드를 읽어보세요
           </p>
-          <p className="mx-auto mt-8 max-w-xl text-lg leading-9 text-[var(--foreground-soft)]">
+          <p className="mx-auto mt-8 max-w-xl break-keep text-base leading-8 text-[var(--foreground-soft)] sm:text-lg sm:leading-9">
             관계 안에서 반복되는 감정선과 반응의 결을 20개의 질문으로 천천히
             살펴봅니다. 사랑이 깊어질수록 나는 어디로 흐르는지, LUMORA의 감성
             리딩으로 부드럽게 비춰보세요.
@@ -172,12 +172,12 @@ export function RelationshipPatternExperience() {
         <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-secondary)]">
           Relationship Pattern Code
         </p>
-        <h2 className="mt-4 font-display text-4xl text-[var(--foreground)]">
+        <h2 className="mt-4 break-keep font-display text-2xl text-[var(--foreground)] sm:text-4xl">
           사랑 안에서 드러나는
           <br />
           당신의 흐름을 읽어보세요
         </h2>
-        <p className="mt-5 text-sm leading-7 text-[var(--foreground-soft)]">
+        <p className="mt-5 break-keep text-sm leading-7 text-[var(--foreground-soft)]">
           연애 안에서 반복되는 몰입, 희생, 거리감, 감정의 파도, 안정 지향성을
           차분하게 살펴보고 현재의 관계 패턴을 가장 닮은 코드로 정리해드립니다.
         </p>
@@ -213,7 +213,7 @@ export function RelationshipPatternExperience() {
         <p className="text-sm uppercase tracking-[0.3em] text-white/50">
           Question {currentQuestion.id}
         </p>
-        <h3 className="mt-4 font-display text-4xl text-[var(--foreground)] sm:text-5xl">
+        <h3 className="mt-4 break-keep font-display text-2xl text-[var(--foreground)] sm:text-5xl">
           {currentQuestion.question}
         </h3>
 

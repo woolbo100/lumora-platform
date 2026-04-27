@@ -54,7 +54,7 @@ export function AuraResult() {
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
           Aura Result
         </p>
-        <h2 className="mt-4 font-display text-4xl text-[var(--foreground)] sm:text-5xl">
+        <h2 className="mt-4 break-keep font-display text-3xl text-[var(--foreground)] sm:text-5xl">
           테스트를 마친 뒤
           <br />
           결과 페이지가 열립니다
@@ -88,10 +88,10 @@ export function AuraResult() {
           <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-secondary)]">
             Aura Report
           </p>
-          <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
+          <h1 className="mt-4 break-keep font-display text-4xl text-[var(--foreground)] sm:text-6xl">
             당신의 오라 코드
           </h1>
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-[var(--foreground-soft)]">
+          <p className="mt-5 max-w-3xl break-keep text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
             {result.summary}
           </p>
 
@@ -173,7 +173,7 @@ export function AuraResult() {
           <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">
             Chakra Highlights
           </p>
-          <h2 className="font-display text-4xl text-[var(--foreground)] sm:text-5xl">
+          <h2 className="font-display break-keep text-3xl text-[var(--foreground)] sm:text-5xl">
             지금 가장 선명한 흐름
           </h2>
         </div>

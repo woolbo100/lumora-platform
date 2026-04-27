@@ -25,10 +25,10 @@ export function SiteFooter() {
               </span>
             </Link>
             <div className="space-y-1">
-              <p className="text-[13px] font-medium tracking-wide text-[var(--color-secondary)] opacity-90">
+              <p className="break-keep text-[13px] font-medium tracking-wide text-[var(--color-secondary)] opacity-90">
                 루모라, 아우라와 빛이 만나는 지점
               </p>
-              <p className="text-[13px] font-light tracking-wide text-[var(--foreground-soft)] opacity-80">
+              <p className="break-keep text-[13px] font-light tracking-wide text-[var(--foreground-soft)] opacity-80">
                 당신의 마음을 읽고, 흐름을 비추는 공간
               </p>
             </div>

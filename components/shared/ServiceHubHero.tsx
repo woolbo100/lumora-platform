@@ -31,14 +31,14 @@ export function ServiceHubHero({
         </div>
 
         <h1
-          className={`font-display text-6xl leading-none text-[var(--foreground)] [text-shadow:0_0_30px_rgba(213,195,165,0.08)] sm:text-7xl md:text-8xl ${titleClassName}`}
+          className={`break-keep font-display text-4xl leading-tight text-[var(--foreground)] [text-shadow:0_0_30px_rgba(213,195,165,0.08)] sm:text-7xl md:text-8xl ${titleClassName}`}
         >
           {title}
         </h1>
-        <p className={`mt-5 text-2xl text-[var(--color-secondary)] sm:text-3xl ${subtitleClassName}`}>
+        <p className={`mt-5 break-keep text-xl text-[var(--color-secondary)] sm:text-3xl ${subtitleClassName}`}>
           {subtitle}
         </p>
-        <p className="mt-8 max-w-2xl whitespace-pre-line text-lg leading-9 text-[var(--foreground-soft)] sm:text-xl">
+        <p className="mt-8 max-w-2xl break-keep whitespace-pre-line text-base leading-9 text-[var(--foreground-soft)] sm:text-xl">
           {description}
         </p>
 

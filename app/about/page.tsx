@@ -30,10 +30,10 @@ export default function AboutPage() {
         <p className="text-xs uppercase tracking-[0.35em] text-[var(--color-secondary)]">
           About LUMORA
         </p>
-        <h1 className="mt-4 font-display text-4xl leading-tight text-[var(--foreground)] sm:text-5xl lg:text-6xl">
+        <h1 className="mt-4 break-keep font-display text-3xl leading-tight text-[var(--foreground)] sm:text-5xl lg:text-6xl">
           감정과 관계를 더 깊이 이해하기 위한 해석의 공간
         </h1>
-        <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+        <p className="mx-auto mt-6 max-w-3xl break-keep text-sm leading-7 text-[var(--foreground-soft)] sm:text-lg sm:leading-8">
           단순한 결과를 보여주는 도구가 아니라, 나의 감정과 선택의 흐름을 차분하게
           바라보게 돕는 플랫폼을 지향합니다.
         </p>

@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 import { PolicyPage } from "@/components/shared/PolicyPage";
 
@@ -7,7 +7,7 @@ export default function ContactPage() {
     <PolicyPage
       title="문의하기"
       intro={[
-        "서비스 이용 중 궁금한 점이 있거나 문의사항이 있으시면",
+        "서비스 이용 중 궁금한 점이 있으시거나 제휴 문의를 하시고 싶으실 때는",
         "아래 이메일로 연락해 주세요.",
         "가능한 빠르게 답변드리겠습니다.",
       ]}

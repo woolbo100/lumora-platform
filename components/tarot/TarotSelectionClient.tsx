@@ -126,25 +126,34 @@ export function TarotSelectionClient({
       </div>
 
       {selectedCategory ? (
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-          {shuffledCards.map((card, index) => (
-            <TarotCardItem
-              key={card.id}
-              card={card}
-              isSelected={selectedCardIds.includes(card.id)}
-              isRevealed={false}
-              onSelect={() => handleToggle(card.id)}
-              priority={index < 5}
-            />
-          ))}
+        <div className="mt-8 flex flex-col md:mt-14">
+          {/* Mobile selected count display */}
+          <div className="z-20 -mx-8 mb-4 flex justify-center border-b border-white/5 bg-[var(--background)]/60 py-3 backdrop-blur-md md:hidden">
+            <span className="text-sm font-bold tracking-[0.2em] text-[var(--color-secondary)]">
+              선택한 카드 {selectedCardIds.length} / 3
+            </span>
+          </div>
+
+          <div className="scrollbar-hide grid max-h-[460px] grid-cols-4 gap-2 overflow-y-auto pb-32 sm:grid-cols-2 md:max-h-none md:overflow-visible md:pb-0 lg:grid-cols-4 xl:grid-cols-5">
+            {shuffledCards.map((card, index) => (
+              <TarotCardItem
+                key={card.id}
+                card={card}
+                isSelected={selectedCardIds.includes(card.id)}
+                isRevealed={false}
+                onSelect={() => handleToggle(card.id)}
+                priority={index < 5}
+              />
+            ))}
+          </div>
         </div>
       ) : null}
 
-      <div className="sticky bottom-6 mx-auto mt-10 flex w-full max-w-5xl flex-col items-center justify-center gap-4 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(25,18,48,0.92),rgba(18,12,38,0.88)_58%,rgba(12,10,32,0.94))] px-5 py-5 shadow-[0_24px_70px_rgba(8,6,20,0.42)] backdrop-blur-2xl sm:flex-row">
+      <div className="fixed bottom-0 left-0 right-0 z-30 flex w-full flex-col items-center justify-center gap-3 bg-[var(--background)]/80 p-5 backdrop-blur-xl md:sticky md:bottom-6 md:mx-auto md:mt-10 md:max-w-5xl md:flex-row md:gap-4 md:rounded-[28px] md:border md:border-white/10 md:bg-[linear-gradient(135deg,rgba(25,18,48,0.92),rgba(18,12,38,0.88)_58%,rgba(12,10,32,0.94))] md:px-5 md:py-5 md:shadow-[0_24px_70px_rgba(8,6,20,0.42)]">
         <button
           type="button"
           onClick={() => router.push("/tarot")}
-          className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 px-6 py-3 text-sm font-semibold tracking-[0.18em] text-[var(--foreground-soft)] transition duration-300 hover:border-white/24 hover:bg-white/6"
+          className="hidden min-h-12 items-center justify-center rounded-full border border-white/12 px-6 py-3 text-sm font-semibold tracking-[0.18em] text-[var(--foreground-soft)] transition duration-300 hover:border-white/24 hover:bg-white/6 md:inline-flex"
         >
           허브로 돌아가기
         </button>
@@ -152,9 +161,9 @@ export function TarotSelectionClient({
           type="button"
           onClick={handleNext}
           disabled={!selectedCategoryKey || selectedCardIds.length !== 3}
-          className="inline-flex min-h-12 items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-10 py-3 text-sm font-bold tracking-[0.18em] text-[#1c1830] shadow-[0_12px_28px_rgba(115,88,232,0.28),0_0_20px_rgba(214,194,255,0.12)] transition duration-300 hover:-translate-y-0.5"
+          className="inline-flex min-h-14 w-full items-center justify-center rounded-full border border-[rgba(229,218,255,0.56)] bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-10 py-3 text-sm font-bold tracking-[0.18em] text-[#1c1830] shadow-[0_12px_28px_rgba(115,88,232,0.28),0_0_20px_rgba(214,194,255,0.12)] transition duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:grayscale md:min-h-12 md:w-auto"
         >
-          결과 보기
+          {selectedCardIds.length === 3 ? "타로 해석하기" : `${3 - selectedCardIds.length}장 더 선택해 주세요`}
         </button>
       </div>
     </section>

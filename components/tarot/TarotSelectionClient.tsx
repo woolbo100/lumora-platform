@@ -127,11 +127,13 @@ export function TarotSelectionClient({
 
       {selectedCategory ? (
         <div className="mt-8 flex flex-col md:mt-14">
-          {/* Mobile selected count display */}
-          <div className="z-20 -mx-8 mb-4 flex justify-center border-b border-white/5 bg-[var(--background)]/60 py-3 backdrop-blur-md md:hidden">
+          <div className="z-20 -mx-8 mb-4 flex flex-col items-center justify-center border-b border-white/5 bg-[var(--background)]/60 py-3 backdrop-blur-md md:hidden">
             <span className="text-sm font-bold tracking-[0.2em] text-[var(--color-secondary)]">
               선택한 카드 {selectedCardIds.length} / 3
             </span>
+            <p className="mt-1 text-[10px] text-white/40">
+              스크롤을 움직여서 카드를 선택하실 수 있습니다.
+            </p>
           </div>
 
           <div className="scrollbar-hide grid max-h-[460px] grid-cols-4 gap-2 overflow-y-auto pb-32 sm:grid-cols-2 md:max-h-none md:overflow-visible md:pb-0 lg:grid-cols-4 xl:grid-cols-5">

@@ -11,6 +11,7 @@ export type BlogPost = {
   slug: string;
   title: string;
   category: BlogCategory;
+  tags?: string[];
   status: BlogPostStatus;
   summary?: string | null;
   metaDescription?: string | null;
@@ -26,6 +27,7 @@ export type CreateBlogPostInput = {
   title: string;
   slug: string;
   category: BlogCategory;
+  tags?: string[];
   status?: BlogPostStatus;
   summary?: string;
   metaDescription?: string;

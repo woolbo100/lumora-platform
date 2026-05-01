@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getCategoryMeta } from "@/data/blogCategories";
 import { AdBanner } from "@/components/AdBanner";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
+import { BlogPostServiceRecommendations } from "@/components/blog/BlogPostServiceRecommendations";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import {
   getBlogParagraphs,
@@ -293,6 +294,7 @@ export function BlogPostDetail({
           </div>
 
           <AdBanner className="pt-4" />
+          <BlogPostServiceRecommendations post={post} />
         </article>
       </div>
 

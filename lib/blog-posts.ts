@@ -17,11 +17,17 @@ type BlogFileFrontmatter = {
   title?: string;
   slug?: string;
   category?: string;
+  tags?: string;
   summary?: string;
+  excerpt?: string;
   metaDescription?: string;
+  seo_keyword?: string;
   imageUrl?: string;
+  thumbnail?: string;
   imageAltText?: string;
+  imageAlt?: string;
   publishedAt?: string;
+  date?: string;
   updatedAt?: string;
   status?: string;
   aiGenerated?: string;
@@ -95,28 +101,55 @@ function parseBoolean(value: string | undefined) {
   return value?.toLowerCase() === "true";
 }
 
+function parseTags(value: string | undefined) {
+  if (!value) {
+    return [];
+  }
+
+  const normalized = value.trim();
+
+  if (!normalized) {
+    return [];
+  }
+
+  const unwrapped =
+    normalized.startsWith("[") && normalized.endsWith("]")
+      ? normalized.slice(1, -1)
+      : normalized;
+
+  return unwrapped
+    .split(",")
+    .map((tag) => normalizeFrontmatterValue(tag).trim())
+    .filter(Boolean);
+}
+
 async function readPostFile(filePath: string, fallbackCategory: BlogCategory) {
   const source = await fs.readFile(filePath, "utf8");
   const { frontmatter, content } = parseFrontmatter(source);
   const slug = frontmatter.slug?.trim() || path.basename(filePath, ".md");
   const title = frontmatter.title?.trim() || slug;
   const category = resolvePostCategory(frontmatter.category, fallbackCategory);
-  const publishedAt = frontmatter.publishedAt?.trim() || new Date(0).toISOString();
+  const publishedAt =
+    frontmatter.publishedAt?.trim() ||
+    frontmatter.date?.trim() ||
+    new Date(0).toISOString();
   const updatedAt = frontmatter.updatedAt?.trim() || null;
 
   return {
     slug,
     title,
     category,
+    tags: parseTags(frontmatter.tags),
     status: resolvePostStatus(frontmatter.status),
-    summary: frontmatter.summary?.trim() || null,
-    metaDescription: frontmatter.metaDescription?.trim() || null,
-    imageAltText: frontmatter.imageAltText?.trim() || null,
+    summary: frontmatter.summary?.trim() || frontmatter.excerpt?.trim() || null,
+    metaDescription:
+      frontmatter.metaDescription?.trim() || frontmatter.seo_keyword?.trim() || null,
+    imageAltText: frontmatter.imageAltText?.trim() || frontmatter.imageAlt?.trim() || null,
     aiGenerated: parseBoolean(frontmatter.aiGenerated),
     content,
     publishedAt,
     updatedAt,
-    imageUrl: frontmatter.imageUrl?.trim() || null,
+    imageUrl: frontmatter.imageUrl?.trim() || frontmatter.thumbnail?.trim() || null,
   } satisfies BlogPost;
 }
 

@@ -15,6 +15,7 @@ Use this format:
 title: 글 제목
 slug: post-slug
 category: romance-reunion
+tags: [재회, 연락, 속마음]
 summary: 목록 카드에 보일 짧은 소개
 metaDescription: SEO 설명
 publishedAt: 2026-04-13
@@ -27,5 +28,12 @@ status: published
 
 두 번째 문단입니다.
 ```
+
+Also supported:
+
+- `date` -> `publishedAt`
+- `thumbnail` -> `imageUrl`
+- `excerpt` -> `summary`
+- `imageAlt` -> `imageAltText`
 
 Only the blog pages read these files. The old Supabase blog editor is no longer the publishing source for `/blog`.

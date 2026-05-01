@@ -294,9 +294,10 @@ export function BlogPostDetail({
           </div>
 
           <AdBanner className="pt-4" />
-          <BlogPostServiceRecommendations post={post} />
         </article>
       </div>
+
+      <BlogPostServiceRecommendations post={post} />
 
       {relatedPosts.length > 0 ? (
         <section className="space-y-5">

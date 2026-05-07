@@ -32,12 +32,23 @@ export default async function FreebieEditPage({ params }: FreebiePageProps) {
   if (!isNew) {
     try {
       const response = await supabaseRestRequest(`freebies?id=eq.${id}`);
+      if (!response.ok) {
+        throw new Error(`DB 요청 실패: ${response.status} ${response.statusText}`);
+      }
       const data = await response.json();
       if (!data || data.length === 0) notFound();
       initialData = data[0];
     } catch (e) {
       console.error(e);
-      throw new Error("데이터를 불러오는 중 오류가 발생했습니다.");
+      return (
+        <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-12">
+          <GlassPanel className="border-red-500/50 bg-red-500/10 p-8">
+            <h2 className="text-xl font-bold text-red-400">🚨 페이지 로드 중 에러 발생</h2>
+            <p className="mt-2 text-sm text-red-300/80">{e instanceof Error ? e.message : "알 수 없는 오류"}</p>
+            <a href="/admin/freebies" className="mt-4 inline-block text-sm text-white underline">목록으로 돌아가기</a>
+          </GlassPanel>
+        </main>
+      );
     }
   }
 

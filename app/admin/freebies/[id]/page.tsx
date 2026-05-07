@@ -164,7 +164,7 @@ export default async function FreebieEditPage({ params }: FreebiePageProps) {
           <div className="flex gap-4 pt-4">
             <button 
               type="submit"
-              className="flex-1 rounded-xl bg-[var(--color-secondary)] py-4 text-sm font-bold text-white transition hover:opacity-80"
+              className="flex-1 rounded-xl bg-[#7c3aed] py-4 text-sm font-bold text-white shadow-lg shadow-purple-500/20 transition hover:opacity-90 active:scale-95"
             >
               {isNew ? "자료 등록하기" : "수정 완료"}
             </button>

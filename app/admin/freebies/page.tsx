@@ -100,7 +100,7 @@ export default async function AdminFreebiesPage() {
       <div className="flex justify-end">
         <a 
           href="/admin/freebies/new"
-          className="rounded-xl bg-[var(--color-secondary)] px-6 py-3 text-sm font-bold text-white transition hover:opacity-80"
+          className="rounded-xl bg-[#7c3aed] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-purple-500/20 transition hover:opacity-90 active:scale-95"
         >
           + 새 PDF 등록하기
         </a>

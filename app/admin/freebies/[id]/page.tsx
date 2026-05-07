@@ -135,8 +135,6 @@ export default async function FreebieEditPage({ params }: FreebiePageProps) {
           </div>
 
           <div className="space-y-2">
-
-          <div className="space-y-2">
             <label className="text-xs font-bold text-[var(--foreground-muted)] uppercase tracking-wider">관련 백도화 서비스 URL</label>
             <input 
               name="related_baekdohwa_url"

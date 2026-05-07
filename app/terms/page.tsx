@@ -61,7 +61,7 @@ export default function TermsPage() {
       ))}
 
       <section className="space-y-3">
-        <p className="text-base text-[var(--foreground)]">이메일: contact@lumora.site</p>
+        <p className="text-base text-[var(--foreground)]">이메일: buzasun@naver.com</p>
       </section>
     </PolicyPage>
   );

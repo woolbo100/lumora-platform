@@ -71,6 +71,22 @@ export default async function BlogWritePage({
         </div>
       </GlassPanel>
 
+      {/* 네비게이션 탭 */}
+      <div className="flex border-b border-white/5">
+        <a 
+          href="/admin/leads" 
+          className="px-6 py-3 text-sm font-medium text-[var(--foreground-muted)] transition hover:text-[var(--foreground)]"
+        >
+          리드 관리
+        </a>
+        <a 
+          href="/blog/write" 
+          className="border-b-2 border-[var(--color-secondary)] px-6 py-3 text-sm font-bold text-[var(--foreground)]"
+        >
+          블로그 작성
+        </a>
+      </div>
+
       {!isConfigured ? (
         <GlassPanel className="p-6">
           <p className="text-sm leading-7 text-[var(--foreground-soft)]">

@@ -31,7 +31,7 @@ export async function adminLoginAction(formData: FormData) {
     );
   }
 
-  redirect("/blog/write");
+  redirect("/admin/leads");
 }
 
 export async function adminLogoutAction() {

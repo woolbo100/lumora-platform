@@ -1,4 +1,5 @@
 import { redirect, notFound } from "next/navigation";
+export const dynamic = "force-dynamic";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { getAdminSession } from "@/lib/admin-auth";
 import { supabaseRestRequest } from "@/lib/supabase";

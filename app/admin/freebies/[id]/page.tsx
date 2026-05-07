@@ -3,6 +3,7 @@ import { GlassPanel } from "@/components/shared/GlassPanel";
 import { getAdminSession } from "@/lib/admin-auth";
 import { supabaseRestRequest } from "@/lib/supabase";
 import { upsertFreebieAction, deleteFreebieAction } from "../actions";
+import { FileUpload } from "@/components/shared/FileUpload";
 
 type FreebiePageProps = {
   params: Promise<{ id: string }>;
@@ -115,28 +116,25 @@ export default async function FreebieEditPage({ params }: FreebiePageProps) {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-[var(--foreground-muted)] uppercase tracking-wider">썸네일 이미지 URL</label>
-            <input 
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <FileUpload 
               name="thumbnail_url"
-              type="text" 
+              label="썸네일 이미지 업로드"
+              accept="image/*"
               defaultValue={initialData.thumbnail_url || ""}
-              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[var(--foreground)] focus:outline-none"
-              placeholder="https://..."
+              onUploadComplete={() => {}} 
+            />
+
+            <FileUpload 
+              name="file_url"
+              label="PDF 파일 업로드 (필수)"
+              accept=".pdf,application/pdf"
+              defaultValue={initialData.file_url}
+              onUploadComplete={() => {}} 
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-[var(--foreground-muted)] uppercase tracking-wider">PDF 파일 URL (필수)</label>
-            <input 
-              name="file_url"
-              type="text" 
-              defaultValue={initialData.file_url}
-              required
-              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[var(--foreground)] focus:outline-none"
-              placeholder="https://... 또는 Supabase 스토리지 링크"
-            />
-          </div>
 
           <div className="space-y-2">
             <label className="text-xs font-bold text-[var(--foreground-muted)] uppercase tracking-wider">관련 백도화 서비스 URL</label>

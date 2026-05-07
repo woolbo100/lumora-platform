@@ -43,36 +43,46 @@ export default async function LeadsPage({ searchParams }: LeadsPageProps) {
 
   const query = await searchParams;
   
-  // 1. 데이터 가져오기 (필터 적용)
-  let filterParams = "order=created_at.desc";
-  
-  if (query.email) filterParams += `&email=ilike.*${query.email}*`;
-  if (query.source) filterParams += `&source=eq.${query.source}`;
-  if (query.clicked) filterParams += `&clicked_baekdohwa=eq.${query.clicked}`;
-  if (query.marketing) filterParams += `&marketing_agree=eq.${query.marketing}`;
-  if (query.date_from) filterParams += `&created_at=gte.${query.date_from}T00:00:00`;
-  if (query.date_to) filterParams += `&created_at=lte.${query.date_to}T23:59:59`;
+  let leads: Lead[] = [];
+  let totalLeads = 0;
+  let todayLeads = 0;
+  let weekLeads = 0;
+  let totalClicks = 0;
+  let fetchError: string | null = null;
 
-  const response = await supabaseRestRequest(`leads?${filterParams}`);
-  const leads: Lead[] = await response.json();
+  try {
+    // 1. 데이터 가져오기 (필터 적용)
+    let filterParams = "order=created_at.desc";
+    
+    if (query.email) filterParams += `&email=ilike.*${query.email}*`;
+    if (query.source) filterParams += `&source=eq.${query.source}`;
+    if (query.clicked) filterParams += `&clicked_baekdohwa=eq.${query.clicked}`;
+    if (query.marketing) filterParams += `&marketing_agree=eq.${query.marketing}`;
+    if (query.date_from) filterParams += `&created_at=gte.${query.date_from}T00:00:00`;
+    if (query.date_to) filterParams += `&created_at=lte.${query.date_to}T23:59:59`;
 
-  // 2. 통계 데이터 계산 (전체 데이터 기준이 필요하므로 별도 쿼리 혹은 현재 리스트 활용)
-  // 여기서는 간단하게 현재 가져온 데이터와 별개로 전체 통계를 위해 한 번 더 호출하거나, 
-  // 실무 효율을 위해 별도 API 없이 기본 통계만 계산합니다.
-  const statsResponse = await supabaseRestRequest("leads?select=id,created_at,clicked_baekdohwa");
-  const allStats: { id: string, created_at: string, clicked_baekdohwa: boolean }[] = await statsResponse.json();
+    const response = await supabaseRestRequest(`leads?${filterParams}`);
+    leads = await response.json();
 
-  const totalLeads = allStats.length;
-  const now = new Date();
-  const todayStart = new Date(now.setHours(0, 0, 0, 0)).toISOString();
-  
-  const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(now.getDate() - 7);
-  const weekStart = oneWeekAgo.toISOString();
+    // 2. 통계 데이터 계산
+    const statsResponse = await supabaseRestRequest("leads?select=id,created_at,clicked_baekdohwa");
+    const allStats: { id: string, created_at: string, clicked_baekdohwa: boolean }[] = await statsResponse.json();
 
-  const todayLeads = allStats.filter(l => l.created_at >= todayStart).length;
-  const weekLeads = allStats.filter(l => l.created_at >= weekStart).length;
-  const totalClicks = allStats.filter(l => l.clicked_baekdohwa).length;
+    totalLeads = allStats.length;
+    const now = new Date();
+    const todayStart = new Date(new Date().setHours(0, 0, 0, 0)).toISOString();
+    
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    const weekStart = oneWeekAgo.toISOString();
+
+    todayLeads = allStats.filter(l => l.created_at >= todayStart).length;
+    weekLeads = allStats.filter(l => l.created_at >= weekStart).length;
+    totalClicks = allStats.filter(l => l.clicked_baekdohwa).length;
+  } catch (e) {
+    console.error(e);
+    fetchError = e instanceof Error ? e.message : "알 수 없는 에러가 발생했습니다.";
+  }
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-12 sm:px-8">
@@ -98,6 +108,17 @@ export default async function LeadsPage({ searchParams }: LeadsPageProps) {
           </button>
         </form>
       </div>
+
+      {/* 에러 메시지 표시 */}
+      {fetchError && (
+        <GlassPanel className="border-red-500/50 bg-red-500/10 p-6">
+          <p className="text-sm font-bold text-red-400">⚠️ 데이터를 가져오는 중 에러가 발생했습니다:</p>
+          <p className="mt-1 text-xs text-red-300/80">{fetchError}</p>
+          <p className="mt-4 text-xs text-[var(--foreground-muted)]">
+            주로 Supabase 테이블 설정 문제이거나 환경 변수 설정 문제일 수 있습니다.
+          </p>
+        </GlassPanel>
+      )}
 
       {/* 네비게이션 탭 */}
       <div className="flex border-b border-white/5">

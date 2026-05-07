@@ -1,5 +1,6 @@
 import { redirect, notFound } from "next/navigation";
 export const dynamic = "force-dynamic";
+
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { getAdminSession } from "@/lib/admin-auth";
 import { supabaseRestRequest } from "@/lib/supabase";
@@ -11,8 +12,17 @@ type FreebiePageProps = {
 };
 
 export default async function FreebieEditPage({ params }: FreebiePageProps) {
-  const session = await getAdminSession();
-  if (!session) redirect("/admin/login");
+  // 1. 세션 체크 (최대한 안전하게)
+  let session;
+  try {
+    session = await getAdminSession();
+  } catch (e) {
+    console.error("Session fetch error:", e);
+  }
+
+  if (!session) {
+    redirect("/admin/login");
+  }
 
   const { id } = await params;
   const isNew = id === "new";
@@ -30,29 +40,36 @@ export default async function FreebieEditPage({ params }: FreebiePageProps) {
     sort_order: 0,
   };
 
-  if (!isNew) {
-    try {
+  // 2. 데이터 페칭 보호
+  try {
+    if (!isNew) {
       const response = await supabaseRestRequest(`freebies?id=eq.${id}`);
       if (!response.ok) {
-        throw new Error(`DB 요청 실패: ${response.status} ${response.statusText}`);
+        throw new Error(`DB 연결 오류 (${response.status}) - 테이블 존재 여부를 확인해주세요.`);
       }
       const data = await response.json();
       if (!data || data.length === 0) notFound();
       initialData = data[0];
-    } catch (e) {
-      console.error(e);
-      return (
-        <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-12">
-          <GlassPanel className="border-red-500/50 bg-red-500/10 p-8">
-            <h2 className="text-xl font-bold text-red-400">🚨 페이지 로드 중 에러 발생</h2>
-            <p className="mt-2 text-sm text-red-300/80">{e instanceof Error ? e.message : "알 수 없는 오류"}</p>
-            <a href="/admin/freebies" className="mt-4 inline-block text-sm text-white underline">목록으로 돌아가기</a>
-          </GlassPanel>
-        </main>
-      );
     }
+  } catch (e) {
+    console.error("Data fetch error:", e);
+    return (
+      <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-12">
+        <GlassPanel className="border-red-500/50 bg-red-500/10 p-8 text-center space-y-4">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-500/20 text-red-400 text-2xl font-bold">!</div>
+          <h2 className="text-xl font-bold text-red-400">자료 정보를 불러올 수 없습니다.</h2>
+          <p className="text-sm text-red-300/80 leading-relaxed">
+            {e instanceof Error ? e.message : "데이터베이스 연결 중 문제가 발생했습니다."}
+          </p>
+          <div className="pt-4">
+            <a href="/admin/freebies" className="rounded-lg bg-white/10 px-6 py-2 text-sm text-white transition hover:bg-white/20">목록으로 돌아가기</a>
+          </div>
+        </GlassPanel>
+      </main>
+    );
   }
 
+  // 3. 메인 렌더링
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-12 sm:px-8">
       <div className="space-y-2">
@@ -106,6 +123,22 @@ export default async function FreebieEditPage({ params }: FreebiePageProps) {
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <FileUpload 
+              name="thumbnail_url"
+              label="썸네일 이미지 업로드"
+              accept="image/*"
+              defaultValue={initialData.thumbnail_url || ""}
+            />
+
+            <FileUpload 
+              name="file_url"
+              label="PDF 파일 업로드 (필수)"
+              accept=".pdf,application/pdf"
+              defaultValue={initialData.file_url}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 pt-2">
             <div className="space-y-2">
               <label className="text-xs font-bold text-[var(--foreground-muted)] uppercase tracking-wider">카테고리</label>
               <input 
@@ -116,7 +149,6 @@ export default async function FreebieEditPage({ params }: FreebiePageProps) {
                 placeholder="예: 재회, 사주, 연애"
               />
             </div>
-            
             <div className="space-y-2">
               <label className="text-xs font-bold text-[var(--foreground-muted)] uppercase tracking-wider">정렬 순서</label>
               <input 
@@ -126,24 +158,6 @@ export default async function FreebieEditPage({ params }: FreebiePageProps) {
                 className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[var(--foreground)] focus:outline-none"
               />
             </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <FileUpload 
-              name="thumbnail_url"
-              label="썸네일 이미지 업로드"
-              accept="image/*"
-              defaultValue={initialData.thumbnail_url || ""}
-              onUploadComplete={() => {}} 
-            />
-
-            <FileUpload 
-              name="file_url"
-              label="PDF 파일 업로드 (필수)"
-              accept=".pdf,application/pdf"
-              defaultValue={initialData.file_url}
-              onUploadComplete={() => {}} 
-            />
           </div>
 
           <div className="space-y-2">

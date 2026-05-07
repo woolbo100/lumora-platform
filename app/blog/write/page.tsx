@@ -80,6 +80,12 @@ export default async function BlogWritePage({
           리드 관리
         </a>
         <a 
+          href="/admin/freebies" 
+          className="px-6 py-3 text-sm font-medium text-[var(--foreground-muted)] transition hover:text-[var(--foreground)]"
+        >
+          무료 자료 관리
+        </a>
+        <a 
           href="/blog/write" 
           className="border-b-2 border-[var(--color-secondary)] px-6 py-3 text-sm font-bold text-[var(--foreground)]"
         >

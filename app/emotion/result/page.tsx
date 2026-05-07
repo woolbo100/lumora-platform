@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { ResultShareActions } from "@/components/shared/ResultShareActions";
+import { ResultDownloadAction } from "@/components/shared/ResultDownloadAction";
 import { interpretEmotion, validateEmotionInput } from "@/lib/emotion/interpreter";
 
 type EmotionResultPageProps = {
@@ -309,6 +310,13 @@ export default async function EmotionResultPage({ searchParams }: EmotionResultP
             ))}
           </div>
         </div>
+        
+        <ResultDownloadAction 
+          source="감정 리딩"
+          interest="심리"
+          testResult={`${emotionLabel} ${result.intensity}단계`}
+        />
+
         <ResultShareActions
           testName="감정 리딩"
           resultTitle="감정 리딩 결과"

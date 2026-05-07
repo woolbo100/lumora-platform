@@ -3,6 +3,7 @@ import Link from "next/link";
 import { NamingResultCard } from "@/components/naming/NamingResultCard";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { ResultShareActions } from "@/components/shared/ResultShareActions";
+import { ResultDownloadAction } from "@/components/shared/ResultDownloadAction";
 import {
   formatElementSummary,
   generateNameCodeResult,
@@ -179,6 +180,12 @@ export default async function NamingResultPage({ searchParams }: NamingResultPag
         <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">Guide</p>
         <p className="mt-4 text-base leading-8 text-[var(--foreground-soft)]">{result.guidanceNote}</p>
       </GlassPanel>
+
+      <ResultDownloadAction 
+        source="이름코드 분석"
+        interest="네이밍"
+        testResult={`${result.name}의 이름코드`}
+      />
 
       <ResultShareActions
         testName="이름코드"

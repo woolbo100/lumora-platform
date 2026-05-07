@@ -9,6 +9,7 @@ import { ResultShareActions } from "@/components/shared/ResultShareActions";
 import { reunionQuestions } from "@/data/reunionQuestions";
 import { getReunionResultByType } from "@/lib/reunionCalculator";
 import { type ReunionType } from "@/types/reunion";
+import { ResultDownloadAction } from "@/components/shared/ResultDownloadAction";
 
 const scoreLabels: Record<ReunionType, string> = {
   high: "가능성 높음형",
@@ -126,6 +127,12 @@ export function ReunionResultPanel({
             </p>
           </div>
         </div>
+
+        <ResultDownloadAction 
+          source="재회 가능성 테스트"
+          interest="재회"
+          testResult={scoreLabels[resultType]}
+        />
 
         <ResultShareActions
           testName="재회 가능성 테스트"

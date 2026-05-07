@@ -2,6 +2,7 @@
 
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { ResultShareActions } from "@/components/shared/ResultShareActions";
+import { ResultDownloadAction } from "@/components/shared/ResultDownloadAction";
 import { type SajuElement, type SajuResult } from "@/types/saju";
 
 const ELEMENT_LABELS: Record<SajuElement, string> = {
@@ -342,9 +343,15 @@ export function SajuResultView({ result }: SajuResultViewProps) {
         </p>
         <p className="mt-4 whitespace-pre-line text-base leading-8 text-[var(--foreground-soft)]">
           입력하신 정보는 사주 분석 결과 생성에만 일시적으로 사용되며 별도의 데이터베이스에
-          저장되지 않습니다. 입력 정보는 저장되지 않으니 안심하고 이용하셔도 됩니다.
+          저장되지 않습니다. 저장되지 않으니 안심하고 이용하셔도 됩니다.
         </p>
       </GlassPanel>
+
+      <ResultDownloadAction 
+        source="사주 선천코드"
+        interest="사주"
+        testResult={`${profile.name}님의 사주코드`}
+      />
 
       <ResultShareActions
         testName="사주 리포트"

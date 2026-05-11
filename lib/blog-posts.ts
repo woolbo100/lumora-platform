@@ -59,24 +59,26 @@ function normalizeFrontmatterValue(value: string) {
 }
 
 function parseFrontmatter(source: string) {
-  if (!source.startsWith("---\n")) {
+  const normalizedSource = source.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
+
+  if (!normalizedSource.startsWith("---\n")) {
     return {
       frontmatter: {} as BlogFileFrontmatter,
-      content: source.trim(),
+      content: normalizedSource.trim(),
     };
   }
 
-  const endIndex = source.indexOf("\n---\n", 4);
+  const endIndex = normalizedSource.indexOf("\n---\n", 4);
 
   if (endIndex === -1) {
     return {
       frontmatter: {} as BlogFileFrontmatter,
-      content: source.trim(),
+      content: normalizedSource.trim(),
     };
   }
 
-  const rawFrontmatter = source.slice(4, endIndex);
-  const content = source.slice(endIndex + 5).trim();
+  const rawFrontmatter = normalizedSource.slice(4, endIndex);
+  const content = normalizedSource.slice(endIndex + 5).trim();
   const frontmatter = rawFrontmatter
     .split("\n")
     .reduce<BlogFileFrontmatter>((result, line) => {

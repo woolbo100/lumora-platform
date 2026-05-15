@@ -12,14 +12,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://lumoracode.kr"),
   title: "LUMORA | 마음 코드 해석 플랫폼",
   description:
-    "타로 리딩, 애착유형 분석, 관계 흐름 해석과 감정 탐색을 통해 내 마음의 패턴을 읽어주는 루모라 플랫폼입니다.",
+    "타로리딩, 애착유형 분석, 관계 흐름 해석과 감정 해석을 통해 내 마음의 패턴을 읽어주는 루모라 플랫폼입니다.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "LUMORA | 마음 코드 해석 플랫폼",
     description:
-      "타로 리딩, 애착유형 분석, 관계 흐름 해석과 감정 탐색을 통해 내 마음의 패턴을 읽어주는 루모라 플랫폼입니다.",
+      "타로리딩, 애착유형 분석, 관계 흐름 해석과 감정 해석을 통해 내 마음의 패턴을 읽어주는 루모라 플랫폼입니다.",
     url: "https://lumoracode.kr",
     siteName: "LUMORA",
     type: "website",
@@ -32,10 +32,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_ID?.trim() ?? "";
-  const shouldRenderAdsenseScript =
-    adsenseId !== "" && adsenseId !== "?섏쨷???낅젰";
-
   return (
     <html lang="ko" className="h-full scroll-smooth" suppressHydrationWarning>
       <head>
@@ -55,15 +51,11 @@ export default function RootLayout({
             gtag('config', 'G-PV553EDK9W');
           `}
         </Script>
-        {shouldRenderAdsenseScript ? (
-          <Script
-            id="adsense-script"
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-          />
-        ) : null}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6109659306037375"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body
         className="min-h-full bg-transparent text-[var(--foreground)] antialiased"

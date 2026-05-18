@@ -3,7 +3,7 @@ title: "남자가 사랑할 수밖에 없는 여자의 특징 7가지 - 그녀�
 slug: "woman-men-cant-help-loving"
 category: "romance-reunion"
 date: "2026-05-19"
-thumbnail: "/images/romance-reunion/woman-men-cant-help-loving-thumbnail.webp"
+thumbnail: "/images/romance-reunion/%EC%8D%B8%EB%84%A4%EC%9D%BC.png"
 imageAlt: "남자가 사랑할 수밖에 없는 여자의 끌림 에너지, 달빛 아래 우아한 여성 실루엣"
 tags: ["남자가사랑할수밖에없는여자", "사랑받는여자특징", "연애심리", "남자심리", "매력적인여자"]
 excerpt: "남자가 사랑할 수밖에 없는 여자에게는 공통된 끌림의 법칙이 있다. 외모가 아닌 존재감, 말투가 아닌 에너지 - 그녀들이 가진 7가지 특징을 당신도 가질 수 있다."
@@ -11,7 +11,7 @@ seo_keyword: "남자가 사랑할 수밖에 없는 여자"
 status: "published"
 ---
 
-![남자가 사랑할 수밖에 없는 여자의 끌림 에너지, 달빛 아래 우아한 여성 실루엣](/images/romance-reunion/woman-men-cant-help-loving-thumbnail.webp)
+![남자가 사랑할 수밖에 없는 여자의 끌림 에너지, 달빛 아래 우아한 여성 실루엣](/images/romance-reunion/%EC%8D%B8%EB%84%A4%EC%9D%BC.png)
 
 # 남자가 사랑할 수밖에 없는 여자의 특징 7가지 - 그녀만의 끌림의 비밀
 

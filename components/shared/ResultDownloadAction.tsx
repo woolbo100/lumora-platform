@@ -65,10 +65,10 @@ export function ResultDownloadAction({
       <div className="mt-8 border-t border-white/5 pt-8">
         <button
           onClick={() => setIsOpen(true)}
-          className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-2xl bg-[var(--color-secondary)] px-8 py-5 text-lg font-bold text-white transition hover:scale-[1.02] active:scale-[0.98]"
+          className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-2xl bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] px-8 py-5 text-lg font-bold text-[#1c1830] shadow-[0_20px_50px_rgba(115,88,232,0.25)] transition hover:scale-[1.02] active:scale-[0.98]"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 -translate-x-full group-hover:translate-x-full" />
-          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-500 -translate-x-full group-hover:translate-x-full" />
+          <svg className="h-6 w-6 text-[#1c1830]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
           내 결과지 PDF로 저장하기
@@ -147,7 +147,7 @@ export function ResultDownloadAction({
                   <button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="mt-4 w-full rounded-xl bg-[var(--color-secondary)] py-4 text-sm font-bold text-white transition hover:opacity-80 disabled:opacity-50"
+                    className="mt-4 w-full rounded-xl bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] py-4 text-sm font-bold text-[#1c1830] transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? "처리 중..." : "PDF 저장하기"}
                   </button>

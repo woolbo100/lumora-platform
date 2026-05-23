@@ -24,8 +24,15 @@ export function ResultDownloadAction({
   const [isSuccess, setIsSuccess] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
 
+  const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
   const handleDownloadPdf = async () => {
     try {
+      setIsDownloading(true);
+
+      // 결과지 본문이 완전히 렌더링될 시간을 잠시 준다.
+      await sleep(500);
+
       // 1. targetId로 먼저 찾고, 없으면 사주 결과 ID 또는 main 컨텐츠 영역을 찾습니다.
       let element = document.getElementById(targetId);
 
@@ -36,17 +43,46 @@ export function ResultDownloadAction({
       }
 
       if (!element) {
-        alert("PDF로 저장할 결과 영역을 찾을 수 없습니다.");
+        console.error('[PDF ERROR] PDF로 저장할 요소를 찾을 수 없습니다. targetId:', targetId);
+        alert("PDF로 저장할 결과지 본문을 찾을 수 없습니다.");
         return;
       }
 
-      setIsDownloading(true);
+      console.log('[PDF TARGET]', element);
+      console.log('[PDF TARGET TEXT]', element.innerText ? element.innerText.slice(0, 300) : "No text content");
 
-      // html2canvas 옵션 설정: 루모라 테마의 다크 배경(#0f0f1a) 유지 및 불필요한 요소 제거
+      if (!element.innerText || element.innerText.trim().length < 20) {
+        console.error('[PDF ERROR] 결과지 본문 내용이 비어 있습니다.');
+        alert('결과지 내용이 아직 준비되지 않았습니다. 잠시 후 다시 시도해주세요.');
+        return;
+      }
+
+      // 폰트 대기
+      if (document.fonts) {
+        await document.fonts.ready;
+      }
+
+      // 이미지 로딩 대기
+      const images = Array.from(element.querySelectorAll('img'));
+      await Promise.all(
+        images.map((img) => {
+          if (img.complete) return Promise.resolve();
+          return new Promise((resolve) => {
+            img.onload = resolve;
+            img.onerror = resolve;
+          });
+        })
+      );
+
+      // html2canvas 옵션 설정: 지침을 준수하여 흰색 배경 및 렌더링 넓이 지정
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
-        backgroundColor: "#0f0f1a",
+        allowTaint: false,
+        backgroundColor: "#ffffff",
+        logging: true,
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight,
         ignoreElements: (el) => {
           const tagName = el.tagName.toLowerCase();
           return (
@@ -80,15 +116,15 @@ export function ResultDownloadAction({
         heightLeft -= pageHeight;
       }
 
-      // 파일명 예시: 사주_선천코드_결과지.pdf
-      const fileName = `${source.replace(/\s+/g, "_")}_결과지.pdf`;
+      // 파일명 설정
+      const fileName = "lumora-saju-result.pdf";
       pdf.save(fileName);
 
       // 성공 후 상태 초기화 및 모달 닫기
       setIsOpen(false);
       setIsSuccess(false);
     } catch (error) {
-      console.error("PDF 다운로드 오류:", error);
+      console.error("[PDF DOWNLOAD ERROR]", error);
       alert("PDF 다운로드 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
     } finally {
       setIsDownloading(false);
@@ -118,10 +154,8 @@ export function ResultDownloadAction({
     if (result.success) {
       setIsSuccess(true);
       setIsSubmitting(false);
-      // 신청 성공 후, 0.5초 뒤에 자동으로 PDF 다운로드를 호출합니다.
-      setTimeout(() => {
-        handleDownloadPdf();
-      }, 500);
+      // 지침에 의거하여, 자동 다운로드 호출을 완전히 제거합니다.
+      // 사용자가 모달 안에서 직접 버튼을 누르도록 유도합니다.
     } else {
       alert("오류가 발생했습니다: " + result.error);
       setIsSubmitting(false);
@@ -159,7 +193,7 @@ export function ResultDownloadAction({
                 </div>
                 <h2 className="font-display text-2xl text-white">신청 완료!</h2>
                 <p className="text-sm text-[var(--foreground-soft)] pb-4">
-                  {isDownloading ? "결과지 PDF 파일을 생성하고 있습니다..." : "잠시 후 다운로드가 자동으로 시작됩니다."}
+                  {isDownloading ? "결과지 PDF 파일을 생성하고 있습니다..." : "아래 버튼을 눌러 결과지 PDF 파일을 다운로드해 주세요."}
                 </p>
                 <button
                   type="button"
@@ -167,7 +201,7 @@ export function ResultDownloadAction({
                   disabled={isDownloading}
                   className="w-full rounded-xl bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] py-4 text-sm font-bold text-[#1c1830] transition hover:opacity-90 disabled:opacity-50"
                 >
-                  {isDownloading ? "PDF 생성 중..." : "PDF 직접 다운로드"}
+                  {isDownloading ? "PDF 생성 중..." : "PDF 다운로드"}
                 </button>
               </div>
             ) : (

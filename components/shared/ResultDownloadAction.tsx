@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { submitFreebieDownload } from "@/app/freebies/actions";
-import { toPng } from "html-to-image";
+import { FEATURES } from "@/lib/features";
 import jsPDF from "jspdf";
 
 type ResultDownloadActionProps = {
@@ -199,6 +199,18 @@ export function ResultDownloadAction({
       setIsSubmitting(false);
     }
   };
+
+  if (!FEATURES.ENABLE_RESULT_PDF_DOWNLOAD) {
+    return (
+      <div className="mt-8 border-t border-white/5 pt-6 pb-2">
+        <p className="text-xs text-white/50 text-center leading-relaxed max-w-md mx-auto">
+          현재 결과지는 이 화면에서 바로 확인하실 수 있습니다.
+          <br />
+          PDF 저장 기능은 더 안정적인 방식으로 준비 중입니다.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>

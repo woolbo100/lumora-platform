@@ -3,21 +3,97 @@
 import { useState } from "react";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { submitFreebieDownload } from "@/app/freebies/actions";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 type ResultDownloadActionProps = {
   source: string;        // 테스트명 (예: 재회 가능성 테스트)
   interest: string;      // 카테고리 (예: 재회)
   testResult: string;    // 결과 유형명 (예: 가능성 높음형)
+  targetId?: string;     // PDF로 저장할 DOM 영역의 ID
 };
 
 export function ResultDownloadAction({
   source,
   interest,
   testResult,
+  targetId = "saju-result-pdf",
 }: ResultDownloadActionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownloadPdf = async () => {
+    try {
+      // 1. targetId로 먼저 찾고, 없으면 사주 결과 ID 또는 main 컨텐츠 영역을 찾습니다.
+      let element = document.getElementById(targetId);
+
+      if (!element) {
+        element = document.getElementById("saju-result-pdf") || 
+                  document.querySelector("main") || 
+                  document.querySelector(".grid.gap-6");
+      }
+
+      if (!element) {
+        alert("PDF로 저장할 결과 영역을 찾을 수 없습니다.");
+        return;
+      }
+
+      setIsDownloading(true);
+
+      // html2canvas 옵션 설정: 루모라 테마의 다크 배경(#0f0f1a) 유지 및 불필요한 요소 제거
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#0f0f1a",
+        ignoreElements: (el) => {
+          const tagName = el.tagName.toLowerCase();
+          return (
+            tagName === "nav" ||
+            tagName === "footer" ||
+            tagName === "button" ||
+            el.classList.contains("no-print")
+          );
+        }
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      const imgWidth = pageWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      // 파일명 예시: 사주_선천코드_결과지.pdf
+      const fileName = `${source.replace(/\s+/g, "_")}_결과지.pdf`;
+      pdf.save(fileName);
+
+      // 성공 후 상태 초기화 및 모달 닫기
+      setIsOpen(false);
+      setIsSuccess(false);
+    } catch (error) {
+      console.error("PDF 다운로드 오류:", error);
+      alert("PDF 다운로드 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,20 +116,12 @@ export function ResultDownloadAction({
     });
 
     if (result.success) {
-      // leads 테이블에 상세 정보 저장을 위해 한번 더 호출하거나 
-      // submitFreebieDownload를 수정하여 test_result도 받게 할 수 있습니다.
-      // 여기서는 우선 기존 액션을 활용하고, 성공 시 PDF 저장(인쇄) 기능을 실행합니다.
       setIsSuccess(true);
-      
-      // 실제 PDF 생성 대신 브라우저의 인쇄 기능을 활용해 PDF 저장을 유도합니다.
+      setIsSubmitting(false);
+      // 신청 성공 후, 0.5초 뒤에 자동으로 PDF 다운로드를 호출합니다.
       setTimeout(() => {
-        if (confirm("결과지를 PDF로 저장하시겠습니까? (인쇄 창에서 'PDF로 저장'을 선택해 주세요)")) {
-          window.print();
-        }
-        setIsOpen(false);
-        setIsSuccess(false);
-        setIsSubmitting(false);
-      }, 1500);
+        handleDownloadPdf();
+      }, 500);
     } else {
       alert("오류가 발생했습니다: " + result.error);
       setIsSubmitting(false);
@@ -90,7 +158,17 @@ export function ResultDownloadAction({
                   </svg>
                 </div>
                 <h2 className="font-display text-2xl text-white">신청 완료!</h2>
-                <p className="text-sm text-[var(--foreground-soft)]">잠시 후 PDF 저장 기능이 시작됩니다.</p>
+                <p className="text-sm text-[var(--foreground-soft)] pb-4">
+                  {isDownloading ? "결과지 PDF 파일을 생성하고 있습니다..." : "잠시 후 다운로드가 자동으로 시작됩니다."}
+                </p>
+                <button
+                  type="button"
+                  onClick={handleDownloadPdf}
+                  disabled={isDownloading}
+                  className="w-full rounded-xl bg-[linear-gradient(135deg,rgba(255,236,236,0.98)_0%,rgba(214,194,255,0.96)_44%,rgba(142,116,255,0.95)_100%)] py-4 text-sm font-bold text-[#1c1830] transition hover:opacity-90 disabled:opacity-50"
+                >
+                  {isDownloading ? "PDF 생성 중..." : "PDF 직접 다운로드"}
+                </button>
               </div>
             ) : (
               <div className="space-y-6">

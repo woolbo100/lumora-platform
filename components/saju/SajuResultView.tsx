@@ -233,124 +233,128 @@ export function SajuResultView({ result }: SajuResultViewProps) {
 
   return (
     <div className="grid gap-6">
-      <GlassPanel className="result-panel-glow border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
-        <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">
-          Seoncheon Code
-        </p>
-        <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
-          {profile.name}님의 사주 8글자
-        </h1>
-        <p className="mt-5 max-w-4xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
-          {interp.core}
-        </p>
+      {/* PDF 저장 캡처 영역 */}
+      <div id="saju-result-pdf" className="grid gap-6 bg-transparent">
+        <GlassPanel className="result-panel-glow border-[var(--color-secondary)]/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.11),rgba(10,13,28,0.34))] p-8 sm:p-10">
+          <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-secondary)]">
+            Seoncheon Code
+          </p>
+          <h1 className="mt-4 font-display text-5xl text-[var(--foreground)] sm:text-6xl">
+            {profile.name}님의 사주 8글자
+          </h1>
+          <p className="mt-5 max-w-4xl text-base leading-8 text-[var(--foreground-soft)] sm:text-lg">
+            {interp.core}
+          </p>
 
-        <div className="mt-7 flex flex-wrap gap-3">
-          <InfoChip label="생년월일" value={profile.birth_date} />
-          <InfoChip label="출생시간" value={profile.birth_time} />
-          <InfoChip label="성별" value={profile.gender === "male" ? "남성" : "여성"} />
-          <InfoChip label="기준" value="무료 참고용 선천코드" />
+          <div className="mt-7 flex flex-wrap gap-3">
+            <InfoChip label="생년월일" value={profile.birth_date} />
+            <InfoChip label="출생시간" value={profile.birth_time} />
+            <InfoChip label="성별" value={profile.gender === "male" ? "남성" : "여성"} />
+            <InfoChip label="기준" value="무료 참고용 선천코드" />
+          </div>
+        </GlassPanel>
+
+        <div className="grid gap-5 xl:grid-cols-4">
+          <PillarCard
+            label="년주"
+            gan={pillars.year.gan}
+            zhi={pillars.year.zhi}
+            ganElement={pillars.year.gan_element}
+            zhiElement={pillars.year.zhi_element}
+          />
+          <PillarCard
+            label="월주"
+            gan={pillars.month.gan}
+            zhi={pillars.month.zhi}
+            ganElement={pillars.month.gan_element}
+            zhiElement={pillars.month.zhi_element}
+          />
+          <PillarCard
+            label="일주"
+            gan={pillars.day.gan}
+            zhi={pillars.day.zhi}
+            ganElement={pillars.day.gan_element}
+            zhiElement={pillars.day.zhi_element}
+          />
+          <PillarCard
+            label="시주"
+            gan={pillars.hour.gan}
+            zhi={pillars.hour.zhi}
+            ganElement={pillars.hour.gan_element}
+            zhiElement={pillars.hour.zhi_element}
+          />
         </div>
-      </GlassPanel>
 
-      <div className="grid gap-5 xl:grid-cols-4">
-        <PillarCard
-          label="년주"
-          gan={pillars.year.gan}
-          zhi={pillars.year.zhi}
-          ganElement={pillars.year.gan_element}
-          zhiElement={pillars.year.zhi_element}
-        />
-        <PillarCard
-          label="월주"
-          gan={pillars.month.gan}
-          zhi={pillars.month.zhi}
-          ganElement={pillars.month.gan_element}
-          zhiElement={pillars.month.zhi_element}
-        />
-        <PillarCard
-          label="일주"
-          gan={pillars.day.gan}
-          zhi={pillars.day.zhi}
-          ganElement={pillars.day.gan_element}
-          zhiElement={pillars.day.zhi_element}
-        />
-        <PillarCard
-          label="시주"
-          gan={pillars.hour.gan}
-          zhi={pillars.hour.zhi}
-          ganElement={pillars.hour.gan_element}
-          zhiElement={pillars.hour.zhi_element}
-        />
-      </div>
+        <SectionCard eyebrow="Summary" title="가볍게 읽는 선천코드" body={interp.total_summary} />
 
-      <SectionCard eyebrow="Summary" title="가볍게 읽는 선천코드" body={interp.total_summary} />
-
-      <div className="grid gap-5 xl:grid-cols-2">
-        <SectionCard eyebrow="Personality" title="타고난 결" body={interp.personality_deep} />
-        <SectionCard eyebrow="Social" title="사람과 일에서의 흐름" body={interp.social_analysis} />
-      </div>
-
-      <div className="grid gap-5 xl:grid-cols-2">
-        <SectionCard eyebrow="Love" title="감정의 리듬" body={interp.love_romance} />
-        <SectionCard eyebrow="Wealth" title="재물과 일의 결" body={interp.wealth_strategy} />
-      </div>
-
-      <GlassPanel className="result-panel-glow p-6 sm:p-8">
-        <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
-          Five Elements
-        </p>
-        <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)]">오행 밸런스</h2>
-        <p className="mt-4 text-base leading-8 text-[var(--foreground-soft)]">
-          {interp.ohaeng_analysis.balance_text}
-        </p>
-        <div className="mt-6">
-          <OhaengGrid result={result} />
+        <div className="grid gap-5 xl:grid-cols-2">
+          <SectionCard eyebrow="Personality" title="타고난 결" body={interp.personality_deep} />
+          <SectionCard eyebrow="Social" title="사람과 일에서의 흐름" body={interp.social_analysis} />
         </div>
-      </GlassPanel>
 
-      <div className="grid gap-5 xl:grid-cols-2">
-        <SectionCard eyebrow="Career" title="직업 및 적성 방향" body={careerDirection} />
-        <SectionCard eyebrow="Growth" title="성장 포인트" body={growthPoint} />
+        <div className="grid gap-5 xl:grid-cols-2">
+          <SectionCard eyebrow="Love" title="감정의 리듬" body={interp.love_romance} />
+          <SectionCard eyebrow="Wealth" title="재물과 일의 결" body={interp.wealth_strategy} />
+        </div>
+
+        <GlassPanel className="result-panel-glow p-6 sm:p-8">
+          <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+            Five Elements
+          </p>
+          <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)]">오행 밸런스</h2>
+          <p className="mt-4 text-base leading-8 text-[var(--foreground-soft)]">
+            {interp.ohaeng_analysis.balance_text}
+          </p>
+          <div className="mt-6">
+            <OhaengGrid result={result} />
+          </div>
+        </GlassPanel>
+
+        <div className="grid gap-5 xl:grid-cols-2">
+          <SectionCard eyebrow="Career" title="직업 및 적성 방향" body={careerDirection} />
+          <SectionCard eyebrow="Growth" title="성장 포인트" body={growthPoint} />
+        </div>
+
+        <div className="grid gap-5 xl:grid-cols-2">
+          <SectionCard eyebrow="Current Flow" title="현재 흐름 요약" body={currentFlowSummary} />
+          <SectionCard eyebrow="Health" title="몸과 마음의 안내" body={interp.health_analysis} />
+        </div>
+
+        <SectionCard
+          eyebrow="Closing"
+          title="종합 해석"
+          body={closingInterpretation}
+          className="px-8 py-8 sm:px-10 sm:py-9"
+        />
+
+        <GlassPanel className="result-panel-glow p-8">
+          <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+            Reference Note
+          </p>
+          <p className="mt-4 whitespace-pre-line text-base leading-8 text-[var(--foreground-soft)]">
+            본 결과는 입력하신 생년월일과 시간을 기준으로 산출한 참고용 선천코드 간단
+            해석입니다. 태양시, 야자시, 대운과 세운의 정밀 분석은 포함하지 않았습니다.
+            출생 시간이 경계(23시 전후 또는 2시간 단위)에 가까운 경우 결과가 달라질 수
+            있습니다. 정밀한 상담 리포트는 별도 분석이 필요할 수 있습니다.
+          </p>
+        </GlassPanel>
+
+        <GlassPanel className="result-panel-glow p-8">
+          <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+            Privacy Note
+          </p>
+          <p className="mt-4 whitespace-pre-line text-base leading-8 text-[var(--foreground-soft)]">
+            입력하신 정보는 사주 분석 결과 생성에만 일시적으로 사용되며 별도의 데이터베이스에
+            저장되지 않습니다. 저장되지 않으니 안심하고 이용하셔도 됩니다.
+          </p>
+        </GlassPanel>
       </div>
-
-      <div className="grid gap-5 xl:grid-cols-2">
-        <SectionCard eyebrow="Current Flow" title="현재 흐름 요약" body={currentFlowSummary} />
-        <SectionCard eyebrow="Health" title="몸과 마음의 안내" body={interp.health_analysis} />
-      </div>
-
-      <SectionCard
-        eyebrow="Closing"
-        title="종합 해석"
-        body={closingInterpretation}
-        className="px-8 py-8 sm:px-10 sm:py-9"
-      />
-
-      <GlassPanel className="result-panel-glow p-8">
-        <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
-          Reference Note
-        </p>
-        <p className="mt-4 whitespace-pre-line text-base leading-8 text-[var(--foreground-soft)]">
-          본 결과는 입력하신 생년월일과 시간을 기준으로 산출한 참고용 선천코드 간단
-          해석입니다. 태양시, 야자시, 대운과 세운의 정밀 분석은 포함하지 않았습니다.
-          출생 시간이 경계(23시 전후 또는 2시간 단위)에 가까운 경우 결과가 달라질 수
-          있습니다. 정밀한 상담 리포트는 별도 분석이 필요할 수 있습니다.
-        </p>
-      </GlassPanel>
-
-      <GlassPanel className="result-panel-glow p-8">
-        <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-secondary)]">
-          Privacy Note
-        </p>
-        <p className="mt-4 whitespace-pre-line text-base leading-8 text-[var(--foreground-soft)]">
-          입력하신 정보는 사주 분석 결과 생성에만 일시적으로 사용되며 별도의 데이터베이스에
-          저장되지 않습니다. 저장되지 않으니 안심하고 이용하셔도 됩니다.
-        </p>
-      </GlassPanel>
 
       <ResultDownloadAction 
         source="사주 선천코드"
         interest="사주"
         testResult={`${profile.name}님의 사주코드`}
+        targetId="saju-result-pdf"
       />
 
       <ResultShareActions

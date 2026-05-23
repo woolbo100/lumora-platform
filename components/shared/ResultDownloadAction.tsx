@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { submitFreebieDownload } from "@/app/freebies/actions";
-import html2canvas from "html2canvas";
+import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 
 type ResultDownloadActionProps = {
@@ -76,7 +76,7 @@ export function ResultDownloadAction({
         })
       );
 
-      const fullWidth = element.scrollWidth;
+      const fullWidth = element.scrollWidth || 794;
       const fullHeight = element.scrollHeight;
 
       console.log("[PDF SIZE]", {
@@ -87,30 +87,43 @@ export function ResultDownloadAction({
         scrollHeight: element.scrollHeight,
       });
 
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        allowTaint: false,
+      // html-to-image를 사용하여 oklab 파싱 에러를 완벽히 우회하고, 긴 문서 전체를 잘림 없이 캡처합니다.
+      const imgData = await toPng(element, {
+        cacheBust: true,
         backgroundColor: "#ffffff",
-        logging: true,
         width: fullWidth,
         height: fullHeight,
-        windowWidth: fullWidth,
-        windowHeight: fullHeight,
-        scrollX: 0,
-        scrollY: 0,
+        style: {
+          width: fullWidth + "px",
+          height: fullHeight + "px",
+          transform: "none",
+        },
+        // PDF에 포함되지 않아야 할 nav, footer, button, .no-print 요소들을 제외합니다.
+        filter: (node) => {
+          if (!(node instanceof HTMLElement)) return true;
+          const tagName = node.tagName.toLowerCase();
+          return !(
+            tagName === "nav" ||
+            tagName === "footer" ||
+            tagName === "button" ||
+            node.classList.contains("no-print")
+          );
+        }
       });
 
-      const imgData = canvas.toDataURL("image/png");
+      // 이미지의 실제 비율을 구하기 위해 Image 객체를 임시로 생성합니다.
+      const img = new Image();
+      img.src = imgData;
+      await new Promise((resolve) => {
+        img.onload = resolve;
+      });
+
       const pdf = new jsPDF("p", "mm", "a4");
 
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
 
-      const canvasWidth = canvas.width;
-      const canvasHeight = canvas.height;
-
-      const imgHeight = (canvasHeight * pdfWidth) / canvasWidth;
+      const imgHeight = (img.naturalHeight * pdfWidth) / img.naturalWidth;
 
       let remainingHeight = imgHeight;
       let position = 0;

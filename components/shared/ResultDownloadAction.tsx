@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { submitFreebieDownload } from "@/app/freebies/actions";
-import html2canvas from "html2canvas";
+import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 
 type ResultDownloadActionProps = {
@@ -74,32 +74,37 @@ export function ResultDownloadAction({
         })
       );
 
-      // html2canvas 옵션 설정: 메모리 크래시 방지를 위해 scale을 1로 조정하고 불필요한 윈도우 크기 강제 지정을 제거합니다.
-      const canvas = await html2canvas(element, {
-        scale: 1,
-        useCORS: true,
-        allowTaint: false,
+      // html-to-image 옵션 설정: 테일윈드 v4의 oklab 등 최신 CSS가 충돌 없이 완벽히 지원됩니다.
+      const imgData = await toPng(element, {
+        cacheBust: true,
         backgroundColor: "#ffffff",
-        logging: true,
-        ignoreElements: (el) => {
-          const tagName = el.tagName.toLowerCase();
-          return (
+        // PDF에 포함되지 않아야 할 nav, footer, button, .no-print 요소들을 제외합니다.
+        filter: (node) => {
+          if (!(node instanceof HTMLElement)) return true;
+          const tagName = node.tagName.toLowerCase();
+          return !(
             tagName === "nav" ||
             tagName === "footer" ||
             tagName === "button" ||
-            el.classList.contains("no-print")
+            node.classList.contains("no-print")
           );
         }
       });
 
-      const imgData = canvas.toDataURL("image/png");
+      // 이미지의 실제 비율을 구하기 위해 Image 객체를 임시로 생성합니다.
+      const img = new Image();
+      img.src = imgData;
+      await new Promise((resolve) => {
+        img.onload = resolve;
+      });
+
       const pdf = new jsPDF("p", "mm", "a4");
 
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
 
       const imgWidth = pageWidth;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const imgHeight = (img.naturalHeight * imgWidth) / img.naturalWidth;
 
       let heightLeft = imgHeight;
       let position = 0;

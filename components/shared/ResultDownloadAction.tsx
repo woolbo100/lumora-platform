@@ -11,6 +11,7 @@ type ResultDownloadActionProps = {
   interest: string;      // 카테고리 (예: 재회)
   testResult: string;    // 결과 유형명 (예: 가능성 높음형)
   targetId?: string;     // PDF로 저장할 DOM 영역의 ID
+  onDownloadPdf?: () => Promise<void> | void; // 커스텀 PDF 다운로드 로직
 };
 
 export function ResultDownloadAction({
@@ -18,6 +19,7 @@ export function ResultDownloadAction({
   interest,
   testResult,
   targetId = "saju-result-pdf",
+  onDownloadPdf,
 }: ResultDownloadActionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,22 +29,30 @@ export function ResultDownloadAction({
   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const handleDownloadPdf = async () => {
-    // 1. targetId로 먼저 찾고, 없으면 사주 결과 ID 또는 main 컨텐츠 영역을 찾습니다.
-    let element = document.getElementById(targetId);
-
-    if (!element) {
-      element = document.getElementById("saju-result-pdf") || 
-                document.querySelector("main") || 
-                document.querySelector(".grid.gap-6");
-    }
-
-    if (!element) {
-      alert("PDF로 저장할 결과지 영역을 찾을 수 없습니다.");
-      return;
-    }
-
     try {
       setIsDownloading(true);
+
+      // 커스텀 PDF 다운로드 로직이 전달된 경우, 캡처를 하지 않고 바로 실행합니다.
+      if (onDownloadPdf) {
+        await onDownloadPdf();
+        setIsOpen(false);
+        setIsSuccess(false);
+        return;
+      }
+
+      // 1. targetId로 먼저 찾고, 없으면 사주 결과 ID 또는 main 컨텐츠 영역을 찾습니다.
+      let element = document.getElementById(targetId);
+
+      if (!element) {
+        element = document.getElementById("saju-result-pdf") || 
+                  document.querySelector("main") || 
+                  document.querySelector(".grid.gap-6");
+      }
+
+      if (!element) {
+        alert("PDF로 저장할 결과지 영역을 찾을 수 없습니다.");
+        return;
+      }
 
       await sleep(300);
 

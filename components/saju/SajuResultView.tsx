@@ -231,6 +231,122 @@ export function SajuResultView({ result }: SajuResultViewProps) {
   const currentFlowSummary = buildCurrentFlowSummary(result, dominantElements, lackingElements);
   const closingInterpretation = buildClosingInterpretation(result, dominantElements, lackingElements);
 
+  const handleDownloadPdf = async () => {
+    try {
+      // client-side에서만 jspdf를 동적으로 가져옵니다.
+      const { default: jsPDF } = await import("jspdf");
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      // 구글 CDN을 통해 한글 NotoSansKR 폰트를 가져와 임베드합니다. (한글 깨짐 해결)
+      try {
+        const fontUrl = "https://fonts.gstatic.com/s/notosanskr/v36/PbykF3Om0J4tqBS58DqN7m4q.ttf";
+        const response = await fetch(fontUrl);
+        if (response.ok) {
+          const arrayBuffer = await response.arrayBuffer();
+          let binary = "";
+          const bytes = new Uint8Array(arrayBuffer);
+          const len = bytes.byteLength;
+          for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+          }
+          const base64Font = window.btoa(binary);
+          pdf.addFileToVFS("NotoSansKR.ttf", base64Font);
+          pdf.addFont("NotoSansKR.ttf", "NotoSansKR", "normal");
+          pdf.setFont("NotoSansKR");
+        }
+      } catch (fontError) {
+        console.error("한글 폰트 로드 실패, 기본 폰트를 적용합니다.", fontError);
+      }
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      const marginX = 18;
+      const maxWidth = pageWidth - marginX * 2;
+      let y = 20;
+
+      const addText = (text: string, fontSize = 10, gap = 6) => {
+        pdf.setFontSize(fontSize);
+        const lines = pdf.splitTextToSize(text || "", maxWidth);
+
+        lines.forEach((line: string) => {
+          if (y > pageHeight - 20) {
+            pdf.addPage();
+            y = 20;
+          }
+          pdf.text(line, marginX, y);
+          y += gap;
+        });
+        y += 2;
+      };
+
+      const addSectionTitle = (title: string) => {
+        if (y > pageHeight - 30) {
+          pdf.addPage();
+          y = 20;
+        }
+        pdf.setFontSize(13);
+        pdf.text(title, marginX, y);
+        y += 8;
+      };
+
+      // PDF 구조 및 내용 생성
+      pdf.setFontSize(18);
+      pdf.text("LUMORA SAJU REPORT", marginX, y);
+      y += 10;
+
+      addText(`루모라 사주 분석 결과지 - ${profile.name}님`, 12, 7);
+      y += 4;
+
+      addSectionTitle("1. 기본 분석 정보");
+      addText(`• 이름: ${profile.name}`);
+      addText(`• 생년월일: ${profile.birth_date}`);
+      addText(`• 출생시간: ${profile.birth_time}`);
+      addText(`• 성별: ${profile.gender === "male" ? "남성" : "여성"}`);
+      y += 4;
+
+      addSectionTitle("2. 사주 8글자 요약");
+      addText(interp.core || "분석 핵심 정보가 없습니다.");
+      y += 4;
+
+      addSectionTitle("3. 가볍게 읽는 선천코드");
+      addText(interp.total_summary || "요약 정보가 없습니다.");
+      y += 4;
+
+      addSectionTitle("4. 타고난 결");
+      addText(interp.personality_deep || "기질 분석 정보가 없습니다.");
+      y += 4;
+
+      addSectionTitle("5. 사람과 일에서의 흐름");
+      addText(interp.social_analysis || "사회성 분석 정보가 없습니다.");
+      y += 4;
+
+      addSectionTitle("6. 감정의 리듬과 연애 흐름");
+      addText(interp.love_romance || "애정 흐름 정보가 없습니다.");
+      y += 4;
+
+      addSectionTitle("7. 재물과 일의 적성");
+      addText(interp.wealth_strategy || "재물 분석 정보가 없습니다.");
+      y += 4;
+
+      addSectionTitle("8. 오행 밸런스 및 조언");
+      addText(interp.ohaeng_analysis.balance_text || "오행 분석 정보가 없습니다.");
+      y += 4;
+
+      addSectionTitle("9. 몸과 마음의 안내");
+      addText(interp.health_analysis || "건강 조언 정보가 없습니다.");
+      y += 6;
+
+      addText("본 결과지는 자기이해와 성찰을 돕기 위한 참고용 분석 보고서입니다.", 9, 5);
+      addText("LUMORA - www.lumoracode.kr", 9, 5);
+
+      pdf.save("lumora-saju-result.pdf");
+    } catch (error) {
+      console.error("[PDF DOWNLOAD ERROR]", error);
+      alert("PDF 다운로드 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    }
+  };
+
   return (
     <div className="grid gap-6">
       {/* PDF 저장 캡처 영역 */}
@@ -355,6 +471,7 @@ export function SajuResultView({ result }: SajuResultViewProps) {
         interest="사주"
         testResult={`${profile.name}님의 사주코드`}
         targetId="saju-result-pdf"
+        onDownloadPdf={handleDownloadPdf}
       />
 
       <ResultShareActions

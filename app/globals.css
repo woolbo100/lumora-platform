@@ -286,6 +286,17 @@ a {
 /* PDF Export Mode Styles */
 @media screen {
   .pdf-export-mode {
+    --background: #ffffff !important;
+    --foreground: #111111 !important;
+    --foreground-soft: #333333 !important;
+    --foreground-muted: #666666 !important;
+    --color-primary: #f5f5f5 !important;
+    --color-primary-strong: #e5e5e5 !important;
+    --color-secondary: #8b5cf6 !important;
+    --color-accent: #b786ff !important;
+    --color-surface: rgba(0, 0, 0, 0.04) !important;
+    --color-surface-strong: rgba(0, 0, 0, 0.08) !important;
+    --color-border: rgba(0, 0, 0, 0.1) !important;
     background: #ffffff !important;
     color: #111111 !important;
     overflow: visible !important;
@@ -306,6 +317,15 @@ a {
     box-shadow: none !important;
     border-color: rgba(0, 0, 0, 0.12) !important;
     text-fill-color: #111111 !important;
+  }
+
+  /* backdrop-filter 및 blur 효과 무력화 (html-to-image 렌더링 충돌 해결) */
+  .pdf-export-mode *,
+  .pdf-export-mode div,
+  .pdf-export-mode section {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
   }
 
   .pdf-export-mode .no-pdf,

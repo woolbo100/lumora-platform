@@ -74,10 +74,21 @@ export function ResultDownloadAction({
         })
       );
 
-      // html-to-image 옵션 설정: 테일윈드 v4의 oklab 등 최신 CSS가 충돌 없이 완벽히 지원됩니다.
+      // 캡처할 영역의 실제 크기를 구합니다.
+      const width = element.scrollWidth;
+      const height = element.scrollHeight;
+
+      // html-to-image 옵션 설정: 뷰포트 크기에 구애받지 않도록 실제 크기를 명시하고 oklab 컬러를 지원합니다.
       const imgData = await toPng(element, {
         cacheBust: true,
         backgroundColor: "#0f0f1a",
+        width: width,
+        height: height,
+        style: {
+          width: width + "px",
+          height: height + "px",
+          transform: "none",
+        },
         // PDF에 포함되지 않아야 할 nav, footer, button, .no-print 요소들을 제외합니다.
         filter: (node) => {
           if (!(node instanceof HTMLElement)) return true;

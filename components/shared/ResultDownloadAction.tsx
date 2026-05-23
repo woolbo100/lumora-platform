@@ -74,15 +74,13 @@ export function ResultDownloadAction({
         })
       );
 
-      // html2canvas 옵션 설정: 지침을 준수하여 흰색 배경 및 렌더링 넓이 지정
+      // html2canvas 옵션 설정: 메모리 크래시 방지를 위해 scale을 1로 조정하고 불필요한 윈도우 크기 강제 지정을 제거합니다.
       const canvas = await html2canvas(element, {
-        scale: 2,
+        scale: 1,
         useCORS: true,
         allowTaint: false,
         backgroundColor: "#ffffff",
         logging: true,
-        windowWidth: element.scrollWidth,
-        windowHeight: element.scrollHeight,
         ignoreElements: (el) => {
           const tagName = el.tagName.toLowerCase();
           return (
@@ -125,7 +123,8 @@ export function ResultDownloadAction({
       setIsSuccess(false);
     } catch (error) {
       console.error("[PDF DOWNLOAD ERROR]", error);
-      alert("PDF 다운로드 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+      const errMsg = error instanceof Error ? error.message : JSON.stringify(error);
+      alert(`PDF 다운로드 중 오류가 발생했습니다.\n오류 상세: ${errMsg}`);
     } finally {
       setIsDownloading(false);
     }

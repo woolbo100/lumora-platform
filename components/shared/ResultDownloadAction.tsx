@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { GlassPanel } from "@/components/shared/GlassPanel";
 import { submitFreebieDownload } from "@/app/freebies/actions";
-import { toPng } from "html-to-image";
+import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 type ResultDownloadActionProps = {
@@ -27,43 +27,45 @@ export function ResultDownloadAction({
   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const handleDownloadPdf = async () => {
+    // 1. targetId로 먼저 찾고, 없으면 사주 결과 ID 또는 main 컨텐츠 영역을 찾습니다.
+    let element = document.getElementById(targetId);
+
+    if (!element) {
+      element = document.getElementById("saju-result-pdf") || 
+                document.querySelector("main") || 
+                document.querySelector(".grid.gap-6");
+    }
+
+    if (!element) {
+      alert("PDF로 저장할 결과지 영역을 찾을 수 없습니다.");
+      return;
+    }
+
     try {
       setIsDownloading(true);
 
-      // 결과지 본문이 완전히 렌더링될 시간을 잠시 준다.
-      await sleep(500);
+      await sleep(300);
 
-      // 1. targetId로 먼저 찾고, 없으면 사주 결과 ID 또는 main 컨텐츠 영역을 찾습니다.
-      let element = document.getElementById(targetId);
-
-      if (!element) {
-        element = document.getElementById("saju-result-pdf") || 
-                  document.querySelector("main") || 
-                  document.querySelector(".grid.gap-6");
-      }
-
-      if (!element) {
-        console.error('[PDF ERROR] PDF로 저장할 요소를 찾을 수 없습니다. targetId:', targetId);
-        alert("PDF로 저장할 결과지 본문을 찾을 수 없습니다.");
-        return;
-      }
-
-      console.log('[PDF TARGET]', element);
-      console.log('[PDF TARGET TEXT]', element.innerText ? element.innerText.slice(0, 300) : "No text content");
-
-      if (!element.innerText || element.innerText.trim().length < 20) {
-        console.error('[PDF ERROR] 결과지 본문 내용이 비어 있습니다.');
-        alert('결과지 내용이 아직 준비되지 않았습니다. 잠시 후 다시 시도해주세요.');
-        return;
-      }
-
-      // 폰트 대기
       if (document.fonts) {
         await document.fonts.ready;
       }
 
-      // 이미지 로딩 대기
-      const images = Array.from(element.querySelectorAll('img'));
+      // PDF 캡처용 스타일 적용
+      element.classList.add("pdf-export-mode");
+
+      // 실제 전체 높이 계산을 위해 임시 스타일 적용
+      const originalWidth = element.style.width;
+      const originalHeight = element.style.height;
+      const originalOverflow = element.style.overflow;
+
+      element.style.width = "794px";
+      element.style.height = "auto";
+      element.style.overflow = "visible";
+
+      await sleep(300);
+
+      // 이미지가 완전히 로드될 수 있도록 기다림
+      const images = Array.from(element.querySelectorAll("img"));
       await Promise.all(
         images.map((img) => {
           if (img.complete) return Promise.resolve();
@@ -74,73 +76,71 @@ export function ResultDownloadAction({
         })
       );
 
-      // 캡처할 영역의 실제 크기를 구합니다.
-      const width = element.scrollWidth;
-      const height = element.scrollHeight;
+      const fullWidth = element.scrollWidth;
+      const fullHeight = element.scrollHeight;
 
-      // html-to-image 옵션 설정: 뷰포트 크기에 구애받지 않도록 실제 크기를 명시하고 oklab 컬러를 지원합니다.
-      const imgData = await toPng(element, {
-        cacheBust: true,
-        backgroundColor: "#0f0f1a",
-        width: width,
-        height: height,
-        style: {
-          width: width + "px",
-          height: height + "px",
-          transform: "none",
-        },
-        // PDF에 포함되지 않아야 할 nav, footer, button, .no-print 요소들을 제외합니다.
-        filter: (node) => {
-          if (!(node instanceof HTMLElement)) return true;
-          const tagName = node.tagName.toLowerCase();
-          return !(
-            tagName === "nav" ||
-            tagName === "footer" ||
-            tagName === "button" ||
-            node.classList.contains("no-print")
-          );
-        }
+      console.log("[PDF SIZE]", {
+        fullWidth,
+        fullHeight,
+        clientHeight: element.clientHeight,
+        offsetHeight: element.offsetHeight,
+        scrollHeight: element.scrollHeight,
       });
 
-      // 이미지의 실제 비율을 구하기 위해 Image 객체를 임시로 생성합니다.
-      const img = new Image();
-      img.src = imgData;
-      await new Promise((resolve) => {
-        img.onload = resolve;
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: "#ffffff",
+        logging: true,
+        width: fullWidth,
+        height: fullHeight,
+        windowWidth: fullWidth,
+        windowHeight: fullHeight,
+        scrollX: 0,
+        scrollY: 0,
       });
 
+      const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
 
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
 
-      const imgWidth = pageWidth;
-      const imgHeight = (img.naturalHeight * imgWidth) / img.naturalWidth;
+      const canvasWidth = canvas.width;
+      const canvasHeight = canvas.height;
 
-      let heightLeft = imgHeight;
+      const imgHeight = (canvasHeight * pdfWidth) / canvasWidth;
+
+      let remainingHeight = imgHeight;
       let position = 0;
 
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
+      pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight);
+      remainingHeight -= pdfHeight;
 
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
+      while (remainingHeight > 0) {
+        position = remainingHeight - imgHeight;
         pdf.addPage();
-        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+        pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight);
+        remainingHeight -= pdfHeight;
       }
 
-      // 파일명 설정
-      const fileName = "lumora-saju-result.pdf";
-      pdf.save(fileName);
+      pdf.save("lumora-saju-result.pdf");
 
-      // 성공 후 상태 초기화 및 모달 닫기
+      // 원래 스타일 복구
+      element.style.width = originalWidth;
+      element.style.height = originalHeight;
+      element.style.overflow = originalOverflow;
+      element.classList.remove("pdf-export-mode");
+
+      // 성공 후 모달 닫기
       setIsOpen(false);
       setIsSuccess(false);
     } catch (error) {
       console.error("[PDF DOWNLOAD ERROR]", error);
       const errMsg = error instanceof Error ? error.message : JSON.stringify(error);
       alert(`PDF 다운로드 중 오류가 발생했습니다.\n오류 상세: ${errMsg}`);
+      element.classList.remove("pdf-export-mode");
     } finally {
       setIsDownloading(false);
     }

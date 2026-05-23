@@ -282,3 +282,37 @@ a {
 .animate-toast-in {
   animation: toast-in 0.3s ease-out forwards;
 }
+
+/* PDF Export Mode Styles */
+@media screen {
+  .pdf-export-mode {
+    background: #ffffff !important;
+    color: #111111 !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .pdf-export-mode * {
+    color: #111111 !important;
+    text-shadow: none !important;
+    -webkit-text-fill-color: #111111 !important;
+    background-clip: initial !important;
+    -webkit-background-clip: initial !important;
+    overflow: visible !important;
+    max-height: none !important;
+    box-shadow: none !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+    text-fill-color: #111111 !important;
+  }
+
+  .pdf-export-mode .no-pdf,
+  .pdf-export-mode button,
+  .pdf-export-mode nav,
+  .pdf-export-mode header,
+  .pdf-export-mode footer {
+    display: none !important;
+  }
+}

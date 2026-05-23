@@ -32,15 +32,20 @@ export async function submitFreebieDownload(data: {
     });
 
     // 2. 해당 자료의 다운로드 수 1 증가 (fetch-then-patch 방식)
-    const res = await supabaseRestRequest(`freebies?id=eq.${data.freebieId}&select=download_count`);
-    const freebie = await res.json();
-    
-    if (freebie && freebie.length > 0) {
-      const newCount = (freebie[0].download_count || 0) + 1;
-      await supabaseRestRequest(`freebies?id=eq.${data.freebieId}`, {
-        method: "PATCH",
-        body: JSON.stringify({ download_count: newCount })
-      });
+    // 단, freebieId가 올바른 UUID 형식일 때만 실행합니다 (예: 'dynamic_result_pdf'는 건너뜀)
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(data.freebieId);
+
+    if (isUuid) {
+      const res = await supabaseRestRequest(`freebies?id=eq.${data.freebieId}&select=download_count`);
+      const freebie = await res.json();
+      
+      if (freebie && freebie.length > 0) {
+        const newCount = (freebie[0].download_count || 0) + 1;
+        await supabaseRestRequest(`freebies?id=eq.${data.freebieId}`, {
+          method: "PATCH",
+          body: JSON.stringify({ download_count: newCount })
+        });
+      }
     }
 
     return { success: true };

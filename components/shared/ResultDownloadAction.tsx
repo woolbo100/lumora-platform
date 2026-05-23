@@ -77,7 +77,7 @@ export function ResultDownloadAction({
       // html-to-image 옵션 설정: 테일윈드 v4의 oklab 등 최신 CSS가 충돌 없이 완벽히 지원됩니다.
       const imgData = await toPng(element, {
         cacheBust: true,
-        backgroundColor: "#ffffff",
+        backgroundColor: "#0f0f1a",
         // PDF에 포함되지 않아야 할 nav, footer, button, .no-print 요소들을 제외합니다.
         filter: (node) => {
           if (!(node instanceof HTMLElement)) return true;

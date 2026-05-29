@@ -165,5 +165,4 @@ status: published
 어쩌면 매력자본이란, 더 빛나는 사람이 되는 일이 아니라  
 이미 내 안에 있었지만 오래 외면했던 빛을 다시 알아보는 일인지도 모릅니다.
 
-비슷한 감정이 반복되고 있다면, **자기사랑이 관계를 바꾸는 이유**를 함께 읽어보세요.  
-https://www.lumoracode.kr/blog/self-love-relationship-psychology
+비슷한 감정이 반복되고 있다면, [자기사랑이 관계를 바꾸는 이유](/blog/self-love-relationship-psychology)도 함께 읽어보세요.

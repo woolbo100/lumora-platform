@@ -7,10 +7,11 @@ type FileUploadProps = {
   label: string;
   accept: string;
   defaultValue?: string;
+  bucket?: string;
   onUploadComplete?: (url: string) => void;
 };
 
-export function FileUpload({ name, label, accept, defaultValue, onUploadComplete }: FileUploadProps) {
+export function FileUpload({ name, label, accept, defaultValue, bucket = "freebies", onUploadComplete }: FileUploadProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [preview, setPreview] = useState(defaultValue || "");
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -26,7 +27,7 @@ export function FileUpload({ name, label, accept, defaultValue, onUploadComplete
     try {
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("bucket", "freebies");
+      formData.append("bucket", bucket);
 
       const response = await fetch("/api/admin/upload", {
         method: "POST",
@@ -36,8 +37,9 @@ export function FileUpload({ name, label, accept, defaultValue, onUploadComplete
       const result = await response.json();
 
       if (result.success) {
-        setPreview(result.url);
-        if (onUploadComplete) onUploadComplete(result.url);
+        const valueToSave = bucket === "lead-magnets" ? result.filePath : result.url;
+        setPreview(valueToSave);
+        if (onUploadComplete) onUploadComplete(valueToSave);
         setUploadError(null);
       } else {
         setUploadError(result.error || "업로드에 실패했습니다.");

@@ -21,6 +21,7 @@ export type BlogPost = {
   publishedAt: string;
   updatedAt?: string | null;
   imageUrl?: string | null;
+  leadMagnetSlug?: string | null;
 };
 
 export type CreateBlogPostInput = {
@@ -35,6 +36,7 @@ export type CreateBlogPostInput = {
   aiGenerated?: boolean;
   content: string;
   imageUrl?: string;
+  leadMagnetSlug?: string;
 };
 
 export type BlogAiArticleType =

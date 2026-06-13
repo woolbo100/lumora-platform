@@ -24,14 +24,14 @@ export async function POST(request: Request) {
     }
 
     // 2. 환경 변수 체크 (Vercel 배포 시 누락 방지)
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_PUBLISHABLE_KEY;
 
     if (!supabaseUrl) {
-      return NextResponse.json({ success: false, error: "서버 설정 오류: NEXT_PUBLIC_SUPABASE_URL이 없습니다." }, { status: 500 });
+      return NextResponse.json({ success: false, error: "서버 설정 오류: NEXT_PUBLIC_SUPABASE_URL 또는 SUPABASE_URL 환경 변수가 누락되었습니다." }, { status: 500 });
     }
     if (!supabaseKey) {
-      return NextResponse.json({ success: false, error: "서버 설정 오류: API Key가 없습니다. Vercel 환경 변수를 확인해주세요." }, { status: 500 });
+      return NextResponse.json({ success: false, error: "서버 설정 오류: SUPABASE_SERVICE_ROLE_KEY 또는 NEXT_PUBLIC_SUPABASE_ANON_KEY 또는 SUPABASE_PUBLISHABLE_KEY 환경 변수가 누락되었습니다." }, { status: 500 });
     }
 
     // 3. 파일 이름 안전하게 생성
@@ -40,12 +40,15 @@ export async function POST(request: Request) {
     const filePath = `${timestamp}_${safeFileName}`;
 
     // 4. Supabase Storage 업로드 시도
-    const uploadUrl = `${supabaseUrl}/storage/v1/object/${bucket}/${filePath}`;
+    const cleanUrl = supabaseUrl.trim().replace(/\/$/, "");
+    const uploadUrl = `${cleanUrl}/storage/v1/object/${bucket}/${filePath}`;
+    const cleanKey = supabaseKey.trim();
     
     const uploadResponse = await fetch(uploadUrl, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${supabaseKey}`,
+        "Authorization": `Bearer ${cleanKey}`,
+        "apikey": cleanKey,
         "Content-Type": file.type,
         "x-upsert": "true"
       },
@@ -66,12 +69,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: errorMessage }, { status: uploadResponse.status });
     }
 
-    // 5. 성공 시 공개 URL 반환
+    // 5. 성공 시 공개 URL 및 파일 상대경로 반환
     const publicUrl = `${supabaseUrl}/storage/v1/object/public/${bucket}/${filePath}`;
 
     return NextResponse.json({ 
       success: true, 
-      url: publicUrl 
+      url: publicUrl,
+      filePath: filePath
     });
 
   } catch (error) {

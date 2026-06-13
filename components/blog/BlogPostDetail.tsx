@@ -11,6 +11,7 @@ import {
   getBlogReadTime,
 } from "@/lib/blog-posts";
 import type { BlogPost } from "@/types/blog";
+import { LeadMagnetModal } from "@/components/lead-magnet/LeadMagnetModal";
 
 type BlogPostDetailProps = {
   post: BlogPost;
@@ -294,6 +295,11 @@ export function BlogPostDetail({
           </div>
 
           <AdBanner className="pt-4" />
+          {post.leadMagnetSlug && (
+            <div className="pt-6 border-t border-white/5 mt-6">
+              <LeadMagnetModal slug={post.leadMagnetSlug} />
+            </div>
+          )}
         </article>
       </div>
 

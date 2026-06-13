@@ -9,9 +9,10 @@ type SupabasePublicConfig = {
 };
 
 function readSupabaseConfig(): SupabaseConfig | null {
-  const url = process.env.SUPABASE_URL;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL;
   const apiKey =
     process.env.SUPABASE_SERVICE_ROLE_KEY ??
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
     process.env.SUPABASE_PUBLISHABLE_KEY;
 
   if (!url || !apiKey) {
@@ -22,8 +23,8 @@ function readSupabaseConfig(): SupabaseConfig | null {
 }
 
 export function readSupabasePublicConfig(): SupabasePublicConfig | null {
-  const url = process.env.SUPABASE_URL;
-  const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL;
+  const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.SUPABASE_PUBLISHABLE_KEY;
 
   if (!url || !publishableKey) {
     return null;
@@ -44,8 +45,15 @@ export async function supabaseRestRequest(
   const config = readSupabaseConfig();
 
   if (!config) {
+    const missingVars = [];
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL && !process.env.SUPABASE_URL) {
+      missingVars.push("NEXT_PUBLIC_SUPABASE_URL 또는 SUPABASE_URL");
+    }
+    if (!process.env.SUPABASE_SERVICE_ROLE_KEY && !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY && !process.env.SUPABASE_PUBLISHABLE_KEY) {
+      missingVars.push("SUPABASE_SERVICE_ROLE_KEY 또는 NEXT_PUBLIC_SUPABASE_ANON_KEY 또는 SUPABASE_PUBLISHABLE_KEY");
+    }
     throw new Error(
-      "Supabase 환경변수가 설정되지 않았습니다. SUPABASE_URL과 SUPABASE_SERVICE_ROLE_KEY 또는 SUPABASE_PUBLISHABLE_KEY를 확인해주세요.",
+      `Supabase 환경변수가 설정되지 않았습니다. 누락된 변수: ${missingVars.join(", ")}`,
     );
   }
 

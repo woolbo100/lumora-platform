@@ -8,6 +8,7 @@ import {
   listBlogPosts,
   listRelatedBlogPosts,
 } from "@/lib/blog-posts";
+import { getRecommendedLeadMagnetSlug } from "@/lib/lead-magnet-recommend";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -70,6 +71,11 @@ export default async function BlogPostPage({
 
   if (!post) {
     notFound();
+  }
+
+  // leadMagnetSlug가 지정되지 않은 경우 추천 엔진을 작동시켜 자동 연결
+  if (!post.leadMagnetSlug) {
+    post.leadMagnetSlug = getRecommendedLeadMagnetSlug(post);
   }
 
   const relatedPosts = await listRelatedBlogPosts(post.category, post.slug);

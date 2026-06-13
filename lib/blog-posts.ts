@@ -31,6 +31,7 @@ type BlogFileFrontmatter = {
   updatedAt?: string;
   status?: string;
   aiGenerated?: string;
+  leadMagnetSlug?: string;
 };
 
 function resolvePostStatus(value: string | undefined): BlogPostStatus {
@@ -152,6 +153,7 @@ async function readPostFile(filePath: string, fallbackCategory: BlogCategory) {
     publishedAt,
     updatedAt,
     imageUrl: frontmatter.imageUrl?.trim() || frontmatter.thumbnail?.trim() || null,
+    leadMagnetSlug: frontmatter.leadMagnetSlug?.trim() || null,
   } satisfies BlogPost;
 }
 
